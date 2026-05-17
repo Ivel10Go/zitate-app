@@ -27,6 +27,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
   final _passwordConfirmController = TextEditingController();
   bool _loading = false;
   bool _passwordVisible = false;
+  String? _errorMessage;
   late final AnimationController _controller;
 
   @override
@@ -67,137 +68,110 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     }
 
     if (success) {
-      if (mounted) {
-        // Nach signUp: Prüfe, ob eine Session erstellt wurde
-        final currentUser = ref.read(authControllerProvider).valueOrNull;
+      final currentUser = ref.read(authControllerProvider).valueOrNull;
 
-        if (widget.isSignUp && currentUser == null) {
-          // Email-Verifikation erforderlich
-          setState(() => _loading = false);
-          if (mounted) {
-            await showDialog<void>(
-              context: context,
-              barrierDismissible: false,
-              builder: (dialogContext) => AlertDialog(
-                title: const Text('Registrierung erfolgreich'),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Eine Verifizierungs-Email wurde an deine E-Mail-Adresse gesendet.',
-                    ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Bitte klicke auf den Link in der Email, um dein Konto zu bestätigen.',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Danach kannst du dich anmelden und dein Profil einrichten.',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(dialogContext);
-                      // Wechsle zu Login-Screen
-                      if (mounted) {
-                        context.go('/login', extra: false);
-                      }
-                    },
-                    child: const Text('Zur Anmeldung'),
+      if (widget.isSignUp && currentUser == null) {
+        setState(() => _loading = false);
+        if (mounted) {
+          await showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (dialogContext) => AlertDialog(
+              title: const Text('Registrierung erfolgreich'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Eine Verifizierungs-Email wurde an deine E-Mail-Adresse gesendet.',
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Bitte klicke auf den Link in der Email, um dein Konto zu bestätigen.',
+                    style: TextStyle(fontSize: 12),
                   ),
                 ],
               ),
-            );
-          }
-          return;
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(dialogContext);
+                    if (mounted) {
+                      context.go('/login');
+                    }
+                  },
+                  child: const Text('Zur Anmeldung'),
+                ),
+              ],
+            ),
+          );
         }
-
-        // Normale Navigation (Login oder mit Session nach SignUp)
-        ref.invalidate(authControllerProvider);
-        await Future.delayed(const Duration(milliseconds: 200));
-        if (mounted) {
-          context.go(widget.isSignUp ? '/onboarding' : '/');
-        }
+        return;
       }
-      return;
+
+      ref.invalidate(authControllerProvider);
+      await Future.delayed(const Duration(milliseconds: 200));
+      if (mounted) {
+        context.go(widget.isSignUp ? '/onboarding' : '/');
+      }
+    } else {
+      final authError = ref
+          .read(authControllerProvider)
+          .maybeWhen(error: (e, _) => e, orElse: () => null);
+      setState(() {
+        _errorMessage = authErrorMessage(authError);
+        _loading = false;
+      });
     }
 
-    final authError = ref
-        .read(authControllerProvider)
-        .maybeWhen(error: (e, _) => e, orElse: () => null);
-    // safe: already checked mounted above
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(authErrorMessage(authError))));
-
-    setState(() => _loading = false);
+    // Error handling
   }
 
-  Future<void> _showResetPasswordDialog() async {
-    final resetEmailCtrl = TextEditingController();
+  Future<void> _signInWithGoogle() async {
+    setState(() => _loading = true);
+    try {
+      final authController = ref.read(authControllerProvider.notifier);
 
-    await showDialog<void>(
-      context: context,
-      builder: (dialogContext) {
-        return AlertDialog(
-          title: const Text('Passwort zurücksetzen'),
-          content: TextField(
-            controller: resetEmailCtrl,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              labelText: 'E-Mail Adresse',
-              hintText: 'deine@email.com',
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: const Text('Abbrechen'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final email = resetEmailCtrl.text.trim();
-                if (email.isEmpty || !email.contains('@')) {
-                  if (!mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Bitte gib eine gültige E-Mail ein'),
-                    ),
-                  );
-                  return;
-                }
+      // Mit Timeout, um zu verhindern, dass der Loading-State hängen bleibt
+      final success = await authController.signInWithGoogle().timeout(
+        const Duration(seconds: 120),
+        onTimeout: () {
+          return false;
+        },
+      );
 
-                try {
-                  await ref
-                      .read(authControllerProvider.notifier)
-                      .resetPassword(email);
-                  if (!mounted) return;
-                  Navigator.pop(dialogContext);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'E-Mail zum Zurücksetzen des Passworts gesendet',
-                      ),
-                    ),
-                  );
-                } catch (e) {
-                  if (!mounted) return;
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text('Fehler: $e')));
-                }
-              },
-              child: const Text('Senden'),
-            ),
-          ],
-        );
-      },
-    );
+      if (!mounted) {
+        return;
+      }
+
+      if (success) {
+        // Google-Anmeldung war erfolgreich
+        // Der AuthGateScreen wird automatisch die Navigation übernehmen
+        // wenn der Auth-Status sich ändert
+        return;
+      } else {
+        // Google-Anmeldung fehlgeschlagen
+        final error = ref
+            .read(authControllerProvider)
+            .maybeWhen(error: (e, _) => e, orElse: () => null);
+
+        if (mounted) {
+          setState(() {
+            _errorMessage = authErrorMessage(error);
+            _loading = false;
+          });
+        }
+      }
+    } catch (e) {
+      // Fehler abfangen
+      if (mounted) {
+        setState(() {
+          _errorMessage =
+              'Ein Fehler ist aufgetreten. Bitte versuche es erneut.';
+          _loading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -205,79 +179,76 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     final scheme = Theme.of(context).colorScheme;
 
     return AppDecoratedScaffold(
-      appBar: AppBar(
-        backgroundColor: scheme.surface,
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        leading: context.canPop()
-            ? IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => context.pop(),
-              )
-            : null,
-      ),
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SlideTransition(
-              position:
-                  Tween<Offset>(
-                    begin: const Offset(0, 0.18),
-                    end: Offset.zero,
-                  ).animate(
-                    CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+      child: Column(
+        children: <Widget>[
+          Container(
+            color: scheme.surface,
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  widget.isSignUp ? 'REGISTRIEREN' : 'ANMELDEN',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700,
+                    color: scheme.onSurface,
+                    letterSpacing: -0.5,
                   ),
-              child: FadeTransition(
-                opacity: _controller,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      widget.isSignUp ? 'REGISTRIEREN' : 'ANMELDEN',
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                        color: scheme.onSurface,
-                        letterSpacing: -0.5,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Container(width: 40, height: 2, color: AppColors.red),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.isSignUp
-                          ? 'Erstelle ein Konto, um Inhalte zu speichern und zu synchronisieren.'
-                          : 'Melde dich an, um auf dein persönliches Archiv zuzugreifen.',
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w400,
-                        color: scheme.onSurfaceVariant,
-                        height: 1.5,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                  ],
                 ),
-              ),
-            ),
-            SlideTransition(
-              position:
-                  Tween<Offset>(
-                    begin: const Offset(0, 0.18),
-                    end: Offset.zero,
-                  ).animate(
-                    CurvedAnimation(
-                      parent: _controller,
-                      curve: const Interval(0.1, 1.0, curve: Curves.easeOut),
-                    ),
+                const SizedBox(height: 12),
+                Container(width: 40, height: 2, color: AppColors.red),
+                const SizedBox(height: 10),
+                Text(
+                  widget.isSignUp
+                      ? 'Erstelle ein Konto, um Inhalte zu speichern und zu synchronisieren.'
+                      : 'Melde dich an, um auf dein persönliches Archiv zuzugreifen.',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w400,
+                    color: scheme.onSurfaceVariant,
+                    height: 1.5,
                   ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: _GoogleSignInButton(
+                    label: widget.isSignUp
+                        ? 'Mit Google registrieren'
+                        : 'Mit Google anmelden',
+                    isLoading: _loading,
+                    onTap: _signInWithGoogle,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
+                    if (_errorMessage != null) ...[
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: scheme.errorContainer,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          _errorMessage!,
+                          style: TextStyle(
+                            color: scheme.onErrorContainer,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                    ],
                     _buildTextField(
                       controller: _emailController,
                       label: 'E-Mail',
@@ -351,7 +322,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: _loading ? null : _showResetPasswordDialog,
+                          onPressed: _loading ? null : () {},
                           child: Text(
                             'Passwort vergessen?',
                             style: GoogleFonts.ibmPlexSans(
@@ -442,13 +413,12 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  /// Hilfsmethode für modernisierte Text-Input-Felder
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
@@ -461,53 +431,105 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     VoidCallback? onObscureToggle,
     String? Function(String?)? validator,
   }) {
+    final scheme = Theme.of(context).colorScheme;
+
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
       enabled: enabled,
       keyboardType: keyboardType,
+      validator: validator,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-        prefixIcon: Icon(icon),
-        suffixIcon: showSuffixIcon && onObscureToggle != null
+        prefixIcon: Icon(icon, size: 18),
+        suffixIcon: showSuffixIcon && obscureText != obscureText
             ? IconButton(
                 icon: Icon(
-                  obscureText
-                      ? Icons.visibility_outlined
-                      : Icons.visibility_off_outlined,
+                  obscureText ? Icons.visibility_off : Icons.visibility,
                 ),
                 onPressed: onObscureToggle,
               )
             : null,
         filled: true,
-        fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
+        fillColor: enabled ? scheme.surface : scheme.surfaceContainerHighest,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: scheme.outline),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-            width: 1,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: AppColors.red, width: 1.2),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
-          borderSide: const BorderSide(color: Colors.red, width: 1.2),
+          borderSide: BorderSide(color: scheme.outline, width: 1),
         ),
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 14,
-          vertical: 13,
+          horizontal: 12,
+          vertical: 12,
         ),
       ),
-      validator: validator,
+    );
+  }
+}
+
+class _GoogleSignInButton extends StatelessWidget {
+  const _GoogleSignInButton({
+    required this.label,
+    required this.isLoading,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool isLoading;
+  final Future<void> Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Material(
+      color: scheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+        side: const BorderSide(color: Color(0xFFDB4437), width: 1.5),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(4),
+        onTap: isLoading ? null : onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: isLoading
+              ? SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(scheme.onSurface),
+                    strokeWidth: 2,
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'G',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFFDB4437),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      label,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.ibmPlexSans(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: scheme.onSurface,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
+                ),
+        ),
+      ),
     );
   }
 }

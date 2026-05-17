@@ -134,6 +134,18 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
     }
   }
 
+  Future<bool> signInWithGoogle() async {
+    state = const AsyncValue.loading();
+    try {
+      await _service.signInWithGoogle();
+      // Auth state wird durch authStateChanges automatisch aktualisiert
+      return true;
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+      return false;
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await _service.signOut();

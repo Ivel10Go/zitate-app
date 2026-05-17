@@ -149,8 +149,8 @@ abstract final class AppBootstrap {
       debugPrint('[Bootstrap] Initializing fonts...');
       _emitProgress(0.10, 'Schriftarten werden geladen ...');
 
-      // Use bundled fonts only to avoid startup failures when network/font cache is unavailable.
-      GoogleFonts.config.allowRuntimeFetching = false;
+      // Allow runtime fetching so missing bundled font variants do not crash startup.
+      GoogleFonts.config.allowRuntimeFetching = true;
       AppTheme.initializeTextStyles(); // Preload all text styles
 
       fontStart.stop();
@@ -320,15 +320,13 @@ abstract final class AppBootstrap {
 
     try {
       final profile = UserProfile.fromJsonString(profileRaw);
-      // Überspringe Onboarding wenn bereits abgeschlossen
-      if (profile.onboardingCompleted) {
+      // Überspringe Onboarding nur wenn das Profil wirklich abgeschlossen wirkt.
+      if (profile.onboardingCompleted &&
+          profile.historicalInterests.isNotEmpty) {
         return true;
       }
-      // Oder wenn Benutzer bereits Interessen und Orientierung hat
-      final hasInterests = profile.historicalInterests.isNotEmpty;
-      final hasOrientation =
-          profile.politicalLeaning != PoliticalLeaning.neutral;
-      return hasInterests && hasOrientation;
+      // Legacy-Fallback: Bereits gespeicherte Interessen deuten auf ein bestehendes Profil hin.
+      return profile.historicalInterests.isNotEmpty;
     } catch (e) {
       debugPrint('[Bootstrap] Error parsing onboarding skip condition: $e');
       return false;

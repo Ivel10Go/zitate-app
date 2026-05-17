@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/providers/supabase_auth_provider.dart';
+import '../../core/services/supabase_auth_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 
-class AuthChoiceScreen extends StatefulWidget {
+class AuthChoiceScreen extends ConsumerStatefulWidget {
   const AuthChoiceScreen({super.key});
 
   @override
-  State<AuthChoiceScreen> createState() => _AuthChoiceScreenState();
+  ConsumerState<AuthChoiceScreen> createState() => _AuthChoiceScreenState();
 }
 
-class _AuthChoiceScreenState extends State<AuthChoiceScreen>
+class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
+  bool _googleLoading = false;
 
   @override
   void initState() {
@@ -35,6 +39,19 @@ class _AuthChoiceScreenState extends State<AuthChoiceScreen>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+
+    ref.listen(authControllerProvider, (previous, next) {
+      final user = next.asData?.value;
+      if (user == null || !mounted) {
+        return;
+      }
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          context.go('/auth-gate');
+        }
+      });
+    });
 
     return AppDecoratedScaffold(
       child: Padding(
@@ -90,6 +107,93 @@ class _AuthChoiceScreenState extends State<AuthChoiceScreen>
                         height: 1.5,
                       ),
                     ),
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: _googleLoading
+                            ? null
+                            : () async {
+                                setState(() => _googleLoading = true);
+                                try {
+                                  await ref
+                                      .read(authControllerProvider.notifier)
+                                      .signInWithGoogle();
+                                } catch (e) {
+                                  if (!mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(authErrorMessage(e)),
+                                    ),
+                                  );
+                                  setState(() => _googleLoading = false);
+                                  return;
+                                }
+
+                                if (!mounted) {
+                                  return;
+                                }
+
+                                setState(() => _googleLoading = false);
+                              },
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          side: const BorderSide(
+                            color: Color(0xFFDB4437),
+                            width: 1.2,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                        child: _googleLoading
+                            ? SizedBox(
+                                height: 18,
+                                width: 18,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppColors.red,
+                                  ),
+                                ),
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFDB4437),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Text(
+                                      'G',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        height: 1,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    'MIT GOOGLE FORTFAHREN',
+                                    style: GoogleFonts.ibmPlexSans(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.red,
+                                      letterSpacing: 1.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
                   ],
                 ),
               ),

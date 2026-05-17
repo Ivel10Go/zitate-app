@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Lightweight auth user model used by the app.
@@ -48,8 +49,7 @@ class SupabaseAuthService {
       final res = await _client.auth.signUp(
         email: email,
         password: password,
-        emailRedirectTo:
-            'https://yourdomain.tld/auth/callback', // Fallback, wird meist nicht genutzt
+        emailRedirectTo: 'marxapp://auth',
       );
       final user = res.user;
       if (user == null) {
@@ -87,6 +87,21 @@ class SupabaseAuthService {
     }
   }
 
+  /// Google OAuth Sign-In
+  Future<void> signInWithGoogle() async {
+    try {
+      await _client.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: kIsWeb ? null : 'marxapp://auth',
+        scopes: 'email profile',
+      );
+    } on AuthException catch (e) {
+      throw Exception('Google Auth Error: ${e.message}');
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Abmelden
   Future<void> signOut() async {
     await _client.auth.signOut();
@@ -94,7 +109,10 @@ class SupabaseAuthService {
 
   /// Passwort zurücksetzen (send reset email)
   Future<void> resetPassword(String email) async {
-    await _client.auth.resetPasswordForEmail(email);
+    await _client.auth.resetPasswordForEmail(
+      email,
+      redirectTo: 'marxapp://auth',
+    );
   }
 }
 

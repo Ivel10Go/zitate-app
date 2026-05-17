@@ -81,7 +81,11 @@ class _AuthGateScreenState extends ConsumerState<AuthGateScreen>
           }
 
           // Authentifiziert: Prüfe Onboarding-Status vom User Profile
-          if (!userProfile.onboardingCompleted) {
+          final hasCompletedOnboarding =
+              userProfile.onboardingCompleted &&
+              userProfile.historicalInterests.isNotEmpty;
+
+          if (!hasCompletedOnboarding) {
             // Onboarding NOT completed → Zur Onboarding Screen
             WidgetsBinding.instance.addPostFrameCallback((_) {
               context.go('/onboarding');

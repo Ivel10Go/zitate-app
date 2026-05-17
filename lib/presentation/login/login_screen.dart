@@ -181,6 +181,38 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: 1.5,
                   ),
                 ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: _GoogleSignInButton(
+                    label: _isSignUp
+                        ? 'Mit Google registrieren'
+                        : 'Mit Google anmelden',
+                    isLoading: _loading,
+                    onTap: () async {
+                      setState(() => _loading = true);
+                      final authController = ref.read(
+                        authControllerProvider.notifier,
+                      );
+                      final success = await authController.signInWithGoogle();
+                      if (success && mounted) {
+                        if (_isSignUp) {
+                          context.go('/onboarding');
+                        } else {
+                          context.go('/');
+                        }
+                      } else if (mounted) {
+                        final error = ref
+                            .read(authControllerProvider)
+                            .maybeWhen(error: (e, _) => e, orElse: () => null);
+                        setState(() {
+                          _errorMessage = authErrorMessage(error);
+                          _loading = false;
+                        });
+                      }
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -337,6 +369,81 @@ class _ActionButton extends StatelessWidget {
                     letterSpacing: 1.2,
                   ),
                 ),
+        ),
+      ),
+    );
+  }
+}
+
+class _GoogleSignInButton extends StatelessWidget {
+  const _GoogleSignInButton({
+    required this.label,
+    required this.isLoading,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool isLoading;
+  final Future<void> Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Material(
+      color: scheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Color(0xFFDB4437), width: 1.5),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: isLoading ? null : onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (isLoading)
+                SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(scheme.primary),
+                    strokeWidth: 2,
+                  ),
+                )
+              else
+                Container(
+                  width: 22,
+                  height: 22,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFDB4437),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Text(
+                    'G',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      height: 1,
+                    ),
+                  ),
+                ),
+              const SizedBox(width: 10),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.ibmPlexSans(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: scheme.onSurface,
+                  letterSpacing: 0.2,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
