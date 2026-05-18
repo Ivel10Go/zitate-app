@@ -16,7 +16,7 @@ class DasKapitalApp extends ConsumerWidget {
 
     return settings.when(
       data: (_) => MaterialApp.router(
-        title: 'Zitatatlas',
+        title: 'Quotidian',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         routerConfig: router,

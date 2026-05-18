@@ -1,4 +1,4 @@
-package com.example.marx_app
+package com.quotidian.app
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -9,6 +9,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
+import com.quotidian.app.R
 
 class QuoteWidgetProviderLarge : AppWidgetProvider() {
   override fun onReceive(context: Context, intent: Intent) {

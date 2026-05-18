@@ -186,6 +186,8 @@ abstract final class AppBootstrap {
       _emitProgress(0.24, 'Startseite wird bestimmt ...');
       final settings = await SharedPreferences.getInstance();
       final profileRaw = settings.getString(UserProfile.storageKey);
+      final guestModeEnabled =
+          settings.getBool(SettingsKeys.guestModeEnabled) ?? false;
 
       // Check if user is authenticated
       final isAuthenticated =
@@ -195,6 +197,8 @@ abstract final class AppBootstrap {
       final launchRoute = NotificationService.instance.consumeLaunchRoute();
       final initialRoute = launchRoute != '/'
           ? launchRoute
+          : guestModeEnabled
+          ? '/' // Guest mode enabled → direkt Home anzeigen
           : !isAuthenticated
           ? '/register' // Not authenticated → direkt Registrierung zeigen
           : _shouldSkipOnboarding(profileRaw)
@@ -401,6 +405,8 @@ abstract final class AppBootstrap {
     try {
       final settings = await SharedPreferences.getInstance();
       final profileRaw = settings.getString(UserProfile.storageKey);
+      final guestModeEnabled =
+          settings.getBool(SettingsKeys.guestModeEnabled) ?? false;
 
       // Check if user is authenticated
       final isAuthenticated =
@@ -411,6 +417,8 @@ abstract final class AppBootstrap {
       return AppBootstrapResult(
         initialRoute: launchRoute != '/'
             ? launchRoute
+            : guestModeEnabled
+            ? '/' // Guest mode enabled → direkt Home anzeigen
             : !isAuthenticated
             ? '/auth' // Not authenticated → show auth screen only
             : _shouldSkipOnboarding(profileRaw)

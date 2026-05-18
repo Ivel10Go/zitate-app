@@ -14,6 +14,12 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
+    lint {
+        // Release-Lint kann bei einzelnen Plugins in AGP/Lint-Metaspace-Fehler laufen.
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -35,7 +41,7 @@ android {
         versionName = flutter.versionName
     }
     // Load keystore properties if present (key.properties at project root).
-    val keystorePropertiesFile = rootProject.file("key.properties")
+    val keystorePropertiesFile = rootProject.file("../key.properties")
     val keystoreProperties = Properties()
     if (keystorePropertiesFile.exists()) {
         keystoreProperties.load(FileInputStream(keystorePropertiesFile))
@@ -51,7 +57,7 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file(storeFilePath)
+            storeFile = rootProject.file(storeFilePath)
             storePassword = keystoreProperties.getProperty("storePassword")
             keyAlias = keystoreProperties.getProperty("keyAlias")
             keyPassword = keystoreProperties.getProperty("keyPassword")

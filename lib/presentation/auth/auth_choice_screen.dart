@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/providers/supabase_auth_provider.dart';
+import '../../core/constants/settings_keys.dart';
 import '../../core/services/supabase_auth_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../widgets/app_decorated_scaffold.dart';
@@ -34,6 +38,16 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  Future<void> _continueAsGuest() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(SettingsKeys.guestModeEnabled, true);
+    if (!mounted) {
+      return;
+    }
+
+    context.go('/');
   }
 
   @override
@@ -88,7 +102,7 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      'Zitatatlas',
+                      'Quotidian',
                       style: GoogleFonts.playfairDisplay(
                         fontSize: 32,
                         fontWeight: FontWeight.w700,
@@ -253,10 +267,26 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: _continueAsGuest,
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      foregroundColor: scheme.onSurfaceVariant,
+                    ),
+                    child: Text(
+                      'OHNE LOGIN FORTFAHREN',
+                      style: GoogleFonts.ibmPlexSans(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.9,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   Center(
                     child: Text(
-                      'Deine Daten werden sicher gespeichert.',
+                      'Du kannst jederzeit später ein Konto anlegen.',
                       style: GoogleFonts.ibmPlexSans(
                         fontSize: 11,
                         color: scheme.onSurfaceVariant,

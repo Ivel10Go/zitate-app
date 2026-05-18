@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/providers/supabase_auth_provider.dart';
+import '../../core/constants/settings_keys.dart';
 import '../../core/services/supabase_auth_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../widgets/app_decorated_scaffold.dart';
@@ -174,6 +176,16 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     }
   }
 
+  Future<void> _continueAsGuest() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(SettingsKeys.guestModeEnabled, true);
+    if (!mounted) {
+      return;
+    }
+
+    context.go('/');
+  }
+
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
@@ -219,6 +231,21 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                         : 'Mit Google anmelden',
                     isLoading: _loading,
                     onTap: _signInWithGoogle,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Center(
+                  child: TextButton(
+                    onPressed: _continueAsGuest,
+                    child: Text(
+                      'OHNE LOGIN FORTFAHREN',
+                      style: GoogleFonts.ibmPlexSans(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.red,
+                        letterSpacing: 0.9,
+                      ),
+                    ),
                   ),
                 ),
               ],
