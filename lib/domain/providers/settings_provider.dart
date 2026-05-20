@@ -144,14 +144,6 @@ class SettingsController extends AsyncNotifier<SettingsState> {
   Future<void> markOnboardingSeen() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('settings_onboarding_seen', true);
-    final raw = prefs.getString(UserProfile.storageKey);
-    final profile = raw == null || raw.isEmpty
-        ? UserProfile.initial()
-        : UserProfile.fromJsonString(raw);
-    await prefs.setString(
-      UserProfile.storageKey,
-      profile.copyWith(onboardingCompleted: true).toJsonString(),
-    );
     state = AsyncData(state.requireValue.copyWith(onboardingSeen: true));
   }
 

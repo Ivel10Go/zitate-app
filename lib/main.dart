@@ -20,23 +20,53 @@ Future<void> main() async {
       WidgetsFlutterBinding.ensureInitialized();
 
       final crashReporting = CrashReportingService();
-      await crashReporting.initialize();
+      try {
+        await crashReporting.initialize().timeout(
+          const Duration(seconds: 4),
+          onTimeout: () {
+            debugPrint('[Bootstrap] Crash reporting init timed out');
+          },
+        );
+      } catch (error) {
+        debugPrint('[Bootstrap] Crash reporting init failed: $error');
+      }
 
       // Lock app to portrait orientation only
       await SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
       ]);
 
-      // Lade Umgebungsvariablen (.env file)
-      await dotenv.load();
+      // Load environment variables from asset if present.
+      try {
+        await dotenv.load().timeout(
+          const Duration(seconds: 2),
+          onTimeout: () {
+            debugPrint('[Bootstrap] dotenv load timed out, using fallbacks');
+          },
+        );
+      } catch (error) {
+        debugPrint('[Bootstrap] dotenv not loaded, using fallbacks: $error');
+      }
 
-      // Initialisiere Supabase
-      final supabaseUrl = dotenv.env['SUPABASE_URL']?.trim() ?? '';
-      final supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY']?.trim() ?? '';
+      // Prefer build-time defines in release; fallback to dotenv values.
+      final supabaseUrl =
+          const String.fromEnvironment('SUPABASE_URL').trim().isNotEmpty
+          ? const String.fromEnvironment('SUPABASE_URL').trim()
+          : (dotenv.env['SUPABASE_URL']?.trim() ?? '');
+      final supabaseAnonKey =
+          const String.fromEnvironment('SUPABASE_ANON_KEY').trim().isNotEmpty
+          ? const String.fromEnvironment('SUPABASE_ANON_KEY').trim()
+          : (dotenv.env['SUPABASE_ANON_KEY']?.trim() ?? '');
 
       if (supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty) {
         try {
-          await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+          await Supabase.initialize(
+            url: supabaseUrl,
+            anonKey: supabaseAnonKey,
+          ).timeout(
+            const Duration(seconds: 6),
+            onTimeout: () => throw TimeoutException('Supabase init timed out'),
+          );
         } catch (e) {
           debugPrint('[Bootstrap] Supabase init failed: $e');
           // Continü anyway - Supabase is optional for offline mode

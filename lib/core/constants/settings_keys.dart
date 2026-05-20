@@ -6,4 +6,5 @@ abstract final class SettingsKeys {
   static const notificationEnabled = 'settings_notification_enabled';
   static const streak = 'settings_streak';
   static const homeContentMode = 'settings_home_content_mode';
+  static const guestModeEnabled = 'settings_guest_mode_enabled';
 }

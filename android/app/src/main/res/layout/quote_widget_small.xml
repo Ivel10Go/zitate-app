@@ -3,132 +3,47 @@
     android:id="@+id/quote_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4EFE6"
-    android:orientation="vertical">
+    android:background="#EDE8DF"
+    android:orientation="vertical"
+    android:padding="12dp">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="28dp"
+        android:layout_height="4dp"
+        android:background="#C41E1E" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#C41E1E" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingBottom="6dp">
+    <TextView
+        android:id="@+id/quote_text_italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif"
+        android:textColor="#1A1A1A"
+        android:textSize="14sp"
+        android:textStyle="italic" />
 
-            <TextView
-                android:id="@+id/quote_header"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ZITATATLAS"
-                android:textColor="#1A1A1A"
-                android:textSize="8sp"
-                android:textStyle="bold" />
+    <TextView
+        android:id="@+id/fact_text_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif"
+        android:textColor="#1A1A1A"
+        android:textSize="14sp"
+        android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/widget_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#C41E1E"
-                android:paddingStart="6dp"
-                android:paddingTop="2dp"
-                android:paddingEnd="6dp"
-                android:paddingBottom="2dp"
-                android:text="HEUTE"
-                android:textColor="#FFFFFF"
-                android:textSize="7sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#2A2A2A" />
-
-        <TextView
-            android:id="@+id/quote_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:textColor="#555555"
-            android:textSize="8sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/quote_text_italic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:layout_marginTop="8dp"
-            android:maxLines="3"
-            android:textColor="#1A1A1A"
-            android:textSize="13sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/fact_text_normal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:layout_marginTop="8dp"
-            android:maxLines="3"
-            android:textColor="#1A1A1A"
-            android:textSize="13sp"
-            android:textStyle="normal"
-            android:visibility="gone" />
-
-        <View
-            android:layout_width="22dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="8dp"
-            android:background="#C41E1E" />
-
-        <TextView
-            android:id="@+id/quote_explanation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif"
-            android:maxLines="2"
-            android:textColor="#555555"
-            android:textSize="9sp" />
-
-        <TextView
-            android:id="@+id/quote_source"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif"
-            android:maxLines="1"
-            android:textAllCaps="true"
-            android:textColor="#1A1A1A"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/quote_categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:maxLines="1"
-            android:textAllCaps="true"
-            android:textColor="#555555"
-            android:textSize="7sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/quote_streak"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textAllCaps="true"
-            android:textColor="#555555"
-            android:textSize="7sp"
-            android:visibility="gone" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/quote_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#C41E1E"
+        android:textSize="10sp"
+        android:textStyle="bold" />
 </LinearLayout>

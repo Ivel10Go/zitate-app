@@ -13,7 +13,6 @@ import '../../../domain/providers/daily_content_provider.dart';
 import '../../../core/providers/supabase_auth_provider.dart';
 import '../../../core/services/supabase_auth_service.dart';
 import '../../../domain/providers/user_profile_provider.dart';
-import '../../../widgets/political_leaning_parliament_picker.dart';
 
 class ProfileSection extends ConsumerWidget {
   const ProfileSection({super.key});
@@ -542,23 +541,44 @@ class ProfileSection extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  PoliticalLeaningParliamentPicker(
-                    selected: selected,
-                    height: 180,
-                    onSelect: (leaning) {
-                      setModalState(() {
-                        selected = leaning;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    _leaningLabel(selected),
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: scheme.onSurface,
-                    ),
+                  Column(
+                    children: [
+                      for (final leaning in PoliticalLeaning.values)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Material(
+                            color: selected == leaning
+                                ? AppColors.ink.withValues(alpha: 0.1)
+                                : Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                setModalState(() {
+                                  selected = leaning;
+                                });
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: selected == leaning
+                                        ? AppColors.ink
+                                        : AppColors.rule,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Text(
+                                  _leaningLabel(leaning),
+                                  style: GoogleFonts.ibmPlexSans(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: scheme.onSurface,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   const SizedBox(height: 14),
                   SizedBox(

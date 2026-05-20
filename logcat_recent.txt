@@ -1,0 +1,342 @@
+--------- beginning of main
+05-17 17:57:44.595 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:44.657 D/AndroidRuntime( 8024): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+05-17 17:57:44.680 I/AndroidRuntime( 8024): Using default boot image
+05-17 17:57:44.680 I/AndroidRuntime( 8024): Leaving lock profiling enabled
+05-17 17:57:44.692 I/app_process( 8024): Using CollectorTypeCMC GC.
+05-17 17:57:44.699 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:44.807 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:44.956 D/nativeloader( 8024): InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+05-17 17:57:44.999 D/nativeloader( 8024): Load libicu_jni.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+05-17 17:57:44.999 D/app_process( 8024): u_setTimeZoneFilesDirectory("/apex/com.android.tzdata/etc/tz/versioned/9/icu") succeeded. 
+05-17 17:57:45.001 D/app_process( 8024): I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt76l.dat
+05-17 17:57:45.014 D/nativeloader( 8024): Load libjavacore.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+05-17 17:57:45.018 D/nativeloader( 8024): Load libopenjdk.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+05-17 17:57:45.026 I/app_process( 8024): Priority-to-niceness mapping: 19, 16, 13, 10, 0, -2, -4, -5, -6, -8
+05-17 17:57:45.092 D/nativeloader( 8024): Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+05-17 17:57:45.093 D/AndroidRuntime( 8024): Calling main entry com.android.commands.monkey.Monkey
+05-17 17:57:45.096 D/nativeloader( 8024): Load /system/lib64/libmonkey_jni.so using ns default for caller /system/framework/monkey.jar in same partition (is_bridged=0): ok
+05-17 17:57:45.097 W/Monkey  ( 8024): args: [-p, com.quotidian.app, -c, android.intent.category.LAUNCHER, 1]
+05-17 17:57:45.105 I/AconfigPackage( 8024): android.uprobestats.mainline.flags is mapped to com.android.uprobestats
+05-17 17:57:45.106 I/AconfigPackage( 8024): com.android.icu is mapped to com.android.i18n
+05-17 17:57:45.107 I/AconfigPackage( 8024): com.android.cellbroadcastreceiver.flags is mapped to com.android.cellbroadcast
+05-17 17:57:45.107 I/AconfigPackage( 8024): com.android.os.statsd.flags is mapped to com.android.os.statsd
+05-17 17:57:45.108 I/AconfigPackage( 8024): com.android.healthfitness.flags is mapped to com.android.healthfitness
+05-17 17:57:45.109 I/AconfigPackage( 8024): com.android.uwb.flags is mapped to com.android.uwb
+05-17 17:57:45.109 I/AconfigPackage( 8024): com.android.ranging.flags is mapped to com.android.uwb
+05-17 17:57:45.109 I/AconfigPackage( 8024): com.android.adservices.flags is mapped to com.android.adservices
+05-17 17:57:45.109 I/AconfigPackage( 8024): com.android.sdksandbox.flags is mapped to com.android.adservices
+05-17 17:57:45.110 I/AconfigPackage( 8024): com.android.org.conscrypt.flags is mapped to com.android.conscrypt
+05-17 17:57:45.110 I/AconfigPackage( 8024): com.android.org.conscrypt.net.flags is mapped to com.android.conscrypt
+05-17 17:57:45.110 I/AconfigPackage( 8024): com.android.ipsec.flags is mapped to com.android.ipsec
+05-17 17:57:45.111 I/AconfigPackage( 8024): com.android.crashrecovery.flags is mapped to com.android.crashrecovery
+05-17 17:57:45.112 I/AconfigPackage( 8024): com.android.wifi.flags is mapped to com.android.wifi
+05-17 17:57:45.112 I/AconfigPackage( 8024): com.android.media.extractor.flags is mapped to com.android.media
+05-17 17:57:45.112 I/AconfigPackage( 8024): com.android.media.mainline.flags is mapped to com.android.media
+05-17 17:57:45.113 I/AconfigPackage( 8024): android.graphics.pdf.flags is mapped to com.android.mediaprovider
+05-17 17:57:45.113 I/AconfigPackage( 8024): com.android.providers.media.flags is mapped to com.android.mediaprovider
+05-17 17:57:45.113 I/AconfigPackage( 8024): android.graphics.pdf.flags.readonly is mapped to com.android.mediaprovider
+05-17 17:57:45.114 I/AconfigPackage( 8024): com.android.permission.flags is mapped to com.android.permission
+05-17 17:57:45.114 I/AconfigPackage( 8024): com.android.permissioncontroller.flags is mapped to com.android.permission
+05-17 17:57:45.115 I/AconfigPackage( 8024): com.android.appsearch.flags is mapped to com.android.appsearch
+05-17 17:57:45.116 I/AconfigPackage( 8024): com.android.adbd.flags is mapped to com.android.adbd
+05-17 17:57:45.117 I/AconfigPackage( 8024): com.android.art.flags is mapped to com.android.art
+05-17 17:57:45.117 I/AconfigPackage( 8024): com.android.art.rw.flags is mapped to com.android.art
+05-17 17:57:45.117 I/AconfigPackage( 8024): com.android.libcore is mapped to com.android.art
+05-17 17:57:45.117 I/AconfigPackage( 8024): com.android.telephony.flags is mapped to com.android.telephonycore
+05-17 17:57:45.118 I/AconfigPackage( 8024): com.android.bluetooth.flags is mapped to com.android.bt
+05-17 17:57:45.119 I/AconfigPackage( 8024): com.android.devicelock.flags is mapped to com.android.devicelock
+05-17 17:57:45.120 I/AconfigPackage( 8024): com.android.rkpd.flags is mapped to com.android.rkpd
+05-17 17:57:45.121 I/AconfigPackage( 8024): com.android.compos.flags is mapped to com.android.compos
+05-17 17:57:45.121 I/AconfigPackage( 8024): com.android.system.virtualmachine.flags is mapped to com.android.virt
+05-17 17:57:45.122 I/AconfigPackage( 8024): android.provider.flags is mapped to com.android.configinfrastructure
+05-17 17:57:45.122 I/AconfigPackage( 8024): com.android.server.deviceconfig is mapped to com.android.configinfrastructure
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.tethering.mainline.beta is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): android.net.http is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.tethering.readonly.flags is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): android.net.vcn is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.net.flags is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.tethering.flags is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.tethering.beta.test is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.nearby.flags is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.net.thread.flags is mapped to com.android.tethering
+05-17 17:57:45.123 I/AconfigPackage( 8024): com.android.net.ct.flags is mapped to com.android.tethering
+05-17 17:57:45.124 I/AconfigPackage( 8024): android.os.profiling is mapped to com.android.profiling
+05-17 17:57:45.124 I/AconfigPackage( 8024): android.os.profiling.anomaly.flags is mapped to com.android.profiling
+05-17 17:57:45.125 I/AconfigPackage( 8024): android.media.swcodec.flags is mapped to com.android.media.swcodec
+05-17 17:57:45.125 I/AconfigPackage( 8024): com.android.adservices.ondevicepersonalization.flags is mapped to com.android.ondevicepersonalization
+05-17 17:57:45.126 I/AconfigPackage( 8024): com.android.nfc.module.flags is mapped to com.android.nfcservices
+05-17 17:57:45.126 I/AconfigPackage( 8024): com.android.nfc.module.nonexported.flags is mapped to com.android.nfcservices
+05-17 17:57:45.126 E/FeatureFlagsImplExport( 8024): android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.xr cannot be found on the device
+05-17 17:57:45.129 W/libc    ( 8024): Access denied finding property "qemu.sf.lcd_density"
+05-17 17:57:45.129 W/libc    ( 8024): Access denied finding property "qemu.sf.lcd_density"
+05-17 17:57:45.123 W/commands.monkey( 8024): type=1400 audit(0.0:550922): avc:  denied  { read } for  name="u:object_r:qemu_sf_lcd_density_prop:s0" dev="tmpfs" ino=340 scontext=u:r:shell:s0 tcontext=u:object_r:qemu_sf_lcd_density_prop:s0 tclass=file permissive=0
+05-17 17:57:45.123 W/commands.monkey( 8024): type=1400 audit(0.0:550923): avc:  denied  { read } for  name="u:object_r:qemu_sf_lcd_density_prop:s0" dev="tmpfs" ino=340 scontext=u:r:shell:s0 tcontext=u:object_r:qemu_sf_lcd_density_prop:s0 tclass=file permissive=0
+05-17 17:57:45.137 W/Monkey  ( 8024):  arg: "-p"
+05-17 17:57:45.137 W/Monkey  ( 8024):  arg: "com.quotidian.app"
+05-17 17:57:45.138 W/Monkey  ( 8024):  arg: "-c"
+05-17 17:57:45.138 W/Monkey  ( 8024):  arg: "android.intent.category.LAUNCHER"
+05-17 17:57:45.138 W/Monkey  ( 8024):  arg: "1"
+05-17 17:57:45.138 W/Monkey  ( 8024): data="com.quotidian.app"
+05-17 17:57:45.138 W/Monkey  ( 8024): data="android.intent.category.LAUNCHER"
+05-17 17:57:45.145 D/EventHub( 1569): No input device configuration file found for device 'Monkey touch'.
+05-17 17:57:45.151 I/EventHub( 1569): usingClockIoctl=true
+05-17 17:57:45.151 I/EventHub( 1569): New device: id=6, fd=1047, path='/dev/input/event4', name='Monkey touch', classes=TOUCH | TOUCH_MT, configuration='', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+05-17 17:57:45.162 I/InputReader( 1569): Device reconfigured: id=6, name='Monkey touch', size 1080x2400, orientation Rotation0, mode DIRECT, display id 0
+05-17 17:57:45.163 I/InputReader( 1569): Device added: id=6, eventHubId=6, name='Monkey touch', descriptor='e1fe28b90f915c7d1febbd52c1ef84b3c4cbed9f',sources=TOUCHSCREEN
+05-17 17:57:45.177 D/TemperatureStateSource( 2207): sequence=101961 actualDelay=10001
+05-17 17:57:45.178 D/TemperatureStateSource( 2207): Reading temperature: sequence=101962
+05-17 17:57:45.180 I/pixel-thermal( 1763): VIRTUAL-SKIN:28.7354 raw data: VIRTUAL-QI-GNSS:25313 VIRTUAL-QI-QUIET:27443.8 VIRTUAL-QUIET-BATT:25789.8 VIRTUAL-SKIN:28735.4 VIRTUAL-USB2-DISP:28735.4 battery:25500 disp_therm:27314 gnss_tcxo_therm:29724 qi_therm:30080 quiet_therm:26565 usb_pwr_therm2:26823 
+05-17 17:57:45.181 D/TemperatureStateSource( 2207): getDeviceTemperatures: sequence=101962 deviceTemperatureType=3 temperatureSource=0 temperatures=[28.735441]
+05-17 17:57:45.181 D/BusinessScope( 2207): Enqueuing the block
+05-17 17:57:45.181 D/TemperatureStateSource( 2207): sequence=101962 waitTime=10000
+05-17 17:57:45.181 D/BusinessScope( 2207): Start running the #208422 block
+05-17 17:57:45.186 D/BusinessScope( 2207): Enqueuing the block
+05-17 17:57:45.186 D/ImpulseStateSource( 2207): Notify clients: 104205
+05-17 17:57:45.186 D/BusinessScope( 2207): Finish running the #208422 block
+05-17 17:57:45.187 D/BusinessScope( 2207): Start running the #208423 block
+05-17 17:57:45.187 D/BusinessScope( 2207): Finish running the #208423 block
+--------- beginning of system
+05-17 17:57:45.195 W/ActivityManager( 1569): registerReceiverWithFeature: no app for null
+05-17 17:57:45.196 D/WindowManager( 1569): Direct invocation of sendNewConfiguration: Display{#0 state=ON size=1080x2400 ROTATION_0}
+05-17 17:57:45.212 I/PkDeviceHelper( 8599): PkDeviceHelper.refreshDevices():87 refreshing devices
+05-17 17:57:45.218 W/ActivityTaskManager( 1569): callingPackage for (uid=2000, pid=8024) has no WPC
+05-17 17:57:45.220 V/GrammaticalInflectionUtils( 1569): AttributionSource: android.content.AttributionSource@7b8b11ea does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+05-17 17:57:45.222 D/RecentsView(29945): onTaskDisplayChanged: 9433, new displayId = 0
+05-17 17:57:45.223 I/libbinder.BpBinder(  567): onLastStrongRef automatically unlinking death recipients for binder (0xb4000079e229c600) with descriptor: '(not cached)'
+05-17 17:57:45.224 D/Bubbles ( 2053): BubbleTaskStackListener.onTaskMovedToFront(): taskId=9433
+05-17 17:57:45.225 V/ActivityTaskManager( 1569): TaskLaunchParamsModifier: phase=3 task=Task{9dc1a2d #9433 type=standard I=com.quotidian.app/.MainActivity} activity=ActivityRecord{215632196 u0 com.quotidian.app/.MainActivity t-1} display-from-task=0 display-id=0 task-display-area-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@173215606 inherit-from-task=fullscreen non-freeform-task-display-area display-area=DefaultTaskDisplayArea@173215606 activity-requested-portrait freeform-size-mismatch=Rect(276, 692 - 804, 1772)
+05-17 17:57:45.225 I/ActivityTaskManager( 1569): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.quotidian.app/.MainActivity} with LAUNCH_SINGLE_TOP from uid 2000 (com.android.shell) (BAL_ALLOW_PERMISSION) result code=0
+05-17 17:57:45.225 D/CompatChangeReporter( 1569): Compat change id reported: 377864165; UID 10541; state: ENABLED
+05-17 17:57:45.226 V/WindowManagerShell( 2053): Transition requested (#18423): android.os.BinderProxy@8d28da0 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=9433 effectiveUid=10541 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.quotidian.app/.MainActivity } baseActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} topActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} origActivity=null realActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} realActivityIsAppLockEnabled=false numActivities=1 lastActiveTime=2010338653 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.os.BinderProxy@28d3d59} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{aaa6d1e com.quotidian.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(276, 692 - 804, 1772) leafTaskBoundsFromOptions= false capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=503 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false isLeafTask= true eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2400) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null topNonResizableActivityAspectRatio=-1.0} topActivityMainWindowFrame=null isAppBubble=false}, pipChange = null, remoteTransitionInfo = null, displayChange = null, requestedLocation = null, userChange = null, windowingLayerChange = null, fullscreenRequestChange = null, flags = 0, debugId = 18423 }
+05-17 17:57:45.226 W/DisplayDisconnectTransitionHandler( 2053): No disconnect change found in the transition, not handling request.
+05-17 17:57:45.226 V/GrammaticalInflectionUtils( 1569): AttributionSource: android.content.AttributionSource@7b8b11ea does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+05-17 17:57:45.226 D/ShellSplitScreen( 2053): logExit: no-op, mLoggerSessionId is null
+05-17 17:57:45.226 D/CompatChangeReporter( 1569): Compat change id reported: 441041342; UID 10541; state: ENABLED
+05-17 17:57:45.227 D/b/417220811(29945): invalidateLoadedTasks - previous requestLoadId: -1
+05-17 17:57:45.227 D/b/417220811(29945): invalidateLoadedTasks - previous requestLoadId: -1
+05-17 17:57:45.227 I/Monkey  ( 8024): Events injected: 1
+05-17 17:57:45.234 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:45.240 I/Monkey  ( 8024): ## Network stats: elapsed time=22ms (0ms mobile, 0ms wifi, 22ms not connected)
+05-17 17:57:45.240 D/Zygote  (  910): Forked child process 8039
+05-17 17:57:45.240 I/ActivityManager( 1569): Start proc 8039:com.quotidian.app/u0a541 for next-top-activity {com.quotidian.app/com.quotidian.app.MainActivity}
+05-17 17:57:45.242 I/app_process( 8024): System.exit called, status: 0
+05-17 17:57:45.242 I/AndroidRuntime( 8024): VM exiting with result code 0.
+05-17 17:57:45.253 V/WindowManagerShell( 2053): onTransitionReady(transaction=6738806798342)
+05-17 17:57:45.253 V/WindowManagerShell( 2053): onTransitionReady (#18423) android.os.BinderProxy@8d28da0: {id=18423 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-17 17:57:45.253 V/WindowManagerShell( 2053):         {m=OPEN f=NONE leash=Surface(name=Task=9433#316544)/@0x601ed0b sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},
+05-17 17:57:45.253 V/WindowManagerShell( 2053):         {m=TO_BACK f=NONE leash=Surface(name=Task=9371#303039)/@0x68d77e8 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}
+05-17 17:57:45.253 V/WindowManagerShell( 2053):     ]}
+05-17 17:57:45.253 V/WindowManagerShell( 2053): Playing animation for (#18423) android.os.BinderProxy@8d28da0@0
+05-17 17:57:45.253 D/ShellSplitScreen( 2053): startAnimation: transition=18423 isSplitActive=false
+05-17 17:57:45.253 V/ShellRecents( 2053): RecentsTransitionHandler.startAnimation: no controller found
+05-17 17:57:45.253 V/WindowManagerShell( 2053): Transition doesn't have explicit remote, search filters for match for {id=18423 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=NONE leash=Surface(name=Task=9433#316544)/@0x601ed0b sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},{m=TO_BACK f=NONE leash=Surface(name=Task=9371#303039)/@0x68d77e8 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}]}
+05-17 17:57:45.253 V/WindowManagerShell( 2053):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=false},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=false}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@524073d, appThread = android.app.IApplicationThread$Stub$Proxy@b9db32, debugName = LauncherToDream, filter = null }}
+05-17 17:57:45.253 V/WindowManagerShell( 2053):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=standard independent=false modes=[CHANGE] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=true}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@a97c083, appThread = android.app.IApplicationThread$Stub$Proxy@7971200, debugName = QuickstepDisplayMove, filter = null }}
+05-17 17:57:45.253 V/WindowManagerShell( 2053):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined isCrossDisplayMove=false},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=false},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined isCrossDisplayMove=false}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@eceda39, appThread = android.app.IApplicationThread$Stub$Proxy@5a6787e, debugName = QuickstepLaunchHome, filter = null }}
+05-17 17:57:45.253 V/WindowManagerShell( 2053):  Delegate animation for (#18423) to null
+05-17 17:57:45.253 V/WindowManagerShell( 2053): start default transition animation, info = {id=18423 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=NONE leash=Surface(name=Task=9433#316544)/@0x601ed0b sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},{m=TO_BACK f=NONE leash=Surface(name=Task=9371#303039)/@0x68d77e8 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}]}
+05-17 17:57:45.253 I/Zygote  ( 8039): Process 8039 created for com.quotidian.app
+05-17 17:57:45.254 I/m.quotidian.app( 8039): Late-enabling -Xcheck:jni
+05-17 17:57:45.254 V/WindowManagerShell( 2053): loadAnimation: anim=android.view.animation.AnimationSet@3b62a94 animAttr=0x9 type=OPEN isEntrance=false
+05-17 17:57:45.256 V/WindowManagerShell( 2053): loadAnimation: anim=android.view.animation.AnimationSet@8d89532 animAttr=0x8 type=OPEN isEntrance=true
+05-17 17:57:45.257 V/WindowManagerShell( 2053):  animated by com.android.wm.shell.transition.DefaultTransitionHandler@ffc9448
+05-17 17:57:45.260 V/WindowManager( 1569): Sent Transition (#18423) createdAt=05-17 17:57:45.221 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=9433 effectiveUid=10541 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.quotidian.app/.MainActivity } baseActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} topActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} origActivity=null realActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} realActivityIsAppLockEnabled=false numActivities=1 lastActiveTime=2010338653 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{d851112 Task{9dc1a2d #9433 type=standard I=com.quotidian.app/.MainActivity}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{2c7f0e3 com.quotidian.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(276, 692 - 804, 1772) leafTaskBoundsFromOptions= false capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=503 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false isLeafTask= true eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2400) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null topNonResizableActivityAspectRatio=-1.0} topActivityMainWindowFrame=null isAppBubble=false}, pipChange = null, remoteTransitionInfo = null, displayChange = null, requestedLocation = null, userChange = null, windowingLayerChange = null, fullscreenRequestChange = null, flags = 0, debugId = 18423 }
+05-17 17:57:45.261 V/WindowManager( 1569):     startWCT=WindowContainerTransaction { changes= {} hops= [] flags= 0 errorCallbackToken=null taskFragmentOrganizer=null }
+05-17 17:57:45.261 V/WindowManager( 1569):     info={id=18423 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+05-17 17:57:45.261 V/WindowManager( 1569):         {WCT{RemoteToken{d851112 Task{9dc1a2d #9433 type=standard I=com.quotidian.app/.MainActivity}}} m=OPEN f=NONE leash=Surface(name=Task=9433#316544)/@0xb9a2747 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},
+05-17 17:57:45.261 V/WindowManager( 1569):         {WCT{RemoteToken{542e25b Task{73602e5 #9371 type=standard A=10285:com.whatsapp}}} m=TO_BACK f=NONE leash=Surface(name=Task=9371#303039)/@0xba19a0c sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}
+05-17 17:57:45.261 V/WindowManager( 1569):     ]}
+05-17 17:57:45.262 V/ShellTaskOrganizer( 2053): Task appeared taskId=9433 listener=FullscreenTaskListener
+05-17 17:57:45.262 V/ShellTaskOrganizer( 2053): Fullscreen Task Appeared: #9433
+05-17 17:57:45.262 D/b/417220811(29945): invalidateLoadedTasks - previous requestLoadId: -1
+05-17 17:57:45.268 I/EventHub( 1569): Removing device Monkey touch due to epoll hang-up event.
+05-17 17:57:45.268 I/EventHub( 1569): Removed device: path=/dev/input/event4 name=Monkey touch id=6 fd=1047 classes=TOUCH | TOUCH_MT
+05-17 17:57:45.270 E/hwc-display(  569): [PrimaryDisplay] resetColorMappingInfoForClientComp:: resetColorMappingInfo() idx=1 error(-22)
+05-17 17:57:45.271 I/InputReader( 1569): Device removed: id=6, eventHubId=6, name='Monkey touch', descriptor='e1fe28b90f915c7d1febbd52c1ef84b3c4cbed9f', sources=TOUCHSCREEN
+05-17 17:57:45.272 E/hwc-display(  569): Fail to open file /data/vendor/log/hwc/PrimaryDisplay_hwc_error_log0.txt, error: Permission denied
+05-17 17:57:45.272 E/hwc-display(  569): Fail to open file /data/log/PrimaryDisplay_hwc_error_log0.txt, error: No such file or directory
+05-17 17:57:45.272 E/hwc-display(  569): Unable to open log file for PrimaryDisplay_hwc_error_log0.txt
+05-17 17:57:45.276 D/WindowManager( 1569): Direct invocation of sendNewConfiguration: Display{#0 state=ON size=1080x2400 ROTATION_0}
+05-17 17:57:45.276 I/EventHub( 1569): Removing device '/dev/input/event4' due to inotify event
+05-17 17:57:45.276 D/NavigationModeController( 2053): getCurrentUserContext: contextUser=0 currentUser=0
+05-17 17:57:45.267 W/composer@2.4-se(  569): type=1400 audit(0.0:550924): avc:  denied  { search } for  name="log" dev="dm-58" ino=394 scontext=u:r:hal_graphics_composer_default:s0 tcontext=u:object_r:vendor_log_file:s0 tclass=dir permissive=0
+05-17 17:57:45.267 W/composer@2.4-se(  569): type=1400 audit(0.0:550925): avc:  denied  { search } for  name="log" dev="dm-58" ino=394 scontext=u:r:hal_graphics_composer_default:s0 tcontext=u:object_r:vendor_log_file:s0 tclass=dir permissive=0
+05-17 17:57:45.280 I/PkDeviceHelper( 8599): PkDeviceHelper.refreshDevices():87 refreshing devices
+05-17 17:57:45.280 I/m.quotidian.app( 8039): Using CollectorTypeCMC GC.
+05-17 17:57:45.288 D/nativeloader( 8039): Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+05-17 17:57:45.293 I/adbd    ( 1227): jdwp connection from 8039
+05-17 17:57:45.297 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:45.305 I/pixel-thermal( 1763): VIRTUAL-SKIN:28.7354 raw data: VIRTUAL-SKIN:28735.4 
+05-17 17:57:45.309 D/ApplicationLoaders( 8039): Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+05-17 17:57:45.309 D/ApplicationLoaders( 8039): Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+05-17 17:57:45.323 E/hwc-display(  569): [PrimaryDisplay] resetColorMappingInfoForClientComp:: resetColorMappingInfo() idx=2 error(-22)
+05-17 17:57:45.323 E/hwc-display(  569): Fail to open file /data/vendor/log/hwc/PrimaryDisplay_hwc_error_log0.txt, error: Permission denied
+05-17 17:57:45.323 E/hwc-display(  569): Fail to open file /data/log/PrimaryDisplay_hwc_error_log0.txt, error: No such file or directory
+05-17 17:57:45.323 E/hwc-display(  569): Unable to open log file for PrimaryDisplay_hwc_error_log0.txt
+05-17 17:57:45.319 W/composer@2.4-se(  569): type=1400 audit(0.0:550926): avc:  denied  { search } for  name="log" dev="dm-58" ino=394 scontext=u:r:hal_graphics_composer_default:s0 tcontext=u:object_r:vendor_log_file:s0 tclass=dir permissive=0
+05-17 17:57:45.319 W/composer@2.4-se(  569): type=1400 audit(0.0:550927): avc:  denied  { search } for  name="log" dev="dm-58" ino=394 scontext=u:r:hal_graphics_composer_default:s0 tcontext=u:object_r:vendor_log_file:s0 tclass=dir permissive=0
+05-17 17:57:45.326 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:45.335 D/b/417220811(29945): invalidateLoadedTasks - previous requestLoadId: -1
+05-17 17:57:45.349 I/AiAiTextClassifier(15995): GenerateLinks did not find valid links, returning empty result
+05-17 17:57:45.356 I/AiAiConversations(15995): (REDACTED) [MessageActivityBroadcaster][component=%s][sessionId=%s][exitReason=%s][requiresDeletion=%s] Exit Conversation
+05-17 17:57:45.358 I/AiAiTranslate(15995): (REDACTED) onExitConversation : %s
+05-17 17:57:45.358 I/AiAiPeople(15995): (REDACTED) [%d] fragments remain to process, dispatched event [%s]
+05-17 17:57:45.359 I/AiAiTranslate(15995): (REDACTED) dismissChipUi() conversation id : %s
+05-17 17:57:45.359 W/AiAiTranslate(15995): dismissChipUi() OverlayLifecycleOwner is not init yet.
+05-17 17:57:45.360 I/AstreaConnection( 8599): AstreaConnection$listener$1.onExitConversation():75 exit
+05-17 17:57:45.360 I/DynamicLanguageSetterModule( 8599): DynamicLanguageSetterModule.updateConversationId():328 Receive exit conversation notification before finish input
+05-17 17:57:45.363 I/NebulaeTrainingCacheMetricsProcessor( 8599): NebulaeTrainingCacheMetricsProcessor.processExitedConversationInternal():312 Exit conversation: 463508bb984b77dbe9b9c235d9efda6e02c5babb3d1e148d44847f02009fc901/
+05-17 17:57:45.363 I/ConversationIdManager( 7109): exit
+05-17 17:57:45.421 I/WifiHAL (  995): Creating message to get link statistics; iface = 48
+05-17 17:57:45.427 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:45.535 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:45.545 D/WifiHAL (  995): Start debug command: mType GET_FEATURE
+05-17 17:57:45.545 I/WifiHAL (  995): CreateRequest mType = GET_FEATURE
+05-17 17:57:45.546 D/WifiHAL (  995): In DebugCommand::handleResponse, mType:GET_FEATURE
+05-17 17:57:45.546 D/WifiHAL (  995): len = 4, expected len = 4
+05-17 17:57:45.627 D/nativeloader( 8039): Configuring clns-9 for other apk /data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/lib/arm64:/data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.quotidian.app
+05-17 17:57:45.637 V/GraphicsEnvironment( 8039): Currently set values for:
+05-17 17:57:45.637 V/GraphicsEnvironment( 8039):   angle_gl_driver_selection_pkgs=[com.android.angle]
+05-17 17:57:45.637 V/GraphicsEnvironment( 8039):   angle_gl_driver_selection_values=[angle]
+05-17 17:57:45.637 V/GraphicsEnvironment( 8039): com.quotidian.app is not listed in per-application setting
+05-17 17:57:45.637 V/GraphicsEnvironment( 8039): No special selections for ANGLE, returning default driver choice
+05-17 17:57:45.637 V/GraphicsEnvironment( 8039): Neither updatable production driver nor prerelease driver is supported.
+05-17 17:57:45.644 W/FirebaseApp( 8039): Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+05-17 17:57:45.644 I/FirebaseInitProvider( 8039): FirebaseApp initialization unsuccessful
+05-17 17:57:45.653 D/WM-WrkMgrInitializer( 8039): Initializing WorkManager with default configuration.
+05-17 17:57:45.669 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:45.669 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:45.672 I/pixel-thermal( 1763): VIRTUAL-USB-UI:0 raw data: USB2-MINUS-QI:-3257 USB2-MINUS-USB:-23 VIRTUAL-USB-UI:0 qi_therm:30080 usb_pwr_therm:26846 usb_pwr_therm2:26823 
+05-17 17:57:45.672 I/DisplayManager( 8039): Choreographer implicitly registered for the refresh rate.
+05-17 17:57:45.672 I/pixel-thermal( 1763): cellular-emergency:28.7354 raw data: VIRTUAL-SKIN:28735.4 cellular-emergency:28735.4 
+05-17 17:57:45.672 I/pixel-thermal( 1763): VIRTUAL-SKIN:28.7354 raw data: VIRTUAL-SKIN:28735.4 
+05-17 17:57:45.672 I/pixel-thermal( 1763): quiet_therm:26.565 raw data: quiet_therm:26565 
+05-17 17:57:45.672 I/pixel-thermal( 1763): usb_pwr_therm2:26.823 raw data: usb_pwr_therm2:26823 
+05-17 17:57:45.674 D/vulkan  ( 8039): searching for layers in '/data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/lib/arm64'
+05-17 17:57:45.674 D/vulkan  ( 8039): searching for layers in '/data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/base.apk!/lib/arm64-v8a'
+05-17 17:57:45.675 E/TransactionExecutor( 8039): Failed to execute the transaction: tId:373268793 ClientTransaction{
+05-17 17:57:45.675 E/TransactionExecutor( 8039): tId:373268793   transactionItems=[
+05-17 17:57:45.675 E/TransactionExecutor( 8039): tId:373268793     LaunchActivityItem{activityToken=android.os.BinderProxy@224e2ec,intent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.quotidian.app/.MainActivity },ident=215632196,info=ActivityInfo{2fe076d com.quotidian.app.MainActivity},curConfig={1.0 262mcc1mnc [de_DE] ldltr sw411dp w411dp h914dp 420dpi nrml long compactNeeded hdr widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.64366 fontWeightAdjustment=0},overrideConfig={1.0 262mcc1mnc [de_DE] ldltr sw411dp w411dp h914dp 420dpi nrml long compactNeeded hdr widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 2400) mAppBounds=Rect(0, 0 - 1080, 2400) mMaxBounds=Rect(0, 0 - 1080, 2400) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} s.2 fontWeightAdjustment=0},deviceId=0,referrer=com.android.shell,procState=2,state=null,persistentState=null,pendingResults=null,pendingNewIntents=null,sceneTransitionInfo=null,profilerInfo=null,assistToken=android.os.BinderProxy@7ee0816,shareableActivityToken=android.os.BinderProxy@dd45597,activityWindowInfo=ActivityWindowInfo{isEmbedded=false, taskBounds=Rect(0, 0 - 1080, 2400), taskFragmentBounds=Rect(0, 0 - 1080, 2400)},displayId=0}
+05-17 17:57:45.675 E/TransactionExecutor( 8039): tId:373268793     ResumeActivityItem{mActivityToken=android.os.BinderProxy@224e2ec,procState=-1,isForward=true,shouldSendCompatFakeFocus=false}
+05-17 17:57:45.675 E/TransactionExecutor( 8039): tId:373268793     Target activity: Not found for token: android.os.BinderProxy@224e2ec
+05-17 17:57:45.675 E/TransactionExecutor( 8039): tId:373268793   ]
+05-17 17:57:45.675 E/TransactionExecutor( 8039): tId:373268793 }
+05-17 17:57:45.675 D/AndroidRuntime( 8039): Shutting down VM
+--------- beginning of crash
+05-17 17:57:45.676 E/AndroidRuntime( 8039): FATAL EXCEPTION: main
+05-17 17:57:45.676 E/AndroidRuntime( 8039): Process: com.quotidian.app, PID: 8039
+05-17 17:57:45.676 E/AndroidRuntime( 8039): java.lang.RuntimeException: Unable to instantiate activity ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity}
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4426)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4723)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:224)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:133)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:103)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:80)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2987)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.os.Handler.dispatchMessage(Handler.java:125)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.os.Looper.loopOnce(Looper.java:269)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.os.Looper.loop(Looper.java:367)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.ActivityThread.main(ActivityThread.java:9333)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at java.lang.reflect.Method.invoke(Native Method)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:566)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:929)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): Caused by: java.lang.ClassNotFoundException: Didn't find class "com.quotidian.app.MainActivity" on path: DexPathList[[zip file "/data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/base.apk"],nativeLibraryDirectories=[/data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/lib/arm64, /data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:259)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:642)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at java.lang.ClassLoader.loadClass(ClassLoader.java:578)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.AppComponentFactory.instantiateActivity(AppComponentFactory.java:97)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at androidx.core.app.CoreComponentFactory.instantiateActivity(CoreComponentFactory.java:44)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.Instrumentation.newActivity(Instrumentation.java:1460)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4415)
+05-17 17:57:45.676 E/AndroidRuntime( 8039): 	... 14 more
+05-17 17:57:45.678 I/DropBoxManagerService( 1569): add tag=data_app_crash isTagEnabled=true flags=0x2
+05-17 17:57:45.679 W/ActivityTaskManager( 1569):   Force finishing activity com.quotidian.app/.MainActivity
+05-17 17:57:45.679 W/TransitionChain( 1569): Combining AR.finish-force-crash into #18424(CLOSE|R|0x10) from finishTopCrash
+05-17 17:57:45.680 V/WindowManagerShell( 2053): Transition requested (#18424): android.os.BinderProxy@302ab18 TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=9433 effectiveUid=10541 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.quotidian.app/.MainActivity } baseActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} topActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} origActivity=null realActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} realActivityIsAppLockEnabled=false numActivities=1 lastActiveTime=2010339096 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.os.BinderProxy@28d3d59} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{4d45971 com.quotidian.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(276, 692 - 804, 1772) leafTaskBoundsFromOptions= false capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=503 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false isLeafTask= true eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2400) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null topNonResizableActivityAspectRatio=-1.0} topActivityMainWindowFrame=null isAppBubble=false}, pipChange = null, remoteTransitionInfo = null, displayChange = null, requestedLocation = null, userChange = null, windowingLayerChange = null, fullscreenRequestChange = null, flags = 16, debugId = 18424 }
+05-17 17:57:45.680 W/DisplayDisconnectTransitionHandler( 2053): No disconnect change found in the transition, not handling request.
+05-17 17:57:45.680 I/libbinder.BpBinder(  567): onLastStrongRef automatically unlinking death recipients for binder (0xb4000079e2277770) with descriptor: '(not cached)'
+05-17 17:57:45.681 I/ActivityManager( 1569): Showing crash dialog for package com.quotidian.app u0
+05-17 17:57:45.705 D/WindowOnBackDispatcher( 1569): setTopOnBackInvokedCallback (unwrapped): android.app.Dialog$$ExternalSyntheticLambda2@542fa5d
+05-17 17:57:45.705 D/CoreBackPreview( 1569): Window{9b6866e u0 Application Error: com.quotidian.app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper@6bb1fd2, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}
+05-17 17:57:45.732 D/vulkan  ( 8039): added global layer 'VK_LAYER_KHRONOS_validation' from library '/data/app/~~ObaEan_dSGMM6BP6ttlDbg==/com.quotidian.app-dpej2DU-7f8KL0irOWC7lg==/base.apk!/lib/arm64-v8a/libVkLayer_khronos_validation.so'
+05-17 17:57:45.740 W/AccessibilityManagerService( 1569):  wait for adding window timeout: 12358
+05-17 17:57:45.772 V/WindowManagerShell( 2053): Transition animation finished (aborted=false), notifying core (#18423) android.os.BinderProxy@8d28da0@0
+05-17 17:57:45.774 V/WindowManager( 1569): Finish Transition (#18423): created at 05-17 17:57:45.221 collect-started=0.028ms request-sent=4.138ms started=5.249ms ready=25.984ms sent=27.664ms commit=18.35ms finished=553.059ms
+05-17 17:57:45.775 V/WindowManagerShell( 2053): Track 0 became idle
+05-17 17:57:45.874 W/Looper  ( 1569): Slow dispatch took 169ms android.ui app=system_server main=false group=FOREGROUND h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@19b68bc m=0
+05-17 17:57:46.164 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:46.179 W/ActivityTaskManager( 1569): Activity top resumed state loss timeout for ActivityRecord{215632196 u0 com.quotidian.app/.MainActivity t9433 f}}
+05-17 17:57:46.179 W/ActivityTaskManager( 1569): Activity pause timeout for ActivityRecord{215632196 u0 com.quotidian.app/.MainActivity t9433 f}}
+05-17 17:57:46.186 V/WindowManagerShell( 2053): onTransitionReady(transaction=6738806798483)
+05-17 17:57:46.186 V/WindowManagerShell( 2053): onTransitionReady (#18424) android.os.BinderProxy@302ab18: {id=18424 t=CLOSE f=0x10 trk=1 r=[0@Point(0, 0)] c=[
+05-17 17:57:46.186 V/WindowManagerShell( 2053):         {m=CLOSE f=NONE leash=Surface(name=Task=9433#316544)/@0x10b356 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},
+05-17 17:57:46.186 V/WindowManagerShell( 2053):         {m=TO_FRONT f=NONE leash=Surface(name=Task=9371#303039)/@0x844bfd7 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}
+05-17 17:57:46.186 V/WindowManagerShell( 2053):     ]}
+05-17 17:57:46.186 V/WindowManagerShell( 2053): Playing animation for (#18424) android.os.BinderProxy@302ab18@1
+05-17 17:57:46.186 D/ShellSplitScreen( 2053): startAnimation: transition=18424 isSplitActive=false
+05-17 17:57:46.186 V/ShellRecents( 2053): RecentsTransitionHandler.startAnimation: no controller found
+05-17 17:57:46.186 V/WindowManagerShell( 2053): Transition doesn't have explicit remote, search filters for match for {id=18424 t=CLOSE f=0x10 trk=1 r=[0@Point(0, 0)] c=[{m=CLOSE f=NONE leash=Surface(name=Task=9433#316544)/@0x10b356 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},{m=TO_FRONT f=NONE leash=Surface(name=Task=9371#303039)/@0x844bfd7 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}]}
+05-17 17:57:46.186 V/WindowManagerShell( 2053):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=false},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=false}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@524073d, appThread = android.app.IApplicationThread$Stub$Proxy@b9db32, debugName = LauncherToDream, filter = null }}
+05-17 17:57:46.187 V/WindowManagerShell( 2053):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=standard independent=false modes=[CHANGE] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=true}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@a97c083, appThread = android.app.IApplicationThread$Stub$Proxy@7971200, debugName = QuickstepDisplayMove, filter = null }}
+05-17 17:57:46.187 V/WindowManagerShell( 2053):  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined isCrossDisplayMove=false},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined isCrossDisplayMove=false},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined isCrossDisplayMove=false}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@eceda39, appThread = android.app.IApplicationThread$Stub$Proxy@5a6787e, debugName = QuickstepLaunchHome, filter = null }}
+05-17 17:57:46.187 V/WindowManagerShell( 2053):  Delegate animation for (#18424) to null
+05-17 17:57:46.187 V/WindowManagerShell( 2053): start default transition animation, info = {id=18424 t=CLOSE f=0x10 trk=1 r=[0@Point(0, 0)] c=[{m=CLOSE f=NONE leash=Surface(name=Task=9433#316544)/@0x10b356 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},{m=TO_FRONT f=NONE leash=Surface(name=Task=9371#303039)/@0x844bfd7 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}]}
+05-17 17:57:46.187 V/WindowManagerShell( 2053): loadAnimation: anim=android.view.animation.AnimationSet@87caee2 animAttr=0xa type=CLOSE isEntrance=true
+05-17 17:57:46.187 V/WindowManagerShell( 2053): loadAnimation: anim=android.view.animation.AnimationSet@f37c530 animAttr=0xb type=CLOSE isEntrance=false
+05-17 17:57:46.188 V/WindowManagerShell( 2053):  animated by com.android.wm.shell.transition.DefaultTransitionHandler@ffc9448
+05-17 17:57:46.189 V/WindowManager( 1569): Sent Transition (#18424) createdAt=05-17 17:57:45.679 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=9433 effectiveUid=10541 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.quotidian.app/.MainActivity } baseActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} topActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} origActivity=null realActivity=ComponentInfo{com.quotidian.app/com.quotidian.app.MainActivity} realActivityIsAppLockEnabled=false numActivities=1 lastActiveTime=2010339096 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{d851112 Task{9dc1a2d #9433 type=standard I=com.quotidian.app/.MainActivity}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{2c7f0e3 com.quotidian.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(276, 692 - 804, 1772) leafTaskBoundsFromOptions= false capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=503 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false isLeafTask= true eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2400) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null topNonResizableActivityAspectRatio=-1.0} topActivityMainWindowFrame=null isAppBubble=false}, pipChange = null, remoteTransitionInfo = null, displayChange = null, requestedLocation = null, userChange = null, windowingLayerChange = null, fullscreenRequestChange = null, flags = 16, debugId = 18424 }
+05-17 17:57:46.189 V/WindowManager( 1569):     startWCT=WindowContainerTransaction { changes= {} hops= [] flags= 0 errorCallbackToken=null taskFragmentOrganizer=null }
+05-17 17:57:46.189 V/WindowManager( 1569):     info={id=18424 t=CLOSE f=0x10 trk=1 r=[0@Point(0, 0)] c=[
+05-17 17:57:46.189 V/WindowManager( 1569):         {WCT{RemoteToken{d851112 Task{9dc1a2d #9433 type=standard I=com.quotidian.app/.MainActivity}}} m=CLOSE f=NONE leash=Surface(name=Task=9433#316544)/@0xb9a2747 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0},
+05-17 17:57:46.189 V/WindowManager( 1569):         {WCT{RemoteToken{542e25b Task{73602e5 #9371 type=standard A=10285:com.whatsapp}}} m=TO_FRONT f=NONE leash=Surface(name=Task=9371#303039)/@0xba19a0c sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1 winMode=1 userId=0}
+05-17 17:57:46.189 V/WindowManager( 1569):     ]}
+05-17 17:57:46.189 D/b/417220811(29945): invalidateLoadedTasks - previous requestLoadId: -1
+05-17 17:57:46.189 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:46.189 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:46.189 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:46.191 E/hwc-display(  569): [PrimaryDisplay] resetColorMappingInfoForClientComp:: resetColorMappingInfo() idx=1 error(-22)
+05-17 17:57:46.191 E/hwc-display(  569): Fail to open file /data/vendor/log/hwc/PrimaryDisplay_hwc_error_log0.txt, error: Permission denied
+05-17 17:57:46.191 E/hwc-display(  569): Fail to open file /data/log/PrimaryDisplay_hwc_error_log0.txt, error: No such file or directory
+05-17 17:57:46.191 E/hwc-display(  569): Unable to open log file for PrimaryDisplay_hwc_error_log0.txt
+05-17 17:57:46.187 W/composer@2.4-se(  569): type=1400 audit(0.0:550928): avc:  denied  { search } for  name="log" dev="dm-58" ino=394 scontext=u:r:hal_graphics_composer_default:s0 tcontext=u:object_r:vendor_log_file:s0 tclass=dir permissive=0
+05-17 17:57:46.187 W/composer@2.4-se(  569): type=1400 audit(0.0:550929): avc:  denied  { search } for  name="log" dev="dm-58" ino=394 scontext=u:r:hal_graphics_composer_default:s0 tcontext=u:object_r:vendor_log_file:s0 tclass=dir permissive=0
+05-17 17:57:46.201 W/View    (13577): requestLayout() improperly called by androidx.appcompat.widget.ActionMenuView{5703e6c V.E...... ......ID 785,0-1080,147 aid=1073742001} during layout: running second layout pass
+05-17 17:57:46.203 I/AiAiConversations(15995): (REDACTED) [MessageActivityBroadcaster][component=%s][sessionId=%s][taskLocusId=%s] Enter Conversation
+05-17 17:57:46.204 I/DynamicLanguageSetterModule( 8599): DynamicLanguageSetterModule.updateConversationId():333 Receiving conversation id in the valid window
+05-17 17:57:46.205 I/NebulaeTrainingCacheMetricsProcessor( 8599): NebulaeTrainingCacheMetricsProcessor.processEnteredConversationInternal():294 Enter conversation id: 463508bb984b77dbe9b9c235d9efda6e02c5babb3d1e148d44847f02009fc901
+05-17 17:57:46.205 I/AstreaConnection( 8599): AstreaConnection$listener$1.onEnterConversation():68 enter
+05-17 17:57:46.205 W/PackageConfigPersister( 1569): App-specific configuration not found for packageName: com.whatsapp and userId: 0
+05-17 17:57:46.206 I/ConversationIdManager( 7109): enter
+05-17 17:57:46.208 I/AiAiPeople(15995): (REDACTED) [%d] fragments remain to process, dispatched event [%s]
+05-17 17:57:46.210 I/DynamicLanguageSetterModule( 8599): DynamicLanguageSetterModule.createTemporaryEnableTask():491 No app specified languages, dynamic language for the conversation id is not specified
+05-17 17:57:46.211 W/ProcessStats( 1569): Tracking association SourceState{7b1a00c com.google.android.googlequicksearchbox:interactor/10168 BFgs #3745691} whose proc state 4 is better than process ProcessState{7afb006 com.google.android.googlequicksearchbox:search/10168 pkg=com.google.android.googlequicksearchbox} proc state 14 (39 skipped)
+05-17 17:57:46.214 D/BackgroundInstallControlService( 1569): Package event received: 0
+05-17 17:57:46.220 I/AiAiTextClassifier(15995): GenerateLinks did not find valid links, returning empty result
+05-17 17:57:46.221 I/AiAiTranslate(15995): (REDACTED) Detection skips model result for short message. maxConfidenceLangId: %s
+05-17 17:57:46.221 I/AiAiTranslate(15995): (REDACTED) Detection skips model result for short message. maxConfidenceLangId: %s
+05-17 17:57:46.225 I/AiAiTranslate(15995): (REDACTED) message: %s, no language detected
+05-17 17:57:46.225 I/AiAiTranslate(15995): (REDACTED) message: %s, no language detected
+05-17 17:57:46.225 I/AiAiPeople(15995): (REDACTED) [%d] fragments remain to process, dispatched event [%s]
+05-17 17:57:46.226 I/AiAiTranslate(15995): (REDACTED) onEnterConversation, language count: %d, activityId: %s, conversation id : %s
+05-17 17:57:46.226 I/AiAiTranslate(15995): (REDACTED) updateActivityViews() windowToken: %s
+05-17 17:57:46.231 I/AiAiTranslate(15995): TranslateUserStateLabel is null
+05-17 17:57:46.231 I/AiAiTranslate(15995): getSourceLanguage() TranslateUserStateLabel is null
+05-17 17:57:46.231 I/AiAiTranslate(15995): TranslateUserStateLabel is null
+05-17 17:57:46.232 I/AiAiTranslate(15995): (REDACTED) locales are identical: %s
+05-17 17:57:46.232 I/AiAiTranslate(15995): (REDACTED) triggering result: %s, type: %s
+05-17 17:57:46.259 E/hwc-display(  569): [PrimaryDisplay] resetColorMappingInfoForClientComp:: resetColorMappingInfo() idx=1 error(-22)
+05-17 17:57:46.259 E/hwc-display(  569): Fail to open file /data/vendor/log/hwc/PrimaryDisplay_hwc_error_log0.txt, error: Permission denied
+05-17 17:57:46.259 E/hwc-display(  569): Fail to open file /data/log/PrimaryDisplay_hwc_error_log0.txt, error: No such file or directory
+05-17 17:57:46.259 E/hwc-display(  569): Unable to open log file for PrimaryDisplay_hwc_error_log0.txt
+05-17 17:57:46.266 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:46.282 D/b/417220811(29945): invalidateLoadedTasks - previous requestLoadId: -1
+05-17 17:57:46.480 D/IpClient/wlan1( 2168): interfaceLinkStateChanged: ifindex 48 up
+05-17 17:57:46.681 W/AccessibilityWindowsPopulator( 1569): Windows change within in 2 frames continuously over 500 ms and notify windows changed immediately
+05-17 17:57:46.709 V/WindowManagerShell( 2053): Transition animation finished (aborted=false), notifying core (#18424) android.os.BinderProxy@302ab18@1
+05-17 17:57:46.721 V/WindowManager( 1569): Finish Transition (#18424): created at 05-17 17:57:45.679 collect-started=0.016ms request-sent=0.109ms started=2.396ms ready=501.406ms sent=503.249ms commit=8.565ms finished=1040.888ms
+05-17 17:57:46.723 V/WindowManagerShell( 2053): Track 1 became idle
+05-17 17:57:46.723 V/WindowManagerShell( 2053): All active transition animations finished
+05-17 17:57:46.788 W/BluetoothRemoteDevices( 6136): Address type mismatch for XX:XX:XX:XX:04:63, new type: 1
+05-17 17:57:46.835 W/ImageReader_JNI( 1569): Unable to acquire a buffer item, very likely client tried to acquire more than maxImages buffers

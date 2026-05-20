@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/providers/supabase_auth_provider.dart';
-import '../../core/services/supabase_auth_service.dart';
 import '../../core/services/notification_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/models/user_profile.dart';
@@ -15,6 +14,7 @@ import 'pages/interests_page.dart';
 import 'pages/notification_permission_page.dart';
 import 'pages/political_leaning_page.dart';
 import 'pages/welcome_page.dart';
+import 'pages/completion_page.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -43,40 +43,20 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       return;
     }
 
-    if (_index == _pageCount - 1) {
-      await ref
-          .read(userProfileProvider.notifier)
-          .saveProfile(
-            historicalInterests: _selectedInterests.toList(),
-            politicalLeaning: _leaning,
-          );
-
-      // Sync to cloud if user is authenticated
-      final currentUserId = ref.read(currentUserIdProvider);
-      if (currentUserId != null) {
-        try {
-          await ref
-              .read(userProfileProvider.notifier)
-              .syncToCloud(currentUserId);
-        } catch (e) {
-          // Log but don't fail - sync is non-critical for onboarding completion
-          print('Onboarding profile sync to cloud error: $e');
-        }
-      }
-
-      ref.invalidate(userProfileProvider);
-      // Invalidate daily content so it reloads with the new profile
-      ref.invalidate(dailyContentProvider);
-      if (mounted) {
-        context.go('/');
-      }
-      return;
-    }
-
     await _pageController.nextPage(
       duration: const Duration(milliseconds: 260),
       curve: Curves.easeOut,
     );
+  }
+
+  void _onCompletionFinished() {
+    // Nach Completion-Page: navigiere zum Home
+    ref.invalidate(authControllerProvider);
+    ref.invalidate(userProfileProvider);
+    ref.invalidate(dailyContentProvider);
+    if (mounted) {
+      context.go('/');
+    }
   }
 
   @override
@@ -153,9 +133,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               },
               children: <Widget>[
                 const WelcomePage(),
-                _AuthOnboardingPage(onSkip: _next),
                 NotificationPermissionPage(
-                  onAllow: () => NotificationService.instance.initialize(),
+                  onAllow: () async {
+                    await NotificationService.instance.initialize();
+                    if (!mounted) {
+                      return;
+                    }
+                    await _next();
+                  },
                   onSkip: _next,
                 ),
                 InterestsPage(
@@ -168,6 +153,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         _selectedInterests.add(value);
                       }
                     });
+                    ref
+                        .read(userProfileProvider.notifier)
+                        .updateInterests(_selectedInterests.toList());
                   },
                 ),
                 PoliticalLeaningPage(
@@ -176,168 +164,56 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     setState(() {
                       _leaning = value;
                     });
+                    ref
+                        .read(userProfileProvider.notifier)
+                        .updatePoliticalLeaning(value);
                   },
                   onSkip: () {
                     setState(() {
                       _leaning = PoliticalLeaning.neutral;
                     });
+                    ref
+                        .read(userProfileProvider.notifier)
+                        .updatePoliticalLeaning(PoliticalLeaning.neutral);
                   },
+                ),
+                OnboardingCompletionPage(
+                  selectedInterests: _selectedInterests.toList(),
+                  politicalLeaning: _leaning.toString().split('.').last,
+                  onCompleted: _onCompletionFinished,
                 ),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-            child: Row(
-              children: <Widget>[
-                if (_index > 0)
-                  Expanded(
-                    child: _OutlineActionButton(
-                      label: 'ZURÜCK',
-                      onTap: () => _pageController.previousPage(
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeOut,
+            child: _index == _pageCount - 1
+                ? const SizedBox.shrink() // Keine Buttons auf Completion-Page
+                : Row(
+                    children: <Widget>[
+                      if (_index > 0)
+                        Expanded(
+                          child: _OutlineActionButton(
+                            label: 'ZURÜCK',
+                            onTap: () => _pageController.previousPage(
+                              duration: const Duration(milliseconds: 250),
+                              curve: Curves.easeOut,
+                            ),
+                          ),
+                        ),
+                      if (_index > 0) const SizedBox(width: 12),
+                      Expanded(
+                        child: _ActionButton(
+                          label: _index == _pageCount - 2 ? 'FERTIG' : 'WEITER',
+                          onTap: _next,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                if (_index > 0) const SizedBox(width: 12),
-                Expanded(
-                  child: _ActionButton(
-                    label: _index == _pageCount - 1 ? 'FERTIG' : 'WEITER',
-                    onTap: _next,
-                  ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
     );
-  }
-}
-
-class _AuthOnboardingPage extends ConsumerStatefulWidget {
-  const _AuthOnboardingPage({required this.onSkip});
-
-  final VoidCallback onSkip;
-
-  @override
-  ConsumerState<_AuthOnboardingPage> createState() =>
-      _AuthOnboardingPageState();
-}
-
-class _AuthOnboardingPageState extends ConsumerState<_AuthOnboardingPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _isSignUp = false;
-  bool _loading = false;
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(labelText: 'E-Mail'),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (v) => v != null && v.contains('@')
-                          ? null
-                          : 'Ungültige E-Mail',
-                    ),
-                    const SizedBox(height: 12),
-                    TextFormField(
-                      controller: _passwordController,
-                      decoration: const InputDecoration(labelText: 'Passwort'),
-                      obscureText: true,
-                      validator: (v) => (v != null && v.length >= 6)
-                          ? null
-                          : 'Mind. 6 Zeichen',
-                    ),
-                    const SizedBox(height: 20),
-                    TextButton(
-                      onPressed: _loading
-                          ? null
-                          : () => setState(() => _isSignUp = !_isSignUp),
-                      child: Text(
-                        _isSignUp
-                            ? 'Bereits Konto? Anmelden'
-                            : 'Noch kein Konto? Registrieren',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: _loading ? null : widget.onSkip,
-                  child: const Text('ÜBERSPRINGEN'),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _loading ? null : _submit,
-                  child: Text(_isSignUp ? 'REGISTRIEREN' : 'ANMELDEN'),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) return;
-    setState(() => _loading = true);
-    final authController = ref.read(authControllerProvider.notifier);
-    final success = _isSignUp
-        ? await authController.signUp(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          )
-        : await authController.signIn(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          );
-
-    if (!mounted) {
-      return;
-    }
-
-    if (success) {
-      widget.onSkip();
-      return;
-    }
-
-    final authError = ref
-        .read(authControllerProvider)
-        .maybeWhen(error: (e, _) => e, orElse: () => null);
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(authErrorMessage(authError))));
-    setState(() => _loading = false);
   }
 }
 

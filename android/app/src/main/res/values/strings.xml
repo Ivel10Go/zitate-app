@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Zitate-App</string>
+    <string name="widget_small_description">Zitatatlas Widget (Klein)</string>
+    <string name="widget_large_description">Zitatatlas Widget (Groß)</string>
 </resources>

@@ -54,7 +54,9 @@ class CompactQuoteCard extends StatelessWidget {
                               '— ${quoteAuthorLabel(quote)}',
                               style: GoogleFonts.ibmPlexSans(
                                 fontSize: 11,
-                                color: scheme.onSurface.withOpacity(0.9),
+                                color: scheme.onSurface.withAlpha(
+                                  (0.9 * 255).round(),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 8),
