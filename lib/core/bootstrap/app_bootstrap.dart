@@ -15,7 +15,6 @@ import '../../domain/services/daily_content_resolver.dart';
 import '../constants/settings_keys.dart';
 import '../services/notification_service.dart';
 import '../services/widget_sync_service.dart';
-import '../services/purchases_service.dart';
 import '../theme/app_theme.dart';
 
 class _IsolateDailyContent {
@@ -161,24 +160,24 @@ abstract final class AppBootstrap {
 
       unawaited(_initializeNotificationService());
 
-      // Initialize RevenueCat Purchases SDK (non-fatal, short timeout)
-      try {
-        _emitProgress(0.18, 'Zahlungsdienste werden initialisiert ...');
-        await PurchasesService.instance
-            .initFromEnvironment(debugLogs: kDebugMode)
-            .timeout(
-              const Duration(seconds: 5),
-              onTimeout: () {
-                debugPrint('[Bootstrap] WARNING: RevenueCat init timed out');
-                return;
-              },
-            );
-        debugPrint('[Bootstrap] RevenueCat initialized');
-      } catch (e, st) {
-        debugPrint('[Bootstrap] RevenueCat init failed: $e');
-        debugPrintStack(stackTrace: st);
-        // Non-critical, continue startup
-      }
+      // TODO: Initialize RevenueCat Purchases SDK (temporarily disabled)
+      // try {
+      //   _emitProgress(0.18, 'Zahlungsdienste werden initialisiert ...');
+      //   await PurchasesService.instance
+      //       .initFromEnvironment(debugLogs: kDebugMode)
+      //       .timeout(
+      //         const Duration(seconds: 5),
+      //         onTimeout: () {
+      //           debugPrint('[Bootstrap] WARNING: RevenueCat init timed out');
+      //           return;
+      //         },
+      //       );
+      //   debugPrint('[Bootstrap] RevenueCat initialized');
+      // } catch (e, st) {
+      //   debugPrint('[Bootstrap] RevenueCat init failed: $e');
+      //   debugPrintStack(stackTrace: st);
+      //   // Non-critical, continue startup
+      // }
 
       // Determine initial route from persisted settings only.
       final routeStart = Stopwatch()..start();
