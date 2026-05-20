@@ -3,78 +3,27 @@
     android:id="@+id/quote_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_card_bg"
+    android:background="#EDE8DF"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+    <TextView
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#C41E1E" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/quote_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ZITATATLAS"
-                android:textColor="#1A1A1A"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/quote_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#555555"
-                android:textSize="11sp"
-                android:layout_marginTop="4dp"
-                android:text="9. Mai 2026" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/widget_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="♥"
-            android:textColor="#C41E1E"
-            android:textSize="14sp"
-            android:layout_marginEnd="8dp" />
-
-        <TextView
-            android:id="@+id/widget_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FF1A1A"
-            android:paddingStart="8dp"
-            android:paddingTop="3dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="3dp"
-            android:text="MARX"
-            android:textColor="#FFFFFF"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <View
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:background="#2A2A2A" />
+        android:background="#C41E1E" />
 
     <TextView
         android:id="@+id/quote_text_italic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="14dp"
         android:fontFamily="serif"
-        android:maxLines="7"
         android:textColor="#1A1A1A"
         android:textSize="18sp"
         android:textStyle="italic" />
@@ -83,99 +32,19 @@
         android:id="@+id/fact_text_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="14dp"
         android:fontFamily="serif"
-        android:maxLines="7"
         android:textColor="#1A1A1A"
         android:textSize="18sp"
-        android:textStyle="normal"
         android:visibility="gone" />
-
-    <View
-        android:layout_width="28dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="10dp"
-        android:background="#FF1A1A" />
-
-    <TextView
-        android:id="@+id/quote_explanation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif"
-        android:maxLines="4"
-        android:textColor="#B5B5B5"
-        android:textSize="11sp" />
 
     <TextView
         android:id="@+id/quote_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#1A1A1A"
-        android:textSize="11sp"
+        android:layout_marginTop="12dp"
+        android:textColor="#C41E1E"
+        android:textSize="12sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/quote_source"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:ellipsize="end"
-        android:fontFamily="sans-serif"
-        android:maxLines="1"
-        android:textAllCaps="true"
-        android:textColor="#1A1A1A"
-        android:textSize="10sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/quote_categories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:ellipsize="end"
-        android:fontFamily="sans-serif"
-        android:maxLines="1"
-        android:textAllCaps="true"
-        android:textColor="#FF4D4D"
-        android:textSize="10sp" />
-
-    <TextView
-        android:id="@+id/quote_streak"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
-        android:textAllCaps="true"
-        android:textColor="#FF1A1A"
-        android:textSize="10sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/widget_bottom_band"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/bottom_series_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SERIE"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/bottom_tag_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TAG 4"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-    </LinearLayout>
 </LinearLayout>

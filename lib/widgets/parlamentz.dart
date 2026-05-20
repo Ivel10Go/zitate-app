@@ -51,21 +51,21 @@ class _ParlamentzPainter extends CustomPainter {
     final ringPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.12
-      ..color = color.withOpacity(0.95)
+      ..color = color.withAlpha((0.95 * 255).round())
       ..strokeCap = StrokeCap.round;
 
     // Outer ring
     canvas.drawCircle(center, radius, ringPaint);
 
     // Inner dot
-    final dotPaint = Paint()..color = color.withOpacity(0.95);
+    final dotPaint = Paint()..color = color.withAlpha((0.95 * 255).round());
     canvas.drawCircle(center, size.width * 0.08, dotPaint);
 
     // Decorative tiny arc to suggest 'seats'
     final arcPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.06
-      ..color = color.withOpacity(0.6)
+      ..color = color.withAlpha((0.6 * 255).round())
       ..strokeCap = StrokeCap.round;
 
     final rect = Rect.fromCircle(

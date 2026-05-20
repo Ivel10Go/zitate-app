@@ -15,7 +15,6 @@ import '../../domain/services/daily_content_resolver.dart';
 import '../constants/settings_keys.dart';
 import '../services/notification_service.dart';
 import '../services/widget_sync_service.dart';
-import '../services/purchases_service.dart';
 import '../theme/app_theme.dart';
 
 class _IsolateDailyContent {
@@ -31,6 +30,7 @@ class _IsolateDailyContent {
 
 /// Deferred background warm-up (runs after first frame in isolate).
 /// Only resolves content - seeding must be done in main thread first.
+// ignore: unused_element
 Future<_IsolateDailyContent> _initializeDatabaseInIsolate(
   Map<String, Object?> args,
 ) async {
@@ -148,8 +148,7 @@ abstract final class AppBootstrap {
       debugPrint('[Bootstrap] Initializing fonts...');
       _emitProgress(0.10, 'Schriftarten werden geladen ...');
 
-      // Fallback to runtime fetching when bundled font files are not present.
-      // This avoids crashes like "font ... was not found in application assets".
+      // Allow runtime fetching so missing bundled font variants do not crash startup.
       GoogleFonts.config.allowRuntimeFetching = true;
       AppTheme.initializeTextStyles(); // Preload all text styles
 
@@ -161,24 +160,24 @@ abstract final class AppBootstrap {
 
       unawaited(_initializeNotificationService());
 
-      // Initialize RevenueCat Purchases SDK (non-fatal, short timeout)
-      try {
-        _emitProgress(0.18, 'Zahlungsdienste werden initialisiert ...');
-        await PurchasesService.instance
-            .initFromEnvironment(debugLogs: kDebugMode)
-            .timeout(
-              const Duration(seconds: 5),
-              onTimeout: () {
-                debugPrint('[Bootstrap] WARNING: RevenueCat init timed out');
-                return;
-              },
-            );
-        debugPrint('[Bootstrap] RevenueCat initialized');
-      } catch (e, st) {
-        debugPrint('[Bootstrap] RevenueCat init failed: $e');
-        debugPrintStack(stackTrace: st);
-        // Non-critical, continue startup
-      }
+      // TODO: Initialize RevenueCat Purchases SDK (temporarily disabled)
+      // try {
+      //   _emitProgress(0.18, 'Zahlungsdienste werden initialisiert ...');
+      //   await PurchasesService.instance
+      //       .initFromEnvironment(debugLogs: kDebugMode)
+      //       .timeout(
+      //         const Duration(seconds: 5),
+      //         onTimeout: () {
+      //           debugPrint('[Bootstrap] WARNING: RevenueCat init timed out');
+      //           return;
+      //         },
+      //       );
+      //   debugPrint('[Bootstrap] RevenueCat initialized');
+      // } catch (e, st) {
+      //   debugPrint('[Bootstrap] RevenueCat init failed: $e');
+      //   debugPrintStack(stackTrace: st);
+      //   // Non-critical, continue startup
+      // }
 
       // Determine initial route from persisted settings only.
       final routeStart = Stopwatch()..start();
@@ -186,6 +185,8 @@ abstract final class AppBootstrap {
       _emitProgress(0.24, 'Startseite wird bestimmt ...');
       final settings = await SharedPreferences.getInstance();
       final profileRaw = settings.getString(UserProfile.storageKey);
+      final guestModeEnabled =
+          settings.getBool(SettingsKeys.guestModeEnabled) ?? false;
 
       // Check if user is authenticated
       final isAuthenticated =
@@ -195,6 +196,8 @@ abstract final class AppBootstrap {
       final launchRoute = NotificationService.instance.consumeLaunchRoute();
       final initialRoute = launchRoute != '/'
           ? launchRoute
+          : guestModeEnabled
+          ? '/' // Guest mode enabled → direkt Home anzeigen
           : !isAuthenticated
           ? '/register' // Not authenticated → direkt Registrierung zeigen
           : _shouldSkipOnboarding(profileRaw)
@@ -263,6 +266,7 @@ abstract final class AppBootstrap {
     Future.delayed(const Duration(milliseconds: 500), () async {
       try {
         final prefs = await SharedPreferences.getInstance();
+        // ignore: unused_local_variable
         final isolateArgs = <String, Object?>{
           SettingsKeys.streak: prefs.getInt(SettingsKeys.streak),
           'app_mode': prefs.getString('app_mode'),
@@ -319,15 +323,13 @@ abstract final class AppBootstrap {
 
     try {
       final profile = UserProfile.fromJsonString(profileRaw);
-      // Überspringe Onboarding wenn bereits abgeschlossen
-      if (profile.onboardingCompleted) {
+      // Überspringe Onboarding nur wenn das Profil wirklich abgeschlossen wirkt.
+      if (profile.onboardingCompleted &&
+          profile.historicalInterests.isNotEmpty) {
         return true;
       }
-      // Oder wenn Benutzer bereits Interessen und Orientierung hat
-      final hasInterests = profile.historicalInterests.isNotEmpty;
-      final hasOrientation =
-          profile.politicalLeaning != PoliticalLeaning.neutral;
-      return hasInterests && hasOrientation;
+      // Legacy-Fallback: Bereits gespeicherte Interessen deuten auf ein bestehendes Profil hin.
+      return profile.historicalInterests.isNotEmpty;
     } catch (e) {
       debugPrint('[Bootstrap] Error parsing onboarding skip condition: $e');
       return false;
@@ -402,6 +404,8 @@ abstract final class AppBootstrap {
     try {
       final settings = await SharedPreferences.getInstance();
       final profileRaw = settings.getString(UserProfile.storageKey);
+      final guestModeEnabled =
+          settings.getBool(SettingsKeys.guestModeEnabled) ?? false;
 
       // Check if user is authenticated
       final isAuthenticated =
@@ -412,6 +416,8 @@ abstract final class AppBootstrap {
       return AppBootstrapResult(
         initialRoute: launchRoute != '/'
             ? launchRoute
+            : guestModeEnabled
+            ? '/' // Guest mode enabled → direkt Home anzeigen
             : !isAuthenticated
             ? '/auth' // Not authenticated → show auth screen only
             : _shouldSkipOnboarding(profileRaw)

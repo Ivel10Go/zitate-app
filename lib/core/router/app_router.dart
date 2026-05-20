@@ -7,6 +7,7 @@ import '../../presentation/detail/quote_detail_screen_new.dart';
 import '../../presentation/favorites/favorites_screen.dart';
 import '../../presentation/home/home_screen.dart';
 import '../../presentation/onboarding/onboarding_screen.dart';
+import '../../presentation/auth/auth_gate_screen.dart';
 import '../../presentation/auth/auth_choice_screen.dart';
 import '../../presentation/auth/auth_screen.dart';
 import '../../presentation/account/account_screen.dart';
@@ -14,7 +15,7 @@ import '../../presentation/settings/settings_screen.dart';
 import '../../presentation/quotes/quote_submission_screen.dart';
 import '../../domain/providers/admin_access_provider.dart';
 
-final initialRouteProvider = Provider<String>((Ref ref) => '/');
+final initialRouteProvider = Provider<String>((Ref ref) => '/auth-gate');
 
 final appRouterProvider = Provider<GoRouter>((Ref ref) {
   final initialRoute = ref.watch(initialRouteProvider);
@@ -29,6 +30,11 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
       return null;
     },
     routes: <RouteBase>[
+      GoRoute(
+        path: '/auth-gate',
+        name: 'auth-gate',
+        builder: (context, state) => const AuthGateScreen(),
+      ),
       GoRoute(
         path: '/',
         name: 'home',

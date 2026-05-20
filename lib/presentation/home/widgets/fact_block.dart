@@ -62,7 +62,7 @@ class FactBlock extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: scheme.surface.withOpacity(0.95),
+                  color: scheme.surface.withAlpha((0.95 * 255).round()),
                   border: Border.all(color: scheme.outline, width: 1),
                 ),
                 child: Column(
@@ -158,7 +158,7 @@ class FactBlock extends StatelessWidget {
 
         // Marxistische Einordnung section
         Container(
-          color: scheme.surface.withOpacity(0.7),
+          color: scheme.surface.withAlpha((0.7 * 255).round()),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Column(
             children: <Widget>[

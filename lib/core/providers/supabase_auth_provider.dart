@@ -1,8 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/supabase_auth_service.dart';
 import '../services/supabase_sync_service.dart';
 import '../services/purchases_service.dart';
+import '../constants/settings_keys.dart';
 import '../../domain/providers/repository_providers.dart';
 import '../../domain/providers/user_profile_provider.dart';
 import '../../domain/providers/daily_content_provider.dart';
@@ -47,24 +50,25 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
         _ref.invalidate(dailyContentProvider);
         try {
           if (user != null) {
+            await _setGuestModeEnabled(false);
             // On login: merge local favorites to cloud and pull cloud favorites back locally
             try {
               await _onLogin(user.id);
             } catch (e) {
               // Log but don't fail - favorites sync is non-blocking
-              print('Favorites sync error: $e');
+              debugPrint('Favorites sync error: $e');
             }
             // Link RevenueCat to this user id
             try {
               await PurchasesService.instance.logIn(user.id);
             } catch (e) {
               // non-fatal: log and continue
-              print('RevenueCat login error: $e');
+              debugPrint('RevenueCat login error: $e');
             }
           }
         } catch (e) {
           // ignore sync errors here but log if needed
-          print('Auth state change error: $e');
+          debugPrint('Auth state change error: $e');
         }
       },
       onError: (e, st) {
@@ -105,7 +109,7 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
       await userProfileNotifier.loadProfileFromCloud(userId);
     } catch (e) {
       // Non-fatal: UserProfile sync failed but user is still logged in
-      print('UserProfile cloud load error: $e');
+      debugPrint('UserProfile cloud load error: $e');
     }
   }
 
@@ -133,6 +137,18 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
     }
   }
 
+  Future<bool> signInWithGoogle() async {
+    state = const AsyncValue.loading();
+    try {
+      await _service.signInWithGoogle();
+      // Auth state wird durch authStateChanges automatisch aktualisiert
+      return true;
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+      return false;
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await _service.signOut();
@@ -148,6 +164,15 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
     } catch (e, st) {
       state = AsyncValue.error(e, st);
       rethrow;
+    }
+  }
+
+  Future<void> _setGuestModeEnabled(bool enabled) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(SettingsKeys.guestModeEnabled, enabled);
+    } catch (e) {
+      debugPrint('Guest mode persistence error: $e');
     }
   }
 }

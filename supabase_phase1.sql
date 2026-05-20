@@ -15,6 +15,7 @@ create table if not exists public.profiles (
   -- User preferences for personalization
   historical_interests jsonb default '[]'::jsonb,
   political_leaning text default 'neutral',
+  onboarding_completed boolean default false,
   -- Optional: Track today's quote for consistency across devices
   daily_quote_date text,
   last_synced_at timestamptz default now()
@@ -27,8 +28,8 @@ language plpgsql
 security definer
 as $$
 begin
-  insert into public.profiles (id, email, historical_interests, political_leaning, last_synced_at)
-  values (new.id, new.email, '[]'::jsonb, 'neutral', now())
+  insert into public.profiles (id, email, historical_interests, political_leaning, onboarding_completed, last_synced_at)
+  values (new.id, new.email, '[]'::jsonb, 'neutral', false, now())
   on conflict (id) do update
     set email = excluded.email,
         updated_at = now();

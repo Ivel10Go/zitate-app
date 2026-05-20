@@ -10,9 +10,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.marx_app"
+    namespace = "com.quotidian.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+
+    lint {
+        // Release-Lint kann bei einzelnen Plugins in AGP/Lint-Metaspace-Fehler laufen.
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -26,7 +32,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.marx_app"
+        applicationId = "com.quotidian.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -35,12 +41,15 @@ android {
         versionName = flutter.versionName
     }
     // Load keystore properties if present (key.properties at project root).
-    val keystorePropertiesFile = rootProject.file("key.properties")
+    val keystorePropertiesFile = rootProject.file("../key.properties")
     val keystoreProperties = Properties()
     if (keystorePropertiesFile.exists()) {
         keystoreProperties.load(FileInputStream(keystorePropertiesFile))
     }
+    val storeFilePath = keystoreProperties.getProperty("storeFile") ?: "release.keystore"
+    val storeFileExists = rootProject.file(storeFilePath).exists()
     val hasReleaseSigning = keystorePropertiesFile.exists() &&
+        storeFileExists &&
         !keystoreProperties.getProperty("storeFile").isNullOrBlank() &&
         !keystoreProperties.getProperty("storePassword").isNullOrBlank() &&
         !keystoreProperties.getProperty("keyAlias").isNullOrBlank() &&
@@ -48,8 +57,7 @@ android {
 
     signingConfigs {
         create("release") {
-            val storeFilePath = keystoreProperties.getProperty("storeFile") ?: "release.keystore"
-            storeFile = file(storeFilePath)
+            storeFile = rootProject.file(storeFilePath)
             storePassword = keystoreProperties.getProperty("storePassword")
             keyAlias = keystoreProperties.getProperty("keyAlias")
             keyPassword = keystoreProperties.getProperty("keyPassword")

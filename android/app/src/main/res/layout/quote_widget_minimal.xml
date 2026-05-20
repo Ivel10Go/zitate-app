@@ -3,64 +3,48 @@
     android:id="@+id/quote_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4EFE6"
+    android:background="#EDE8DF"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="12dp">
 
     <TextView
-        android:id="@+id/quote_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ZITATATLAS"
-        android:textColor="#1A1A1A"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:layout_width="28dp"
+        android:layout_height="4dp"
+        android:background="#C41E1E" />
 
     <TextView
-        android:id="@+id/widget_mode"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Wird geladen..."
-        android:textColor="#666666"
-        android:textSize="10sp" />
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#C41E1E" />
 
     <TextView
         android:id="@+id/quote_text_italic"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp"
-        android:text="Zitat wird geladen..."
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif"
         android:textColor="#1A1A1A"
         android:textSize="14sp"
         android:textStyle="italic" />
 
     <TextView
+        android:id="@+id/fact_text_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif"
+        android:textColor="#1A1A1A"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/quote_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="— Autor"
-        android:textColor="#1A1A1A"
-        android:textSize="10sp" />
+        android:layout_marginTop="10dp"
+        android:textColor="#C41E1E"
+        android:textSize="10sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/quote_source"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Quelle"
-        android:textColor="#666666"
-        android:textSize="9sp" />
-
-    <!-- Placeholder Views für Views, die QuoteWidgetProvider setzt -->
-    <View android:id="@+id/quote_date" android:visibility="gone" />
-    <View android:id="@+id/widget_favorite" android:visibility="gone" />
-    <View android:id="@+id/fact_text_normal" android:visibility="gone" />
-    <View android:id="@+id/quote_explanation" android:visibility="gone" />
-    <View android:id="@+id/quote_categories" android:visibility="gone" />
-    <View android:id="@+id/quote_streak" android:visibility="gone" />
-    <View android:id="@+id/bottom_series_label" android:visibility="gone" />
-    <View android:id="@+id/bottom_tag_label" android:visibility="gone" />
 </LinearLayout>

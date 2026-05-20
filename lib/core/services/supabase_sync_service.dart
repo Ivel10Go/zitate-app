@@ -94,8 +94,11 @@ class SupabaseSyncService {
   }
 
   /// Lade UserProfile (Interessen + politische Neigung) aus Cloud
-  /// Gibt Map mit 'historical_interests' (List<String>), 'political_leaning' (String),
-  /// und 'onboarding_completed' (bool) zurück oder null wenn Benutzer nicht existiert
+  /// Gibt eine Map zurück mit den Schlüsseln:
+  /// - 'historical_interests' (Liste von Strings)
+  /// - 'political_leaning' (String)
+  /// - 'onboarding_completed' (bool)
+  /// oder `null`, wenn der Benutzer nicht existiert
   Future<Map<String, dynamic>?> fetchUserProfileFromCloud(String userId) async {
     try {
       final response = await _client
@@ -138,19 +141,19 @@ class SupabaseSyncService {
     bool? onboardingCompleted,
   }) async {
     try {
-      await _client
-          .from('profiles')
-          .update({
-            if (displayName != null) 'display_name': displayName,
-            'historical_interests': historicalInterests,
-            'political_leaning': politicalLeaning,
-            'daily_quote_date': dailyQuoteDate,
-            if (onboardingCompleted != null)
-              'onboarding_completed': onboardingCompleted,
-            'last_synced_at': DateTime.now().toIso8601String(),
-            'updated_at': DateTime.now().toIso8601String(),
-          })
-          .eq('id', userId);
+      final payload = <String, Object?>{
+        'id': userId,
+        if (displayName != null) 'display_name': displayName,
+        'historical_interests': historicalInterests,
+        'political_leaning': politicalLeaning,
+        'daily_quote_date': dailyQuoteDate,
+        if (onboardingCompleted != null)
+          'onboarding_completed': onboardingCompleted,
+        'last_synced_at': DateTime.now().toIso8601String(),
+        'updated_at': DateTime.now().toIso8601String(),
+      };
+
+      await _client.from('profiles').upsert(payload, onConflict: 'id');
     } catch (e) {
       throw Exception('Fehler beim Speichern des UserProfile: $e');
     }

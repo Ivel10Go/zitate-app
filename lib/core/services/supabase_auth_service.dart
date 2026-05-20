@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Lightweight auth user model used by the app.
@@ -41,13 +42,14 @@ class SupabaseAuthService {
   bool get isAuthenticated => _client.auth.currentUser != null;
 
   /// Email/Passwort Registrierung
+  /// Hinweis: Wenn Email-Verifikation aktiviert ist, ist die Session null,
+  /// aber der Benutzer wird registriert und kann sich später anmelden.
   Future<AuthUser> signUpWithEmail(String email, String password) async {
     try {
       final res = await _client.auth.signUp(
         email: email,
         password: password,
-        emailRedirectTo:
-            'https://yourdomain.tld/auth/callback', // Fallback, wird meist nicht genutzt
+        emailRedirectTo: 'marxapp://auth',
       );
       final user = res.user;
       if (user == null) {
@@ -56,6 +58,12 @@ class SupabaseAuthService {
       return _mapToAuthUser(user)!;
     } on AuthException catch (e) {
       // Besseres Error-Handling für Auth-spezifische Fehler
+      if (e.message.contains('already registered') ||
+          e.message.contains('already exists')) {
+        throw Exception(
+          'Diese E-Mail-Adresse ist bereits registriert. Bitte melden Sie sich an oder verwenden Sie eine andere E-Mail.',
+        );
+      }
       throw Exception('Auth Error: ${e.message}');
     } catch (e) {
       rethrow;
@@ -79,6 +87,21 @@ class SupabaseAuthService {
     }
   }
 
+  /// Google OAuth Sign-In
+  Future<void> signInWithGoogle() async {
+    try {
+      await _client.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: kIsWeb ? null : 'marxapp://auth',
+        scopes: 'email profile',
+      );
+    } on AuthException catch (e) {
+      throw Exception('Google Auth Error: ${e.message}');
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Abmelden
   Future<void> signOut() async {
     await _client.auth.signOut();
@@ -86,7 +109,10 @@ class SupabaseAuthService {
 
   /// Passwort zurücksetzen (send reset email)
   Future<void> resetPassword(String email) async {
-    await _client.auth.resetPasswordForEmail(email);
+    await _client.auth.resetPasswordForEmail(
+      email,
+      redirectTo: 'marxapp://auth',
+    );
   }
 }
 

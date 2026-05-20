@@ -63,7 +63,9 @@ class AppNavigationBar extends StatelessWidget {
                             size: 16,
                             color: isActive
                                 ? scheme.onSurface
-                                : scheme.onSurface.withOpacity(0.6),
+                                : scheme.onSurface.withAlpha(
+                                    (0.6 * 255).round(),
+                                  ),
                           ),
                           const SizedBox(height: 2),
                           Text(
@@ -73,7 +75,9 @@ class AppNavigationBar extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               color: isActive
                                   ? scheme.onSurface
-                                  : scheme.onSurface.withOpacity(0.6),
+                                  : scheme.onSurface.withAlpha(
+                                      (0.6 * 255).round(),
+                                    ),
                               letterSpacing: 1.2,
                             ),
                           ),

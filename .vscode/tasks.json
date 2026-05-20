@@ -94,6 +94,23 @@
 			"type": "shell",
 			"command": "flutter run -d 19051FDF6000J8",
 			"isBackground": false
+		},
+		{
+			"label": "Release: Build AAB (mit Console-Beschreibung)",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"scripts/release_build_for_upload.ps1"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$dart-analyze"
+			],
+			"group": "build"
 		}
 	]
 }

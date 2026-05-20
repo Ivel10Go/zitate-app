@@ -75,7 +75,7 @@ class QuoteCard extends ConsumerWidget {
                   quote.chapter,
                   style: GoogleFonts.ibmPlexSans(
                     fontSize: 8,
-                    color: scheme.onPrimary.withOpacity(0.7),
+                    color: scheme.onPrimary.withAlpha((0.7 * 255).round()),
                   ),
                 ),
               ],
@@ -124,7 +124,9 @@ class QuoteCard extends ConsumerWidget {
                             size: 18,
                             color: isFavorite
                                 ? scheme.primary
-                                : scheme.onSurface.withOpacity(0.6),
+                                : scheme.onSurface.withAlpha(
+                                    (0.6 * 255).round(),
+                                  ),
                           ),
                           splashRadius: 18,
                           padding: EdgeInsets.zero,
@@ -153,7 +155,9 @@ class QuoteCard extends ConsumerWidget {
                           style: GoogleFonts.ibmPlexSans(
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
-                            color: scheme.onSurface.withOpacity(0.6),
+                            color: scheme.onSurface.withAlpha(
+                              (0.6 * 255).round(),
+                            ),
                             letterSpacing: 0.2,
                           ),
                         ),
@@ -167,7 +171,9 @@ class QuoteCard extends ConsumerWidget {
                         '— ${quoteAuthorLabel(quote)}',
                         style: GoogleFonts.playfairDisplay(
                           fontSize: 11,
-                          color: scheme.onSurface.withOpacity(0.85),
+                          color: scheme.onSurface.withAlpha(
+                            (0.85 * 255).round(),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 14),

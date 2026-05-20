@@ -1,4 +1,4 @@
-package com.example.marx_app
+package com.quotidian.app
 
 import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity

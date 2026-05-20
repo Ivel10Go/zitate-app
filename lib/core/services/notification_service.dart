@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
@@ -30,7 +32,7 @@ class NotificationService {
       return;
     }
 
-    _initializeTimeZonesIfNeeded();
+    await _initializeTimeZonesIfNeeded();
 
     const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosInit = DarwinInitializationSettings();
@@ -181,11 +183,22 @@ class NotificationService {
     _launchRoute = _payloadToRoute(payload);
   }
 
-  void _initializeTimeZonesIfNeeded() {
+  Future<void> _initializeTimeZonesIfNeeded() async {
     if (_timeZonesInitialized) {
       return;
     }
+
     tz_data.initializeTimeZones();
+
+    try {
+      final localTimeZone = await FlutterTimezone.getLocalTimezone();
+      final localLocation = tz.getLocation(localTimeZone);
+      tz.setLocalLocation(localLocation);
+    } catch (error) {
+      // Keep defaults when timezone lookup fails so notifications still work.
+      debugPrint('[Notification] Failed to resolve local timezone: $error');
+    }
+
     _timeZonesInitialized = true;
   }
 

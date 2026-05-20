@@ -1,0 +1,33 @@
+Upload-Anleitung (Kurz)
+
+1) Prüfe `android/app/build.gradle.kts`:
+   - Stelle sicher, dass `applicationId` auf deine Play-Paket-ID gesetzt ist (z.B. com.mycompany.marx_app).
+
+2) Keystore:
+   - Falls du einen Release-Keystore besitzt: lege die Datei unter Projekt-Root ab (z.B. `release.keystore`) und passe `key.properties` an.
+   - Falls nicht, generiere lokal mit `keytool` (Teil des JDK). Beispiel:
+     keytool -genkeypair -v -keystore release.keystore -storetype PKCS12 -alias marx_release -keyalg RSA -keysize 2048 -validity 10000 -storepass <storePw> -keypass <keyPw> -dname "CN=Marx App, OU=Dev, O=Name, L=City, ST=Region, C=DE"
+
+3) Privacy Policy:
+   - Die Datenschutzerklärung liegt lokal in `assets/branding/privacy_policy.html` und `docs/privacy_policy.html` vor.
+   - Play Console verlangt eine öffentliche HTTPS-URL. Hoste die Datei z.B. per GitHub Pages oder Netlify und verwende die URL im Play Console Feld "Privacy Policy".
+
+4) AAB bauen:
+   - `flutter build appbundle --release`
+   - Ergebnis: `build/app/outputs/bundle/release/app-release.aab`
+
+5) Screenshots & Grafiken:
+   - Verwende die Dateien in `assets/screenshots/play_screenshots.zip` und `assets/branding/app_icon.png`.
+   - Feature graphic, 1024x500, ggf. in `assets/branding/` hinzufügen.
+
+6) Play Console:
+   - Erstelle Developer Account (falls nicht vorhanden).
+   - Erzeuge ein neues App-Listing, fülle Titel, kurze + vollständige Beschreibung (siehe PLAY_STORE_METADATA).
+   - Lade AAB hoch, Screenshots, Feature Graphic und setze Privacy Policy URL.
+
+7) Testing:
+   - Erstelle Internal Test Track und lade Tester ein.
+
+Wenn du möchtest, übernehme ich:
+- Hosting der Privacy-Policy (z.B. GitHub Pages) — nur wenn du Zugriff/Tokens freigibst.
+- Upload-Vorbereitung: ich kann die finalen Dateien (AAB, Screenshots, Metadaten) in einen Zip-Ordner packen.
