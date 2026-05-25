@@ -17,8 +17,24 @@ class CrashReportingService {
 
   bool _enabled = false;
   bool _firebaseReady = false;
+  Future<void>? _initializationFuture;
 
   Future<void> initialize() async {
+    final pendingInitialization = _initializationFuture;
+    if (pendingInitialization != null) {
+      return pendingInitialization;
+    }
+
+    final future = _initializeInternal();
+    _initializationFuture = future;
+    try {
+      await future;
+    } finally {
+      _initializationFuture = null;
+    }
+  }
+
+  Future<void> _initializeInternal() async {
     if (!kReleaseMode) {
       debugPrint('[CrashReporting] Skipping Crashlytics in non-release mode');
       return;
@@ -29,10 +45,12 @@ class CrashReportingService {
       _firebaseReady = true;
 
       final prefs = await SharedPreferences.getInstance();
-      _enabled = prefs.getBool(SettingsKeys.crashReportingEnabled) ?? false;
+      final consentEnabled =
+          prefs.getBool(SettingsKeys.crashReportingEnabled) ?? false;
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
-        _enabled,
+        consentEnabled,
       );
+      _enabled = consentEnabled;
 
       final previousFlutterOnError = FlutterError.onError;
       FlutterError.onError = (FlutterErrorDetails details) {
@@ -68,6 +86,11 @@ class CrashReportingService {
   }
 
   Future<void> setUserConsent(bool enabled) async {
+    final pendingInitialization = _initializationFuture;
+    if (pendingInitialization != null) {
+      await pendingInitialization;
+    }
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
     _enabled = enabled;
