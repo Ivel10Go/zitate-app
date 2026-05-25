@@ -156,10 +156,10 @@ class SettingsController extends AsyncNotifier<SettingsState> {
   }
 
   Future<void> setCrashReportingEnabled(bool enabled) async {
+    await CrashReportingService().setUserConsent(enabled);
     state = AsyncData(
       state.requireValue.copyWith(crashReportingEnabled: enabled),
     );
-    await CrashReportingService().setUserConsent(enabled);
   }
 
   DifficultyFilter _fromDifficultyKey(String key) {

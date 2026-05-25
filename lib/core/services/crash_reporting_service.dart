@@ -91,7 +91,9 @@ class CrashReportingService {
   }
 
   Future<void> setUserConsent(bool enabled) async {
-    _consentUpdateQueue = _consentUpdateQueue.then((_) async {
+    _consentUpdateQueue = _consentUpdateQueue
+        .catchError((Object _, StackTrace __) {})
+        .then((_) async {
       final pendingInitialization = _initializationFuture;
       if (pendingInitialization != null) {
         await pendingInitialization;
