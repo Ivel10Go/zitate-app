@@ -356,82 +356,85 @@ class AppFullscreenRecoveryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.paper,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Container(
-              width: 440,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppColors.paper,
-                border: Border.all(color: AppColors.ink, width: 1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(width: 44, height: 2, color: AppColors.red),
-                  const SizedBox(height: 16),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const Icon(
-                        Icons.error_outline_rounded,
-                        size: 28,
-                        color: AppColors.red,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          title,
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.ink,
-                            height: 1.2,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 440),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.paper,
+                  border: Border.all(color: AppColors.ink, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(width: 44, height: 2, color: AppColors.red),
+                    const SizedBox(height: 16),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Icon(
+                          Icons.error_outline_rounded,
+                          size: 28,
+                          color: AppColors.red,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: GoogleFonts.ibmPlexSans(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.ink,
+                              height: 1.2,
+                            ),
                           ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      message,
+                      style: GoogleFonts.ibmPlexSans(
+                        fontSize: 14,
+                        color: AppColors.ink,
+                        height: 1.5,
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: AppColors.rule.withValues(alpha: 0.14),
+                        border: Border.all(color: AppColors.rule, width: 1),
+                      ),
+                      child: Text(
+                        details,
+                        style: GoogleFonts.ibmPlexSans(
+                          fontSize: 11,
+                          color: AppColors.inkLight,
+                          height: 1.45,
+                        ),
+                      ),
+                    ),
+                    if (onRetry != null) ...<Widget>[
+                      const SizedBox(height: 18),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: onRetry,
+                          child: Text(retryLabel),
                         ),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    message,
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 14,
-                      color: AppColors.ink,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.rule.withValues(alpha: 0.14),
-                      border: Border.all(color: AppColors.rule, width: 1),
-                    ),
-                    child: Text(
-                      details,
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 11,
-                        color: AppColors.inkLight,
-                        height: 1.45,
-                      ),
-                    ),
-                  ),
-                  if (onRetry != null) ...<Widget>[
-                    const SizedBox(height: 18),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: onRetry,
-                        child: Text(retryLabel),
-                      ),
-                    ),
                   ],
-                ],
+                ),
               ),
             ),
           ),

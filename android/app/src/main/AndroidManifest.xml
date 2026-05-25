@@ -9,7 +9,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".MainActivity"
+            android:name="com.quotidian.app.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:taskAffinity=""
@@ -46,7 +46,7 @@
 
         <!-- Small Quote Widget (nicht größenveränderbar) -->
         <receiver
-            android:name=".QuoteWidgetProvider"
+            android:name="com.quotidian.app.QuoteWidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -58,7 +58,7 @@
 
         <!-- Large Quote Widget (nicht größenveränderbar) -->
         <receiver
-            android:name=".QuoteWidgetProviderLarge"
+            android:name="com.quotidian.app.QuoteWidgetProviderLarge"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
