@@ -166,15 +166,18 @@ class _LegalCard extends StatelessWidget {
 }
 
 String get _providerInfoText {
+  final providerName = _legalProviderName.trim();
+  final providerAddress = _legalProviderAddress.trim();
+  final providerContact = _legalProviderContact.trim();
   final hasProviderInfo =
-      _legalProviderName.trim().isNotEmpty &&
-      _legalProviderAddress.trim().isNotEmpty &&
-      _legalProviderContact.trim().isNotEmpty;
+      providerName.isNotEmpty &&
+      providerAddress.isNotEmpty &&
+      providerContact.isNotEmpty;
 
   if (hasProviderInfo) {
-    return 'Name/Firma: $_legalProviderName\n'
-        'Anschrift: $_legalProviderAddress\n'
-        'Kontakt: $_legalProviderContact';
+    return 'Name/Firma: $providerName\n'
+        'Anschrift: $providerAddress\n'
+        'Kontakt: $providerContact';
   }
 
   return 'Name/Firma: NICHT KONFIGURIERT\n'

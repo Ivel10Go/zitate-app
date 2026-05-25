@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -25,13 +27,17 @@ class CrashReportingService {
       return pendingInitialization;
     }
 
-    final future = _initializeInternal();
-    _initializationFuture = future;
-    try {
-      await future;
-    } finally {
-      _initializationFuture = null;
-    }
+    final completer = Completer<void>();
+    _initializationFuture = completer.future;
+    _initializeInternal()
+        .then(completer.complete)
+        .catchError(completer.completeError)
+        .whenComplete(() {
+          if (identical(_initializationFuture, completer.future)) {
+            _initializationFuture = null;
+          }
+        });
+    await completer.future;
   }
 
   Future<void> _initializeInternal() async {
