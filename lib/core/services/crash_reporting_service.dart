@@ -20,6 +20,7 @@ class CrashReportingService {
   bool _enabled = false;
   bool _firebaseReady = false;
   Future<void>? _initializationFuture;
+  Future<void> _consentUpdateQueue = Future<void>.value();
 
   Future<void> initialize() async {
     final pendingInitialization = _initializationFuture;
@@ -33,9 +34,7 @@ class CrashReportingService {
         .then(completer.complete)
         .catchError(completer.completeError)
         .whenComplete(() {
-          if (identical(_initializationFuture, completer.future)) {
-            _initializationFuture = null;
-          }
+          _initializationFuture = null;
         });
     await completer.future;
   }
@@ -92,18 +91,22 @@ class CrashReportingService {
   }
 
   Future<void> setUserConsent(bool enabled) async {
-    final pendingInitialization = _initializationFuture;
-    if (pendingInitialization != null) {
-      await pendingInitialization;
-    }
+    _consentUpdateQueue = _consentUpdateQueue.then((_) async {
+      final pendingInitialization = _initializationFuture;
+      if (pendingInitialization != null) {
+        await pendingInitialization;
+      }
 
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
-    if (_firebaseReady) {
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
-        enabled,
-      );
-    }
-    _enabled = enabled;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
+      if (_firebaseReady) {
+        await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+          enabled,
+        );
+      }
+      _enabled = enabled;
+    });
+
+    await _consentUpdateQueue;
   }
 }

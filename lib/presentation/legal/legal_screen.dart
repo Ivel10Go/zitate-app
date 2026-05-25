@@ -6,10 +6,18 @@ import '../../core/theme/app_theme.dart';
 import '../../widgets/android_back_guard.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 
+/// Provider/Firma für die Anbieterkennzeichnung.
+/// Beispiel: "Musterfirma GmbH".
 const String _legalProviderName = String.fromEnvironment('LEGAL_PROVIDER_NAME');
+
+/// Ladungsfähige Anschrift für die Anbieterkennzeichnung.
+/// Beispiel: "Musterstraße 12, 12345 Berlin".
 const String _legalProviderAddress = String.fromEnvironment(
   'LEGAL_PROVIDER_ADDRESS',
 );
+
+/// Kontaktangabe für rechtliche Anfragen.
+/// Beispiel: "kontakt@beispiel.de".
 const String _legalProviderContact = String.fromEnvironment(
   'LEGAL_PROVIDER_CONTACT',
 );
