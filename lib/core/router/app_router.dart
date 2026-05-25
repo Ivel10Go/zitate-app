@@ -11,6 +11,7 @@ import '../../presentation/auth/auth_gate_screen.dart';
 import '../../presentation/auth/auth_choice_screen.dart';
 import '../../presentation/auth/auth_screen.dart';
 import '../../presentation/account/account_screen.dart';
+import '../../presentation/legal/legal_screen.dart';
 import '../../presentation/settings/settings_screen.dart';
 import '../../presentation/quotes/quote_submission_screen.dart';
 import '../../domain/providers/admin_access_provider.dart';
@@ -71,6 +72,11 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               FadeTransition(opacity: animation, child: child),
         ),
+      ),
+      GoRoute(
+        path: '/legal',
+        name: 'legal',
+        builder: (context, state) => const LegalScreen(),
       ),
       GoRoute(
         path: '/admin',

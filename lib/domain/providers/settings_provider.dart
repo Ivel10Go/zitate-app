@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/settings_keys.dart';
+import '../../core/services/crash_reporting_service.dart';
 import '../../core/services/notification_service.dart';
 import '../../data/models/home_content_mode.dart';
 import '../../data/models/user_profile.dart';
@@ -19,6 +20,7 @@ class SettingsState {
     required this.homeContentMode,
     required this.streak,
     required this.onboardingSeen,
+    required this.crashReportingEnabled,
   });
 
   final String languageCode;
@@ -29,6 +31,7 @@ class SettingsState {
   final HomeContentMode homeContentMode;
   final int streak;
   final bool onboardingSeen;
+  final bool crashReportingEnabled;
 
   SettingsState copyWith({
     String? languageCode,
@@ -39,6 +42,7 @@ class SettingsState {
     HomeContentMode? homeContentMode,
     int? streak,
     bool? onboardingSeen,
+    bool? crashReportingEnabled,
   }) {
     return SettingsState(
       languageCode: languageCode ?? this.languageCode,
@@ -49,6 +53,8 @@ class SettingsState {
       homeContentMode: homeContentMode ?? this.homeContentMode,
       streak: streak ?? this.streak,
       onboardingSeen: onboardingSeen ?? this.onboardingSeen,
+      crashReportingEnabled:
+          crashReportingEnabled ?? this.crashReportingEnabled,
     );
   }
 }
@@ -77,6 +83,8 @@ class SettingsController extends AsyncNotifier<SettingsState> {
       onboardingSeen:
           onboardingSeen ||
           (prefs.getBool('settings_onboarding_seen') ?? false),
+      crashReportingEnabled:
+          prefs.getBool(SettingsKeys.crashReportingEnabled) ?? false,
     );
   }
 
@@ -145,6 +153,15 @@ class SettingsController extends AsyncNotifier<SettingsState> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('settings_onboarding_seen', true);
     state = AsyncData(state.requireValue.copyWith(onboardingSeen: true));
+  }
+
+  Future<void> setCrashReportingEnabled(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
+    state = AsyncData(
+      state.requireValue.copyWith(crashReportingEnabled: enabled),
+    );
+    await CrashReportingService().setUserConsent(enabled);
   }
 
   DifficultyFilter _fromDifficultyKey(String key) {

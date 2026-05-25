@@ -35,6 +35,8 @@ class AccountPrivacyService {
             prefs.getInt(SettingsKeys.notificationMinute) ?? 0,
         'notification_enabled':
             prefs.getBool(SettingsKeys.notificationEnabled) ?? true,
+        'crash_reporting_enabled':
+            prefs.getBool(SettingsKeys.crashReportingEnabled) ?? false,
         'home_content_mode':
             prefs.getString(SettingsKeys.homeContentMode) ?? 'mixed',
         'streak': prefs.getInt(SettingsKeys.streak) ?? 0,
@@ -60,6 +62,7 @@ class AccountPrivacyService {
     await prefs.remove(SettingsKeys.notificationHour);
     await prefs.remove(SettingsKeys.notificationMinute);
     await prefs.remove(SettingsKeys.notificationEnabled);
+    await prefs.remove(SettingsKeys.crashReportingEnabled);
     await prefs.remove(SettingsKeys.homeContentMode);
     await prefs.remove(SettingsKeys.streak);
     await prefs.remove('settings_onboarding_seen');

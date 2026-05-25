@@ -269,6 +269,65 @@ class SettingsScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 20),
+                      _SettingsGroup(
+                        title: 'RECHTLICHES',
+                        children: <Widget>[
+                          Text(
+                            'Datenschutz, Haftung und Urheberhinweise einsehen und die Absturzdiagnose bewusst aktivieren.',
+                            style: GoogleFonts.ibmPlexSans(
+                              fontSize: 11,
+                              color: AppColors.inkLight,
+                              height: 1.5,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: double.infinity,
+                            child: _SettingsActionButton(
+                              label: 'DATENSCHUTZ & RECHTLICHES',
+                              filled: false,
+                              onTap: () => context.push('/legal'),
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Absturzdiagnose (Crash-Reports)',
+                                      style: GoogleFonts.ibmPlexSans(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.ink,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      settings.crashReportingEnabled
+                                          ? 'Aktiviert'
+                                          : 'Deaktiviert',
+                                      style: GoogleFonts.ibmPlexSans(
+                                        fontSize: 10,
+                                        color: AppColors.inkLight,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Switch.adaptive(
+                                value: settings.crashReportingEnabled,
+                                onChanged: (enabled) => ref
+                                    .read(settingsControllerProvider.notifier)
+                                    .setCrashReportingEnabled(enabled),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 28),
                       _BugReportFooter(
                         onTap: () => _showBugReportSheet(context),
@@ -397,6 +456,8 @@ class _SettingsGroup extends StatelessWidget {
         return Icons.admin_panel_settings_outlined;
       case 'WARTUNG':
         return Icons.build_outlined;
+      case 'RECHTLICHES':
+        return Icons.gavel_outlined;
       case 'FEHLER & RÜCKMELDUNGEN':
         return Icons.bug_report_outlined;
       default:
@@ -412,6 +473,8 @@ class _SettingsGroup extends StatelessWidget {
         return 'Admin-Bereich';
       case 'WARTUNG':
         return 'Einführung und Status';
+      case 'RECHTLICHES':
+        return 'Datenschutz und Hinweise';
       case 'FEHLER & RÜCKMELDUNGEN':
         return 'Probleme berichten';
       default:

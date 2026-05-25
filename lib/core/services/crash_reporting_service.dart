@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../constants/settings_keys.dart';
 
 /// Optional Crashlytics bootstrap.
 ///
@@ -13,6 +16,7 @@ class CrashReportingService {
   factory CrashReportingService() => _instance;
 
   bool _enabled = false;
+  bool _firebaseReady = false;
 
   Future<void> initialize() async {
     if (!kReleaseMode) {
@@ -22,17 +26,27 @@ class CrashReportingService {
 
     try {
       await Firebase.initializeApp();
-      _enabled = true;
+      _firebaseReady = true;
+
+      final prefs = await SharedPreferences.getInstance();
+      _enabled = prefs.getBool(SettingsKeys.crashReportingEnabled) ?? false;
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+        _enabled,
+      );
 
       final previousFlutterOnError = FlutterError.onError;
       FlutterError.onError = (FlutterErrorDetails details) {
-        FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+        if (_enabled) {
+          FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+        }
         previousFlutterOnError?.call(details);
       };
 
       final previousOnError = PlatformDispatcher.instance.onError;
       PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        if (_enabled) {
+          FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        }
         return previousOnError?.call(error, stack) ?? false;
       };
 
@@ -51,5 +65,16 @@ class CrashReportingService {
       stackTrace,
       fatal: true,
     );
+  }
+
+  Future<void> setUserConsent(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
+    _enabled = enabled;
+    if (_firebaseReady) {
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+        enabled,
+      );
+    }
   }
 }
