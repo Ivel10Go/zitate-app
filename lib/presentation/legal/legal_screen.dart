@@ -6,6 +6,14 @@ import '../../core/theme/app_theme.dart';
 import '../../widgets/android_back_guard.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 
+const String _legalProviderName = String.fromEnvironment('LEGAL_PROVIDER_NAME');
+const String _legalProviderAddress = String.fromEnvironment(
+  'LEGAL_PROVIDER_ADDRESS',
+);
+const String _legalProviderContact = String.fromEnvironment(
+  'LEGAL_PROVIDER_CONTACT',
+);
+
 class LegalScreen extends StatelessWidget {
   const LegalScreen({super.key});
 
@@ -93,9 +101,7 @@ class LegalScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   _LegalCard(
                     title: 'ANBIETERKENNZEICHNUNG',
-                    body:
-                        'Für einen produktiven, öffentlichen Betrieb sollten vollständige Anbieterangaben '
-                        '(z. B. Name/Firma, ladungsfähige Anschrift, Kontaktweg) bereitgestellt werden.',
+                    body: _providerInfoText,
                   ),
                   const SizedBox(height: 12),
                   Text(
@@ -157,4 +163,23 @@ class _LegalCard extends StatelessWidget {
       ),
     );
   }
+}
+
+String get _providerInfoText {
+  final hasProviderInfo =
+      _legalProviderName.trim().isNotEmpty &&
+      _legalProviderAddress.trim().isNotEmpty &&
+      _legalProviderContact.trim().isNotEmpty;
+
+  if (hasProviderInfo) {
+    return 'Name/Firma: $_legalProviderName\n'
+        'Anschrift: $_legalProviderAddress\n'
+        'Kontakt: $_legalProviderContact';
+  }
+
+  return 'Name/Firma: NICHT KONFIGURIERT\n'
+      'Anschrift: NICHT KONFIGURIERT\n'
+      'Kontakt: NICHT KONFIGURIERT\n\n'
+      'Setze die Werte per Dart-Define: '
+      'LEGAL_PROVIDER_NAME, LEGAL_PROVIDER_ADDRESS, LEGAL_PROVIDER_CONTACT.';
 }

@@ -93,11 +93,11 @@ class CrashReportingService {
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
-    _enabled = enabled;
     if (_firebaseReady) {
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
         enabled,
       );
     }
+    _enabled = enabled;
   }
 }
