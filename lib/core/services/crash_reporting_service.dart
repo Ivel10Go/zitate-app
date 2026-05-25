@@ -92,7 +92,10 @@ class CrashReportingService {
 
   Future<void> setUserConsent(bool enabled) async {
     _consentUpdateQueue = _consentUpdateQueue
-        .catchError((Object _, StackTrace __) {})
+        .catchError((Object error, StackTrace stackTrace) {
+          debugPrint('[CrashReporting] Consent queue recovered after error: $error');
+          debugPrintStack(stackTrace: stackTrace);
+        })
         .then((_) async {
       final pendingInitialization = _initializationFuture;
       if (pendingInitialization != null) {
