@@ -4,7 +4,9 @@ class HistoryFact {
   const HistoryFact({
     required this.id,
     required this.headline,
+    this.headlineEn,
     required this.body,
+    this.bodyEn,
     required this.dateDisplay,
     required this.dateIso,
     required this.dayOfYear,
@@ -15,6 +17,7 @@ class HistoryFact {
     this.person,
     this.personRole,
     required this.connectionToMarx,
+    this.connectionToMarxEn,
     required this.relatedQuoteIds,
     this.funFact,
     this.source,
@@ -24,7 +27,9 @@ class HistoryFact {
 
   final String id;
   final String headline;
+  final String? headlineEn;
   final String body;
+  final String? bodyEn;
   final String dateDisplay;
   final String dateIso;
   final int dayOfYear;
@@ -35,6 +40,7 @@ class HistoryFact {
   final String? person;
   final String? personRole;
   final String connectionToMarx;
+  final String? connectionToMarxEn;
   final List<String> relatedQuoteIds;
   final String? funFact;
   final String? source;
@@ -45,7 +51,9 @@ class HistoryFact {
     return HistoryFact(
       id: json['id'] as String,
       headline: normalizeGermanDisplayText(json['headline'] as String)!,
+      headlineEn: json['headline_en'] as String?,
       body: normalizeGermanDisplayText(json['body'] as String)!,
+      bodyEn: json['body_en'] as String?,
       dateDisplay: normalizeGermanDisplayText(json['date_display'] as String)!,
       dateIso: json['date_iso'] as String,
       dayOfYear: (json['day_of_year'] as num).toInt(),
@@ -61,6 +69,7 @@ class HistoryFact {
       connectionToMarx: normalizeGermanDisplayText(
         json['connection_to_marx'] as String,
       )!,
+      connectionToMarxEn: json['connection_to_marx_en'] as String?,
       relatedQuoteIds:
           (json['related_quote_ids'] as List<dynamic>?)
               ?.cast<String>()
@@ -78,7 +87,9 @@ class HistoryFact {
     return <String, dynamic>{
       'id': id,
       'headline': headline,
+      'headline_en': headlineEn,
       'body': body,
+      'body_en': bodyEn,
       'date_display': dateDisplay,
       'date_iso': dateIso,
       'day_of_year': dayOfYear,
@@ -89,6 +100,7 @@ class HistoryFact {
       'person': person,
       'person_role': personRole,
       'connection_to_marx': connectionToMarx,
+      'connection_to_marx_en': connectionToMarxEn,
       'related_quote_ids': relatedQuoteIds,
       'fun_fact': funFact,
       'source': source,

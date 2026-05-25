@@ -14,8 +14,8 @@ class NotificationService {
   static final NotificationService instance = NotificationService._();
 
   static const _channelId = 'daily_quote_channel';
-  static const _channelName = 'Tägliches Zitat';
-  static const _channelDescription = 'Benachrichtigungen für das Tageszitat.';
+  static const _channelName = 'Daily Quote';
+  static const _channelDescription = 'Notifications for the daily quote.';
   static const _dailyReminderId = 120001;
   static const _instantDailyQuoteId = 120002;
 
@@ -93,10 +93,10 @@ class NotificationService {
     );
 
     await _plugin.cancel(_instantDailyQuoteId);
-    final firstSentence = _extractFirstSentence(quote.textDe);
+    final firstSentence = _extractFirstSentence(quote.textEn ?? quote.textDe);
     await _plugin.show(
       _instantDailyQuoteId,
-      'Zitatatlas - Tageszitat',
+      'Quote Atlas - Daily Quote',
       firstSentence,
       details,
       payload: 'quote:${quote.id}',
@@ -130,8 +130,8 @@ class NotificationService {
 
     await _plugin.zonedSchedule(
       _dailyReminderId,
-      'Zitatatlas - Tageszitat',
-      'Dein nächstes Tageszitat wartet auf dich.',
+      'Quote Atlas - Daily Quote',
+      'Your next daily quote is waiting for you.',
       nextTrigger,
       details,
       payload: 'route:/',

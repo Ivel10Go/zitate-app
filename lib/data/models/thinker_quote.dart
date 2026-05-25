@@ -6,6 +6,7 @@ class ThinkerQuote {
     required this.author,
     required this.authorType,
     required this.textDe,
+    this.textEn,
     required this.source,
     required this.year,
     this.imageUrl,
@@ -17,6 +18,7 @@ class ThinkerQuote {
   /// Either 'philosopher' or 'politician'
   final String authorType;
   final String textDe;
+  final String? textEn;
   final String source;
   final int year;
   final String? imageUrl;
@@ -42,6 +44,7 @@ class ThinkerQuote {
       textDe:
           normalizeGermanDisplayText(json['text_de'] as String?) ??
           '(Text not available)',
+      textEn: json['text_en'] as String?,
       source:
           normalizeGermanDisplayText(json['source'] as String?) ??
           '(Source unknown)',

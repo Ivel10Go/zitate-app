@@ -118,7 +118,7 @@ class _BootstrapGateAppState extends State<_BootstrapGateApp> {
       stream: AppBootstrap.progressStream,
       initialData: const AppBootstrapProgress(
         progress: 0.06,
-        message: 'Start wird vorbereitet ...',
+        message: 'Preparing startup ...',
       ),
       builder: (context, progressSnapshot) {
         return FutureBuilder<AppBootstrapResult>(
@@ -134,7 +134,7 @@ class _BootstrapGateAppState extends State<_BootstrapGateApp> {
                 theme: AppTheme.light,
                 home: AppLoadingScreen(
                   subtitle:
-                      progressData?.message ?? 'Inhalte werden vorbereitet ...',
+                      progressData?.message ?? 'Preparing content ...',
                   progress: progressData?.progress,
                 ),
               );
@@ -143,10 +143,10 @@ class _BootstrapGateAppState extends State<_BootstrapGateApp> {
             if (snapshot.hasError) {
               debugPrint('[UI] Bootstrap error: ${snapshot.error}');
               return AppFullscreenRecoveryScreen(
-                title: 'Start fehlgeschlagen',
+                title: 'Startup failed',
                 message:
-                    'Der Start konnte nicht vollständig abgeschlossen werden.',
-                details: 'Fehler: ${snapshot.error}',
+                    'The startup could not be completed successfully.',
+                details: 'Error: ${snapshot.error}',
                 onRetry: () {
                   debugPrint('[UI] User clicked retry');
                   setState(() {
@@ -159,9 +159,9 @@ class _BootstrapGateAppState extends State<_BootstrapGateApp> {
             if (!snapshot.hasData) {
               debugPrint('[UI] Bootstrap completed but no data returned');
               return AppFullscreenRecoveryScreen(
-                title: 'Start fehlgeschlagen',
-                message: 'Der Start hat keine gültigen Daten geliefert.',
-                details: 'Die App kann erneut geladen werden.',
+                title: 'Startup failed',
+                message: 'The startup did not deliver valid data.',
+                details: 'The app can be reloaded.',
                 onRetry: () {
                   debugPrint('[UI] User clicked retry');
                   setState(() {

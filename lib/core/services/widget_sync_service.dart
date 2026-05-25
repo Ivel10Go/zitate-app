@@ -37,11 +37,11 @@ abstract final class WidgetSyncService {
           );
           await _saveCommon(
             contentType: 'quote',
-            header: 'ZITATATLAS',
+            header: 'QUOTE ATLAS',
             modeLabel: modeLabel ?? 'PUBLIC',
             author: 'Karl Marx & Friedrich Engels',
             launchRoute: '/detail/${quote.id}',
-            quoteText: quote.textDe,
+            quoteText: quote.textEn ?? quote.textDe,
             source: '${quote.source}, ${quote.year}',
             explanation: quote.explanationShort,
             categories: quote.category.join(', '),
@@ -57,16 +57,16 @@ abstract final class WidgetSyncService {
               : '/';
           final factLead = fact.funFact?.trim().isNotEmpty == true
               ? fact.funFact!.trim()
-              : fact.headline;
+              : (fact.headlineEn ?? fact.headline);
           await _saveCommon(
             contentType: 'fact',
-            header: 'WELTGESCHICHTE',
+            header: 'WORLD HISTORY',
             modeLabel: modeLabel ?? 'PUBLIC',
-            author: 'Geschichte',
+            author: 'History',
             launchRoute: route,
             quoteText: factLead,
             source: fact.dateDisplay,
-            explanation: fact.headline,
+            explanation: fact.headlineEn ?? fact.headline,
             categories: [
               fact.era,
               fact.region,
@@ -88,11 +88,11 @@ abstract final class WidgetSyncService {
           );
           await _saveCommon(
             contentType: 'thinker_quote',
-            header: 'ARCHIV',
+            header: 'ARCHIVE',
             modeLabel: modeLabel ?? 'PUBLIC',
             author: quote.author,
             launchRoute: '/archive',
-            quoteText: quote.textDe,
+            quoteText: quote.textEn ?? quote.textDe,
             source: '${quote.author}, ${quote.year}',
             explanation: quote.authorType,
             categories: quote.author,

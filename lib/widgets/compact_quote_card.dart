@@ -13,8 +13,8 @@ class CompactQuoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final text = quote.textDe.trim().isNotEmpty
-        ? quote.textDe
+    final text = (quote.textEn ?? quote.textDe).trim().isNotEmpty
+        ? (quote.textEn ?? quote.textDe)
         : quote.textOriginal;
 
     return ConstrainedBox(

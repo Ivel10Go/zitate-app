@@ -85,8 +85,8 @@ class ShareCardRenderer {
   }
 
   String _quoteShareText(Quote quote) {
-    final text = quote.textDe.trim().isNotEmpty
-        ? quote.textDe.trim()
+    final text = (quote.textEn ?? quote.textDe).trim().isNotEmpty
+        ? (quote.textEn ?? quote.textDe).trim()
         : quote.textOriginal.trim();
     return '"$text"\n— ${quote.source}, ${quote.year}\n${quote.explanationShort}';
   }
@@ -111,7 +111,7 @@ class _ShareCanvas extends StatelessWidget {
     return _ShareCanvas._(
       kind: _ShareCanvasKind.quote,
       kicker: '${quoteAuthorLabel(quote).toUpperCase()} · ${quote.year}',
-      title: quote.textDe,
+      title: quote.textEn ?? quote.textDe,
       source: '— ${quoteAuthorLabel(quote)}',
       headerRight: quote.chapter,
       tagline: quote.category.take(3).join(' · '),
@@ -121,13 +121,13 @@ class _ShareCanvas extends StatelessWidget {
   factory _ShareCanvas.fact({required HistoryFact fact}) {
     return _ShareCanvas._(
       kind: _ShareCanvasKind.fact,
-      kicker: 'WELTGESCHICHTE · ${fact.dateDisplay.toUpperCase()}',
-      title: fact.funFact ?? fact.headline,
-      body: fact.body,
-      source: fact.connectionToMarx,
+      kicker: 'WORLD HISTORY · ${fact.dateDisplay.toUpperCase()}',
+      title: fact.funFact ?? (fact.headlineEn ?? fact.headline),
+      body: fact.bodyEn ?? fact.body,
+      source: fact.connectionToMarxEn ?? fact.connectionToMarx,
       headerRight: fact.category.isNotEmpty
           ? fact.category.first.toUpperCase()
-          : 'FAKT',
+          : 'FACT',
       tagline: fact.category.take(3).join(' · '),
     );
   }
@@ -258,7 +258,7 @@ class _ShareCanvas extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          'ZITATATLAS',
+                          'QUOTE ATLAS',
                           style: GoogleFonts.ibmPlexSans(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,

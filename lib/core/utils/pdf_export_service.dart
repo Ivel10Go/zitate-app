@@ -90,29 +90,29 @@ class PdfExportService {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: <pw.Widget>[
         pw.Text(
-          'ZITATATLAS',
+          'QUOTE ATLAS',
           style: pw.TextStyle(font: fonts.sansBold, fontSize: 28, color: _ink),
         ),
         pw.SizedBox(height: 8),
         pw.Container(width: double.infinity, height: 2, color: _red),
         pw.SizedBox(height: 22),
         pw.Text(
-          'Meine Favoriten',
+          'My Favorites',
           style: pw.TextStyle(font: fonts.sans, fontSize: 18, color: _ink),
         ),
         pw.SizedBox(height: 6),
         pw.Text(
-          'Exportiert am ${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}',
+          'Exported on ${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}',
           style: pw.TextStyle(font: fonts.sans, fontSize: 12, color: _muted),
         ),
         pw.SizedBox(height: 20),
         pw.Text(
-          '$quotes gespeicherte Zitate',
+          '$quotes saved quotes',
           style: pw.TextStyle(font: fonts.sans, fontSize: 12, color: _ink),
         ),
         pw.SizedBox(height: 6),
         pw.Text(
-          '$facts gespeicherte Fakten',
+          '$facts saved facts',
           style: pw.TextStyle(font: fonts.sans, fontSize: 12, color: _ink),
         ),
       ],
@@ -166,7 +166,7 @@ class PdfExportService {
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: <pw.Widget>[
                 pw.Text(
-                  '„${quote.textDe}“',
+                  '„${quote.textEn ?? quote.textDe}"',
                   style: pw.TextStyle(
                     font: fonts.serifItalic,
                     fontSize: 22,
@@ -235,7 +235,7 @@ class PdfExportService {
               children: <pw.Widget>[
                 pw.Expanded(
                   child: pw.Text(
-                    'WELTGESCHICHTE · ${fact.dateDisplay.toUpperCase()}',
+                    'WORLD HISTORY · ${fact.dateDisplay.toUpperCase()}',
                     style: pw.TextStyle(
                       font: fonts.sansBold,
                       fontSize: 9,
@@ -248,7 +248,7 @@ class PdfExportService {
                 pw.Text(
                   fact.category.isNotEmpty
                       ? fact.category.first.toUpperCase()
-                      : 'FAKT',
+                      : 'FACT',
                   style: pw.TextStyle(
                     font: fonts.sansBold,
                     fontSize: 8,
@@ -265,7 +265,7 @@ class PdfExportService {
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: <pw.Widget>[
                 pw.Text(
-                  fact.funFact ?? fact.headline,
+                  fact.funFact ?? (fact.headlineEn ?? fact.headline),
                   style: pw.TextStyle(
                     font: fonts.serif,
                     fontSize: 22,
@@ -275,7 +275,7 @@ class PdfExportService {
                 ),
                 pw.SizedBox(height: 12),
                 pw.Text(
-                  fact.body,
+                  fact.bodyEn ?? fact.body,
                   style: pw.TextStyle(
                     font: fonts.sans,
                     fontSize: 11,
@@ -287,7 +287,7 @@ class PdfExportService {
                 pw.Container(width: 56, height: 2, color: _red),
                 pw.SizedBox(height: 10),
                 pw.Text(
-                  fact.connectionToMarx,
+                  fact.connectionToMarxEn ?? fact.connectionToMarx,
                   style: pw.TextStyle(
                     font: fonts.sans,
                     fontSize: 10,

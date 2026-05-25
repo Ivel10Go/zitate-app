@@ -4,6 +4,7 @@ class Quote {
   const Quote({
     required this.id,
     required this.textDe,
+    this.textEn,
     required this.textOriginal,
     required this.source,
     required this.year,
@@ -20,6 +21,7 @@ class Quote {
 
   final String id;
   final String textDe;
+  final String? textEn;
   final String textOriginal;
   final String source;
   final int year;
@@ -38,7 +40,8 @@ class Quote {
       id: (json['id'] as String?) ?? 'unknown',
       textDe:
           normalizeGermanDisplayText(json['text_de'] as String?) ??
-          '(Text nicht verfügbar)',
+          '(Text not available)',
+      textEn: json['text_en'] as String?,
       textOriginal:
           normalizeGermanDisplayText(json['text_original'] as String?) ??
           '(Original text not available)',
@@ -97,6 +100,7 @@ class Quote {
     return <String, dynamic>{
       'id': id,
       'text_de': textDe,
+      'text_en': textEn,
       'text_original': textOriginal,
       'source': source,
       'year': year,

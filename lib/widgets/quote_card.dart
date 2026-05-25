@@ -29,8 +29,8 @@ class QuoteCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quoteText = quote.textDe.trim().isNotEmpty
-        ? quote.textDe
+    final quoteText = (quote.textEn ?? quote.textDe).trim().isNotEmpty
+        ? (quote.textEn ?? quote.textDe)
         : quote.textOriginal;
     final isLongQuote = _isLongQuote(quoteText);
     final isFavoriteAsync = ref.watch(isFavoriteProvider(quote.id));
@@ -67,7 +67,7 @@ class QuoteCard extends ConsumerWidget {
                     ),
                     iconSize: 16,
                     color: scheme.onPrimary,
-                    tooltip: 'Teilen',
+                    tooltip: 'Share',
                   ),
                   const SizedBox(width: 4),
                 ],
@@ -135,8 +135,8 @@ class QuoteCard extends ConsumerWidget {
                             minHeight: 28,
                           ),
                           tooltip: isFavorite
-                              ? 'Aus Favoriten entfernen'
-                              : 'Zu Favoriten',
+                              ? 'Remove from favorites'
+                              : 'Add to favorites',
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -151,7 +151,7 @@ class QuoteCard extends ConsumerWidget {
                       if (isLongQuote) ...<Widget>[
                         const SizedBox(height: 8),
                         Text(
-                          'Langes Zitat gekürzt – tippen für Volltext',
+                          'Long quote truncated – tap for full text',
                           style: GoogleFonts.ibmPlexSans(
                             fontSize: 10,
                             fontWeight: FontWeight.w600,
@@ -195,8 +195,8 @@ class QuoteCard extends ConsumerWidget {
                             Expanded(
                               child: Text(
                                 isLongQuote
-                                    ? 'Tippen für Volltext und Erklärung'
-                                    : 'Tippen für Erklärung und Kontext',
+                                    ? 'Tap for full text and explanation'
+                                    : 'Tap for explanation and context',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.ibmPlexSans(

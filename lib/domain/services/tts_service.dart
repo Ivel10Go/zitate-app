@@ -8,7 +8,7 @@ class TtsService {
   Future<void> Function()? onPlaybackCompleted;
 
   Future<void> init() async {
-    await _tts.setLanguage('de-DE');
+    await _tts.setLanguage('en-US');
     await _tts.setSpeechRate(0.55);
     await _tts.setVolume(1.0);
     await _tts.setPitch(1.0);
@@ -47,8 +47,9 @@ class TtsService {
     _isPlaying = true;
     await _tts.speak('${quote.source}, ${quote.year}.');
     await Future<void>.delayed(const Duration(milliseconds: 800));
+    final quoteText = quote.textEn ?? quote.textDe;
     await _tts.speak(
-      quote.textDe.replaceAll('„', '').replaceAll('"', '').replaceAll('“', ''),
+      quoteText.replaceAll('„', '').replaceAll('"', '').replaceAll('"', ''),
     );
     await Future<void>.delayed(const Duration(milliseconds: 1200));
     await _tts.speak(quote.explanationShort);

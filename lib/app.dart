@@ -26,8 +26,8 @@ class DasKapitalApp extends ConsumerWidget {
         theme: AppTheme.light,
         home: Scaffold(
           body: const AppInlineLoadingState(
-            title: 'Einstellungen werden geladen',
-            subtitle: 'App-Konfiguration wird vorbereitet ...',
+            title: 'Loading settings',
+            subtitle: 'Preparing app configuration ...',
           ),
         ),
       ),
@@ -36,8 +36,8 @@ class DasKapitalApp extends ConsumerWidget {
         theme: AppTheme.light,
         home: Scaffold(
           body: AppInlineErrorState(
-            title: 'Einstellungen konnten nicht geladen werden',
-            message: 'Fehler: $err',
+            title: 'Settings could not be loaded',
+            message: 'Error: $err',
           ),
         ),
       ),

@@ -5,7 +5,7 @@ class AndroidBackGuard extends StatefulWidget {
   const AndroidBackGuard({
     required this.child,
     this.onBlockedPop,
-    this.exitHint = 'Nochmal zurück drücken, um die App zu schließen',
+    this.exitHint = 'Press back again to close the app',
     super.key,
   });
 
