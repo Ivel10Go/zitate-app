@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../constants/settings_keys.dart';
 
 /// Optional Crashlytics bootstrap.
 ///
@@ -13,8 +18,28 @@ class CrashReportingService {
   factory CrashReportingService() => _instance;
 
   bool _enabled = false;
+  bool _firebaseReady = false;
+  Future<void>? _initializationFuture;
+  Future<void> _consentUpdateQueue = Future<void>.value();
 
   Future<void> initialize() async {
+    final pendingInitialization = _initializationFuture;
+    if (pendingInitialization != null) {
+      return pendingInitialization;
+    }
+
+    final completer = Completer<void>();
+    _initializationFuture = completer.future;
+    _initializeInternal()
+        .then(completer.complete)
+        .catchError(completer.completeError)
+        .whenComplete(() {
+          _initializationFuture = null;
+        });
+    await completer.future;
+  }
+
+  Future<void> _initializeInternal() async {
     if (!kReleaseMode) {
       debugPrint('[CrashReporting] Skipping Crashlytics in non-release mode');
       return;
@@ -22,17 +47,29 @@ class CrashReportingService {
 
     try {
       await Firebase.initializeApp();
-      _enabled = true;
+      _firebaseReady = true;
+
+      final prefs = await SharedPreferences.getInstance();
+      final consentEnabled =
+          prefs.getBool(SettingsKeys.crashReportingEnabled) ?? false;
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+        consentEnabled,
+      );
+      _enabled = consentEnabled;
 
       final previousFlutterOnError = FlutterError.onError;
       FlutterError.onError = (FlutterErrorDetails details) {
-        FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+        if (_enabled) {
+          FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+        }
         previousFlutterOnError?.call(details);
       };
 
       final previousOnError = PlatformDispatcher.instance.onError;
       PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        if (_enabled) {
+          FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        }
         return previousOnError?.call(error, stack) ?? false;
       };
 
@@ -51,5 +88,30 @@ class CrashReportingService {
       stackTrace,
       fatal: true,
     );
+  }
+
+  Future<void> setUserConsent(bool enabled) async {
+    _consentUpdateQueue = _consentUpdateQueue
+        .catchError((Object error, StackTrace stackTrace) {
+          debugPrint('[CrashReporting] Consent queue recovered after error: $error');
+          debugPrintStack(stackTrace: stackTrace);
+        })
+        .then((_) async {
+      final pendingInitialization = _initializationFuture;
+      if (pendingInitialization != null) {
+        await pendingInitialization;
+      }
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
+      if (_firebaseReady) {
+        await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+          enabled,
+        );
+      }
+      _enabled = enabled;
+    });
+
+    await _consentUpdateQueue;
   }
 }
