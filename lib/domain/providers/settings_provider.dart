@@ -156,8 +156,6 @@ class SettingsController extends AsyncNotifier<SettingsState> {
   }
 
   Future<void> setCrashReportingEnabled(bool enabled) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(SettingsKeys.crashReportingEnabled, enabled);
     state = AsyncData(
       state.requireValue.copyWith(crashReportingEnabled: enabled),
     );
