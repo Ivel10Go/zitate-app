@@ -30,7 +30,9 @@ import '../shared/icon_circle.dart';
 import '../shared/app_card.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({this.showBottomNavigationBar = true, super.key});
+
+  final bool showBottomNavigationBar;
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
@@ -212,12 +214,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     final premiumQuotesAsync = isPro
         ? ref.watch(premiumDailyQuotesProvider)
         : const AsyncValue<List<Quote>>.data(<Quote>[]);
-    final scheme = Theme.of(context).colorScheme;
 
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: const AppNavigationBar(selectedIndex: 0),
+        bottomNavigationBar: widget.showBottomNavigationBar
+            ? const AppNavigationBar(selectedIndex: 0)
+            : null,
         child: RefreshIndicator(
           onRefresh: () async => ref.invalidate(dailyContentProvider),
           child: ListView(
@@ -226,56 +229,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               parent: BouncingScrollPhysics(),
             ),
             children: <Widget>[
-              // ── Editorial header ────────────────────────────────────────
-              Container(
-                color: scheme.surface,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        AppTheme.spacingLarge,
-                        AppTheme.spacingBase,
-                        AppTheme.spacingLarge,
-                        AppTheme.spacingBase,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'HEUTE',
-                            style: GoogleFonts.playfairDisplay(
-                              fontSize: 32,
-                              fontWeight: FontWeight.w700,
-                              color: scheme.onSurface,
-                              letterSpacing: -0.5,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Container(width: 40, height: 2, color: AppColors.red),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Deine tägliche Ausgabe aus Zitaten und historischen Fakten.',
-                            style: GoogleFonts.ibmPlexSans(
-                              fontSize: 11,
-                              color: scheme.onSurfaceVariant,
-                              height: 1.5,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            _mastheadSubtitle(),
-                            style: GoogleFonts.ibmPlexSans(
-                              fontSize: 10,
-                              color: AppColors.inkLight,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Bottom separator
-                    Container(height: 1, color: scheme.outline),
-                  ],
+              EditorialSectionTitle(
+                label: 'HEUTE',
+                title: 'HEUTE',
+                subtitle:
+                    'Deine tägliche Ausgabe aus Zitaten und historischen Fakten.',
+                trailing: Text(
+                  _mastheadSubtitle(),
+                  style: AppTheme.mastHeadSubtitle.copyWith(
+                    color: AppColors.inkLight,
+                  ),
                 ),
               ),
 

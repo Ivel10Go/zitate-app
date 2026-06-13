@@ -4,6 +4,7 @@ import 'package:home_widget/home_widget.dart';
 import '../../data/models/daily_content.dart';
 import '../../data/models/quote.dart';
 import '../../data/models/thinker_quote.dart';
+import '../utils/quote_attribution.dart';
 
 abstract final class WidgetSyncService {
   static Future<void> forceRefresh() async {
@@ -39,7 +40,7 @@ abstract final class WidgetSyncService {
             contentType: 'quote',
             header: 'ZITATATLAS',
             modeLabel: modeLabel ?? 'PUBLIC',
-            author: 'Karl Marx & Friedrich Engels',
+            author: quoteAuthorLabel(quote),
             launchRoute: '/detail/${quote.id}',
             quoteText: quote.textDe,
             source: '${quote.source}, ${quote.year}',

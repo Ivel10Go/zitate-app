@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/constants/settings_keys.dart';
 import '../../core/providers/supabase_auth_provider.dart';
 import '../../core/services/notification_service.dart';
 import '../../core/theme/app_colors.dart';
@@ -30,6 +32,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   PoliticalLeaning _leaning = PoliticalLeaning.neutral;
 
   static const _pageCount = 5;
+
+  @override
+  void initState() {
+    super.initState();
+    _consumeGoogleOnboardingMarker();
+  }
+
+  Future<void> _consumeGoogleOnboardingMarker() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(SettingsKeys.pendingGoogleOnboarding) ?? false) {
+      await prefs.remove(SettingsKeys.pendingGoogleOnboarding);
+    }
+  }
 
   @override
   void dispose() {

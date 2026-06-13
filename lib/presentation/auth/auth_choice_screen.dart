@@ -62,7 +62,7 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          context.go('/auth-gate');
+          context.go('/onboarding');
         }
       });
     });

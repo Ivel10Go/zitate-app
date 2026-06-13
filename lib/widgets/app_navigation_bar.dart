@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../core/theme/app_theme.dart';
 
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({required this.selectedIndex, super.key});
@@ -25,6 +26,12 @@ class AppNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final labelStyle = AppTheme.labelSmall.copyWith(
+      color: scheme.onSurface,
+      fontSize: 11,
+      fontWeight: FontWeight.w700,
+      letterSpacing: 1.2,
+    );
 
     return Container(
       color: scheme.surface,
@@ -70,15 +77,12 @@ class AppNavigationBar extends StatelessWidget {
                           const SizedBox(height: 2),
                           Text(
                             destination.label,
-                            style: GoogleFonts.ibmPlexSans(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
+                            style: labelStyle.copyWith(
                               color: isActive
                                   ? scheme.onSurface
                                   : scheme.onSurface.withAlpha(
                                       (0.6 * 255).round(),
                                     ),
-                              letterSpacing: 1.2,
                             ),
                           ),
                           AnimatedOpacity(

@@ -54,13 +54,24 @@ class _ArchiveScreenState extends ConsumerState<ArchiveScreen> {
         bottomNavigationBar: const AppNavigationBar(selectedIndex: 1),
         child: Column(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: scheme.surface,
-                border: Border(
-                  bottom: BorderSide(color: scheme.outline, width: 1),
+            EditorialSectionTitle(
+              label: 'ARCHIV',
+              title: 'ARCHIV',
+              subtitle:
+                  'Suche, filtere und springe zwischen Themen, Interessen und Geschichte.',
+              trailing: archiveAsync.when(
+                data: (items) => Text(
+                  '${items.length} Einträge',
+                  style: AppTheme.mastHeadSubtitle,
                 ),
+                loading: () =>
+                    Text('— Einträge', style: AppTheme.mastHeadSubtitle),
+                error: (_, __) =>
+                    Text('— Einträge', style: AppTheme.mastHeadSubtitle),
               ),
+            ),
+            Container(height: 1, color: scheme.outline),
+            Padding(
               padding: EdgeInsets.fromLTRB(
                 AppTheme.spacingLarge,
                 AppTheme.spacingBase,
@@ -70,49 +81,6 @@ class _ArchiveScreenState extends ConsumerState<ArchiveScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Expanded(
-                        child: archiveAsync.when(
-                          data: (_) => Text('ARCHIV', style: AppTheme.masthead),
-                          loading: () =>
-                              Text('ARCHIV', style: AppTheme.masthead),
-                          error: (_, __) =>
-                              Text('ARCHIV', style: AppTheme.masthead),
-                        ),
-                      ),
-                      SizedBox(width: AppTheme.spacingMedium),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          archiveAsync.when(
-                            data: (items) => Text(
-                              '${items.length} Einträge',
-                              style: AppTheme.mastHeadSubtitle,
-                            ),
-                            loading: () => Text(
-                              '— Einträge',
-                              style: AppTheme.mastHeadSubtitle,
-                            ),
-                            error: (_, __) => Text(
-                              '— Einträge',
-                              style: AppTheme.mastHeadSubtitle,
-                            ),
-                          ),
-                          SizedBox(height: AppTheme.spacingXs),
-                          Container(width: 32, height: 2, color: AppColors.red),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Suche, filtere und springe zwischen Themen, Interessen und Geschichte.',
-                    style: AppTheme.bodyMedium.copyWith(height: 1.4),
-                  ),
-                  const SizedBox(height: AppTheme.spacingBase),
-
                   const SizedBox(height: AppTheme.spacingMedium),
                   TextField(
                     decoration: InputDecoration(

@@ -147,9 +147,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
       }
 
       if (success) {
-        // Google-Anmeldung war erfolgreich
-        // Der AuthGateScreen wird automatisch die Navigation übernehmen
-        // wenn der Auth-Status sich ändert
+        context.go('/onboarding');
         return;
       } else {
         // Google-Anmeldung fehlgeschlagen

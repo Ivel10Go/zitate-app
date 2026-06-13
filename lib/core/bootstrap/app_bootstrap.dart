@@ -187,6 +187,8 @@ abstract final class AppBootstrap {
       final profileRaw = settings.getString(UserProfile.storageKey);
       final guestModeEnabled =
           settings.getBool(SettingsKeys.guestModeEnabled) ?? false;
+      final pendingGoogleOnboarding =
+          settings.getBool(SettingsKeys.pendingGoogleOnboarding) ?? false;
 
       // Check if user is authenticated
       final isAuthenticated =
@@ -200,6 +202,8 @@ abstract final class AppBootstrap {
           ? '/' // Guest mode enabled → direkt Home anzeigen
           : !isAuthenticated
           ? '/register' // Not authenticated → direkt Registrierung zeigen
+          : pendingGoogleOnboarding
+          ? '/onboarding' // Google OAuth pending → onboarding first
           : _shouldSkipOnboarding(profileRaw)
           ? '/' // Authenticated + onboarding done → home
           : '/onboarding'; // Authenticated but onboarding pending
@@ -406,6 +410,8 @@ abstract final class AppBootstrap {
       final profileRaw = settings.getString(UserProfile.storageKey);
       final guestModeEnabled =
           settings.getBool(SettingsKeys.guestModeEnabled) ?? false;
+      final pendingGoogleOnboarding =
+          settings.getBool(SettingsKeys.pendingGoogleOnboarding) ?? false;
 
       // Check if user is authenticated
       final isAuthenticated =
@@ -420,6 +426,8 @@ abstract final class AppBootstrap {
             ? '/' // Guest mode enabled → direkt Home anzeigen
             : !isAuthenticated
             ? '/auth' // Not authenticated → show auth screen only
+            : pendingGoogleOnboarding
+            ? '/onboarding' // Google OAuth pending → onboarding first
             : _shouldSkipOnboarding(profileRaw)
             ? '/' // Authenticated + onboarding done → home
             : '/onboarding', // Authenticated but onboarding pending

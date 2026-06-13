@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/utils/share_card_renderer.dart';
@@ -15,7 +14,9 @@ import '../../widgets/quote_card.dart';
 import '../loading/app_loading_screen.dart';
 
 class FavoritesScreen extends ConsumerWidget {
-  const FavoritesScreen({super.key});
+  const FavoritesScreen({this.showBottomNavigationBar = true, super.key});
+
+  final bool showBottomNavigationBar;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,55 +26,23 @@ class FavoritesScreen extends ConsumerWidget {
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: const AppNavigationBar(selectedIndex: 1),
+        bottomNavigationBar: showBottomNavigationBar
+            ? const AppNavigationBar(selectedIndex: 1)
+            : null,
         child: Column(
           children: <Widget>[
-            // Masthead
-            Container(
-              color: scheme.surface,
-              padding: EdgeInsets.fromLTRB(
-                AppTheme.spacingLarge,
-                AppTheme.spacingBase,
-                AppTheme.spacingLarge,
-                AppTheme.spacingBase,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  // Title
-                  Text(
-                    'FAVORITEN',
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: scheme.onSurface,
-                      letterSpacing: -0.5,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  // Red accent line
-                  Container(width: 40, height: 2, color: AppColors.red),
-                  const SizedBox(height: 10),
-                  // Description
-                  Text(
-                    'Deine gespeicherten Lieblingszitate zum Revisieren und Teilen.',
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 11,
-                      color: scheme.onSurfaceVariant,
-                      height: 1.5,
-                    ),
-                  ),
-                ],
-              ),
+            EditorialSectionTitle(
+              label: 'FAVORITEN',
+              title: 'FAVORITEN',
+              subtitle:
+                  'Deine gespeicherten Lieblingszitate zum Revisieren und Teilen.',
             ),
             Container(height: 1, color: scheme.outline),
             Expanded(
               child: favoritesAsync.when(
                 data: (quotes) {
                   if (quotes.isEmpty) {
-                    return _FavoritesEmptyStateCard(
-                      onGoArchive: () => context.push('/archive'),
-                    );
+                    return const _FavoritesEmptyStateCard();
                   }
 
                   return ListView.builder(
@@ -252,9 +221,7 @@ Future<void> _showQuoteInsightSheet(BuildContext context, Quote quote) async {
 }
 
 class _FavoritesEmptyStateCard extends StatelessWidget {
-  const _FavoritesEmptyStateCard({required this.onGoArchive});
-
-  final VoidCallback onGoArchive;
+  const _FavoritesEmptyStateCard();
 
   @override
   Widget build(BuildContext context) {
@@ -292,14 +259,6 @@ class _FavoritesEmptyStateCard extends StatelessWidget {
                   fontSize: 11,
                   color: scheme.onSurfaceVariant,
                   height: 1.45,
-                ),
-              ),
-              const SizedBox(height: 14),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: onGoArchive,
-                  child: const Text('ZUM ARCHIV'),
                 ),
               ),
             ],

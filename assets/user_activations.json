@@ -1,0 +1,8 @@
+{
+  "levi.neisius@yahoo.com": {
+    "quote_id": "kolonial_reserve_001",
+    "activated_at": "2026-05-20T00:00:00Z",
+    "source": "script_most_frequent_quote",
+    "note": "Aktiviert: häufigstes Zitat in assets (gezählt über generated/thinkers/quotes)"
+  }
+}

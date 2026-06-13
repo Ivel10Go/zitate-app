@@ -196,11 +196,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       );
                       final success = await authController.signInWithGoogle();
                       if (success && mounted) {
-                        if (_isSignUp) {
-                          context.go('/onboarding');
-                        } else {
-                          context.go('/');
-                        }
+                        context.go('/onboarding');
                       } else if (mounted) {
                         final error = ref
                             .read(authControllerProvider)

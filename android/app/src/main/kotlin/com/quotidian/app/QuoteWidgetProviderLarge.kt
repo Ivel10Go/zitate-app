@@ -68,11 +68,10 @@ class QuoteWidgetProviderLarge : AppWidgetProvider() {
         val quoteText = prefs.getString("quote_text", "Tageszitat wird geladen …") ?: ""
         Log.d(LOG_TAG, "Loaded quote_text from SharedPreferences")
         val contentType = prefs.getString("content_type", "") ?: ""
+        val storedAuthor = prefs.getString("quote_author", "") ?: ""
         val quoteAuthor = when (contentType) {
-          "quote" -> "Karl Marx & Friedrich Engels"
           "fact" -> "Geschichte"
-          "thinker_quote" -> prefs.getString("quote_author", "") ?: ""
-          else -> prefs.getString("quote_author", "") ?: ""
+          else -> storedAuthor
         }
         val layout = selectLayout(appWidgetManager, appWidgetId)
         Log.d(LOG_TAG, "Selected layout: ${layoutName(layout)} for large widget $appWidgetId")

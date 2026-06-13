@@ -34,6 +34,11 @@ final currentUserEmailProvider = Provider<String?>((ref) {
   return authState.whenData((user) => user?.email).value;
 });
 
+final googleOnboardingPendingProvider = FutureProvider<bool>((ref) async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getBool(SettingsKeys.pendingGoogleOnboarding) ?? false;
+});
+
 class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
   AuthController(this._ref) : super(const AsyncValue.loading()) {
     _init();
@@ -140,10 +145,18 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
   Future<bool> signInWithGoogle() async {
     state = const AsyncValue.loading();
     try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(SettingsKeys.pendingGoogleOnboarding, true);
       await _service.signInWithGoogle();
       // Auth state wird durch authStateChanges automatisch aktualisiert
       return true;
     } catch (e, st) {
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.remove(SettingsKeys.pendingGoogleOnboarding);
+      } catch (_) {
+        // ignore cleanup errors
+      }
       state = AsyncValue.error(e, st);
       return false;
     }
@@ -151,6 +164,8 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
 
   Future<void> signOut() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(SettingsKeys.pendingGoogleOnboarding);
       await _service.signOut();
     } catch (e, st) {
       state = AsyncValue.error(e, st);

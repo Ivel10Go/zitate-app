@@ -17,7 +17,9 @@ import '../../widgets/app_navigation_bar.dart';
 import '../loading/app_loading_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({this.showBottomNavigationBar = true, super.key});
+
+  final bool showBottomNavigationBar;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,45 +31,16 @@ class SettingsScreen extends ConsumerWidget {
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: const AppNavigationBar(selectedIndex: 2),
+        bottomNavigationBar: showBottomNavigationBar
+            ? const AppNavigationBar(selectedIndex: 2)
+            : null,
         child: Column(
           children: <Widget>[
-            // Masthead
-            Container(
-              color: scheme.surface,
-              padding: EdgeInsets.fromLTRB(
-                AppTheme.spacingLarge,
-                AppTheme.spacingBase,
-                AppTheme.spacingLarge,
-                AppTheme.spacingBase,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'EINSTELLUNGEN',
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: scheme.onSurface,
-                      letterSpacing: -0.5,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Container(width: 40, height: 2, color: AppColors.red),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Steuere, was du täglich siehst und wie du lernst.',
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 11,
-                      color: scheme.onSurfaceVariant,
-                      height: 1.5,
-                    ),
-                  ),
-                ],
-              ),
+            EditorialSectionTitle(
+              label: 'EINSTELLUNGEN',
+              title: 'EINSTELLUNGEN',
+              subtitle: 'Steuere, was du täglich siehst und wie du lernst.',
             ),
-            // Bottom separator
             Container(height: 1, color: scheme.outline),
             Expanded(
               child: settingsAsync.when(
