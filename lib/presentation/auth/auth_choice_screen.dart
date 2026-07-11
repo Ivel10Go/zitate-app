@@ -96,8 +96,12 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                         ),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Center(
-                        child: Text('📚', style: TextStyle(fontSize: 34)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Image.asset(
+                          'assets/branding/Zitate App.png',
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),

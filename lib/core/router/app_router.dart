@@ -120,12 +120,18 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
       GoRoute(
         path: '/account',
         name: 'account',
-        builder: (context, state) => const AccountScreen(),
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+          key: state.pageKey,
+          child: const AccountScreen(),
+        ),
       ),
       GoRoute(
         path: '/profile',
         name: 'profile',
-        builder: (context, state) => const AccountScreen(),
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+          key: state.pageKey,
+          child: const AccountScreen(),
+        ),
       ),
       GoRoute(
         path: '/submit-quote',

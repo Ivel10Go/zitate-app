@@ -56,3 +56,6 @@ android/.kotlin/
 
 android/java_pid*.hprof
 *.hprof
+
+# Local Gradle distribution/cache
+.gradle-local/
