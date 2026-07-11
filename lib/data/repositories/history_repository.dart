@@ -12,6 +12,8 @@ class HistoryRepository {
 
   final AppDatabase _db;
 
+  Future<int> factCount() => _db.historyFactDao.countHistoryFacts();
+
   Future<void> ensureSeeded() async {
     final raw = await rootBundle.loadString('assets/history_facts.json');
     final decoded = jsonDecode(raw) as List<dynamic>;

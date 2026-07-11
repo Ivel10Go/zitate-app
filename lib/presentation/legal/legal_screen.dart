@@ -143,7 +143,7 @@ class _LegalCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surface,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       padding: const EdgeInsets.all(20),
       child: Column(

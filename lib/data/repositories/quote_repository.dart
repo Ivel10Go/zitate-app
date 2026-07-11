@@ -13,6 +13,8 @@ class QuoteRepository {
 
   final AppDatabase _db;
 
+  Future<int> quoteCount() => _db.quoteDao.countQuotes();
+
   Future<void> ensureSeeded() async {
     final raw = await rootBundle.loadString('assets/thinkers_quotes.json');
     final decoded = jsonDecode(raw);

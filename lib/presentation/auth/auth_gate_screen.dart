@@ -162,7 +162,7 @@ class _AuthGateScreenState extends ConsumerState<AuthGateScreen>
                 ),
               ),
               child: Text(
-                'Zitatatlas',
+                'Quotidian',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
                   color: AppColors.ink,
                   fontWeight: FontWeight.w700,

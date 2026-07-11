@@ -115,7 +115,7 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.red, width: 1),
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius: BorderRadius.zero,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,39 +247,77 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
 
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
-        appBar: AppBar(
-          backgroundColor: scheme.surface,
-          title: Text(
-            'ZITAT EINREICHEN',
-            style: GoogleFonts.playfairDisplay(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: scheme.onSurface,
-            ),
-          ),
-          elevation: 0,
-        ),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppTheme.spacingLarge),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Teile dein Lieblingszitat',
-                style: GoogleFonts.ibmPlexSans(
-                  fontSize: 12,
-                  color: AppColors.inkLight,
-                  height: 1.5,
-                ),
+        appBar: null,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              color: scheme.surface,
+              padding: EdgeInsets.fromLTRB(
+                AppTheme.spacingLarge,
+                AppTheme.spacingBase,
+                AppTheme.spacingLarge,
+                AppTheme.spacingBase,
               ),
-              const SizedBox(height: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () => Navigator.of(context).maybePop(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: scheme.onSurface,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'ZITAT EINREICHEN',
+                    style: GoogleFonts.playfairDisplay(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w700,
+                      color: scheme.onSurface,
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(width: 40, height: 2, color: AppColors.red),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Teile dein Lieblingszitat',
+                    style: GoogleFonts.ibmPlexSans(
+                      fontSize: 11,
+                      color: scheme.onSurfaceVariant,
+                      height: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(height: 1, color: scheme.outline),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppTheme.spacingLarge),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+              const SizedBox(height: 4),
               TextField(
                 controller: _textController,
                 decoration: InputDecoration(
                   labelText: 'Das Zitat *',
                   hintText: 'Gib das Zitat ein...',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.zero,
                     borderSide: BorderSide(color: scheme.outline),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -298,7 +336,7 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
                   labelText: 'Autor *',
                   hintText: 'Karl Marx',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.zero,
                     borderSide: BorderSide(color: scheme.outline),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -317,7 +355,7 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
                     labelText: 'Quelle (optional)',
                     hintText: 'Das Kapital, Buch 1',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius: BorderRadius.zero,
                       borderSide: BorderSide(color: scheme.outline),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
@@ -335,7 +373,7 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
                     labelText: 'Notiz / Kontext (optional)',
                     hintText: 'Kontext oder zusätzliche Informationen...',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius: BorderRadius.zero,
                       borderSide: BorderSide(color: scheme.outline),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
@@ -377,7 +415,7 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
                   labelText: 'Kontakt (optional)',
                   hintText: 'deine@email.de',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.zero,
                     borderSide: BorderSide(color: scheme.outline),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -469,8 +507,11 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
                   ),
                 ],
               ),
-            ],
-          ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

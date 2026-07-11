@@ -168,7 +168,7 @@ class _AuthCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surface,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -336,7 +336,7 @@ class _PersonalizationCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surface,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -416,7 +416,7 @@ class _PrivacyCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surface,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -510,7 +510,7 @@ class _NotificationCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surface,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -828,7 +828,7 @@ class _DebugCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surface,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),

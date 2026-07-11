@@ -363,7 +363,7 @@ class _SettingsGroup extends StatelessWidget {
       decoration: BoxDecoration(
         color: scheme.surface,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -522,7 +522,7 @@ class _SettingsLinkCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.paperDark,
         border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.circular(2),
+        borderRadius: BorderRadius.zero,
       ),
       child: Material(
         color: Colors.transparent,
@@ -710,7 +710,7 @@ class _BugReportSheetState extends State<_BugReportSheet> {
           decoration: BoxDecoration(
             color: scheme.surface,
             border: Border.all(color: scheme.outline, width: 1),
-            borderRadius: BorderRadius.circular(2),
+            borderRadius: BorderRadius.zero,
           ),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
@@ -778,7 +778,7 @@ class _BugReportSheetState extends State<_BugReportSheet> {
                     labelText: 'Fehlertitel',
                     hintText: 'z.B. Widget lädt nicht',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius: BorderRadius.zero,
                       borderSide: BorderSide(color: scheme.outline),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
@@ -796,7 +796,7 @@ class _BugReportSheetState extends State<_BugReportSheet> {
                     labelText: 'Beschreibung',
                     hintText: 'Beschreibe das Problem...',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius: BorderRadius.zero,
                       borderSide: BorderSide(color: scheme.outline),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
@@ -815,7 +815,7 @@ class _BugReportSheetState extends State<_BugReportSheet> {
                     labelText: 'Kontakt (optional)',
                     hintText: 'deine@email.de',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius: BorderRadius.zero,
                       borderSide: BorderSide(color: scheme.outline),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
