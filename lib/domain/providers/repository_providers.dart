@@ -24,8 +24,10 @@ final initialSeedProvider = FutureProvider<void>((Ref ref) async {
   final historyRepository = ref.watch(historyRepositoryProvider);
 
   // Check if seeding was already done (idempotent check via SharedPreferences)
+  // Version suffix must be bumped whenever assets/thinkers_quotes.json or
+  // the history seed data changes, so existing installs re-upsert the fixes.
   final prefs = await SharedPreferences.getInstance();
-  const seedKey = 'app_seeded_v1';
+  const seedKey = 'app_seeded_v2';
 
   if (prefs.getBool(seedKey) == true) {
     // The flag says we've seeded before, but the database itself is the

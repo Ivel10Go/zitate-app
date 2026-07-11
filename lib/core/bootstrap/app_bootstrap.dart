@@ -201,7 +201,7 @@ abstract final class AppBootstrap {
           : guestModeEnabled
           ? '/' // Guest mode enabled → direkt Home anzeigen
           : !isAuthenticated
-          ? '/register' // Not authenticated → direkt Registrierung zeigen
+          ? '/auth' // Not authenticated → Login/Registrierung-Auswahl zeigen
           : pendingGoogleOnboarding
           ? '/onboarding' // Google OAuth pending → onboarding first
           : _shouldSkipOnboarding(profileRaw)

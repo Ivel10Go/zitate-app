@@ -47,14 +47,35 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
   final Ref _ref;
   final _service = SupabaseAuthService();
 
+  /// Tracks the last observed user id so we only react to real identity
+  /// changes (login/logout) and ignore repeated events for the same session
+  /// such as token refreshes. Invalidating on every event resets the home
+  /// screen's daily content back to a loading state and made it appear as if
+  /// quotes only loaded after a manual pull-to-refresh.
+  bool _sawFirstEvent = false;
+  String? _lastUserId;
+
   void _init() {
     _service.authStateChanges().listen(
       (user) async {
+        final previousUserId = _lastUserId;
+        final identityChanged = !_sawFirstEvent || previousUserId != user?.id;
+        _sawFirstEvent = true;
+        _lastUserId = user?.id;
+
         state = AsyncValue.data(user);
-        // Invalidate daily content so it reloads with the new user's profile/cache
-        _ref.invalidate(dailyContentProvider);
+
+        // Only reload daily content when the signed-in user actually changes
+        // (login or logout), not on every token refresh / session replay.
+        if (identityChanged) {
+          _ref.invalidate(dailyContentProvider);
+        }
         try {
-          if (user != null) {
+          // Login side effects (favorites merge, cloud profile restore,
+          // RevenueCat linking) must only run once per real login. Running
+          // them on every token refresh kept rewriting the user profile,
+          // which forced the daily content provider to reload repeatedly.
+          if (user != null && identityChanged) {
             await _setGuestModeEnabled(false);
             // On login: merge local favorites to cloud and pull cloud favorites back locally
             try {

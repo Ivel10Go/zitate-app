@@ -12,15 +12,11 @@ import '../../core/theme/app_theme.dart';
 import '../../core/services/account_privacy_service.dart';
 import '../../core/providers/supabase_auth_provider.dart';
 import '../../core/services/supabase_sync_service.dart';
-import '../../data/models/user_profile.dart';
 import '../../domain/providers/repository_providers.dart';
-import '../../domain/providers/daily_content_provider.dart';
 import '../../domain/providers/user_profile_provider.dart';
-import '../../domain/providers/settings_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
 import '../../widgets/app_navigation_bar.dart';
-import '../../widgets/political_leaning_parliament_picker.dart';
 
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
@@ -29,92 +25,48 @@ class AccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scheme = Theme.of(context).colorScheme;
     final authState = ref.watch(authControllerProvider);
-    final profile = ref.watch(userProfileProvider);
     final isAuth = authState.whenData((u) => u != null).value ?? false;
     final email = authState.whenData((u) => u?.email).value;
-
-    final interests = availableInterests
-        .where(
-          (InterestOption option) =>
-              profile.historicalInterests.contains(option.id),
-        )
-        .map((InterestOption option) => option.label)
-        .toList();
-    final interestsSummary = _formatInterestsSummary(interests);
 
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
         bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
-        child: CustomScrollView(
-          slivers: <Widget>[
-            // Masthead (aligned with Settings/Home/Favorites)
-            SliverToBoxAdapter(
-              child: Container(
-                color: scheme.surface,
-                padding: EdgeInsets.fromLTRB(
-                  AppTheme.spacingLarge,
-                  AppTheme.spacingBase,
-                  AppTheme.spacingLarge,
-                  AppTheme.spacingBase,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    // Back button
-                    Row(
-                      children: <Widget>[
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () => context.pop(),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: scheme.onSurface,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+        child: Column(
+          children: <Widget>[
+            // Back affordance above the shared editorial masthead so the
+            // screen matches Home/Settings/Favorites.
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => context.pop(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.arrow_back, color: scheme.onSurface),
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'KONTO',
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                        color: scheme.onSurface,
-                        letterSpacing: -0.5,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Container(width: 40, height: 2, color: AppColors.red),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Verwalte dein Konto und deine Personalisierung',
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 11,
-                        color: scheme.onSurfaceVariant,
-                        height: 1.5,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-            // Content
-            SliverPadding(
-              padding: EdgeInsets.fromLTRB(
-                AppTheme.spacingLarge,
-                AppTheme.spacingLarge,
-                AppTheme.spacingLarge,
-                AppTheme.spacingXl,
-              ),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate.fixed([
-                  // Authentication Card
+            const EditorialSectionTitle(
+              label: 'KONTO',
+              title: 'KONTO',
+              subtitle: 'Anmeldung, Konto und Datenschutz',
+            ),
+            Container(height: 1, color: scheme.outline),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.fromLTRB(
+                  AppTheme.spacingLarge,
+                  AppTheme.spacingLarge,
+                  AppTheme.spacingLarge,
+                  AppTheme.spacingXl,
+                ),
+                children: <Widget>[
                   _AuthCard(
                     isAuth: isAuth,
                     email: email,
@@ -122,22 +74,12 @@ class AccountScreen extends ConsumerWidget {
                     ref: ref,
                   ),
                   SizedBox(height: AppTheme.spacingXl),
-                  // Personalization Card
-                  _PersonalizationCard(
-                    context: context,
-                    ref: ref,
-                    profile: profile,
-                    interestsSummary: interestsSummary,
-                  ),
-                  SizedBox(height: AppTheme.spacingXl),
-                  _NotificationCard(context: context, ref: ref),
-                  SizedBox(height: AppTheme.spacingXl),
                   _PrivacyCard(context: context, ref: ref),
-                  if (kDebugMode) ...[
+                  if (kDebugMode) ...<Widget>[
                     SizedBox(height: AppTheme.spacingXl),
                     _DebugCard(context: context, ref: ref),
                   ],
-                ]),
+                ],
               ),
             ),
           ],
@@ -315,93 +257,6 @@ class _AuthCard extends StatelessWidget {
   }
 }
 
-class _PersonalizationCard extends StatelessWidget {
-  const _PersonalizationCard({
-    required this.context,
-    required this.ref,
-    required this.profile,
-    required this.interestsSummary,
-  });
-
-  final BuildContext context;
-  final WidgetRef ref;
-  final UserProfile profile;
-  final String interestsSummary;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: scheme.surface,
-        border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.zero,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.paperDark,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(Icons.tune, color: AppColors.red, size: 20),
-                ),
-                const SizedBox(width: 14),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'PERSONALISIERUNG',
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 9,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.red,
-                        letterSpacing: 1.4,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      'Passe deinen Tagesinhalt an',
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 11,
-                        color: scheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Container(height: 1, color: scheme.outline),
-            const SizedBox(height: 16),
-            _PersonalizationRow(
-              icon: Icons.interests_outlined,
-              label: 'Interessen',
-              value: interestsSummary,
-              onTap: () => _showInterestsSheet(context, ref, profile),
-            ),
-            const SizedBox(height: 14),
-            _PersonalizationRow(
-              icon: Icons.public_outlined,
-              label: 'Politische Haltung',
-              value: _leaningLabel(profile.politicalLeaning),
-              onTap: () => _showLeaningSheet(context, ref, profile),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _PrivacyCard extends StatelessWidget {
   const _PrivacyCard({required this.context, required this.ref});
 
@@ -488,267 +343,6 @@ class _PrivacyCard extends StatelessWidget {
                 label: const Text('KONTO & LOKALE DATEN LÖSCHEN'),
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _NotificationCard extends StatelessWidget {
-  const _NotificationCard({required this.context, required this.ref});
-
-  final BuildContext context;
-  final WidgetRef ref;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final settingsAsync = ref.watch(settingsControllerProvider);
-
-    return Container(
-      decoration: BoxDecoration(
-        color: scheme.surface,
-        border: Border.all(color: scheme.outline, width: 1),
-        borderRadius: BorderRadius.zero,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: settingsAsync.when(
-          data: (settings) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: AppColors.paperDark,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.notifications_active_outlined,
-                        color: AppColors.red,
-                        size: 20,
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'BENACHRICHTIGUNGEN',
-                            style: GoogleFonts.ibmPlexSans(
-                              fontSize: 9,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.red,
-                              letterSpacing: 1.4,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'Tägliche Erinnerung verwalten',
-                            style: GoogleFonts.ibmPlexSans(
-                              fontSize: 11,
-                              color: scheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Container(height: 1, color: scheme.outline),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        'Tägliche Benachrichtigung',
-                        style: GoogleFonts.ibmPlexSans(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: scheme.onSurface,
-                        ),
-                      ),
-                    ),
-                    Switch.adaptive(
-                      value: settings.notificationEnabled,
-                      onChanged: (bool enabled) async {
-                        try {
-                          await ref
-                              .read(settingsControllerProvider.notifier)
-                              .setNotificationEnabled(enabled);
-                        } catch (e) {
-                          if (!context.mounted) {
-                            return;
-                          }
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Benachrichtigung konnte nicht aktualisiert werden: $e',
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                      activeThumbColor: AppColors.red,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () async {
-                    if (!settings.notificationEnabled) {
-                      return;
-                    }
-
-                    final selected = await showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay(
-                        hour: settings.notificationHour,
-                        minute: settings.notificationMinute,
-                      ),
-                    );
-
-                    if (selected == null || !context.mounted) {
-                      return;
-                    }
-
-                    try {
-                      await ref
-                          .read(settingsControllerProvider.notifier)
-                          .setNotificationTime(selected);
-                    } catch (e) {
-                      if (!context.mounted) {
-                        return;
-                      }
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Benachrichtigungszeit konnte nicht gespeichert werden: $e',
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.paperDark,
-                      border: Border.all(color: scheme.outline),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Uhrzeit',
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.inkLight,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '${settings.notificationHour.toString().padLeft(2, '0')}:${settings.notificationMinute.toString().padLeft(2, '0')}',
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: settings.notificationEnabled
-                                ? scheme.onSurface
-                                : scheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-          loading: () => const Padding(
-            padding: EdgeInsets.symmetric(vertical: 12),
-            child: Center(child: CircularProgressIndicator()),
-          ),
-          error: (Object error, StackTrace stackTrace) {
-            return Text(
-              'Benachrichtigungseinstellungen konnten nicht geladen werden.',
-              style: GoogleFonts.ibmPlexSans(
-                fontSize: 11,
-                color: scheme.onSurfaceVariant,
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class _PersonalizationRow extends StatelessWidget {
-  const _PersonalizationRow({
-    required this.icon,
-    required this.label,
-    required this.value,
-    required this.onTap,
-  });
-
-  final IconData icon;
-  final String label;
-  final String value;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: AppColors.paperDark,
-          border: Border.all(color: scheme.outline),
-        ),
-        child: Row(
-          children: <Widget>[
-            Icon(icon, size: 18, color: AppColors.red),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    label,
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.inkLight,
-                    ),
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    value,
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: scheme.onSurface,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 12),
-            Icon(Icons.chevron_right, size: 18, color: scheme.outline),
           ],
         ),
       ),
@@ -906,231 +500,6 @@ class _DebugCard extends StatelessWidget {
       ),
     );
   }
-}
-
-String _formatInterestsSummary(List<String> interests) {
-  if (interests.isEmpty) {
-    return 'Keine ausgewählt';
-  }
-  if (interests.length == 1) {
-    return interests[0];
-  }
-  return '${interests.length} Interessen';
-}
-
-String _leaningLabel(PoliticalLeaning leaning) {
-  switch (leaning) {
-    case PoliticalLeaning.left:
-      return 'Links';
-    case PoliticalLeaning.centerLeft:
-      return 'Zentrum-Links';
-    case PoliticalLeaning.neutral:
-      return 'Neutral';
-    case PoliticalLeaning.liberal:
-      return 'Liberal';
-    case PoliticalLeaning.conservative:
-      return 'Konservativ';
-  }
-}
-
-Future<void> _showInterestsSheet(
-  BuildContext context,
-  WidgetRef ref,
-  UserProfile profile,
-) async {
-  final scheme = Theme.of(context).colorScheme;
-  final selected = profile.historicalInterests.toSet();
-  var searchQuery = '';
-
-  await showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: scheme.surface,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    builder: (BuildContext sheetContext) {
-      return StatefulBuilder(
-        builder: (sheetContext, setSheetState) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'INTERESSEN BEARBEITEN',
-                  style: GoogleFonts.ibmPlexSans(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.2,
-                    color: scheme.primary,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  onChanged: (value) {
-                    setSheetState(() {
-                      searchQuery = value.trim();
-                    });
-                  },
-                  style: GoogleFonts.ibmPlexSans(fontSize: 12),
-                  decoration: InputDecoration(
-                    hintText: 'Interesse suchen …',
-                    prefixIcon: const Icon(Icons.search, size: 18),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  height: 300,
-                  child: Builder(
-                    builder: (context) {
-                      final query = searchQuery.toLowerCase();
-                      final visibleInterests = availableInterests
-                          .where(
-                            (option) =>
-                                query.isEmpty ||
-                                option.label.toLowerCase().contains(query),
-                          )
-                          .toList();
-
-                      if (visibleInterests.isEmpty) {
-                        return Center(
-                          child: Text(
-                            'Keine Treffer.',
-                            style: GoogleFonts.ibmPlexSans(
-                              fontSize: 11,
-                              color: scheme.onSurfaceVariant,
-                            ),
-                          ),
-                        );
-                      }
-
-                      return ListView.separated(
-                        itemCount: visibleInterests.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 8),
-                        itemBuilder: (context, index) {
-                          final option = visibleInterests[index];
-                          final isActive = selected.contains(option.id);
-                          return GestureDetector(
-                            onTap: () {
-                              setSheetState(() {
-                                if (isActive) {
-                                  selected.remove(option.id);
-                                } else {
-                                  selected.add(option.id);
-                                }
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: isActive
-                                      ? AppColors.red
-                                      : AppColors.rule,
-                                  width: 1,
-                                ),
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  Text(option.icon),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: Text(
-                                      option.label,
-                                      style: GoogleFonts.ibmPlexSans(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: scheme.onSurface,
-                                      ),
-                                    ),
-                                  ),
-                                  Icon(
-                                    isActive
-                                        ? Icons.check_box_rounded
-                                        : Icons.circle_outlined,
-                                    size: 18,
-                                    color: isActive
-                                        ? AppColors.red
-                                        : AppColors.inkMuted,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: selected.isEmpty
-                        ? null
-                        : () async {
-                            await ref
-                                .read(userProfileProvider.notifier)
-                                .updateInterests(selected.toList());
-                            ref.invalidate(dailyContentProvider);
-                            if (sheetContext.mounted) {
-                              Navigator.of(sheetContext).pop();
-                            }
-                          },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: scheme.onSurface,
-                      foregroundColor: scheme.surface,
-                    ),
-                    child: const Text('SPEICHERN'),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    },
-  );
-}
-
-Future<void> _showLeaningSheet(
-  BuildContext context,
-  WidgetRef ref,
-  UserProfile profile,
-) async {
-  await showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Theme.of(context).colorScheme.surface,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    builder: (BuildContext sheetContext) {
-      return Padding(
-        padding: EdgeInsets.fromLTRB(
-          20,
-          20,
-          20,
-          MediaQuery.of(sheetContext).viewInsets.bottom + 20,
-        ),
-        child: PoliticalLeaningParliamentPicker(
-          selected: profile.politicalLeaning,
-          onSelect: (PoliticalLeaning value) async {
-            await ref
-                .read(userProfileProvider.notifier)
-                .updatePoliticalLeaning(value);
-            if (sheetContext.mounted) {
-              Navigator.of(sheetContext).pop();
-            }
-          },
-        ),
-      );
-    },
-  );
 }
 
 Future<void> _exportPersonalData(BuildContext context, WidgetRef ref) async {

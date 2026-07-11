@@ -26,6 +26,29 @@ class NotificationService {
   String? _launchRoute;
   bool _initialized = false;
   bool _timeZonesInitialized = false;
+  bool _permissionGranted = false;
+
+  /// Whether the OS-level notification permission is currently granted.
+  bool get permissionGranted => _permissionGranted;
+
+  static const AndroidNotificationDetails _androidDetails =
+      AndroidNotificationDetails(
+        _channelId,
+        _channelName,
+        channelDescription: _channelDescription,
+        importance: Importance.high,
+        priority: Priority.high,
+      );
+
+  static const NotificationDetails _details = NotificationDetails(
+    android: _androidDetails,
+    iOS: DarwinNotificationDetails(),
+  );
+
+  AndroidFlutterLocalNotificationsPlugin? get _android => _plugin
+      .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin
+      >();
 
   Future<void> initialize() async {
     if (_initialized) {
@@ -54,13 +77,66 @@ class NotificationService {
       _storeLaunchPayload(launchDetails?.notificationResponse?.payload);
     }
 
-    await _plugin
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >()
-        ?.requestNotificationsPermission();
+    // Explicitly (re)create the Android channel so scheduled notifications
+    // always have a valid, high-importance channel to post to.
+    await _android?.createNotificationChannel(
+      const AndroidNotificationChannel(
+        _channelId,
+        _channelName,
+        description: _channelDescription,
+        importance: Importance.high,
+      ),
+    );
 
     _initialized = true;
+
+    // Request the runtime permission after init and remember the result so the
+    // UI can reflect whether notifications will actually be delivered.
+    await requestPermission();
+  }
+
+  /// Requests notification (and, on Android 12+, exact-alarm) permissions.
+  /// Returns whether the notification permission is granted afterwards.
+  Future<bool> requestPermission() async {
+    await initialize();
+
+    final android = _android;
+    if (android != null) {
+      final granted = await android.requestNotificationsPermission();
+      _permissionGranted = granted ?? _permissionGranted;
+      // Exact alarms make the daily reminder fire on time on Android 12+.
+      // Best-effort: ignore failures, we fall back to inexact scheduling.
+      try {
+        await android.requestExactAlarmsPermission();
+      } catch (_) {
+        // ignore
+      }
+    } else {
+      final ios = _plugin
+          .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin
+          >();
+      final granted = await ios?.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      _permissionGranted = granted ?? true;
+    }
+
+    return _permissionGranted;
+  }
+
+  /// Sends an immediate notification so users can verify delivery works.
+  Future<void> showTestNotification() async {
+    await initialize();
+    await _plugin.show(
+      _instantDailyQuoteId,
+      'Quotidian',
+      'Benachrichtigungen sind aktiv – so sieht dein Tageszitat aus.',
+      _details,
+      payload: 'route:/',
+    );
   }
 
   String consumeLaunchRoute() {
@@ -115,31 +191,34 @@ class NotificationService {
       return;
     }
 
-    const details = NotificationDetails(
-      android: AndroidNotificationDetails(
-        _channelId,
-        _channelName,
-        channelDescription: _channelDescription,
-        importance: Importance.high,
-        priority: Priority.high,
-      ),
-      iOS: DarwinNotificationDetails(),
-    );
-
     final nextTrigger = _nextInstanceOfTime(hour: hour, minute: minute);
 
-    await _plugin.zonedSchedule(
-      _dailyReminderId,
-      'Zitatatlas - Tageszitat',
-      'Dein nächstes Tageszitat wartet auf dich.',
-      nextTrigger,
-      details,
-      payload: 'route:/',
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
+    // Prefer exact alarms so the reminder fires at the chosen time; if exact
+    // alarms aren't permitted (Android 12+ without the permission) fall back
+    // to an inexact alarm rather than failing to schedule at all.
+    Future<void> schedule(AndroidScheduleMode mode) {
+      return _plugin.zonedSchedule(
+        _dailyReminderId,
+        'Zitatatlas - Tageszitat',
+        'Dein nächstes Tageszitat wartet auf dich.',
+        nextTrigger,
+        _details,
+        payload: 'route:/',
+        androidScheduleMode: mode,
+        matchDateTimeComponents: DateTimeComponents.time,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+      );
+    }
+
+    try {
+      await schedule(AndroidScheduleMode.exactAllowWhileIdle);
+    } catch (error) {
+      debugPrint(
+        '[Notification] Exact alarm scheduling failed, using inexact: $error',
+      );
+      await schedule(AndroidScheduleMode.inexactAllowWhileIdle);
+    }
   }
 
   Future<void> cancelDailyReminder() async {

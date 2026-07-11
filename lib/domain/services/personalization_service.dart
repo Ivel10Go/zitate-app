@@ -110,6 +110,7 @@ class PersonalizationService {
         break;
       case PoliticalLeaning.liberal:
         if (_containsAnyInText(quoteContext, <String>[
+          'liberal',
           'freiheit',
           'rechte',
           'individ',
@@ -122,6 +123,8 @@ class PersonalizationService {
         }
       case PoliticalLeaning.conservative:
         if (_containsAnyInText(quoteContext, <String>[
+          'konservativ',
+          'conservative',
           'ordnung',
           'staat',
           'tradition',

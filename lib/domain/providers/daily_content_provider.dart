@@ -109,6 +109,26 @@ Future<void> _cacheDailyContent(DailyContent content, String userId) async {
   }
 }
 
+/// Removes all cached daily-content entries (every user/day). Call this when
+/// the inputs that shape the daily selection change — interests, political
+/// leaning or the home content format — so that invalidating
+/// [dailyContentProvider] re-resolves fresh content instead of returning the
+/// already cached pick for today.
+Future<void> clearDailyContentCache() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final keys = prefs
+        .getKeys()
+        .where((String key) => key.startsWith(_cachedDailyContentKey))
+        .toList(growable: false);
+    for (final String key in keys) {
+      await prefs.remove(key);
+    }
+  } catch (_) {
+    // Best-effort only.
+  }
+}
+
 Future<DailyContent?> _readCachedDailyContent(String userId) async {
   try {
     final prefs = await SharedPreferences.getInstance();

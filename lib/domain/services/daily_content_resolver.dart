@@ -409,7 +409,6 @@ class DailyContentResolver {
     'karl marx',
     'engels',
     'friedrich engels',
-    'briefe',
     'kommunistisch',
     'kommunismus',
     'kommunistisches manifest',
@@ -428,6 +427,7 @@ class DailyContentResolver {
   ];
 
   static const List<String> _liberalLensTerms = <String>[
+    'liberal',
     'freiheit',
     'liberty',
     'rechte',
@@ -440,6 +440,8 @@ class DailyContentResolver {
   ];
 
   static const List<String> _conservativeLensTerms = <String>[
+    'konservativ',
+    'conservative',
     'ordnung',
     'tradition',
     'staat',

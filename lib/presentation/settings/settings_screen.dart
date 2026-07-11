@@ -4,13 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/services/feedback_submission_service.dart';
+import '../../core/services/notification_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/models/daily_content.dart';
+import '../../data/models/home_content_mode.dart';
+import '../../data/models/user_profile.dart';
 import '../../domain/providers/admin_access_provider.dart';
 import '../../domain/providers/app_mode_provider.dart';
 import '../../domain/providers/daily_content_provider.dart';
 import '../../domain/providers/settings_provider.dart';
+import '../../domain/providers/user_profile_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
 import '../../widgets/app_navigation_bar.dart';
@@ -54,12 +58,15 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                     children: <Widget>[
                       _SettingsLinkCard(
-                        title: 'PROFIL',
-                        subtitle:
-                            'Identität, Fortschritt und persönliche Auszeichnungen',
+                        title: 'KONTO',
+                        subtitle: 'Anmeldung, Konto und Datenschutz',
                         icon: Icons.person_rounded,
                         onTap: () => context.push('/account'),
                       ),
+                      SizedBox(height: AppTheme.spacingLarge),
+                      const _ContentPreferencesGroup(),
+                      SizedBox(height: AppTheme.spacingLarge),
+                      const _NotificationsGroup(),
                       SizedBox(height: AppTheme.spacingLarge),
                       if (isAdmin) ...<Widget>[
                         _SettingsGroup(
@@ -348,6 +355,312 @@ Future<void> _showBugReportSheet(BuildContext context) {
   );
 }
 
+Widget _fieldLabel(String text) {
+  return Text(
+    text,
+    style: GoogleFonts.ibmPlexSans(
+      fontSize: 9,
+      fontWeight: FontWeight.w700,
+      color: AppColors.red,
+      letterSpacing: 1.2,
+    ),
+  );
+}
+
+String _contentModeLabel(HomeContentMode mode) {
+  switch (mode) {
+    case HomeContentMode.quotes:
+      return 'Zitate';
+    case HomeContentMode.facts:
+      return 'Fakten';
+    case HomeContentMode.mixed:
+      return 'Gemischt';
+  }
+}
+
+String _leaningLabel(PoliticalLeaning leaning) {
+  switch (leaning) {
+    case PoliticalLeaning.left:
+      return 'Links';
+    case PoliticalLeaning.centerLeft:
+      return 'Mitte-Links';
+    case PoliticalLeaning.neutral:
+      return 'Neutral';
+    case PoliticalLeaning.liberal:
+      return 'Liberal';
+    case PoliticalLeaning.conservative:
+      return 'Konservativ';
+  }
+}
+
+/// Content preferences: home format, topics of interest and political lens.
+/// These mirror the onboarding inputs so they can be revisited any time; any
+/// change re-resolves today's content immediately.
+class _ContentPreferencesGroup extends ConsumerWidget {
+  const _ContentPreferencesGroup();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scheme = Theme.of(context).colorScheme;
+    final settings = ref.watch(settingsControllerProvider).valueOrNull;
+    final profile = ref.watch(userProfileProvider);
+    final mode = settings?.homeContentMode ?? HomeContentMode.quotes;
+
+    Future<void> refreshContent() async {
+      // Clear the cached daily pick so the new preferences take effect today
+      // rather than only on the next day.
+      await clearDailyContentCache();
+      ref.invalidate(dailyContentProvider);
+    }
+
+    return _SettingsGroup(
+      title: 'INHALT',
+      children: <Widget>[
+        _fieldLabel('FORMAT'),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: <Widget>[
+            for (final HomeContentMode value in HomeContentMode.values)
+              _ChoicePill(
+                label: _contentModeLabel(value),
+                selected: mode == value,
+                onTap: () async {
+                  await ref
+                      .read(settingsControllerProvider.notifier)
+                      .setHomeContentMode(value);
+                  await refreshContent();
+                },
+              ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        _fieldLabel('THEMEN'),
+        const SizedBox(height: 4),
+        Text(
+          'Wähle Bereiche, die dein täglicher Feed bevorzugen soll.',
+          style: GoogleFonts.ibmPlexSans(
+            fontSize: 11,
+            color: scheme.onSurfaceVariant,
+            height: 1.4,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: <Widget>[
+            for (final InterestOption option in availableInterests)
+              _ChoicePill(
+                label: '${option.icon}  ${option.label}',
+                selected: profile.historicalInterests.contains(option.id),
+                onTap: () async {
+                  final next = List<String>.from(profile.historicalInterests);
+                  if (next.contains(option.id)) {
+                    next.remove(option.id);
+                  } else {
+                    next.add(option.id);
+                  }
+                  await ref
+                      .read(userProfileProvider.notifier)
+                      .updateInterests(next);
+                  await refreshContent();
+                },
+              ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        _fieldLabel('AUSRICHTUNG'),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: <Widget>[
+            for (final PoliticalLeaning value in PoliticalLeaning.values)
+              _ChoicePill(
+                label: _leaningLabel(value),
+                selected: profile.politicalLeaning == value,
+                onTap: () async {
+                  await ref
+                      .read(userProfileProvider.notifier)
+                      .updatePoliticalLeaning(value);
+                  await refreshContent();
+                },
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+/// Daily reminder controls: enable/disable, pick the time, and send a test.
+class _NotificationsGroup extends ConsumerWidget {
+  const _NotificationsGroup();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scheme = Theme.of(context).colorScheme;
+    final settings = ref.watch(settingsControllerProvider).valueOrNull;
+    final enabled = settings?.notificationEnabled ?? true;
+    final hour = settings?.notificationHour ?? 7;
+    final minute = settings?.notificationMinute ?? 0;
+    final timeLabel =
+        '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+
+    return _SettingsGroup(
+      title: 'BENACHRICHTIGUNGEN',
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Tägliche Erinnerung',
+                    style: GoogleFonts.ibmPlexSans(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.ink,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    enabled ? 'Aktiviert' : 'Deaktiviert',
+                    style: GoogleFonts.ibmPlexSans(
+                      fontSize: 10,
+                      color: AppColors.inkLight,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Switch.adaptive(
+              value: enabled,
+              onChanged: (bool value) => ref
+                  .read(settingsControllerProvider.notifier)
+                  .setNotificationEnabled(value),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Uhrzeit',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.ink,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Wann dein Tageszitat erscheint.',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 10,
+                    color: AppColors.inkLight,
+                  ),
+                ),
+              ],
+            ),
+            _ChoicePill(
+              label: timeLabel,
+              selected: false,
+              onTap: enabled
+                  ? () async {
+                      final picked = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay(hour: hour, minute: minute),
+                      );
+                      if (picked != null) {
+                        await ref
+                            .read(settingsControllerProvider.notifier)
+                            .setNotificationTime(picked);
+                      }
+                    }
+                  : null,
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Container(height: 1, color: scheme.outline),
+        const SizedBox(height: 16),
+        SizedBox(
+          width: double.infinity,
+          child: _SettingsActionButton(
+            label: 'TESTBENACHRICHTIGUNG SENDEN',
+            filled: false,
+            onTap: () async {
+              await NotificationService.instance.showTestNotification();
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Testbenachrichtigung gesendet'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ChoicePill extends StatelessWidget {
+  const _ChoicePill({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: selected ? AppColors.red : scheme.surface,
+        border: Border.all(
+          color: selected ? AppColors.redDark : scheme.outline,
+          width: 1,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: Text(
+              label,
+              style: GoogleFonts.ibmPlexSans(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: selected ? Colors.white : scheme.onSurface,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _SettingsGroup extends StatelessWidget {
   const _SettingsGroup({required this.title, required this.children});
 
@@ -423,6 +736,8 @@ class _SettingsGroup extends StatelessWidget {
 
   IconData _getIconForTitle(String title) {
     switch (title) {
+      case 'INHALT':
+        return Icons.tune_rounded;
       case 'BENACHRICHTIGUNGEN':
         return Icons.notifications_outlined;
       case 'ADMIN':
@@ -440,6 +755,8 @@ class _SettingsGroup extends StatelessWidget {
 
   String _getSubtitleForTitle(String title) {
     switch (title) {
+      case 'INHALT':
+        return 'Themen, Ausrichtung und Format';
       case 'BENACHRICHTIGUNGEN':
         return 'Zeitpunkt und Aktivierung';
       case 'ADMIN':

@@ -29,7 +29,9 @@ dart run build_runner build --delete-conflicting-outputs
 
 Useful one-off scripts (PowerShell, in `scripts/`):
 - `release_build_for_upload.ps1` — pub get → analyze → build appbundle → verify the AAB exists, used before a Play Store upload.
-- `cold_start_test.ps1`, `back_button_test.ps1`, `offline_test.ps1`, `capture_screenshot.ps1`, `capture_play_screenshots.ps1` — manual QA helpers, not part of a CI pipeline (none exists — there's no `.github/workflows`).
+- `widget_debug.ps1` — adb-based helper to debug the Android home-screen widget (launches the app, dumps filtered logcat and `HomeWidgetPreferences.xml`, attempts an APPWIDGET_UPDATE broadcast).
+
+There is no CI pipeline (no `.github/workflows`).
 
 `tools/` and `process_quotes.py` are one-off/offline Python scripts for curating and validating the quote/thinker content datasets (dedup, authenticity checks, umlaut/encoding fixes, Supabase import prep) — they operate on JSON/CSV data files, not on the Flutter app, and are not part of the app build.
 
@@ -70,6 +72,10 @@ Startup is intentionally split into three stages to keep perceived launch time l
 `core/theme/app_theme.dart` + `core/theme/app_colors.dart` define a print/editorial-styled design system (Playfair Display for display/quote text, IBM Plex Sans for UI chrome, sharp square corners — `BorderRadius.zero` everywhere, 1px hairline borders instead of elevation/shadows). `AppTheme.initializeTextStyles()` pre-builds every `TextStyle` once during bootstrap specifically to avoid runtime `GoogleFonts` fetches; both light and dark variants are built eagerly at that point, so any new text style must be added as a static field + init-time assignment + getter, mirrored for light and dark.
 
 Shared layout primitives screens should reuse for consistency with Home (`presentation/home/home_screen.dart` is the reference implementation): `AppDecoratedScaffold` (scaffold + `SafeArea`, no elevation), `EditorialSectionTitle` (the "HEUTE"-style masthead header block), `AppCard` (bordered content card), `IconCircle`, `AppNavigationBar`, and the `AppInlineLoadingState` / `AppInlineErrorState` / `AppFullscreenRecoveryScreen` trio (`presentation/loading/app_loading_screen.dart`) for loading/error states — used consistently from `main.dart` down through individual providers' `.when(loading:, error:)` branches.
+
+### Home-screen widget & background isolate
+
+The Android home-screen widget (`home_widget`) is refreshed by a `workmanager` periodic task (`core/services/background_tasks_service.dart`). Its `workmanagerCallbackDispatcher` runs in a **separate background isolate** with no `ProviderScope`: it opens its own `AppDatabase()` (not the one from `appDatabaseProvider`), receives settings as primitives via `inputData` rather than reading providers, and deliberately avoids platform-channel plugins. Keep any code you add there self-contained the same way.
 
 ### Political mode duality
 

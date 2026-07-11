@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/settings_keys.dart';
-import '../../core/providers/supabase_auth_provider.dart';
 import '../../core/services/notification_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../data/models/user_profile.dart';
@@ -64,10 +63,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     );
   }
 
-  void _onCompletionFinished() {
-    // Nach Completion-Page: navigiere zum Home
-    ref.invalidate(authControllerProvider);
-    ref.invalidate(userProfileProvider);
+  Future<void> _onCompletionFinished() async {
+    // Nach Completion-Page: Tagesinhalt anhand der neuen Interessen neu
+    // berechnen und zur Home navigieren. Das Profil wurde bereits von der
+    // Completion-Page gespeichert; authController/userProfile dürfen hier
+    // nicht invalidiert werden, sonst würde ein erneuter Cloud-Abgleich die
+    // gerade gespeicherten Interessen überschreiben können.
+    await clearDailyContentCache();
     ref.invalidate(dailyContentProvider);
     if (mounted) {
       context.go('/');
@@ -150,7 +152,16 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 const WelcomePage(),
                 NotificationPermissionPage(
                   onAllow: () async {
-                    await NotificationService.instance.initialize();
+                    // Berechtigung anfragen, tägliche Erinnerung aktivieren und
+                    // direkt planen, damit die Auswahl sofort wirksam ist.
+                    await NotificationService.instance.requestPermission();
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool(
+                      SettingsKeys.notificationEnabled,
+                      true,
+                    );
+                    await NotificationService.instance
+                        .scheduleDailyReminderFromSettings();
                     if (!mounted) {
                       return;
                     }

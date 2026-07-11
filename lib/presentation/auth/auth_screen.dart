@@ -114,7 +114,10 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
       ref.invalidate(authControllerProvider);
       await Future.delayed(const Duration(milliseconds: 200));
       if (mounted) {
-        context.go(widget.isSignUp ? '/onboarding' : '/');
+        // Registrierung → immer Onboarding.
+        // Login → über den Auth-Gate, der anhand des Profils entscheidet, ob
+        // das Onboarding noch aussteht oder direkt Home angezeigt wird.
+        context.go(widget.isSignUp ? '/onboarding' : '/auth-gate');
       }
     } else {
       final authError = ref

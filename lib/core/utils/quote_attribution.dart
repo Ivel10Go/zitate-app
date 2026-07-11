@@ -10,9 +10,14 @@ String quoteAuthorLabel(Quote quote) {
         .where((part) => part.isNotEmpty)
         .toList();
     if (words.isNotEmpty) {
-      return words
-          .map((part) => part[0].toUpperCase() + part.substring(1))
-          .join(' ');
+      const particles = <String>{'von', 'van', 'de', 'der', 'di', 'da', 'la'};
+      return List<String>.generate(words.length, (index) {
+        final part = words[index];
+        if (index > 0 && particles.contains(part)) {
+          return part;
+        }
+        return part[0].toUpperCase() + part.substring(1);
+      }).join(' ');
     }
   }
 

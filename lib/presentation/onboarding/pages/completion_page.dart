@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/providers/supabase_auth_provider.dart';
 import '../../../data/models/user_profile.dart';
 import '../../../domain/providers/user_profile_provider.dart';
 
@@ -65,18 +64,17 @@ class _OnboardingCompletionPageState
         orElse: () => PoliticalLeaning.neutral,
       );
 
-      // Speichere Profil lokal
-      await ref
-          .read(userProfileProvider.notifier)
-          .saveProfile(
-            historicalInterests: widget.selectedInterests,
-            politicalLeaning: leaning,
-            onboardingCompleted: true,
-          );
-
-      // Invalidiere Provider für frische Daten
-      ref.invalidate(authControllerProvider);
-      ref.invalidate(userProfileProvider);
+      // Speichere Profil lokal (und synchronisiert zur Cloud).
+      // saveProfile aktualisiert bereits den userProfileProvider-State und
+      // schreibt in die Cloud – daher hier KEIN invalidate von
+      // authController/userProfile, um einen konkurrierenden Cloud-Abgleich
+      // zu vermeiden, der die frisch gespeicherten Interessen überschreibt.
+      final profileNotifier = ref.read(userProfileProvider.notifier);
+      await profileNotifier.saveProfile(
+        historicalInterests: widget.selectedInterests,
+        politicalLeaning: leaning,
+        onboardingCompleted: true,
+      );
 
       // Kleine Verzögerung für UI-Polish
       await Future<void>.delayed(const Duration(milliseconds: 800));

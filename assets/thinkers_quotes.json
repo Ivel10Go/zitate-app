@@ -130,7 +130,7 @@
     ],
     "difficulty": "intermediate",
     "needs_review": true,
-    "series": "person_abraham_lincoln",
+    "series": "person_abraham_lincoln_(zuschreibung_unsicher)",
     "explanation_short": "HINWEIS: Dieses Zitat wird Lincoln zugeschrieben, ist aber nicht belegt – es kursiert auch unter Abraham Lincoln, Peter Drucker und anderen.",
     "explanation_long": "Der Satz ist ein populäres Motivationszitat, das im Internet häufig Lincoln, aber auch dem Managementdenker Peter Drucker, Abraham Lincoln und anderen zugeordnet wird. Eine verlässliche Primärquelle bei Lincoln existiert nicht. Inhaltlich passt der Gedanke zu Lincolns pragmatischer Haltung – er war kein Fatalist, sondern glaubte an politische Gestaltungskraft. Trotzdem sollte die Zuschreibung in der App als unsicher gekennzeichnet werden, da falsche Attributionen die Glaubwürdigkeit untergraben.",
     "related_ids": [
@@ -194,7 +194,7 @@
       "Werte"
     ],
     "difficulty": "intermediate",
-    "series": "smith",
+    "series": "person_adam_smith",
     "explanation_short": "Kurz erklärt: Wirtschaft braucht Regeln und moralische Grenzen.",
     "explanation_long": "Das Zitat verbindet markt und ordnung und hilft bei konservativ-liberalen Empfehlungen ausserhalb des Marx-Pools.",
     "related_ids": [
@@ -241,7 +241,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "camus",
+    "series": "person_albert_camus",
     "explanation_short": "Kurz erklärt: Demokratische Kultur braucht Grenzen im Streit.",
     "explanation_long": "Der Fokus liegt auf neutraler politischer Kultur und alltagstauglicher Ethik, was den neutralen Feed stabilisiert.",
     "related_ids": [
@@ -307,7 +307,7 @@
       "Freiheit"
     ],
     "difficulty": "intermediate",
-    "series": "solzhenitsyn",
+    "series": "person_aleksandr_solzhenitsyn",
     "explanation_short": "Kurz erklärt: Freiheitskultur braucht Wahrheit und persönliche Verantwortung.",
     "explanation_long": "Der Fokus auf werte und verantwortung verbessert konservative und neutrale Auswahl ohne parteipolitische Schieflage.",
     "related_ids": [
@@ -353,15 +353,15 @@
       "Institutionen"
     ],
     "difficulty": "intermediate",
-    "series": "tocqüville",
+    "series": "person_alexis_de_tocqueville",
     "explanation_short": "Kurz erklärt: Freiheit braucht Institutionen und aktive Bürgergesellschaft.",
     "explanation_long": "Das Zitat verbindet liberale Freiheitsrechte mit institutioneller Stabilität. Es passt für liberale, neutrale und mitte-links Profile, die Teilhabe und Rechtsstaat priorisieren.",
     "related_ids": [
       "mill_001",
       "weber_001"
     ],
-    "fun_fact": "V2-Ergänzung: liberal-demokratische Schwerpunktqülle.",
-    "author": "Alexis de Tocqüville",
+    "fun_fact": "V2-Ergänzung: liberal-demokratische Schwerpunktquelle.",
+    "author": "Alexis de Tocqueville",
     "merged_from": "assets/quotes.json",
     "author_type": "philosopher",
     "provenance": "generated_strict_mapped",
@@ -369,7 +369,7 @@
   },
   {
     "id": "tocqüville_001",
-    "author": "Alexis de Tocqüville",
+    "author": "Alexis de Tocqueville",
     "author_type": "philosopher",
     "text_de": "Die Gesundheit einer demokratischen Gesellschaft lässt sich daran messen, wie sie mit Minderheiten umgeht.",
     "source": "Über die Demokratie in Amerika",
@@ -382,9 +382,9 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_alexis_de_tocqüville",
-    "explanation_short": "Alexis de Tocqüville konzeptualisiert hier einen Aspekt von demokratie. Das Zitat verdeutlicht die Bedeutung von demokratie in der Analyse.",
-    "explanation_long": "In \"Über die Demokratie in Amerika\" (1835) artikuliert Alexis de Tocqüville einen Gedanken, der zentral für die Analyse von demokratie ist. Das Zitat — \"Die Gesundheit einer demokratischen Gesellschaft lässt sich daran messen, wie sie mit Minderheiten umgeht.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich demokratie konkret ausdrückt. Alexis de Tocqüville brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Alexis de Tocqüville damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "series": "person_alexis_de_tocqueville",
+    "explanation_short": "Alexis de Tocqueville konzeptualisiert hier einen Aspekt von demokratie. Das Zitat verdeutlicht die Bedeutung von demokratie in der Analyse.",
+    "explanation_long": "In \"Über die Demokratie in Amerika\" (1835) artikuliert Alexis de Tocqueville einen Gedanken, der zentral für die Analyse von demokratie ist. Das Zitat — \"Die Gesundheit einer demokratischen Gesellschaft lässt sich daran messen, wie sie mit Minderheiten umgeht.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich demokratie konkret ausdrückt. Alexis de Tocqueville brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Alexis de Tocqueville damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -400,7 +400,7 @@
       "Freiheit"
     ],
     "difficulty": "intermediate",
-    "series": "sen",
+    "series": "person_amartya_sen",
     "explanation_short": "Kurz erklärt: Freiheit braucht tatsächliche Optionen, nicht nur formale Rechte.",
     "explanation_long": "Das Zitat stärkt neutrale und mitte-nahe Empfehlungen mit Fokus auf Teilhabe und alltagswirksame Freiheit.",
     "related_ids": [
@@ -835,7 +835,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_charles_darwin",
+    "series": "person_leon_megginson_(fälschlich_darwin_zugeschrieben)",
     "needs_review": true,
     "explanation_short": "ACHTUNG: Dieses Zitat stammt nicht von Darwin, sondern vom Soziologen Leon Megginson (1963) – eine Paraphrase, die irrtümlich Darwin zugeschrieben wird.",
     "explanation_long": "Darwin hat diesen Satz nie geschrieben oder gesagt. Die Quelle ist ein Vortrag des Soziologen Leon Megginson von der Louisiana State University aus dem Jahr 1963, in dem er Darwins Evolutionstheorie zusammenfasste. Durch Weitergabe wurde die Paraphrase zum vermeintlichen Original. Darwin selbst beschrieb in 'On the Origin of Species' (1859) natürliche Selektion als Prozess, bei dem individuen mit vorteilhaften Merkmalen bessere Überlebenschancen haben – er sprach nicht von 'Anpassung' im abstrakten Sinne. Das Zitat sollte in der App mit einem Hinweis versehen oder durch ein authentisches Darwin-Zitat ersetzt werden.",
@@ -1012,7 +1012,7 @@
       "Verantwortung"
     ],
     "difficulty": "beginner",
-    "series": "ostrom",
+    "series": "person_elinor_ostrom",
     "explanation_short": "Kurz erklärt: Kooperation funktioniert mit klaren Regeln und gemeinsamer Verantwortung.",
     "explanation_long": "Dieser Eintrag verbessert die neutrale Auswahl für alltag/gesellschaft und verbindet sie mit verantwortungsvoller Ordnung.",
     "related_ids": [
@@ -1038,7 +1038,7 @@
       "Demokratie"
     ],
     "difficulty": "beginner",
-    "series": "stanton",
+    "series": "person_elizabeth_cady_stanton",
     "explanation_short": "Kurz erklärt: Wahlrecht ist zentral für reale politische Teilhabe von Frauen.",
     "explanation_long": "Das Zitat verknüpft Frauenrechte mit institutioneller Demokratie. Es zeigt, dass formale Gleichheit ohne Wahlrecht und politische Repräsentation unzureichend bleibt.",
     "related_ids": [
@@ -1084,7 +1084,7 @@
       "Reform"
     ],
     "difficulty": "intermediate",
-    "series": "nightingale",
+    "series": "person_florence_nightingale",
     "explanation_short": "Kurz erklärt: Unsichtbare Arbeit braucht politische Anerkennung und soziale Reform.",
     "explanation_long": "Die Passage verbindet Frauengeschichte, Arbeit und Mitte-Links Reformperspektiven. Damit verbessert sie gleichzeitig Interessen- und Profilvielfalt.",
     "related_ids": [
@@ -1128,7 +1128,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_franklin_d_roosevelt",
+    "series": "person_franklin_d._roosevelt",
     "explanation_short": "Franklin D. Roosevelt konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
     "explanation_long": "In \"Fireside Chats\" (1933) artikuliert Franklin D. Roosevelt einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Politik muss Krisen durch Arbeit, Solidarität und handlungsfähige Institutionen beantworten.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Franklin D. Roosevelt brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Franklin D. Roosevelt damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
@@ -1186,13 +1186,13 @@
       "Teilhabe"
     ],
     "difficulty": "advanced",
-    "series": "fanon",
+    "series": "person_frantz_fanon",
     "explanation_short": "Kurz erklärt: Dekolonisierung braucht reale Teilhabe statt symbolischer Unabhängigkeit.",
     "explanation_long": "Das Zitat schliesst eine klare Lücke beim Interesse kolonial und verknüpft dieses mit sozialen und demokratischen Fragen.",
     "related_ids": [
       "du_bois_001"
     ],
-    "fun_fact": "V2-Ergänzung: bessere thematische Breite jenseits europäzentrischer Qüllen.",
+    "fun_fact": "V2-Ergänzung: bessere thematische Breite jenseits europäzentrischer Quellen.",
     "author": "Frantz Fanon",
     "merged_from": "assets/quotes.json",
     "author_type": "philosopher",
@@ -1232,7 +1232,7 @@
       "Staat"
     ],
     "difficulty": "advanced",
-    "series": "hayek",
+    "series": "person_friedrich_hayek",
     "explanation_short": "Kurz erklärt: Freiheit bleibt stabil durch verallgemeinerte Regeln statt Willkür.",
     "explanation_long": "Die Passage bringt konservativ-liberale Schlüsselbegriffe zusammen und stärkt nicht-marxistische Auswahl für liberal und konservativ.",
     "related_ids": [
@@ -1258,7 +1258,7 @@
       "Wissen"
     ],
     "difficulty": "advanced",
-    "series": "hayek",
+    "series": "person_friedrich_hayek",
     "explanation_short": "Kurz erklärt: Dezentrale Information wird über Signale koordiniert, nicht zentral gesammelt.",
     "explanation_long": "Hayek beschreibt hier sein zentrales Informationsargument: Kein Akteur verfügt allein über genug Wissen, deshalb braucht es Signale, die verstreutes Wissen koordinieren.",
     "related_ids": [],
@@ -1568,11 +1568,11 @@
     "id": "orwell_001",
     "author": "George Orwell",
     "author_type": "philosopher",
-    "text_de": "In Zeiten universeller Taeuschung ist das Aussprechen der Wahrheit ein revolutionärer Akt.",
-    "source": "Qüllenhinweis unklar",
+    "text_de": "In Zeiten universeller Täuschung ist das Aussprechen der Wahrheit ein revolutionärer Akt.",
+    "source": "Quellenhinweis unklar",
     "year": 1945,
-    "text_original": "In Zeiten universeller Taeuschung ist das Aussprechen der Wahrheit ein revolutionärer Akt.",
-    "chapter": "Qüllenhinweis unklar",
+    "text_original": "In Zeiten universeller Täuschung ist das Aussprechen der Wahrheit ein revolutionärer Akt.",
+    "chapter": "Quellenhinweis unklar",
     "category": [
       "Politik",
       "Rechte",
@@ -1581,7 +1581,7 @@
     "difficulty": "intermediate",
     "series": "person_george_orwell",
     "explanation_short": "George Orwell konzeptualisiert hier einen Aspekt von politische Praxis und Macht. Das Zitat verdeutlicht die Bedeutung von politische Praxis und Macht in der Analyse.",
-    "explanation_long": "In \"Qüllenhinweis unklar\" (1945) artikuliert George Orwell einen Gedanken, der zentral für die Analyse von politische Praxis und Macht ist. Das Zitat — \"In Zeiten universeller Taeuschung ist das Aussprechen der Wahrheit ein revolutionärer Akt.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich politik konkret ausdrückt. George Orwell brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da George Orwell damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "explanation_long": "In \"Quellenhinweis unklar\" (1945) artikuliert George Orwell einen Gedanken, der zentral für die Analyse von politische Praxis und Macht ist. Das Zitat — \"In Zeiten universeller Täuschung ist das Aussprechen der Wahrheit ein revolutionärer Akt.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich politik konkret ausdrückt. George Orwell brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da George Orwell damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -1617,7 +1617,7 @@
       "Verantwortung"
     ],
     "difficulty": "intermediate",
-    "series": "arendt",
+    "series": "person_hannah_arendt",
     "explanation_short": "Kurz erklärt: Freiheit ist eine gemeinsame Praxis im öffentlichen Raum.",
     "explanation_long": "Der Satz verbindet liberale Freiheitsidee mit gemeinschaftlicher Verantwortung. Dadurch entsteht eine Brücke zwischen liberalen und neutralen Profilen.",
     "related_ids": [
@@ -1738,7 +1738,7 @@
   },
   {
     "id": "kant_003",
-    "author": "Immanül Kant",
+    "author": "Immanuel Kant",
     "author_type": "philosopher",
     "text_de": "Der Mensch ist das einzige Geschöpf, das erzogen werden muss.",
     "source": "Über Pädagogik",
@@ -1749,9 +1749,9 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_immanül_kant",
-    "explanation_short": "Immanül Kant konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
-    "explanation_long": "In \"Über Pädagogik\" (1803) artikuliert Immanül Kant einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Der Mensch ist das einzige Geschöpf, das erzogen werden muss.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Immanül Kant brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Immanül Kant damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "series": "person_immanuel_kant",
+    "explanation_short": "Immanuel Kant konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
+    "explanation_long": "In \"Über Pädagogik\" (1803) artikuliert Immanuel Kant einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Der Mensch ist das einzige Geschöpf, das erzogen werden muss.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Immanuel Kant brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Immanuel Kant damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -1814,7 +1814,7 @@
   },
   {
     "id": "rousseau_002",
-    "author": "Jean-Jacqüs Rousseau",
+    "author": "Jean-Jacques Rousseau",
     "author_type": "philosopher",
     "text_de": "Die erste Person, die ein Stück Land eingezäunt hat und auf die Idee kam zu sagen: Das gehört mir, und genug einfältige Leute fand, die es glaubten, war der wirkliche Gründer der bürgerlichen Gesellschaft.",
     "source": "Abhandlung über den Ursprung der Ungleichheit",
@@ -1825,9 +1825,9 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_jean_jacqüs_rousseau",
-    "explanation_short": "Jean-Jacqüs Rousseau konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
-    "explanation_long": "In \"Abhandlung über den Ursprung der Ungleichheit\" (1755) artikuliert Jean-Jacqüs Rousseau einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Die erste Person, die ein Stück Land eingezäunt hat und auf die Idee kam zu sagen: Das gehört mir, und genug einfältige Leute fand, die es glaubten, war der wirkliche Gründer der bürgerlichen Gesellschaft.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Jean-Jacqüs Rousseau brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Jean-Jacqüs Rousseau damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "series": "person_jean_jacques_rousseau",
+    "explanation_short": "Jean-Jacques Rousseau konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
+    "explanation_long": "In \"Abhandlung über den Ursprung der Ungleichheit\" (1755) artikuliert Jean-Jacques Rousseau einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Die erste Person, die ein Stück Land eingezäunt hat und auf die Idee kam zu sagen: Das gehört mir, und genug einfältige Leute fand, die es glaubten, war der wirkliche Gründer der bürgerlichen Gesellschaft.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Jean-Jacques Rousseau brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Jean-Jacques Rousseau damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -1845,7 +1845,7 @@
       "Politik"
     ],
     "difficulty": "intermediate",
-    "series": "person_jean-jacques_rousseau",
+    "series": "person_jean_jacques_rousseau",
     "explanation_short": "Rousseau eröffnet seinen Gesellschaftsvertrag mit einer Anklage: Natürliche Freiheit wurde durch gesellschaftliche Institutionen in Unfreiheit verwandelt.",
     "explanation_long": "Der berühmteste Eröffnungssatz der politischen Philosophie der Neuzeit stellt eine Diagnose, keine Nostalgie: Rousseau meint nicht, der Naturzustand sei ideal gewesen, sondern dass gesellschaftliche Strukturen – Eigentum, Staat, Konventionen – Freiheit durch Herrschaft ersetzen. Die entscheidende Folgefrage des Buches ist: Welche Form der Gesellschaft kann Legitimität beanspruchen? Rousseaus Antwort ist der Gesellschaftsvertrag, in dem alle dem Gemeinwillen (volonté générale) unterstellt sind. Das ist einflussreich, aber gefährlich: Der 'Gemeinwille' kann als Legitimation für Zwang gegen Einzelne missbraucht werden – was Robespierre später demonstrierte. Der Satz prägte Amerikanische und Französische Revolution.",
     "related_ids": [
@@ -1855,7 +1855,7 @@
   },
   {
     "id": "rousseau_003",
-    "author": "Jean-Jacqüs Rousseau",
+    "author": "Jean-Jacques Rousseau",
     "author_type": "philosopher",
     "text_de": "Zwischen dem Starken und dem Schwachen ist es die Freiheit, die unterdrückt, und das Gesetz, das befreit.",
     "source": "Vom Gesellschaftsvertrag",
@@ -1868,9 +1868,9 @@
       "Staat"
     ],
     "difficulty": "intermediate",
-    "series": "person_jean_jacqüs_rousseau",
-    "explanation_short": "Jean-Jacqüs Rousseau konzeptualisiert hier einen Aspekt von rechte. Das Zitat verdeutlicht die Bedeutung von rechte in der Analyse.",
-    "explanation_long": "In \"Vom Gesellschaftsvertrag\" (1762) artikuliert Jean-Jacqüs Rousseau einen Gedanken, der zentral für die Analyse von rechte ist. Das Zitat — \"Zwischen dem Starken und dem Schwachen ist es die Freiheit, die unterdrückt, und das Gesetz, das befreit.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich rechte konkret ausdrückt. Jean-Jacqüs Rousseau brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Jean-Jacqüs Rousseau damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "series": "person_jean_jacques_rousseau",
+    "explanation_short": "Jean-Jacques Rousseau konzeptualisiert hier einen Aspekt von rechte. Das Zitat verdeutlicht die Bedeutung von rechte in der Analyse.",
+    "explanation_long": "In \"Vom Gesellschaftsvertrag\" (1762) artikuliert Jean-Jacques Rousseau einen Gedanken, der zentral für die Analyse von rechte ist. Das Zitat — \"Zwischen dem Starken und dem Schwachen ist es die Freiheit, die unterdrückt, und das Gesetz, das befreit.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich rechte konkret ausdrückt. Jean-Jacques Rousseau brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Jean-Jacques Rousseau damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -1947,7 +1947,7 @@
   },
   {
     "id": "göthe_001",
-    "author": "Johann Wolfgang von Göthe",
+    "author": "Johann Wolfgang von Goethe",
     "author_type": "philosopher",
     "text_de": "Wer immer strebend sich bemüht, den können wir erlösen.",
     "source": "Faust II",
@@ -1960,9 +1960,9 @@
       "Menschenbild"
     ],
     "difficulty": "intermediate",
-    "series": "person_johann_wolfgang_von_göthe",
-    "explanation_short": "Johann Wolfgang von Göthe konzeptualisiert hier einen Aspekt von kulturelle und intellektuelle Aspekte. Das Zitat verdeutlicht die Bedeutung von kulturelle und intellektuelle Aspekte in der Analyse.",
-    "explanation_long": "In \"Faust II\" (1832) artikuliert Johann Wolfgang von Göthe einen Gedanken, der zentral für die Analyse von kulturelle und intellektuelle Aspekte ist. Das Zitat — \"Wer immer strebend sich bemüht, den können wir erlösen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich kultur konkret ausdrückt. Johann Wolfgang von Göthe brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Johann Wolfgang von Göthe damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "series": "person_johann_wolfgang_von_goethe",
+    "explanation_short": "Johann Wolfgang von Goethe konzeptualisiert hier einen Aspekt von kulturelle und intellektuelle Aspekte. Das Zitat verdeutlicht die Bedeutung von kulturelle und intellektuelle Aspekte in der Analyse.",
+    "explanation_long": "In \"Faust II\" (1832) artikuliert Johann Wolfgang von Goethe einen Gedanken, der zentral für die Analyse von kulturelle und intellektuelle Aspekte ist. Das Zitat — \"Wer immer strebend sich bemüht, den können wir erlösen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich kultur konkret ausdrückt. Johann Wolfgang von Goethe brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Johann Wolfgang von Goethe damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -1978,7 +1978,7 @@
       "Alltag"
     ],
     "difficulty": "beginner",
-    "series": "dewey",
+    "series": "person_john_dewey",
     "explanation_short": "Kurz erklärt: Demokratie entsteht im Alltag, durch Bildung und Teilhabe.",
     "explanation_long": "Das Zitat passt stark zu neutralen und mitte-links Lesarten, weil es demokratische Praxis im Alltag betont statt ideologische Zuspitzung.",
     "related_ids": [
@@ -2080,7 +2080,7 @@
       "Verfassung"
     ],
     "difficulty": "intermediate",
-    "series": "locke",
+    "series": "person_john_locke",
     "explanation_short": "Kurz erklärt: Freiheit braucht rechtsstaatliche Institutionen.",
     "explanation_long": "Dieses Zitat stärkt konservative und liberale Profile über die Marker rechte, eigentum und staatliche Ordnung.",
     "related_ids": [
@@ -2124,7 +2124,7 @@
       "Reform"
     ],
     "difficulty": "advanced",
-    "series": "rawls",
+    "series": "person_john_rawls",
     "explanation_short": "Kurz erklärt: Freiheit und soziale Gerechtigkeit müssen gemeinsam gedacht werden.",
     "explanation_long": "Der Fokus liegt auf fairen Institutionen und gerechter Teilhabe. Das stärkt Inhalte für mitte-links Profile und Interessen an Demokratie, Arbeit und Gesellschaft.",
     "related_ids": [
@@ -2332,7 +2332,7 @@
       "Demokratie"
     ],
     "difficulty": "beginner",
-    "series": "popper",
+    "series": "person_karl_popper",
     "explanation_short": "Kurz erklärt: Kritik und Reformfähigkeit schützen demokratische Freiheit.",
     "explanation_long": "Dieses Zitat stärkt insbesondere liberale und neutrale Profile und verbessert die Abdeckung für reform, demokratie und freiheit.",
     "related_ids": [
@@ -2449,10 +2449,10 @@
     "author": "Leo Trotzki",
     "author_type": "politician",
     "text_de": "Man mag sich nicht für Politik interessieren, aber die Politik interessiert sich für einen.",
-    "source": "Qüllenhinweis unklar",
+    "source": "Quellenhinweis unklar",
     "year": 1930,
     "text_original": "Man mag sich nicht für Politik interessieren, aber die Politik interessiert sich für einen.",
-    "chapter": "Qüllenhinweis unklar",
+    "chapter": "Quellenhinweis unklar",
     "category": [
       "Politik",
       "Gesellschaft",
@@ -2461,7 +2461,7 @@
     "difficulty": "intermediate",
     "series": "person_leo_trotzki",
     "explanation_short": "Leo Trotzki konzeptualisiert hier einen Aspekt von politische Praxis und Macht. Das Zitat verdeutlicht die Bedeutung von politische Praxis und Macht in der Analyse.",
-    "explanation_long": "In \"Qüllenhinweis unklar\" (1930) artikuliert Leo Trotzki einen Gedanken, der zentral für die Analyse von politische Praxis und Macht ist. Das Zitat — \"Man mag sich nicht für Politik interessieren, aber die Politik interessiert sich für einen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich politik konkret ausdrückt. Leo Trotzki brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Leo Trotzki damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "explanation_long": "In \"Quellenhinweis unklar\" (1930) artikuliert Leo Trotzki einen Gedanken, der zentral für die Analyse von politische Praxis und Macht ist. Das Zitat — \"Man mag sich nicht für Politik interessieren, aber die Politik interessiert sich für einen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich politik konkret ausdrückt. Leo Trotzki brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Leo Trotzki damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -2698,7 +2698,7 @@
       "Gesellschaft"
     ],
     "difficulty": "beginner",
-    "series": "wollstonecraft",
+    "series": "person_mary_wollstonecraft",
     "explanation_short": "Kurz erklärt: Gleichberechtigung beginnt bei Bildung und politischer Teilhabe.",
     "explanation_long": "Das Zitat betont den Zusammenhang zwischen Bildung, Gleichberechtigung und demokratischer Kultur. Ohne gleiche Bildungschancen bleiben politische und soziale Rechte für Frauen unvollständig.",
     "related_ids": [
@@ -2764,7 +2764,7 @@
       "Ordnung"
     ],
     "difficulty": "intermediate",
-    "series": "weber",
+    "series": "person_max_weber",
     "explanation_short": "Kurz erklärt: Gute Politik verbindet Verantwortung, Ordnung und Begrenzung von Macht.",
     "explanation_long": "Der Schwerpunkt liegt auf institutioneller Ordnung und verantwortlichem Handeln. Das trifft konservative und neutrale Lesarten, ohne autoritäre Extreme zu begünstigen.",
     "related_ids": [
@@ -2815,7 +2815,7 @@
   },
   {
     "id": "sandel_001",
-    "author": "Michäl J. Sandel",
+    "author": "Michael J. Sandel",
     "author_type": "philosopher",
     "text_de": "Märkte lassen nichts unangetastet, was Geld berührt.",
     "source": "What Money Can't Buy",
@@ -2828,9 +2828,9 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_michäl_j._sandel",
-    "explanation_short": "Michäl J. Sandel konzeptualisiert hier einen Aspekt von ökonomie. Das Zitat verdeutlicht die Bedeutung von ökonomie in der Analyse.",
-    "explanation_long": "In \"What Money Can't Buy\" (2012) artikuliert Michäl J. Sandel einen Gedanken, der zentral für die Analyse von ökonomie ist. Das Zitat — \"Märkte lassen nichts unangetastet, was Geld berührt.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich ökonomie konkret ausdrückt. Michäl J. Sandel brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Michäl J. Sandel damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "series": "person_michael_j._sandel",
+    "explanation_short": "Michael J. Sandel konzeptualisiert hier einen Aspekt von ökonomie. Das Zitat verdeutlicht die Bedeutung von ökonomie in der Analyse.",
+    "explanation_long": "In \"What Money Can't Buy\" (2012) artikuliert Michael J. Sandel einen Gedanken, der zentral für die Analyse von ökonomie ist. Das Zitat — \"Märkte lassen nichts unangetastet, was Geld berührt.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich ökonomie konkret ausdrückt. Michael J. Sandel brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Michael J. Sandel damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -2846,14 +2846,14 @@
       "Tradition"
     ],
     "difficulty": "advanced",
-    "series": "oakeshott",
+    "series": "person_michael_oakeshott",
     "explanation_short": "Kurz erklärt: Politik sollte vorsichtig, lernfähig und verantwortungsvoll handeln.",
     "explanation_long": "Das Zitat liefert konservative Schwerpunkte ohne Ideologisierung und stabilisiert die konservative Feed-Balance.",
     "related_ids": [
       "burke_002"
     ],
     "fun_fact": "V3-Ausbau: konservative Verantwortungsethik.",
-    "author": "Michäl Oakeshott",
+    "author": "Michael Oakeshott",
     "merged_from": "assets/quotes.json",
     "author_type": "philosopher",
     "provenance": "generated_strict_mapped",
@@ -2890,7 +2890,7 @@
       "Ordnung"
     ],
     "difficulty": "beginner",
-    "series": "montesquieu",
+    "series": "person_montesquieu",
     "explanation_short": "Kurz erklärt: Gewaltenteilung schützt Freiheit durch institutionelle Balance.",
     "explanation_long": "Dieses Zitat passt besonders für konservative und neutrale Profile, die staatliche Ordnung und Rechtsbindung priorisieren.",
     "related_ids": [
@@ -3029,7 +3029,7 @@
       "Gleichberechtigung"
     ],
     "difficulty": "intermediate",
-    "series": "de_gouges",
+    "series": "person_olympe_de_gouges",
     "explanation_short": "Kurz erklärt: Politische Rechte müssen geschlechtergerecht formuliert und umgesetzt werden.",
     "explanation_long": "Hier wird die Forderung nach gleicher staatsbürgerlicher Teilhabe formuliert. Das Thema verbindet Frauenrechte mit Rechtsstaat, Demokratie und Verfassungspolitik.",
     "related_ids": [
@@ -3112,7 +3112,7 @@
       "Institutionen"
     ],
     "difficulty": "advanced",
-    "series": "ricoeur",
+    "series": "person_paul_ricoeur",
     "explanation_short": "Kurz erklärt: Verfahren sind zentral für gerechte demokratische Ordnung.",
     "explanation_long": "Das Zitat bringt neutrale Institutionenperspektiven ein und verbessert die Balance jenseits ideologischer Marker.",
     "related_ids": [
@@ -3157,7 +3157,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_ren_descartes",
+    "series": "person_rené_descartes",
     "explanation_short": "René Descartes konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
     "explanation_long": "In \"Discourse on Method\" (1637) artikuliert René Descartes einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Ich denke, also bin ich.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. René Descartes brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da René Descartes damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
@@ -3175,7 +3175,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_ren_descartes",
+    "series": "person_rené_descartes",
     "explanation_short": "René Descartes konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
     "explanation_long": "In \"Meditations\" (1641) artikuliert René Descartes einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Die Überzeugungen, die wir am längsten bewahrt haben, sind solche, die wir überhaupt nicht zu untersuchen gewagt haben.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. René Descartes brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da René Descartes damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
@@ -3184,10 +3184,10 @@
     "id": "feynman_001",
     "author": "Richard Feynman",
     "author_type": "philosopher",
-    "text_de": "Das erste Prinzip ist, dass man sich selbst nicht taeuschen darf – und man selbst ist am leichtesten zu taeuschen.",
+    "text_de": "Das erste Prinzip ist, dass man sich selbst nicht täuschen darf – und man selbst ist am leichtesten zu täuschen.",
     "source": "Caltech Commencement Address",
     "year": 1974,
-    "text_original": "Das erste Prinzip ist, dass man sich selbst nicht taeuschen darf – und man selbst ist am leichtesten zu taeuschen.",
+    "text_original": "Das erste Prinzip ist, dass man sich selbst nicht täuschen darf – und man selbst ist am leichtesten zu täuschen.",
     "chapter": "Caltech Commencement Address",
     "category": [
       "Wissenschaft",
@@ -3197,7 +3197,7 @@
     "difficulty": "intermediate",
     "series": "person_richard_feynman",
     "explanation_short": "Richard Feynman konzeptualisiert hier einen Aspekt von wissenschaft. Das Zitat verdeutlicht die Bedeutung von wissenschaft in der Analyse.",
-    "explanation_long": "In \"Caltech Commencement Address\" (1974) artikuliert Richard Feynman einen Gedanken, der zentral für die Analyse von wissenschaft ist. Das Zitat — \"Das erste Prinzip ist, dass man sich selbst nicht taeuschen darf – und man selbst ist am leichtesten zu taeuschen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich wissenschaft konkret ausdrückt. Richard Feynman brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Richard Feynman damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "explanation_long": "In \"Caltech Commencement Address\" (1974) artikuliert Richard Feynman einen Gedanken, der zentral für die Analyse von wissenschaft ist. Das Zitat — \"Das erste Prinzip ist, dass man sich selbst nicht täuschen darf – und man selbst ist am leichtesten zu täuschen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich wissenschaft konkret ausdrückt. Richard Feynman brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Richard Feynman damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
   },
   {
@@ -3443,7 +3443,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_s_ren_kierkegaard",
+    "series": "person_søren_kierkegaard",
     "explanation_short": "Søren Kierkegaard konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
     "explanation_long": "In \"Gesammelte Werke\" (1843) artikuliert Søren Kierkegaard einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Das Leben kann nur rückwärts verstanden werden, muss aber vorwärts gelebt werden.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Søren Kierkegaard brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Søren Kierkegaard damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
@@ -3461,7 +3461,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_s_ren_kierkegaard",
+    "series": "person_søren_kierkegaard",
     "explanation_short": "Søren Kierkegaard konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
     "explanation_long": "In \"Der Augenblick\" (1848) artikuliert Søren Kierkegaard einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"In unserem Zeitalter haben wir vergessen, dass es sowohl ein Übermaß an Genuss als auch einen Übermaß an Schmerz gibt.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Søren Kierkegaard brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Søren Kierkegaard damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
@@ -3479,7 +3479,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_s_ren_kierkegaard",
+    "series": "person_søren_kierkegaard",
     "explanation_short": "Søren Kierkegaard konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
     "explanation_long": "In \"Die Krankheit zum Tode\" (1849) artikuliert Søren Kierkegaard einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Die wahrhafte Freiheit ist: vor Gott einsam vor sich selbst zu stehen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Søren Kierkegaard brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Søren Kierkegaard damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
@@ -3497,7 +3497,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_theodor_w_adorno",
+    "series": "person_theodor_w._adorno",
     "explanation_short": "Theodor W. Adorno konzeptualisiert hier einen Aspekt von gesellschaftliche Verhältnisse und Strukturen. Das Zitat verdeutlicht die Bedeutung von gesellschaftliche Verhältnisse und Strukturen in der Analyse.",
     "explanation_long": "In \"Dialektik der Aufklärung\" (1944) artikuliert Theodor W. Adorno einen Gedanken, der zentral für die Analyse von gesellschaftliche Verhältnisse und Strukturen ist. Das Zitat — \"Aufklärung muss auch sich selbst kritisch prüfen, wenn sie nicht in Mythos zurückfallen will.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich gesellschaft konkret ausdrückt. Theodor W. Adorno brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Theodor W. Adorno damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": []
@@ -3633,13 +3633,13 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "havel",
+    "series": "person_vaclav_havel",
     "explanation_short": "Kurz erklärt: Demokratische Kultur entsteht aus Alltagspraxis und Wahrhaftigkeit.",
     "explanation_long": "Der Schwerpunkt ist neutral und gesellschaftsnah. Das hilft der App, weniger ideologisch einseitige Tageszitate auszuspielen.",
     "related_ids": [
       "camus_001"
     ],
-    "fun_fact": "V3-Ausbau: neutral-alltagspolitische Qülle.",
+    "fun_fact": "V3-Ausbau: neutral-alltagspolitische Quelle.",
     "author": "Vaclav Havel",
     "merged_from": "assets/quotes.json",
     "author_type": "politician",
@@ -3682,7 +3682,7 @@
     ],
     "difficulty": "intermediate",
     "needs_review": true,
-    "series": "person_voltaire",
+    "series": "person_evelyn_beatrice_hall_(fälschlich_voltaire_zugeschrieben)",
     "explanation_short": "WICHTIG: Dieser Satz stammt nicht von Voltaire, sondern von der Biografin Evelyn Beatrice Hall (1906) als Zusammenfassung von Voltaires Haltung.",
     "explanation_long": "Das Zitat ist eines der bekanntesten Missattributionen der Geistesgeschichte. Evelyn Beatrice Hall schrieb unter dem Pseudonym S.G. Tallentyre die Voltaire-Biographie 'The Friends of Voltaire' (1906) und formulierte dort: 'I disapprove of what you say, but I will defend to the death your right to say it' – als Paraphrase von Voltaires Haltung im Fall des Helvétius-Verbots. Sie selbst bestätigte später, dass es ihre eigene Formulierung war. Voltaire hatte ähnliche Gedanken, aber diesen exakten Satz nie geschrieben. Inhaltlich drückt das Zitat echter liberaler Meinungsfreiheit aus: Toleranz auch für Ansichten, die man ablehnt – eine Haltung, die Voltaire tatsächlich vertrat, etwa in seiner Verteidigung der Hugenotten.",
     "related_ids": [
@@ -3761,7 +3761,7 @@
       "Alltag"
     ],
     "difficulty": "intermediate",
-    "series": "du_bois",
+    "series": "person_w._e._b._du_bois",
     "explanation_short": "Kurz erklärt: Gleichberechtigung muss soziale Wirklichkeit werden.",
     "explanation_long": "Das Zitat stärkt demokratische und gesellschaftliche Kategorien und passt besonders für mitte-links sowie neutrale Perspektiven.",
     "related_ids": [
@@ -3934,7 +3934,7 @@
     "chapter": "Part 2: The Repressive Hypothesis",
     "category": "philosophie",
     "difficulty": "hard",
-    "series": "Poststructuralism",
+    "series": "person_michel_foucault",
     "explanation_short": "Foucaults radikale Umformulierung von Macht als ubiquitär und dezentral.",
     "explanation_long": "Michel Foucault argumentiert, dass Macht nicht ein zentrales Phänomen ist, das nur von Staaten ausgeht, sondern überall in sozialen Beziehungen wirkt. Dies revolutionierte Machtanalyse in der Sozialwissenschaft.",
     "related_ids": []
@@ -3949,7 +3949,7 @@
     "chapter": "Introduction",
     "category": "kolonial",
     "difficulty": "hard",
-    "series": "Postcolonial Theory",
+    "series": "person_edward_said",
     "explanation_short": "Saids Analyse des Orientalismus als diskursive Konstruktion des Westens.",
     "explanation_long": "Edward Said analysiert, wie der Westen den Orient durch Diskurse von Wissen und Macht konstruierte. Sein Konzept des Orientalismus wurde fundamental für postkoloniale und kritische Theorie.",
     "related_ids": []
@@ -3964,7 +3964,7 @@
     "chapter": "Introduction: From Parody to Politics",
     "category": "frauen",
     "difficulty": "hard",
-    "series": "Queer Theory",
+    "series": "person_judith_butler",
     "explanation_short": "Butlers performative Theorie des Geschlechts.",
     "explanation_long": "Judith Butler argumentiert, dass Geschlecht nicht eine Kategorie des Seins ist, sondern des Handelns. Gender wird durch wiederholte performative Akte konstituiert, nicht durch innere Essenz.",
     "related_ids": []
@@ -3979,7 +3979,7 @@
     "chapter": "Part 1: The Aristocracy of Culture",
     "category": "arbeit",
     "difficulty": "hard",
-    "series": "Sociology of Culture",
+    "series": "person_pierre_bourdieu",
     "explanation_short": "Bourdieus Konzept des kulturellen Kapitals als Klassenmechanismus.",
     "explanation_long": "Pierre Bourdieu analysiert, wie kulturelles Kapital (Geschmack, Bildung, soziale Codes) als unsichtbarer Mechanismus der Klassenreproduktion funktioniert. Sein Werk transformierte Klassenanalyse.",
     "related_ids": []
@@ -3994,7 +3994,7 @@
     "chapter": "Part II: The Rise and Fall of Market Economy",
     "category": "arbeit",
     "difficulty": "medium",
-    "series": "Economic Anthropology",
+    "series": "person_karl_polanyi",
     "explanation_short": "Polanyis Argument gegen die naturale Annahme von Märkten.",
     "explanation_long": "Karl Polanyi argumentiert in Die große Transformation, dass Marktökonomen nicht natürlich sind, sondern durch intensive staatliche Intervention geschaffen und aufrechterhalten werden.",
     "related_ids": []
@@ -4009,9 +4009,9 @@
     "chapter": "Chapter 4: Work and Unemployment",
     "category": "arbeit",
     "difficulty": "medium",
-    "series": "Behavioral Economics",
+    "series": "person_bruno_s._frey",
     "explanation_short": "Freys Analyse von Arbeit als psycho-soziales Phänomen.",
-    "explanation_long": "Bruno Frey untersucht, wie Arbeit über ihre ökonomische Funktion hinaus für psychisches Wohlbefinden und soziale Integration essentiell ist. Seine Forschung zeigt, dass Arbeitslosigkeit tiefere Konseqünzen hat als bloße Einkommenslosigkeit.",
+    "explanation_long": "Bruno Frey untersucht, wie Arbeit über ihre ökonomische Funktion hinaus für psychisches Wohlbefinden und soziale Integration essentiell ist. Seine Forschung zeigt, dass Arbeitslosigkeit tiefere Konsequenzen hat als bloße Einkommenslosigkeit.",
     "related_ids": []
   },
   {
@@ -4024,7 +4024,7 @@
     "chapter": "Chapter 8: And No Birds Sing",
     "category": "wissenschaft",
     "difficulty": "medium",
-    "series": "Environmental Science",
+    "series": "person_rachel_carson",
     "explanation_short": "Carsons Warnung vor chemischen Pestiziden und Aufruf für Naturschutz.",
     "explanation_long": "Rachel Carson's Silent Spring gilt als Beginn der modernen Umweltbewegung. Sie dokumentiert die verheerenden Effekte von Pestiziden auf Ökosysteme und argumentiert für eine neue Ethik unserer Beziehung zur Natur.",
     "related_ids": []
@@ -4039,7 +4039,7 @@
     "chapter": "Chapter VII: Crisis and the Emergence of Scientific Theories",
     "category": "wissenschaft",
     "difficulty": "hard",
-    "series": "Philosophy of Science",
+    "series": "person_thomas_kuhn",
     "explanation_short": "Kuhns revolutionäre These von Paradigmawechseln in der Wissenschaftsgeschichte.",
     "explanation_long": "Thomas Kuhn revolutionierte die Philosophie der Wissenschaft mit seiner Theorie der Paradigmawechsel. Wissenschaftlicher Fortschritt erfolgt nicht kontinuierlich, sondern durch diskontinuierliche Paradigmenverschiebungen.",
     "related_ids": []
@@ -4054,7 +4054,7 @@
     "chapter": "Chapter 1: A Propaganda Model",
     "category": "philosophie",
     "difficulty": "medium",
-    "series": "Media Criticism",
+    "series": "person_noam_chomsky",
     "explanation_short": "Chomskys und Hermans Propaganda-Modell der Massenmedien.",
     "explanation_long": "In Manufacturing Consent analysieren Noam Chomsky und Edward Herman, wie Massenmedien in kapitalistischen Systemen zur Fabrikation von Zustimmung funktionieren. Ihr Propagandamodell wurde einflussreich für Medienanalyse.",
     "related_ids": []
@@ -4069,7 +4069,7 @@
     "chapter": "Part II: The Worker",
     "category": "arbeit",
     "difficulty": "medium",
-    "series": "Sociology of Work",
+    "series": "person_richard_sennett",
     "explanation_short": "Sennetts Analyse von Charakter und Würde in der modernen flexiblen Arbeitswelt.",
     "explanation_long": "Richard Sennett untersucht, wie die neoliberale Arbeitswelt (Flexibilität, Kurzfristigkeit) langfristige Charakter- und Würdeentwicklung untergräbt. Seine Kritik ist zentral für Arbeitskritik.",
     "related_ids": []
@@ -4084,7 +4084,7 @@
     "chapter": "Part I: Body",
     "category": "frauenrechte",
     "difficulty": "medium",
-    "series": "Second Wave Feminism",
+    "series": "person_germaine_greer",
     "explanation_short": "Greers radikale Kritik der patriarchalen Konstruktion von Weiblichkeit.",
     "explanation_long": "Germaine Greer argumentiert in The Female Eunuch, dass moderne Weiblichkeit eine patriarchale Erfindung ist, die Frauen zur Sexualität konditioniert, ohne ihnen Autonomie zu geben. Ihr Werk war zentral für den Feminismus der 1970er.",
     "related_ids": []
@@ -4099,7 +4099,7 @@
     "chapter": "Introduction: Love as a Practice of Freedom",
     "category": "philosophie",
     "difficulty": "medium",
-    "series": "Black Feminism",
+    "series": "person_bell_hooks",
     "explanation_short": "hooks' Verständnis von Liebe als revolutionäre Praxis gegen Unterdrückung.",
     "explanation_long": "bell hooks denkt über Liebe als politische und revolutionäre Kraft nach. Sie argumentiert, dass Liebe (Selbstliebe, politische Liebe, Gemeinschaftsliebe) essentiell für Befreiung und Widerstand ist.",
     "related_ids": []
@@ -4114,7 +4114,7 @@
     "chapter": "Vorwort",
     "category": "philosophie",
     "difficulty": "medium",
-    "series": "Eastern Philosophy",
+    "series": "person_miyamoto_musashi",
     "explanation_short": "Musashis Weg des Kriegers als spiritülle Disziplin.",
     "explanation_long": "Miyamoto Musashi, legendärer japanischer Schwertkämpfer, entwickelt das Buch der Fünf Ringe als Philosophie des Kampfes und Lebens. Der Kriegerweg wird zur Metapher für Selbstvervollkommnung und innere Harmonie.",
     "related_ids": []
@@ -4129,7 +4129,7 @@
     "chapter": "Chapter XV: On Philosophical Method",
     "category": "philosophie",
     "difficulty": "medium",
-    "series": "Analytical Philosophy",
+    "series": "person_bertrand_russell",
     "explanation_short": "Russells Plädoyer für intellektülle Nonkonformität und kritisches Denken.",
     "explanation_long": "Bertrand Russell argumentiert, dass wissenschaftlicher und philosophischer Fortschritt Mut zur Nonkonformität erfordert. Was heute exzentrisch erscheint, kann morgen akzeptierte Wahrheit sein.",
     "related_ids": []
@@ -4144,7 +4144,7 @@
     "chapter": "Chapter 1: The State and Revolution in Theory and in Practice",
     "category": "revolution",
     "difficulty": "hard",
-    "series": "Marxist Theory",
+    "series": "person_raya_dunayevskaya",
     "explanation_short": "Dunayevskyas Dialektik von Theorie und revolutionärer Praxis.",
     "explanation_long": "Raya Dunayevskaya entwickelt eine Theorie der Revolution, die nicht Lenin folgt, sondern auf unmittelbare Arbeiterbewegung basiert. Ihr Werk verbindet Marx mit schwarzem Feminismus und antikolonialem Denken.",
     "related_ids": []
@@ -4159,7 +4159,7 @@
     "chapter": "On Complex Communication Across Difference",
     "category": "kolonial",
     "difficulty": "hard",
-    "series": "Decolonial Feminism",
+    "series": "person_maría_lugones",
     "explanation_short": "Lugones' Konzept der Kolonialisierung von Geschlecht und Körper.",
     "explanation_long": "María Lugones argumentiert, dass Kolonialität nicht nur ökonomisch ist, sondern sich epistemisch und körperlich manifestiert, insbesondere in der Unterdrückung von Geschlecht und sexüller Differenz. Ihr Werk ist zentral für Dekolonialisierungstheorie.",
     "related_ids": []
@@ -4174,7 +4174,7 @@
     "chapter": "Introduction",
     "category": "frauenrechte",
     "difficulty": "hard",
-    "series": "Transnational Feminism",
+    "series": "person_inderpal_grewal",
     "explanation_short": "Grewal und Kaplans Analyse von Geschlecht und Transnationalisierung.",
     "explanation_long": "Inderpal Grewal und Caren Kaplan analysieren, wie globale Kapitalakkumulation Geschlecht, Rasse und Sexualität durch Transnationalisierungsprozesse strukturiert. Ihre Arbeit verbindet feministische Ökonomiekritik mit globalen Machtanalysen.",
     "related_ids": []
@@ -4189,7 +4189,7 @@
     "chapter": "Chapter 1: The Ionian Enchantment",
     "category": "wissenschaft",
     "difficulty": "medium",
-    "series": "Philosophy of Science",
+    "series": "person_e._o._wilson",
     "explanation_short": "Wilsons Projekt der Vereinigung von Natur- und Geisteswissenschaften.",
     "explanation_long": "E.O. Wilson argumentiert in Consilience für eine Vereinigung aller menschlichen Wissensbereiche unter gemeinsamen Prinzipien. Sein Projet mag umstritten sein, regt aber zur Reflexion über Wissensfragmentierung an.",
     "related_ids": []
@@ -4204,7 +4204,7 @@
     "chapter": "Chapter 1: The Descartes' Error",
     "category": "wissenschaft",
     "difficulty": "medium",
-    "series": "Neuroscience and Philosophy",
+    "series": "person_antónio_damásio",
     "explanation_short": "Damásios Kritik der Körper-Geist-Trennung und Rehabilitation von Emotionen.",
     "explanation_long": "António Damásio widerlegt Descartes' Trennung von Vernunft und Körper durch Neurowissenschaften. Er argumentiert, dass Emotionen (biologische Körperprozesse) essentiell für Rationalität sind.",
     "related_ids": []
@@ -4219,7 +4219,7 @@
     "chapter": "Chapter 1",
     "category": "frauenrechte",
     "difficulty": "medium",
-    "series": "Feminist Literature",
+    "series": "person_virginia_woolf",
     "explanation_short": "Woolfs Forderung nach materieller und geistiger Unabhängigkeit von Frauen.",
     "explanation_long": "Virginia Woolf verbindet ökonomische Unabhängigkeit und Raum als Voraussetzungen weiblicher Kreativität. Der Satz ist zu einem Grundtext feministischer Theorie geworden.",
     "related_ids": []
@@ -4234,7 +4234,7 @@
     "chapter": "The Master's Tools Will Never Dismantle the Master's House",
     "category": "frauenrechte",
     "difficulty": "medium",
-    "series": "Black Feminism",
+    "series": "person_audre_lorde",
     "explanation_short": "Lorde kritisiert Reformen, die Unterdrückung mit ihren eigenen Mitteln bekämpfen wollen.",
     "explanation_long": "Audre Lorde argumentiert, dass echte Befreiung neue Denk- und Handlungsformen braucht. Unterdrückende Strukturen können nicht durch dieselben Mittel überwunden werden, die sie stabilisieren.",
     "related_ids": []
@@ -4249,7 +4249,7 @@
     "chapter": "Attention",
     "category": "philosophie",
     "difficulty": "medium",
-    "series": "Ethics and Spirituality",
+    "series": "person_simone_weil",
     "explanation_short": "Weils Ethik der Aufmerksamkeit als moralische Praxis.",
     "explanation_long": "Simone Weil versteht Aufmerksamkeit als ethische Haltung, die über bloßes Sehen hinausgeht. Sie macht sie zur Voraussetzung von Mitgefühl und Wahrnehmung des Anderen.",
     "related_ids": []
@@ -4264,7 +4264,7 @@
     "chapter": "Of the Dawn of Freedom",
     "category": "gleichberechtigung",
     "difficulty": "medium",
-    "series": "Civil Rights Thought",
+    "series": "person_w._e._b._du_bois",
     "explanation_short": "Du Bois beschreibt Rassismus als zentrales Strukturproblem der Moderne.",
     "explanation_long": "W. E. B. Du Bois macht klar, dass Rassismus kein Randproblem ist, sondern die politische und soziale Ordnung des Jahrhunderts prägt. Der Satz wurde zu einem Grundtext antirassistischer Theorie.",
     "related_ids": []
@@ -4279,7 +4279,7 @@
     "chapter": "Chapter 1",
     "category": "bildung",
     "difficulty": "medium",
-    "series": "Critical Pedagogy",
+    "series": "person_paulo_freire",
     "explanation_short": "Freire verbindet Bildung mit kollektiver Befreiung.",
     "explanation_long": "Paulo Freire argumentiert, dass Bildung ein gemeinsamer emanzipatorischer Prozess ist. Lernen wird bei ihm zu einem Werkzeug gegen Unterdrückung und für politische Mündigkeit.",
     "related_ids": []
@@ -4294,7 +4294,7 @@
     "chapter": "Chapter 1: The Promise",
     "category": "gesellschaft",
     "difficulty": "medium",
-    "series": "Sociology",
+    "series": "person_c._wright_mills",
     "explanation_short": "Mills fordert, Biografie und Struktur zusammen zu denken.",
     "explanation_long": "C. Wright Mills beschreibt die soziologische Vorstellungskraft als Fähigkeit, individülles Erleben mit gesellschaftlichen Strukturen zu verbinden. So wird aus privatem Ärger ein öffentliches Problem.",
     "related_ids": []
@@ -4309,7 +4309,7 @@
     "chapter": "Down at the Cross",
     "category": "gesellschaft",
     "difficulty": "medium",
-    "series": "Civil Rights Literature",
+    "series": "person_james_baldwin",
     "explanation_short": "Baldwin über die Notwendigkeit, Wahrheit zürst anzürkennen.",
     "explanation_long": "James Baldwin macht Sichtbarkeit zur Voraussetzung von Veränderung. Sein Satz ist eine prägnante Formel für kritische Gesellschaftsanalyse und Selbstprüfung.",
     "related_ids": []
@@ -4324,7 +4324,7 @@
     "chapter": "Of Solitude",
     "category": "philosophie",
     "difficulty": "medium",
-    "series": "Renaissance Humanism",
+    "series": "person_michel_de_montaigne",
     "explanation_short": "Montaigne betont Selbstbesitz und innere Unabhängigkeit.",
     "explanation_long": "Michel de Montaigne verbindet in seinen Essays Selbstkenntnis mit der Fähigkeit, sich nicht völlig durch äußere Erwartungen bestimmen zu lassen. Der Satz ist ein frühes humanistisches Freiheitsmotiv.",
     "related_ids": []
@@ -4339,7 +4339,7 @@
     "chapter": "Introduction",
     "category": "revolution",
     "difficulty": "medium",
-    "series": "Contemporary Essays",
+    "series": "person_rebecca_solnit",
     "explanation_short": "Solnit versteht Hoffnung als Praxis, nicht als Passivität.",
     "explanation_long": "Rebecca Solnit beschreibt Hoffnung als aktives Prinzip politischer und sozialer Veränderung. Ihr Bild macht deutlich, dass Hoffnung ohne Handlung leer bleibt.",
     "related_ids": []
@@ -4354,7 +4354,7 @@
     "chapter": "Consolation for Unpopularity",
     "category": "alltag",
     "difficulty": "medium",
-    "series": "Popular Philosophy",
+    "series": "person_alain_de_botton",
     "explanation_short": "De Botton übersetzt Philosophie in alltägliche Lebensführung.",
     "explanation_long": "Alain de Botton macht Philosophie als Hilfe für alltägliche Krisen zugänglich. Sein Ansatz verbindet klassische Denkfragen mit praktischer Lebenskunst.",
     "related_ids": []
@@ -4362,14 +4362,14 @@
   {
     "id": "nussbaum_001",
     "text_de": "Eine gerechte Gesellschaft misst sich daran, welche Fähigkeiten ihre Mitglieder wirklich entfalten können.",
-    "text_original": "A central qüstion of justice is what people are actually able to do and to be.",
+    "text_original": "A central question of justice is what people are actually able to do and to be.",
     "author": "Martha Nussbaum",
     "source": "Creating Capabilities",
     "year": 2011,
     "chapter": "Introduction",
     "category": "gerechtigkeit",
     "difficulty": "hard",
-    "series": "Political Philosophy",
+    "series": "person_martha_nussbaum",
     "explanation_short": "Nussbaums Capabilities-Ansatz rückt reale Möglichkeiten in den Mittelpunkt.",
     "explanation_long": "Martha Nussbaum argumentiert, dass Gerechtigkeit sich nicht nur an formalen Rechten messen lässt. Entscheidend ist, ob Menschen reale Fähigkeiten zur Entfaltung haben.",
     "related_ids": []
@@ -4384,7 +4384,7 @@
     "chapter": "Testimony and memory",
     "category": "frieden",
     "difficulty": "medium",
-    "series": "Human Rights",
+    "series": "person_rigoberta_menchú",
     "explanation_short": "Menchú verbindet Frieden mit sozialer und historischer Gerechtigkeit.",
     "explanation_long": "Rigoberta Menchú macht deutlich, dass Frieden ohne gerechte Verhältnisse unvollständig bleibt. Das verbindet Menschenrechte, Erinnerung und politische Verantwortung.",
     "related_ids": []
@@ -4399,7 +4399,7 @@
     "chapter": "Introduction",
     "category": "revolution",
     "difficulty": "medium",
-    "series": "Black Radical Thought",
+    "series": "person_angela_davis",
     "explanation_short": "Davis versteht Freiheit als fortlaufende politische Praxis.",
     "explanation_long": "Angela Davis betont, dass Freiheit nicht einmalig erreicht wird, sondern immer wieder verteidigt und neu erkämpft werden muss. Der Satz ist zentral für ihr Verständnis von politischem Widerstand.",
     "related_ids": []
@@ -4414,7 +4414,7 @@
     "chapter": "Earthseed: The Books of the Living",
     "category": "gesellschaft",
     "difficulty": "medium",
-    "series": "Science Fiction Ethics",
+    "series": "person_octavia_e._butler",
     "explanation_short": "Butler formuliert Veränderung als wechselseitigen Prozess.",
     "explanation_long": "Octavia E. Butler macht in ihrer Earthseed-Philosophie deutlich, dass Handeln nie folgenlos bleibt. Der Satz verbindet Verantwortung, Wandel und Zukunftsdenken.",
     "related_ids": []
@@ -4429,7 +4429,7 @@
     "chapter": "Meditation One",
     "category": "philosophie",
     "difficulty": "medium",
-    "series": "Perspectivism",
+    "series": "person_josé_ortega_y_gasset",
     "explanation_short": "Ortega y Gasset verbindet Selbstsein mit Kontext und Situation.",
     "explanation_long": "José Ortega y Gasset betont, dass Menschen nie isoliert verstanden werden können. Identität entsteht immer im Zusammenspiel mit den eigenen Umständen.",
     "related_ids": []
@@ -4444,7 +4444,7 @@
     "chapter": "Hope and resistance",
     "category": "revolution",
     "difficulty": "medium",
-    "series": "Contemporary Politics",
+    "series": "person_arundhati_roy",
     "explanation_short": "Roy verbindet Hoffnung mit politischer Bewegung.",
     "explanation_long": "Arundhati Roy beschreibt Veränderung nicht als abstrakte Zukunft, sondern als bereits begonnene Bewegung. Der Satz ist ein prägnantes Hoffnungsmotiv für soziale Kämpfe.",
     "related_ids": []
@@ -4459,7 +4459,7 @@
     "chapter": "Introduction",
     "category": "gerechtigkeit",
     "difficulty": "medium",
-    "series": "Public Philosophy",
+    "series": "person_cornel_west",
     "explanation_short": "West verbindet Moral, Politik und soziale Fürsorge.",
     "explanation_long": "Cornel West formuliert Gerechtigkeit als öffentlich gelebte Liebe. Der Satz fasst seine Verbindung von Ethik, Demokratie und gesellschaftlicher Verantwortung zusammen.",
     "related_ids": []
@@ -4474,7 +4474,7 @@
     "chapter": "Power",
     "category": "frauenrechte",
     "difficulty": "medium",
-    "series": "Womanist Thought",
+    "series": "person_alice_walker",
     "explanation_short": "Walker betont Selbstermächtigung als politische Ressource.",
     "explanation_long": "Alice Walker beschreibt Macht als etwas, das oft psychologisch aufgegeben wird, bevor es politisch verloren ist. Der Satz stärkt die Idee von Selbstermächtigung und Handlungsmacht.",
     "related_ids": []
@@ -4489,7 +4489,7 @@
     "chapter": "Black Consciousness",
     "category": "revolution",
     "difficulty": "medium",
-    "series": "Anti-Apartheid Thought",
+    "series": "person_steve_biko",
     "explanation_short": "Biko beschreibt Unterdrückung auch als geistige Verinnerlichung.",
     "explanation_long": "Steve Biko macht deutlich, dass Befreiung nicht nur äußerlich, sondern auch innerlich beginnt. Das Bewusstsein über die eigene Würde ist für ihn eine politische Waffe.",
     "related_ids": []
@@ -4504,7 +4504,7 @@
     "chapter": "Relationships and trust",
     "category": "alltag",
     "difficulty": "medium",
-    "series": "Memoir and Life Advice",
+    "series": "person_maya_angelou",
     "explanation_short": "Angelou rät zur ernsthaften Wahrnehmung von Verhalten.",
     "explanation_long": "Maya Angelou fasst Lebensklugheit in einer knappen Regel: Menschen sollten an ihrem Verhalten und nicht nur an Worten gemessen werden. Der Satz ist bis heute weit verbreitet.",
     "related_ids": []
@@ -4521,7 +4521,7 @@
       "Politik"
     ],
     "difficulty": "beginner",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Das Zitat beschreibt die Angst der alten Ordnung vor gesellschaftlicher Umwälzung.",
     "explanation_long": "Marx und Engels stellen direkt zu Beginn dar, dass ihre Ideen bereits politische Wirkung zeigen. Der Ausdruck als Gespenst steht für etwas, das nicht ignoriert werden kann. Gleichzeitig ist es ein rhetorischer Einstieg, der den Konflikt zwischen alter und neuer Gesellschaftsordnung klar macht.",
     "related_ids": [
@@ -4544,7 +4544,7 @@
       "Geschichte"
     ],
     "difficulty": "beginner",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Gesellschaftliche Entwicklung wird als Konflikt gegensätzlicher Klassen verstanden.",
     "explanation_long": "Marx und Engels fassen historische Epochen als Resultat sozialer Gegensätze auf. Damit verschiebt sich der Blick von Einzelpersonen zu materiellen Interessen und Machtverhältnissen. Das Zitat bildet den methodischen Kern vieler späterer Analysen.",
     "related_ids": [
@@ -4567,7 +4567,7 @@
       "Klassenkampf"
     ],
     "difficulty": "beginner",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Die Aussage betont, dass Unterdrückte ein existenzielles Interesse an Veränderung haben.",
     "explanation_long": "Im Schlussaufruf wird Klassenpolitik als Notwendigkeit formuliert. Das Bild der Ketten verweist auf strukturelle Abhängigkeit, nicht nur auf einzelne Missstände. Gleichzeitig erzeugt der Satz einen kollektiven Handlungsimpuls.",
     "related_ids": [
@@ -4590,7 +4590,7 @@
       "Politik"
     ],
     "difficulty": "intermediate",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Der Ton ist bewusst konfrontativ und richtet sich gegen bestehende Machtverhältnisse.",
     "explanation_long": "Marx und Engels nutzen einen programmatischen Stil, um politische Entschlossenheit zu markieren. Das Zitat zeigt, dass die Schrift kein neutrales Lehrbuch sein will. Es verbindet Analyse und Aufruf zur Organisation.",
     "related_ids": [
@@ -4613,7 +4613,7 @@
       "Organisation"
     ],
     "difficulty": "beginner",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Der Aufruf verbindet soziale Frage mit internationaler Solidarität.",
     "explanation_long": "Die Autoren gehen davon aus, dass kapitalistische Verhältnisse grenzüberschreitend wirken. Deshalb soll auch der Widerstand international sein. Das Motto wurde zu einem Leitmotiv der Arbeiterbewegung.",
     "related_ids": [
@@ -4636,7 +4636,7 @@
       "Moderne"
     ],
     "difficulty": "intermediate",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Das Manifest erkennt die revolutionäre Modernisierungsleistung des Kapitalismus an.",
     "explanation_long": "Marx und Engels verbinden scharfe Kritik mit einer Analyse realer Produktivitätsfortschritte. Gerade diese Dynamik erzeugt aber auch neue Krisen und Konflikte. Die Passage zeigt die Ambivalenz ihres Fortschrittsbegriffs.",
     "related_ids": [
@@ -4659,7 +4659,7 @@
       "Kultur"
     ],
     "difficulty": "intermediate",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kapitalismus löst traditionelle Bindungen und feste Ordnungen auf.",
     "explanation_long": "Die Passage beschreibt die dauernde Umwälzung sozialer Verhältnisse als Kern der Moderne. Produktion, Handel und Lebensformen bleiben in Bewegung. Dadurch entstehen Freiheitsraeume, aber auch Unsicherheit und Entwurzelung.",
     "related_ids": [
@@ -4682,7 +4682,7 @@
       "Moderne"
     ],
     "difficulty": "intermediate",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Die Passage erfasst den historischen Schub von Urbanisierung und Marktintegration.",
     "explanation_long": "Marx und Engels sehen in der Ausdehnung städtischer Industrie eine Umformung ganzer Lebensweisen. Traditionelle lokale Ökonomien werden in überregionale Märkte eingebunden. Das verändert Arbeitsformen, Familienstrukturen und politische Organisation.",
     "related_ids": [
@@ -4705,7 +4705,7 @@
       "Geschichte"
     ],
     "difficulty": "beginner",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Die gesellschaftliche Entwicklung erscheint als Konflikt zwischen Klassen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Kommunistisches Manifest. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Vorrede und ordnet Die gesellschaftliche Entwicklung erscheint als Konflikt zwischen Klassen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -4728,7 +4728,7 @@
       "Politik"
     ],
     "difficulty": "intermediate",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Die Bourgeoisie treibt Geschichte und Krise zugleich voran.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Kommunistisches Manifest. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 1 und ordnet Die Bourgeoisie treibt Geschichte und Krise zugleich voran. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -4751,7 +4751,7 @@
       "Organisation"
     ],
     "difficulty": "advanced",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Politische Emanzipation braucht kollektive Organisation.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Kommunistisches Manifest. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 2 und ordnet Politische Emanzipation braucht kollektive Organisation. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -4774,7 +4774,7 @@
       "Proletariat"
     ],
     "difficulty": "beginner",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Internationalismus verbindet die Arbeiterbewegung über Grenzen hinweg.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Kommunistisches Manifest. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 3 und ordnet Internationalismus verbindet die Arbeiterbewegung über Grenzen hinweg. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -4797,7 +4797,7 @@
       "Organisation"
     ],
     "difficulty": "intermediate",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Revolution ist für Marx und Engels ein historischer Prozess, kein Einzelakt.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Kommunistisches Manifest. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Schluss und ordnet Revolution ist für Marx und Engels ein historischer Prozess, kein Einzelakt. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -4821,7 +4821,7 @@
       "Partei"
     ],
     "difficulty": "beginner",
-    "series": "manifest",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -4843,7 +4843,7 @@
       "Ausbeutung"
     ],
     "difficulty": "intermediate",
-    "series": "fundiert",
+    "series": "person_karl_marx",
     "explanation_short": "Ein prägendes Bild für die Mehrwertaneignung im Kapitalismus.",
     "explanation_long": "Marx beschreibt Kapital als vergangene Arbeit, die nur durch aktülle Arbeitskraft weiterverwertet werden kann. Die Metapher zeigt den systematischen Charakter der Ausbeutung.",
     "related_ids": [],
@@ -4863,7 +4863,7 @@
       "Ökonomie"
     ],
     "difficulty": "advanced",
-    "series": "fundiert",
+    "series": "person_karl_marx",
     "explanation_short": "Marx pointiert die zentrale Logik kapitalistischer Produktion: endlose Verwertung.",
     "explanation_long": "Der Ausruf bringt den strukturellen Zwang zur Kapitalvermehrung auf den Punkt. Nicht Bedürfnisbefriedigung, sondern Akkumulation steuert die Produktionsdynamik.",
     "related_ids": [],
@@ -4884,7 +4884,7 @@
       "Mehrwert"
     ],
     "difficulty": "beginner",
-    "series": "kapital",
+    "series": "person_karl_marx",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -4906,7 +4906,7 @@
       "Ökonomie"
     ],
     "difficulty": "intermediate",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Marx beginnt mit der Ware als Grundform der kapitalistischen Gesellschaft.",
     "explanation_long": "Durch den Einstieg bei der Ware entwickelt Marx seine Kritik systematisch vom Einfachen zum Komplexen. Er zeigt, dass ökonomische Kategorien gesellschaftliche Verhältnisse ausdrücken. Damit wird Werttheorie zum Schlüssel für die Gesamtanalyse.",
     "related_ids": [
@@ -4929,7 +4929,7 @@
       "Wert"
     ],
     "difficulty": "beginner",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Nützlichkeit entsteht praktisch erst durch Verwendung der Sache.",
     "explanation_long": "Marx trennt hier Gebrauchswert und Tauschwert analytisch. Ein Produkt kann nützlich sein, ohne im Tausch eine bestimmte Wertgrösse zu haben. Diese Unterscheidung ist zentral für das Verständnis kapitalistischer Produktion.",
     "related_ids": [
@@ -4952,7 +4952,7 @@
       "Bedürfnisse"
     ],
     "difficulty": "beginner",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Die Ware wird zunächst als nützliches Ding bestimmt.",
     "explanation_long": "Marx startet bei der alltäglichen Erfahrung von Produkten, um dann ihre gesellschaftliche Form zu analysieren. So zeigt er, dass hinter Dingen Beziehungen zwischen Menschen stehen. Der scheinbar einfache Warenbegriff eröffnet die spätere Kritik des Fetischismus.",
     "related_ids": [
@@ -4975,7 +4975,7 @@
       "Arbeit"
     ],
     "difficulty": "advanced",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Kapitalistische Produktion ist auf systematische Mehrwertaneignung ausgerichtet.",
     "explanation_long": "Der Satz kondensiert den Kern der Ausbeutungsanalyse im Kapital. Profit entsteht nicht aus fairem Tausch, sondern aus unbezahlter Mehrarbeit. Daraus erklären sich Arbeitszeitdruck, Produktivitätszwang und Konkurrenzdynamik.",
     "related_ids": [
@@ -4998,7 +4998,7 @@
       "Arbeitstag"
     ],
     "difficulty": "intermediate",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Ein prägendes Bild für die Abhängigkeit des Kapitals von lebendiger Arbeit.",
     "explanation_long": "Mit der Metapher macht Marx die soziale Asymmetrie im Produktionsprozess anschaulich. Maschinen, Geld und Fabriken erzeugen keinen Wert aus sich selbst. Erst die Verausgabung lebendiger Arbeitskraft produziert neuen Wert.",
     "related_ids": [
@@ -5021,7 +5021,7 @@
       "Entfremdung"
     ],
     "difficulty": "beginner",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Produktion folgt den Verwertungszielen des Kapitals, nicht individüllen Bedürfnissen.",
     "explanation_long": "Diese Verdichtung fasst den strukturellen Charakter der Lohnarbeit zusammen. Entscheidungen über was und wie produziert wird, orientieren sich an Rentabilität. Das beeinflusst Arbeitsinhalt, Tempo und Ergebnis der Produktion.",
     "related_ids": [
@@ -5044,14 +5044,14 @@
       "Arbeitszeit"
     ],
     "difficulty": "intermediate",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Längere Arbeitszeit ist ein direkter Hebel zur Steigerung des Mehrwerts.",
     "explanation_long": "Marx unterscheidet zwischen notwendiger Arbeit für die Reproduktion des Lohns und Mehrarbeit für das Kapital. Wird der Arbeitstag ausgedehnt, wächst dieser Mehrarbeitsanteil. Historisch führte das zu starken Konflikten um gesetzliche Arbeitszeitgrenzen.",
     "related_ids": [
       "kapital_005",
       "kapital_009"
     ],
-    "fun_fact": "Die Factory Acts in England liefern Marx wichtige empirische Qüllen.",
+    "fun_fact": "Die Factory Acts in England liefern Marx wichtige empirische Quellen.",
     "author": "Karl Marx",
     "author_type": "philosopher"
   },
@@ -5067,7 +5067,7 @@
       "Produktivität"
     ],
     "difficulty": "advanced",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Nicht nur längere Arbeit, auch effizientere Produktion steigert Mehrwert.",
     "explanation_long": "Wenn Güter zur Reproduktion der Arbeitskraft billiger werden, sinkt der notwendige Arbeitsanteil. Dadurch vergrössert sich bei gleichem Arbeitstag die Mehrarbeit. Marx zeigt so den Innovationsdruck innerhalb kapitalistischer Konkurrenz.",
     "related_ids": [
@@ -5090,7 +5090,7 @@
       "Arbeit"
     ],
     "difficulty": "intermediate",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Technik verändert Machtverhältnisse im Betrieb, nicht nur Produktivität.",
     "explanation_long": "Marx analysiert Maschinen als Teil eines gesellschaftlichen Verhältnisses. Sie können Arbeit erleichtern, werden aber unter Profitdruck oft zur Intensivierung eingesetzt. Dadurch verschiebt sich Kontrolle von Arbeiterinnen und Arbeitern zu Management und Eigentum.",
     "related_ids": [
@@ -5113,7 +5113,7 @@
       "Ungleichheit"
     ],
     "difficulty": "advanced",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Wohlstandszuwachs und soziale Polarisierung können zusammen auftreten.",
     "explanation_long": "Marx beschreibt, dass kapitalistische Dynamik gleichzeitig Produktivkraftsteigerung und soziale Unsicherheit erzeugen kann. Entscheidend ist die Verteilung von Eigentum und Entscheidungsmacht. Das Kapitel bindet Einzelbeobachtungen an ein Gesamtgesetz.",
     "related_ids": [
@@ -5136,7 +5136,7 @@
       "Geschichte"
     ],
     "difficulty": "advanced",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Der Startpunkt des Kapitals wird als historischer Enteignungsprozess beschrieben.",
     "explanation_long": "Marx kritisiert den Mythos friedlicher Ersparnis als Ursprung des Kapitals. Stattdessen betont er Gewalt, Enteignung und Rechtsveränderungen als historische Bedingungen. Dadurch wird Kapitalismus als historisch geworden und damit veränderbar dargestellt.",
     "related_ids": [
@@ -5159,7 +5159,7 @@
       "Ideologie"
     ],
     "difficulty": "advanced",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Marktbeziehungen wirken im Alltag oft wie naturhafte Dingbeziehungen.",
     "explanation_long": "Marx erklärt, warum soziale Prozesse im Kapitalismus verschleiert erscheinen. Preise, Märkte und Produkte wirken selbständig, obwohl sie aus menschlicher Arbeit und sozialen Regeln entstehen. Der Begriff hilft, Ideologieeffekte im Alltag zu verstehen.",
     "related_ids": [
@@ -5182,7 +5182,7 @@
       "Produktivität"
     ],
     "difficulty": "intermediate",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Betriebe innovieren nicht nur freiwillig, sondern unter strukturellem Marktdruck.",
     "explanation_long": "Wer Produktivität nicht steigert, verliert Kosten- und Preiswettbewerb. Dadurch verbreiten sich neue Verfahren auch gegen den Willen einzelner Unternehmen. Marx liest Konkurrenz als Zwangsmechanismus des Systems.",
     "related_ids": [
@@ -5205,7 +5205,7 @@
       "Wert"
     ],
     "difficulty": "beginner",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Die Ware ist der Ausgangspunkt der kapitalistischen Analyse.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 1. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 1 und ordnet Die Ware ist der Ausgangspunkt der kapitalistischen Analyse. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5228,7 +5228,7 @@
       "Zirkulation"
     ],
     "difficulty": "intermediate",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Wert entsteht nicht aus der Sache, sondern aus gesellschaftlicher Arbeit.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 1. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 4 und ordnet Wert entsteht nicht aus der Sache, sondern aus gesellschaftlicher Arbeit. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5251,7 +5251,7 @@
       "Arbeit"
     ],
     "difficulty": "advanced",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Mehrwert erklärt den spezifischen Profitmechanismus des Kapitals.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 1. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 7 und ordnet Mehrwert erklärt den spezifischen Profitmechanismus des Kapitals. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5274,7 +5274,7 @@
       "Technik"
     ],
     "difficulty": "beginner",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Maschinerie dient im Kapitalismus oft der Verdichtung von Arbeit.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 1. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 10 und ordnet Maschinerie dient im Kapitalismus oft der Verdichtung von Arbeit. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5297,7 +5297,7 @@
       "Ungleichheit"
     ],
     "difficulty": "intermediate",
-    "series": "kapital1",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Akkumulation verbindet Wachstum mit sozialer Polarisierung.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 1. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 13 und ordnet Akkumulation verbindet Wachstum mit sozialer Polarisierung. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5320,7 +5320,7 @@
       "Bewusstsein"
     ],
     "difficulty": "intermediate",
-    "series": "ideologie",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Die Produktion des Lebens ist der Ausgangspunkt der Geschichte.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Die deutsche Ideologie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Feuerbach und ordnet Die Produktion des Lebens ist der Ausgangspunkt der Geschichte. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5342,7 +5342,7 @@
       "Geschichte"
     ],
     "difficulty": "advanced",
-    "series": "ideologie",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Ideen werden von gesellschaftlicher Praxis getragen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Die deutsche Ideologie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Erster Teil und ordnet Ideen werden von gesellschaftlicher Praxis getragen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5365,7 +5365,7 @@
       "Theorie"
     ],
     "difficulty": "beginner",
-    "series": "ideologie",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Die Arbeitsteilung erzeugt bestimmte Formen des Bewusstseins.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Die deutsche Ideologie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Zweiter Teil und ordnet Die Arbeitsteilung erzeugt bestimmte Formen des Bewusstseins. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5388,7 +5388,7 @@
       "Materialismus"
     ],
     "difficulty": "intermediate",
-    "series": "ideologie",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Ideologie verschleiert den realen Zusammenhang von Leben und Produktion.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Die deutsche Ideologie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Dritter Teil und ordnet Ideologie verschleiert den realen Zusammenhang von Leben und Produktion. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5411,7 +5411,7 @@
       "Philosophie"
     ],
     "difficulty": "advanced",
-    "series": "ideologie",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Kritik an Feuerbach heisst auch Kritik an passivem Materialismus.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Die deutsche Ideologie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Schluss und ordnet Kritik an Feuerbach heisst auch Kritik an passivem Materialismus. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5434,7 +5434,7 @@
       "Herrschaft"
     ],
     "difficulty": "advanced",
-    "series": "fundiert",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Ideen werden als Ausdruck realer Macht- und Eigentumsordnungen verstanden.",
     "explanation_long": "Marx verbindet Bewusstseinsformen mit gesellschaftlicher Struktur. Damit kritisiert er die Vorstellung, Ideengeschichte sei von materiellen Bedingungen unabhängig.",
     "related_ids": [],
@@ -5455,7 +5455,7 @@
       "Geschichte"
     ],
     "difficulty": "beginner",
-    "series": "misc",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -5478,7 +5478,7 @@
       "Krise"
     ],
     "difficulty": "beginner",
-    "series": "kapital",
+    "series": "person_karl_marx",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -5500,7 +5500,7 @@
       "Macht"
     ],
     "difficulty": "intermediate",
-    "series": "brumaire",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Geschichte wiederholt sich nicht einfach, sondern in veränderten Formen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der achtzehnte Brumaire des Louis Bonaparte. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Einleitung und ordnet Geschichte wiederholt sich nicht einfach, sondern in veränderten Formen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5522,7 +5522,7 @@
       "Politik"
     ],
     "difficulty": "advanced",
-    "series": "brumaire",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Staatsmacht verdichtet Klassenverhältnisse in einer politischen Gestalt.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der achtzehnte Brumaire des Louis Bonaparte. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 1 und ordnet Staatsmacht verdichtet Klassenverhältnisse in einer politischen Gestalt. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5545,7 +5545,7 @@
       "Wiederholung"
     ],
     "difficulty": "beginner",
-    "series": "brumaire",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Bauernschaft und Kleinbürgertum spielen eine widersprüchliche Rolle.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der achtzehnte Brumaire des Louis Bonaparte. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 2 und ordnet Bauernschaft und Kleinbürgertum spielen eine widersprüchliche Rolle. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5568,7 +5568,7 @@
       "Reaktion"
     ],
     "difficulty": "intermediate",
-    "series": "brumaire",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Politisches Theater kann reale Konflikte verschleiern.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der achtzehnte Brumaire des Louis Bonaparte. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapitel 3 und ordnet Politisches Theater kann reale Konflikte verschleiern. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5591,7 +5591,7 @@
       "Herrschaft"
     ],
     "difficulty": "advanced",
-    "series": "brumaire",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Die Analyse des Putsches zeigt die Stabilität und Fragilität von Herrschaft.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der achtzehnte Brumaire des Louis Bonaparte. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Schluss und ordnet Die Analyse des Putsches zeigt die Stabilität und Fragilität von Herrschaft. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5614,7 +5614,7 @@
       "Politik"
     ],
     "difficulty": "intermediate",
-    "series": "fundiert",
+    "series": "person_karl_marx",
     "explanation_short": "Marx analysiert politische Wiederholungen als veränderte historische Konstellationen.",
     "explanation_long": "Die berühmte Passage kontrastiert historische Grösse mit späterer Karikatur. Sie zeigt, wie Marx konkrete Ereignisse zugleich historisch und satirisch deutet.",
     "related_ids": [],
@@ -5634,7 +5634,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "kritik1859",
+    "series": "person_karl_marx",
     "explanation_short": "Materielle Lebensverhältnisse prägen Denkweisen und Ideologien.",
     "explanation_long": "Die These richtet sich gegen idealistische Geschichtsbilder. Marx argumentiert, dass Produktion, Eigentum und soziale Stellung den Rahmen des Denkbaren setzen. Das bedeutet nicht Determinismus ohne Spielraum, aber eine klare Priorität materieller Bedingungen.",
     "related_ids": [
@@ -5657,7 +5657,7 @@
       "Geschichte"
     ],
     "difficulty": "advanced",
-    "series": "kritik1859",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Das gesellschaftliche Sein formt das Bewusstsein.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Zur Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Vorrede und ordnet Das gesellschaftliche Sein formt das Bewusstsein. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5680,7 +5680,7 @@
       "Methode"
     ],
     "difficulty": "beginner",
-    "series": "kritik1859",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Produktionsverhältnisse bilden die Basis historischer Analysen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Zur Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Erster Abschnitt und ordnet Produktionsverhältnisse bilden die Basis historischer Analysen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5703,7 +5703,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "kritik1859",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Theorie muss sich an den realen Formen der Produktion messen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Zur Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Zweiter Abschnitt und ordnet Theorie muss sich an den realen Formen der Produktion messen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5726,7 +5726,7 @@
       "Theorie"
     ],
     "difficulty": "advanced",
-    "series": "kritik1859",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Ökonomische Kategorien sind historische Formen, keine Naturtatsachen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Zur Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Dritter Abschnitt und ordnet Ökonomische Kategorien sind historische Formen, keine Naturtatsachen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5749,7 +5749,7 @@
       "Entwicklung"
     ],
     "difficulty": "beginner",
-    "series": "kritik1859",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Die Kritik beginnt mit der Analyse der materiellen Verhältnisse.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Zur Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Vorbemerkung und ordnet Die Kritik beginnt mit der Analyse der materiellen Verhältnisse. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5772,7 +5772,7 @@
       "Methode"
     ],
     "difficulty": "intermediate",
-    "series": "antidühring",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Kritik an Dogmen bedeutet auch Kritik an starren Denkformen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Anti-Duhring. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Einleitung und ordnet Kritik an Dogmen bedeutet auch Kritik an starren Denkformen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5794,7 +5794,7 @@
       "Gesellschaft"
     ],
     "difficulty": "advanced",
-    "series": "antidühring",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Sozialismus wird als Bewegung der realen Verhältnisse bestimmt.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Anti-Duhring. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Dialektik und ordnet Sozialismus wird als Bewegung der realen Verhältnisse bestimmt. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5817,7 +5817,7 @@
       "Theorie"
     ],
     "difficulty": "beginner",
-    "series": "antidühring",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Wissenschaftliche Analyse ersetzt blossen Moralappell.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Anti-Duhring. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Ökonomie und ordnet Wissenschaftliche Analyse ersetzt blossen Moralappell. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5840,7 +5840,7 @@
       "System"
     ],
     "difficulty": "intermediate",
-    "series": "antidühring",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Dialektik hilft, Widersprüche in Bewegung zu sehen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Anti-Duhring. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Sozialismus und ordnet Dialektik hilft, Widersprüche in Bewegung zu sehen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5863,7 +5863,7 @@
       "Praxis"
     ],
     "difficulty": "advanced",
-    "series": "antidühring",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Die Theorie muss sich an der Praxis bewahren.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Anti-Duhring. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Schluss und ordnet Die Theorie muss sich an der Praxis bewahren. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5886,7 +5886,7 @@
       "Bewegung"
     ],
     "difficulty": "intermediate",
-    "series": "briefe",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Briefe zeigen die Verbindung von Theorie, Taktik und Alltag.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Briefe und Korrespondenz. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Brief 1 und ordnet Briefe zeigen die Verbindung von Theorie, Taktik und Alltag. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5908,7 +5908,7 @@
       "Politik"
     ],
     "difficulty": "advanced",
-    "series": "briefe",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Politische Organisation entsteht in konkreten Beziehungen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Briefe und Korrespondenz. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Brief 2 und ordnet Politische Organisation entsteht in konkreten Beziehungen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5931,7 +5931,7 @@
       "Strategie"
     ],
     "difficulty": "beginner",
-    "series": "briefe",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Solidarität wirkt auch jenseits grosser Programme.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Briefe und Korrespondenz. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Brief 3 und ordnet Solidarität wirkt auch jenseits grosser Programme. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5954,7 +5954,7 @@
       "Kampf"
     ],
     "difficulty": "intermediate",
-    "series": "briefe",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Korrespondenz erhellt die Entwicklung von Argumenten.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Briefe und Korrespondenz. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Brief 4 und ordnet Korrespondenz erhellt die Entwicklung von Argumenten. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -5977,7 +5977,7 @@
       "Netzwerk"
     ],
     "difficulty": "advanced",
-    "series": "briefe",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kurz erklärt: Die Briefe machen die internationale Vernetzung sichtbar.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Briefe und Korrespondenz. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Brief 5 und ordnet Die Briefe machen die internationale Vernetzung sichtbar. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6000,7 +6000,7 @@
       "Erkenntnis"
     ],
     "difficulty": "intermediate",
-    "series": "feuerbach",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Praxis ist der Prüfstein aller Philosophie.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Ludwig Feuerbach und der Ausgang der klassischen deutschen Philosophie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Feuerbach und ordnet Praxis ist der Prüfstein aller Philosophie. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6022,7 +6022,7 @@
       "Philosophie"
     ],
     "difficulty": "advanced",
-    "series": "feuerbach",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Menschen bilden sich in ihrer tätigen Auseinandersetzung mit der Welt.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Ludwig Feuerbach und der Ausgang der klassischen deutschen Philosophie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Praxis und ordnet Menschen bilden sich in ihrer tätigen Auseinandersetzung mit der Welt. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6045,7 +6045,7 @@
       "Kritik"
     ],
     "difficulty": "beginner",
-    "series": "feuerbach",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Religion wird als menschliche Projektion erklärt.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Ludwig Feuerbach und der Ausgang der klassischen deutschen Philosophie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Materialismus und ordnet Religion wird als menschliche Projektion erklärt. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6068,7 +6068,7 @@
       "Tätigkeit"
     ],
     "difficulty": "intermediate",
-    "series": "feuerbach",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Materialismus braucht Bewegung und Geschichte, nicht nur Anschauung.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Ludwig Feuerbach und der Ausgang der klassischen deutschen Philosophie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Dialektik und ordnet Materialismus braucht Bewegung und Geschichte, nicht nur Anschauung. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6091,7 +6091,7 @@
       "Theorie"
     ],
     "difficulty": "advanced",
-    "series": "feuerbach",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Die klassische Philosophie endet in der Frage nach Praxis.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Ludwig Feuerbach und der Ausgang der klassischen deutschen Philosophie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Schluss und ordnet Die klassische Philosophie endet in der Frage nach Praxis. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6114,7 +6114,7 @@
       "Methode"
     ],
     "difficulty": "intermediate",
-    "series": "grundrisse",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Abstrakte Kategorien gewinnen erst im historischen Kontext Bedeutung.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Grundrisse der Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Einleitung und ordnet Abstrakte Kategorien gewinnen erst im historischen Kontext Bedeutung. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6136,7 +6136,7 @@
       "Arbeit"
     ],
     "difficulty": "advanced",
-    "series": "grundrisse",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Maschinen können Arbeit verkürzen und zugleich kontrollieren.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Grundrisse der Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Fragment Maschine und ordnet Maschinen können Arbeit verkürzen und zugleich kontrollieren. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6159,7 +6159,7 @@
       "Krise"
     ],
     "difficulty": "beginner",
-    "series": "grundrisse",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Geld vermittelt Produktion und Austausch als allgemeine Form.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Grundrisse der Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Geld und ordnet Geld vermittelt Produktion und Austausch als allgemeine Form. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6182,7 +6182,7 @@
       "Zeit"
     ],
     "difficulty": "intermediate",
-    "series": "grundrisse",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Produktivkraft und gesellschaftliche Form gehören zusammen gedacht.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Grundrisse der Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Kapital und ordnet Produktivkraft und gesellschaftliche Form gehören zusammen gedacht. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6205,7 +6205,7 @@
       "Theorie"
     ],
     "difficulty": "advanced",
-    "series": "grundrisse",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Die Grundrisse zeigen die Arbeit am entstehenden System des Kapitals.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Grundrisse der Kritik der Politischen Ökonomie. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Abschluss und ordnet Die Grundrisse zeigen die Arbeit am entstehenden System des Kapitals. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6228,7 +6228,7 @@
       "Kreislauf"
     ],
     "difficulty": "intermediate",
-    "series": "kapital2",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Die Reproduktion des Gesamtkapitals verlangt einen kontinuierlichen Kreislauf.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 2. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band II: Kreislauf und ordnet Die Reproduktion des Gesamtkapitals verlangt einen kontinuierlichen Kreislauf. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6250,7 +6250,7 @@
       "Kapital"
     ],
     "difficulty": "advanced",
-    "series": "kapital2",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Zirkulation ist für das Kapital keine Nebenfrage, sondern Bedingung seiner Bewegung.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 2. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band II: Umschlag und ordnet Zirkulation ist für das Kapital keine Nebenfrage, sondern Bedingung seiner Bewegung. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6273,7 +6273,7 @@
       "Zeit"
     ],
     "difficulty": "beginner",
-    "series": "kapital2",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Der Umschlag des Kapitals beeinflusst Profit und Wachstum entscheidend.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 2. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band II: Reproduktion und ordnet Der Umschlag des Kapitals beeinflusst Profit und Wachstum entscheidend. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6296,7 +6296,7 @@
       "Warenkapital"
     ],
     "difficulty": "intermediate",
-    "series": "kapital2",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Produktions- und Zirkulationszeit greifen im Kapitalismus ineinander.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 2. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band II: Zirkulation und ordnet Produktions- und Zirkulationszeit greifen im Kapitalismus ineinander. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6319,7 +6319,7 @@
       "Produktion"
     ],
     "difficulty": "advanced",
-    "series": "kapital2",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Jede Unterbrechung des Kreislaufs macht die Abhängigkeit sichtbar.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 2. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band II: Geldkapital und ordnet Jede Unterbrechung des Kreislaufs macht die Abhängigkeit sichtbar. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6342,7 +6342,7 @@
       "Konkurrenz"
     ],
     "difficulty": "intermediate",
-    "series": "kapital3",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Die Tendenz der Profitrate zeigt den inneren Widerspruch kapitalistischer Produktion.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 3. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band III: Profitrate und ordnet Die Tendenz der Profitrate zeigt den inneren Widerspruch kapitalistischer Produktion. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6364,7 +6364,7 @@
       "Finanz"
     ],
     "difficulty": "advanced",
-    "series": "kapital3",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Kredit erweitert die Dynamik des Kapitals und verstärkt zugleich seine Risiken.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 3. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band III: Kredit und ordnet Kredit erweitert die Dynamik des Kapitals und verstärkt zugleich seine Risiken. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6387,7 +6387,7 @@
       "Eigentum"
     ],
     "difficulty": "beginner",
-    "series": "kapital3",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Grundrente macht Eigentum an Natur und Raum ökonomisch wirksam.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 3. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band III: Ground Rent und ordnet Grundrente macht Eigentum an Natur und Raum ökonomisch wirksam. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6410,7 +6410,7 @@
       "Preis"
     ],
     "difficulty": "intermediate",
-    "series": "kapital3",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Konkurrenz zwingt Einzelkapitale zu steter Anpassung.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 3. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band III: Konkurrenz und ordnet Konkurrenz zwingt Einzelkapitale zu steter Anpassung. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6433,7 +6433,7 @@
       "Krise"
     ],
     "difficulty": "advanced",
-    "series": "kapital3",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Transformation von Werten in Preise bleibt ein Kernproblem der politischen Ökonomie.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Das Kapital Band 3. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Band III: Transformation und ordnet Transformation von Werten in Preise bleibt ein Kernproblem der politischen Ökonomie. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6456,7 +6456,7 @@
       "Arbeitskraft"
     ],
     "difficulty": "intermediate",
-    "series": "lohnarbeit",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Lohnarbeit ist der Austausch von Arbeitskraft gegen Geld.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Lohnarbeit und Kapital. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Vortrag und ordnet Lohnarbeit ist der Austausch von Arbeitskraft gegen Geld. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6478,7 +6478,7 @@
       "Tausch"
     ],
     "difficulty": "advanced",
-    "series": "lohnarbeit",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Kapital und Arbeit stehen in einer sozialen Beziehung, nicht nur in einem Vertrag.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Lohnarbeit und Kapital. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Teil 1 und ordnet Kapital und Arbeit stehen in einer sozialen Beziehung, nicht nur in einem Vertrag. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6501,7 +6501,7 @@
       "Arbeitszeit"
     ],
     "difficulty": "beginner",
-    "series": "lohnarbeit",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Der Lohn deckt die Arbeitskraft, nicht den vollen geschaffenen Wert.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Lohnarbeit und Kapital. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Teil 2 und ordnet Der Lohn deckt die Arbeitskraft, nicht den vollen geschaffenen Wert. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6524,7 +6524,7 @@
       "Markt"
     ],
     "difficulty": "intermediate",
-    "series": "lohnarbeit",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Ausbeutung bleibt auch im rechtlich freien Vertrag möglich.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Lohnarbeit und Kapital. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Teil 3 und ordnet Ausbeutung bleibt auch im rechtlich freien Vertrag möglich. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6547,7 +6547,7 @@
       "Produktion"
     ],
     "difficulty": "advanced",
-    "series": "lohnarbeit",
+    "series": "person_karl_marx",
     "explanation_short": "Kurz erklärt: Der Markt verdeckt oft die Abhängigkeit der Arbeit.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Lohnarbeit und Kapital. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Schluss und ordnet Der Markt verdeckt oft die Abhängigkeit der Arbeit. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6570,7 +6570,7 @@
       "Geschichte"
     ],
     "difficulty": "intermediate",
-    "series": "ursprung",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Familie, Eigentum und Staat werden historisch entwickelt, nicht naturgegeben.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der Ursprung der Familie, des Privateigentums und des Staats. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Einleitung und ordnet Familie, Eigentum und Staat werden historisch entwickelt, nicht naturgegeben. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6592,7 +6592,7 @@
       "Eigentum"
     ],
     "difficulty": "advanced",
-    "series": "ursprung",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Privateigentum verändert soziale Bindungen und Machtverhältnisse.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der Ursprung der Familie, des Privateigentums und des Staats. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Familie und ordnet Privateigentum verändert soziale Bindungen und Machtverhältnisse. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6615,7 +6615,7 @@
       "Herrschaft"
     ],
     "difficulty": "beginner",
-    "series": "ursprung",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Der Staat entsteht aus gesellschaftlichen Gegensätzen.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der Ursprung der Familie, des Privateigentums und des Staats. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Privateigentum und ordnet Der Staat entsteht aus gesellschaftlichen Gegensätzen. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6638,7 +6638,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "ursprung",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Verwandtschaftsformen sind historisch wandelbar.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der Ursprung der Familie, des Privateigentums und des Staats. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Staat und ordnet Verwandtschaftsformen sind historisch wandelbar. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6661,7 +6661,7 @@
       "Formen"
     ],
     "difficulty": "advanced",
-    "series": "ursprung",
+    "series": "person_friedrich_engels",
     "explanation_short": "Kurz erklärt: Patriarchale Ordnung ist an Eigentumsverhältnisse gebunden.",
     "explanation_long": "Die Passage verdichtet einen zentralen Gedanken aus Der Ursprung der Familie, des Privateigentums und des Staats. Sie eignet sich als Arbeitszitat für den thematischen Zugriff auf Schluss und ordnet Patriarchale Ordnung ist an Eigentumsverhältnisse gebunden. in den historischen Zusammenhang ein.",
     "related_ids": [
@@ -6685,7 +6685,7 @@
       "Produktion"
     ],
     "difficulty": "beginner",
-    "series": "misc",
+    "series": "person_karl_marx",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -6708,7 +6708,7 @@
       "Bonapartismus"
     ],
     "difficulty": "beginner",
-    "series": "misc",
+    "series": "person_karl_marx",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -6730,7 +6730,7 @@
       "Philosophie"
     ],
     "difficulty": "beginner",
-    "series": "fundiert",
+    "series": "person_karl_marx",
     "explanation_short": "Die elfte Feuerbach-These markiert den Vorrang gesellschaftlicher Praxis.",
     "explanation_long": "Marx grenzt sich von rein kontemplativer Philosophie ab. Erkenntnis wird erst durch verändernde Praxis politisch wirksam.",
     "related_ids": [],
@@ -6751,7 +6751,7 @@
       "Materialismus"
     ],
     "difficulty": "beginner",
-    "series": "feuerbach",
+    "series": "person_karl_marx",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -6774,7 +6774,7 @@
       "Dialektik"
     ],
     "difficulty": "beginner",
-    "series": "misc",
+    "series": "person_friedrich_engels",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -6797,7 +6797,7 @@
       "Persönliches"
     ],
     "difficulty": "beginner",
-    "series": "misc",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Dieses Zitat betont, dass Theorie und Klassenpraxis zusammen gedacht werden müssen.",
     "explanation_long": "Der Text entstand im Kontext der europaeischen Krisen des 19. Jahrhunderts und reagiert auf Industrialisierung, politische Repression und die Neuordnung der Klassenverhältnisse. Marx und Engels schrieben in einer Phase, in der Arbeiterbewegungen, Pressekonflikte und Exilerfahrungen die Theorie prägten. Die Passage verbindet ökonomische Analyse mit historischer Dynamik und verweist auf den Zusammenhang von Ausbeutung, Staat und Ideologie. Im Entstehungskontext war dies eine Antwort auf reformistische und idealistische Erklärungen, die die materiellen Bedingungen unterschätzten.",
     "related_ids": [
@@ -6819,7 +6819,7 @@
       "Politik"
     ],
     "difficulty": "beginner",
-    "series": "fundiert",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Die berühmte Eröffnung des Manifests beschreibt die politische Furcht der alten Ordnung.",
     "explanation_long": "Marx und Engels nutzen die Metapher des Gespensts, um die europaweite Wirkung der kommunistischen Bewegung zu zeigen. Das Bild verweist auf die Angst der herrschenden Klassen vor organisierter Arbeiterpolitik.",
     "related_ids": [],
@@ -6839,7 +6839,7 @@
       "Klassenkampf"
     ],
     "difficulty": "beginner",
-    "series": "fundiert",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Kernthese des historischen Materialismus im Manifest.",
     "explanation_long": "Die Formel fasst Marx' Geschichtsdeutung zusammen: soziale Entwicklung wird durch Konflikte zwischen Klassen bestimmt, nicht durch Ideen allein.",
     "related_ids": [],
@@ -6859,7 +6859,7 @@
       "Bewegung"
     ],
     "difficulty": "beginner",
-    "series": "fundiert",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Der programmatische Schlussappell des Manifests.",
     "explanation_long": "Der Satz fordert grenzübergreifende Solidarität der Arbeiterklasse. Marx und Engels setzen damit auf internationale Organisation statt nationaler Vereinzelung.",
     "related_ids": [],
@@ -6879,7 +6879,7 @@
       "Theorie"
     ],
     "difficulty": "intermediate",
-    "series": "fundiert",
+    "series": "person_karl_marx_&_friedrich_engels",
     "explanation_short": "Marx und Engels verdichten das kommunistische Programm auf die Eigentumsfrage.",
     "explanation_long": "Der Satz markiert den zentralen Unterschied zur bürgerlichen Gesellschaft: nicht individülles Gebrauchseigentum, sondern kapitalistisches Privateigentum an Produktionsmitteln steht zur Kritik.",
     "related_ids": [],
@@ -6899,7 +6899,7 @@
       "Wandel"
     ],
     "difficulty": "intermediate",
-    "series": "burke",
+    "series": "person_edmund_burke",
     "explanation_short": "Kurz erklärt: Ein Staat braucht kontrollierte Veränderung, um sich selbst zu erhalten.",
     "explanation_long": "Burke verbindet politische Stabilität mit begrenzter Veränderungsfähigkeit. Der Satz ist zentral, weil er Reform nicht als Gegenspieler von Ordnung darstellt, sondern als Bedingung ihrer Dauer.",
     "related_ids": [],
@@ -6920,7 +6920,7 @@
       "Kontinuität"
     ],
     "difficulty": "intermediate",
-    "series": "burke",
+    "series": "person_edmund_burke",
     "explanation_short": "Kurz erklärt: Konservative Politik verbindet Wandel mit Kontinuität.",
     "explanation_long": "Das Zitat adressiert zentrale konservative Marker wie Ordnung, Tradition und Kontinuität und erhöht damit die Passung für konservative Profile.",
     "related_ids": [
@@ -6943,7 +6943,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "fundiert",
+    "series": "person_karl_marx",
     "explanation_short": "Marx deutet Religion als Reaktion auf reales Leiden, nicht nur als Irrtum.",
     "explanation_long": "Die Passage wird oft verkürzt zitiert. Im Kontext beschreibt Marx Religion zugleich als Ausdruck von Not und als ideologische Form, die gesellschaftliche Veränderung ersetzen kann.",
     "related_ids": [],
@@ -6963,7 +6963,7 @@
       "Diskussion"
     ],
     "difficulty": "beginner",
-    "series": "mill",
+    "series": "person_john_stuart_mill",
     "explanation_short": "Kurz erklärt: Wahrheitsfindung braucht die Auseinandersetzung mit Gegenargumenten.",
     "explanation_long": "Mill begründet hier die Freiheit der Diskussion: Ohne die Gegenseite zu kennen, bleibt das eigene Urteil unvollständig. Der Satz ist ein Kernstück seines Arguments für offene Debatte.",
     "related_ids": [],
@@ -6986,7 +6986,7 @@
       "Ethik"
     ],
     "difficulty": "intermediate",
-    "series": "person_plato",
+    "series": "person_platon",
     "explanation_short": "Platon: Mangel an Wissen führt zu schlechtem Handeln.",
     "explanation_long": "Platons These, dass Unwissenheit der Ursprung aller moralischen Fehler ist - Bildung als Weg zur Tugend.",
     "related_ids": [
@@ -7139,7 +7139,7 @@
   },
   {
     "id": "rousseau_001__2",
-    "author": "Jean-Jacqüs Rousseau",
+    "author": "Jean-Jacques Rousseau",
     "author_type": "philosopher",
     "text_de": "Der Mensch wird geboren frei, und überall liegt er in Ketten.",
     "text_original": "Man is born free, and everywhere he is in chains.",
@@ -7152,7 +7152,7 @@
       "Gesellschaftsvertrag"
     ],
     "difficulty": "easy",
-    "series": "person_jean_jacqüs_rousseau",
+    "series": "person_jean_jacques_rousseau",
     "explanation_short": "Menschen sind frei geboren, werden aber unterdrückt.",
     "explanation_long": "Rousseaus Kritik an der Diskrepanz zwischen natürlicher Freiheit und faktischer Unterdrückung - ein Schlüsselsatz der Aufklärung.",
     "related_ids": [
@@ -7163,7 +7163,7 @@
   },
   {
     "id": "rousseau_002__2",
-    "author": "Jean-Jacqüs Rousseau",
+    "author": "Jean-Jacques Rousseau",
     "author_type": "philosopher",
     "text_de": "Die Volkssouveränität kann nicht durch Repräsentation ausgeübt werden. Unmittelbare Partizipation ist notwendig.",
     "text_original": "Sovereignty cannot be transferred; popular sovereignty must be exercised directly.",
@@ -7176,7 +7176,7 @@
       "Volkssouveränität"
     ],
     "difficulty": "hard",
-    "series": "person_jean_jacqüs_rousseau",
+    "series": "person_jean_jacques_rousseau",
     "explanation_short": "Das Volk muss direkt herrschen, nicht durch Vertreter.",
     "explanation_long": "Rousseaus Konzept der direkten Partizipation als notwendig für echte Volkssouveränität - eine Grundidee der direkten Demokratie.",
     "related_ids": [
@@ -7345,7 +7345,7 @@
   },
   {
     "id": "tocqüville_001__3",
-    "author": "Alexis de Tocqüville",
+    "author": "Alexis de Tocqueville",
     "author_type": "philosopher",
     "text_de": "Die Tyrannei der Mehrheit ist das Hauptrisiko der amerikanischen Demokratie.",
     "text_original": "I know of no country in which there is so little independence of mind and real freedom of discussion as in America.",
@@ -7358,9 +7358,9 @@
       "Meinungsfreiheit"
     ],
     "difficulty": "hard",
-    "series": "person_tocqüville",
+    "series": "person_alexis_de_tocqueville",
     "explanation_short": "Demokratische Gesellschaften können unterdrückerisch sein.",
-    "explanation_long": "Tocqüvilles scharfsinnige Analyse der Vereinigten Staaten - warnt vor der Tyrannei der öffentlichen Meinung und Konformitätsdruck.",
+    "explanation_long": "Tocquevilles scharfsinnige Analyse der Vereinigten Staaten - warnt vor der Tyrannei der öffentlichen Meinung und Konformitätsdruck.",
     "related_ids": [
       "mill_001"
     ],
@@ -7368,7 +7368,7 @@
   },
   {
     "id": "tocqüville_002",
-    "author": "Alexis de Tocqüville",
+    "author": "Alexis de Tocqueville",
     "author_type": "philosopher",
     "text_de": "Demokratie ist die Herrschaft des Volkes, aber dieses Volk kann ebenso tyrannisch sein wie ein Diktator.",
     "text_original": "The majority has a habit of speaking of the whole nation, but thinking always of the greatest part of the nation.",
@@ -7381,9 +7381,9 @@
       "Partizipation"
     ],
     "difficulty": "intermediate",
-    "series": "person_tocqüville",
+    "series": "person_alexis_de_tocqueville",
     "explanation_short": "Mehrheit ist nicht notwendig Allgemeinheit.",
-    "explanation_long": "Tocqüvilles Kritik an der idealistischen Demokratie - die Mehrheit ist keine bloße Addition aller, sondern eine Machtstruktur.",
+    "explanation_long": "Tocquevilles Kritik an der idealistischen Demokratie - die Mehrheit ist keine bloße Addition aller, sondern eine Machtstruktur.",
     "related_ids": [],
     "political_orientation": "conservative"
   },
@@ -7402,7 +7402,7 @@
       "Sozialismus"
     ],
     "difficulty": "hard",
-    "series": "person_mikhail_bakunin",
+    "series": "person_michail_bakunin",
     "explanation_short": "Anarchie verbindet Freiheit und Solidarität.",
     "explanation_long": "Bakunins Definition der anarchistischen Position zwischen reiner Freiheit (die unterdrückend ist) und reinem Sozialismus (der Sklaverei wird).",
     "related_ids": [
@@ -7426,7 +7426,7 @@
       "Freiheit"
     ],
     "difficulty": "hard",
-    "series": "person_mikhail_bakunin",
+    "series": "person_michail_bakunin",
     "explanation_short": "Der Staat ist inhärent unterdrückend.",
     "explanation_long": "Bakunins radikale Staatskritik und die anarchistische Forderung nach Aufhebung des Staates zugunsten direkter, freiwilliger Assoziationen.",
     "related_ids": [
@@ -7449,7 +7449,7 @@
       "Partei"
     ],
     "difficulty": "hard",
-    "series": "person_vladimir_lenin",
+    "series": "person_wladimir_lenin",
     "explanation_short": "Die Arbeiterklasse braucht eine Kader-Partei.",
     "explanation_long": "Lenins Konzept der Vorhut-Partei - professionelle Revolutionäre, die im Namen der Arbeiterklasse handeln - umstritten bis heute.",
     "related_ids": [
@@ -7473,7 +7473,7 @@
       "Kapitalismus"
     ],
     "difficulty": "hard",
-    "series": "person_vladimir_lenin",
+    "series": "person_wladimir_lenin",
     "explanation_short": "Imperialismus ist kapitalistisches Endstadium.",
     "explanation_long": "Lenins Analyse des Imperialismus als notwendige Phase kapitalistischer Entwicklung - einflusreiches Werk der marxistischen Debatte.",
     "related_ids": [
@@ -7564,7 +7564,7 @@
       "Wissen"
     ],
     "difficulty": "hard",
-    "series": "person_friedrich_hayek",
+    "series": "person_friedrich_august_von_hayek",
     "explanation_short": "Märkte sind dezentralisierte Informationssysteme.",
     "explanation_long": "Hayeks Kritik an sozialistischer Planung und sein Konzept der Marktpreise als Informationssystem - Grundlage libertärer Theorie.",
     "related_ids": [
@@ -7588,7 +7588,7 @@
       "Totalitarismus"
     ],
     "difficulty": "hard",
-    "series": "person_friedrich_hayek",
+    "series": "person_friedrich_august_von_hayek",
     "explanation_short": "Zentrale Planung führt zu Unfreiheit.",
     "explanation_long": "Hayeks einflussreiche Analyse, wie wirtschaftliche Zentralplanung zur Tyrannei führt - wichtig für Debatte über Markt vs. Staat.",
     "related_ids": [
@@ -7648,7 +7648,7 @@
     "author_type": "economist",
     "text_de": "Auf lange Sicht sind wir alle tot.",
     "text_original": "In the long run we are all dead.",
-    "source": "The Economic Conseqünces of the Peace",
+    "source": "The Economic Consequences of the Peace",
     "year": 1919,
     "chapter": "Zeitlichkeit",
     "category": [
@@ -8056,7 +8056,7 @@
     "author": "Emma Goldman",
     "author_type": "anarchist",
     "text_de": "Wer bereit ist für echte Freiheit, muss verantwortlich sein. Freiheit ohne Verantwortung ist Chaos.",
-    "text_original": "Freedom, love, and individuality are the elements of trü happiness.",
+    "text_original": "Freedom, love, and individuality are the elements of true happiness.",
     "source": "Gesammelte Essays",
     "year": 1910,
     "chapter": "Anarcha-Feminismus",
@@ -8154,7 +8154,7 @@
       "Gleichheit"
     ],
     "difficulty": "easy",
-    "series": "person_martin_luther_king",
+    "series": "person_martin_luther_king_jr.",
     "explanation_short": "Urteil nach Charakter, nicht Rasse.",
     "explanation_long": "Kings berühmteste Rede über den Traum von Rassengleichheit - ein zentrales Dokument der Bürgerrechtsbewegung.",
     "related_ids": [],
@@ -8175,7 +8175,7 @@
       "Protest"
     ],
     "difficulty": "intermediate",
-    "series": "person_martin_luther_king",
+    "series": "person_martin_luther_king_jr.",
     "explanation_short": "Gerechtigkeit ist global verflochten.",
     "explanation_long": "Kings These zur Universalität von Gerechtigkeit - dass Ungerechtigkeit an einem Ort die Gerechtigkeit überall bedroht.",
     "related_ids": [],
@@ -8284,7 +8284,7 @@
       "Geschichte"
     ],
     "difficulty": "hard",
-    "series": "person_thomas_kuhn",
+    "series": "person_thomas_s._kuhn",
     "explanation_short": "Wissenschaft schreitet durch Paradigma-Wechsel, nicht Anhäufung.",
     "explanation_long": "Kuhns revolutionäre Theorie: Wissenschaft arbeitet nicht durch kontinuierliche Akkumulation, sondern durch Paradigmenverschiebungen.",
     "related_ids": [
@@ -8294,7 +8294,7 @@
   },
   {
     "id": "derrida_001",
-    "author": "Jacqüs Derrida",
+    "author": "Jacques Derrida",
     "author_type": "philosopher",
     "text_de": "Es gibt nichts außerhalb des Textes. Bedeutung ist verschoben und unendlich aufgeschoben.",
     "text_original": "There is no outside-text.",
@@ -8307,7 +8307,7 @@
       "Bedeutung"
     ],
     "difficulty": "hard",
-    "series": "person_jacqüs_derrida",
+    "series": "person_jacques_derrida",
     "explanation_short": "Bedeutung ist nicht stabil, sondern relational und verschoben.",
     "explanation_long": "Derridas Grundthese der Dekonstruktion - dass Bedeutung nicht gegeben ist, sondern durch Unterschiede und Verschiebung produziert wird.",
     "related_ids": [
@@ -8392,7 +8392,7 @@
       "Wirtschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_eisenhower",
+    "series": "person_dwight_d._eisenhower",
     "explanation_short": "Warnung vor zu großem Einfluss von Militär und Rüstungsindustrie.",
     "explanation_long": "Eisenhowers Abschiedsrede mahnte zur Wachsamkeit gegen ein Zusammenspiel von Politik, Militär und Industrie, das demokratische Kontrolle schwächen kann.",
     "related_ids": []
@@ -8412,7 +8412,7 @@
       "Mut"
     ],
     "difficulty": "intermediate",
-    "series": "person_hemingway",
+    "series": "person_ernest_hemingway",
     "explanation_short": "Kurz gefasst: Mut als Haltung in Drucksituationen.",
     "explanation_long": "Hemingways oft zitierte Formulierung beschreibt einen stoischen Umgang mit schwierigen Situationen, vielfach in Kriegs- und Abenteuerliteratur rezipiert.",
     "related_ids": []
@@ -8432,7 +8432,7 @@
       "Realpolitik"
     ],
     "difficulty": "advanced",
-    "series": "person_machiavelli",
+    "series": "person_niccolò_machiavelli",
     "explanation_short": "Bekannte Paraphrase eigener Politik-Theorie; Kontext beachten.",
     "explanation_long": "Machiavellis Werk wird oft so zusammengefasst; wichtig ist die historische Einbettung und die Frage, für wen und in welcher Lage solche Mittel diskutiert wurden.",
     "related_ids": []
@@ -8440,7 +8440,7 @@
   {
     "id": "wilfred_owen_001",
     "author": "Wilfred Owen",
-    "author_type": "pöt",
+    "author_type": "poet",
     "text_de": "Auf dem Schlachtfeld wird Heldenmut oft durch Leid bezahlt.",
     "source": "Dichtungsparaphrase",
     "year": 1918,
@@ -8449,7 +8449,7 @@
     "category": [
       "Krieg",
       "Kritik",
-      "Pösie"
+      "Poesie"
     ],
     "difficulty": "advanced",
     "series": "person_wilfred_owen",
@@ -8472,7 +8472,7 @@
       "Emanzipation"
     ],
     "difficulty": "intermediate",
-    "series": "person_lumumba",
+    "series": "person_patrice_lumumba",
     "explanation_short": "Anti-koloniale Selbstbestimmungsforderung.",
     "explanation_long": "Lumumba war eine Schlüsselfigur der kongolesischen Unabhängigkeitsbewegung; dieses Thema passt zu kolonialismuskritischen Feeds.",
     "related_ids": []
@@ -8512,7 +8512,7 @@
       "Arbeit"
     ],
     "difficulty": "advanced",
-    "series": "person_clr_james",
+    "series": "person_c._l._r._james",
     "explanation_short": "Blick auf die Rolle der Massen in Befreiungsprozessen.",
     "explanation_long": "CLR James analysierte koloniale Befreiungsbewegungen und die aktive Rolle von Arbeiter- und Volksmassen.",
     "related_ids": []
@@ -8552,7 +8552,7 @@
       "Politik"
     ],
     "difficulty": "intermediate",
-    "series": "person_jose_marti",
+    "series": "person_josé_martí",
     "explanation_short": "Früher revolutionärer Appell zur Unabhängigkeit.",
     "explanation_long": "Martí war ein zentraler Denker der kubanischen Unabhängigkeitsbewegung; seine Texte verbinden Patriotismus mit Kulturkritik.",
     "related_ids": []
@@ -8572,7 +8572,7 @@
       "Ethik"
     ],
     "difficulty": "advanced",
-    "series": "person_aquinas",
+    "series": "person_thomas_von_aquin",
     "explanation_short": "Klassische Synthese von Theologie und Philosophie.",
     "explanation_long": "Thomas von Aquin versuchte, christliche Lehren systematisch mit aristotelischer Vernunft zu verbinden.",
     "related_ids": []
@@ -8592,7 +8592,7 @@
       "Widerstand"
     ],
     "difficulty": "intermediate",
-    "series": "person_bonhöffer",
+    "series": "person_dietrich_bonhöffer",
     "explanation_short": "Bonhöffer ruft zur Verantwortung gegen Unrecht auf.",
     "explanation_long": "Als Gegner des Nationalsozialismus forderte Bonhöffer ethisches Handeln statt passiver Anpassung.",
     "related_ids": []
@@ -8612,7 +8612,7 @@
       "Ethik"
     ],
     "difficulty": "intermediate",
-    "series": "person_cs_lewis",
+    "series": "person_c._s._lewis",
     "explanation_short": "Apologetische Verbindung von Vernunft und Glaube.",
     "explanation_long": "Lewis schrieb populäre Werke, die religiöse Themen auf rationale Weise erklären und diskutieren.",
     "related_ids": []
@@ -8652,7 +8652,7 @@
       "Werte"
     ],
     "difficulty": "intermediate",
-    "series": "person_schweitzer",
+    "series": "person_albert_schweitzer",
     "explanation_short": "Ethik-Grundsatz, der Verantwortung gegenüber Leben betont.",
     "explanation_long": "Schweitzers Ethik fordert Respekt vor allen Lebewesen und hat Einfluss auf moderne Umwelt- und Tierschutzdebatten.",
     "related_ids": []
@@ -8732,7 +8732,7 @@
       "Sozialismus"
     ],
     "difficulty": "intermediate",
-    "series": "person_eugene_debs",
+    "series": "person_eugene_v._debs",
     "explanation_short": "Einsatz für Arbeiterrechte und soziale Reformen.",
     "explanation_long": "Debs war eine zentrale Figur der US-amerikanischen Arbeiterbewegung und prägte linke Politik und Streikkultur.",
     "related_ids": []
@@ -8742,10 +8742,10 @@
     "author": "Betty Friedan",
     "author_type": "writer",
     "text_de": "Die Rolle der Frau darf nicht auf Hausarbeit reduziert werden.",
-    "source": "The Feminine Mystiqü",
+    "source": "The Feminine Mystique",
     "year": 1963,
     "text_original": "The role of women should not be reduced to household tasks.",
-    "chapter": "Feminist Critiqü",
+    "chapter": "Feminist Critique",
     "category": [
       "Frauen",
       "Gleichheit",
@@ -8792,7 +8792,7 @@
       "Rechte"
     ],
     "difficulty": "intermediate",
-    "series": "person_susan_b_anthony",
+    "series": "person_susan_b._anthony",
     "explanation_short": "Kernthese der Frauenwahlrechtsbewegung.",
     "explanation_long": "Anthonys Arbeit war zentral für Erfolge im Frauenwahlrecht und demokratische Teilhabe.",
     "related_ids": []
@@ -8852,7 +8852,7 @@
       "Beobachtung"
     ],
     "difficulty": "intermediate",
-    "series": "person_leonardo",
+    "series": "person_leonardo_da_vinci",
     "explanation_short": "Bezug zwischen wissenschaftlicher Neugier und künstlerischer Praxis.",
     "explanation_long": "Da Vincis Notizen verbinden Kunst, Technik und Naturbeobachtung; relevant für interdisziplinäre Feeds.",
     "related_ids": []
@@ -8872,7 +8872,7 @@
       "Kreativität"
     ],
     "difficulty": "intermediate",
-    "series": "person_picasso",
+    "series": "person_pablo_picasso",
     "explanation_short": "Kreativität als Perspektivwechsel.",
     "explanation_long": "Picassos Arbeiten fordern traditionelle Sichtweisen heraus; dieses Zitat betont schöpferische Perspektivwechsel.",
     "related_ids": []
@@ -8900,7 +8900,7 @@
   {
     "id": "rilke_001",
     "author": "Rainer Maria Rilke",
-    "author_type": "pöt",
+    "author_type": "poet",
     "text_de": "Wer spricht kann nicht immer richtig sein, aber Schweigen ist nicht immer weise.",
     "source": "Letters",
     "year": 1905,
@@ -8908,11 +8908,11 @@
     "chapter": "Letters to a Young Pöt",
     "category": [
       "Kunst",
-      "Pösie",
+      "Poesie",
       "Reflexion"
     ],
     "difficulty": "intermediate",
-    "series": "person_rilke",
+    "series": "person_rainer_maria_rilke",
     "explanation_short": "Rilkes Reflexion über Sprache und Schweigen.",
     "explanation_long": "Rilkes Briefe behandeln Kreativität, Einsamkeit und die Arbeit am Selbst; dieses Zitat betont kommunikative Ambivalenz.",
     "related_ids": []
@@ -8932,7 +8932,7 @@
       "Gesellschaft"
     ],
     "difficulty": "advanced",
-    "series": "person_kafka",
+    "series": "person_franz_kafka",
     "explanation_short": "Kafkäske Diagnose moderner Ohnmacht.",
     "explanation_long": "Kafkas Werk erkundet das Gefühl der Ohnmacht in anonymen bürokratischen Systemen; relevant für kritische Gesellschaftsreflexionen.",
     "related_ids": []
@@ -8952,7 +8952,7 @@
       "Bildung"
     ],
     "difficulty": "intermediate",
-    "series": "person_newton",
+    "series": "person_isaac_newton",
     "explanation_short": "Anerkennung des kumulativen Charakters wissenschaftlichen Fortschritts.",
     "explanation_long": "Newtons Bild prägt die Wissenschaftsethik: Fortschritt baut auf Vorarbeit auf.",
     "related_ids": []
@@ -8964,7 +8964,7 @@
     "text_de": "Beobachtung ist der wahre Richter wissenschaftlicher Thesen.",
     "source": "Letter",
     "year": 1610,
-    "text_original": "Observation is the trü judge of scientific claims.",
+    "text_original": "Observation is the true judge of scientific claims.",
     "chapter": "Dialogüs",
     "category": [
       "Wissenschaft",
@@ -8972,7 +8972,7 @@
       "Beobachtung"
     ],
     "difficulty": "intermediate",
-    "series": "person_galileo",
+    "series": "person_galileo_galilei",
     "explanation_short": "Betonung empirischer Methode.",
     "explanation_long": "Galileis Arbeit beseitigte dogmatische Hindernisse für experimentelle Wissenschaft.",
     "related_ids": []
@@ -9012,7 +9012,7 @@
       "Methode"
     ],
     "difficulty": "advanced",
-    "series": "person_bohr",
+    "series": "person_niels_bohr",
     "explanation_short": "Bohrs Reflexionen über Komplementarität und Erkenntnis.",
     "explanation_long": "Bohrs Konzept der Komplementarität beeinflusste sowohl Physik als auch Erkenntnistheorie.",
     "related_ids": []
@@ -9052,7 +9052,7 @@
       "Versöhnung"
     ],
     "difficulty": "intermediate",
-    "series": "person_adenauer",
+    "series": "person_konrad_adenauer",
     "explanation_short": "Adenauers Fokus auf Wiederaufbau und Integration nach Krieg.",
     "explanation_long": "Als erste Bundeskanzler prägte Adenauer die Westbindung und Demokratisierung Deutschlands nach dem Zweiten Weltkrieg.",
     "related_ids": []
@@ -9072,7 +9072,7 @@
       "Politik"
     ],
     "difficulty": "intermediate",
-    "series": "person_thatcher",
+    "series": "person_margaret_thatcher",
     "explanation_short": "Kernbotschaft des wirtschaftsliberalen Konservatismus.",
     "explanation_long": "Thatchers Politik betonte Deregulierung, Privatwirtschaft und individülle Verantwortung als Wachstumstreiber.",
     "related_ids": []
@@ -9092,7 +9092,7 @@
       "Werte"
     ],
     "difficulty": "advanced",
-    "series": "person_scruton",
+    "series": "person_roger_scruton",
     "explanation_short": "Konservative Betonung kultureller Kontinuität.",
     "explanation_long": "Scruton argumentierte für die Bedeutung lokaler und kultureller Praxis als Grundlage stabiler Gesellschaften.",
     "related_ids": []
@@ -9112,7 +9112,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_chesterton",
+    "series": "person_g._k._chesterton",
     "explanation_short": "Chestertons Blick für das Alltägliche als moralischen Raum.",
     "explanation_long": "Chestertons Schriften verteidigen traditionelle Werte und betonen moralische Kenntnisse des Alltags.",
     "related_ids": []
@@ -9222,7 +9222,7 @@
     "author": "Seneca",
     "author_type": "philosopher",
     "text_de": "Wahrer Reichtum ist Genügsamkeit, nicht Besitz.",
-    "text_original": "Trü wealth is a reserve of strength, not of goods.",
+    "text_original": "True wealth is a reserve of strength, not of goods.",
     "source": "Letters",
     "year": 65,
     "chapter": "Letter",
@@ -9282,7 +9282,7 @@
     "author": "Seneca",
     "author_type": "philosopher",
     "text_de": "Wenige Freundschaften, aber echte, sind ein Schatz.",
-    "text_original": "One of the most beautiful qualities of trü friendship is to understand and be understood.",
+    "text_original": "One of the most beautiful qualities of true friendship is to understand and be understood.",
     "source": "Letters",
     "year": 65,
     "chapter": "Letter",
@@ -9302,7 +9302,7 @@
     "author": "Marcus Tullius Cicero",
     "author_type": "statesman",
     "text_de": "Nicht in Reden liegt die Würde, sondern in guten Taten.",
-    "text_original": "Not in eloqünce but in good deeds lies trü dignity.",
+    "text_original": "Not in eloquence but in good deeds lies true dignity.",
     "source": "Orations",
     "year": -50,
     "chapter": "Oration",
@@ -9311,7 +9311,7 @@
       "Handeln"
     ],
     "difficulty": "advanced",
-    "series": "person_cicero",
+    "series": "person_marcus_tullius_cicero",
     "explanation_short": "Marcus Tullius Cicero konzeptualisiert hier einen Aspekt von ethik. Das Zitat verdeutlicht die Bedeutung von ethik in der Analyse.",
     "explanation_long": "In \"Orations\" (-50) artikuliert Marcus Tullius Cicero einen Gedanken, der zentral für die Analyse von ethik ist. Das Zitat — \"Nicht in Reden liegt die Würde, sondern in guten Taten.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich ethik konkret ausdrückt. Marcus Tullius Cicero brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Marcus Tullius Cicero damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": [],
@@ -9331,7 +9331,7 @@
       "Freiheit"
     ],
     "difficulty": "advanced",
-    "series": "person_cicero",
+    "series": "person_marcus_tullius_cicero",
     "explanation_short": "Verbindung von Freiheit und Verantwortung.",
     "explanation_long": "Cicero sah in der Balance von Rechten und Pflichten die Grundlage stabiler Gesellschaften.",
     "related_ids": [],
@@ -9342,7 +9342,7 @@
     "author": "William Shakespeare",
     "author_type": "playwright",
     "text_de": "Sein oder Nichtsein — das ist hier die Frage.",
-    "text_original": "To be, or not to be: that is the qüstion.",
+    "text_original": "To be, or not to be: that is the question.",
     "source": "Hamlet",
     "year": 1603,
     "chapter": "Act 3, Scene 1",
@@ -9351,7 +9351,7 @@
       "Existenz"
     ],
     "difficulty": "advanced",
-    "series": "person_shakespeare",
+    "series": "person_william_shakespeare",
     "explanation_short": "Berühmte Meditation über Leben und Leiden.",
     "explanation_long": "Hamlets Monolog reflektiert über Existenz, Leid und Entscheidungskraft.",
     "related_ids": [],
@@ -9371,7 +9371,7 @@
       "Gesellschaft"
     ],
     "difficulty": "advanced",
-    "series": "person_shakespeare",
+    "series": "person_william_shakespeare",
     "explanation_short": "Metapher für Rollen im Leben.",
     "explanation_long": "Der Vergleich deutet auf die temporäre Natur sozialer Rollen und Lebensabschnitte.",
     "related_ids": [],
@@ -9382,7 +9382,7 @@
     "author": "William Shakespeare",
     "author_type": "playwright",
     "text_de": "Die Räume, in denen wir leben, formen uns; rede mit deinem eigenen Gewissen.",
-    "text_original": "This above all: to thine own self be trü.",
+    "text_original": "This above all: to thine own self be true.",
     "source": "Hamlet",
     "year": 1603,
     "chapter": "Polonius' Advice",
@@ -9391,7 +9391,7 @@
       "Lebensführung"
     ],
     "difficulty": "advanced",
-    "series": "person_shakespeare",
+    "series": "person_william_shakespeare",
     "explanation_short": "Aufruf zur Ehrlichkeit gegenüber sich selbst.",
     "explanation_long": "Polonius rät zur Selbsttreue als Grundlage guter Lebensführung.",
     "related_ids": [],
@@ -9399,7 +9399,7 @@
   },
   {
     "id": "göthe_002",
-    "author": "Johann Wolfgang von Göthe",
+    "author": "Johann Wolfgang von Goethe",
     "author_type": "writer",
     "text_de": "Wenn du dich selbst erkennst, wächst Weisheit.",
     "text_original": "He who knows others is wise; he who knows himself is enlightened.",
@@ -9411,15 +9411,15 @@
       "Selbsterkenntnis"
     ],
     "difficulty": "advanced",
-    "series": "person_göthe",
+    "series": "person_johann_wolfgang_von_goethe",
     "explanation_short": "Unterscheidung von äußerer und innerer Weisheit.",
-    "explanation_long": "Göthe betont Selbstkenntnis als höherwertige Form der Weisheit.",
+    "explanation_long": "Goethe betont Selbstkenntnis als höherwertige Form der Weisheit.",
     "related_ids": [],
     "needs_review": true
   },
   {
     "id": "göthe_003",
-    "author": "Johann Wolfgang von Göthe",
+    "author": "Johann Wolfgang von Goethe",
     "author_type": "writer",
     "text_de": "Die beste Bildung findet ein gescheiter Mensch auf Reisen.",
     "text_original": "A clever person learns from their own mistakes; a wise person learns from others.",
@@ -9431,9 +9431,9 @@
       "Erfahrung"
     ],
     "difficulty": "intermediate",
-    "series": "person_göthe",
-    "explanation_short": "Johann Wolfgang von Göthe konzeptualisiert hier einen Aspekt von bildung. Das Zitat verdeutlicht die Bedeutung von bildung in der Analyse.",
-    "explanation_long": "In \"Wilhelm Meister\" (1795) artikuliert Johann Wolfgang von Göthe einen Gedanken, der zentral für die Analyse von bildung ist. Das Zitat — \"Die beste Bildung findet ein gescheiter Mensch auf Reisen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich bildung konkret ausdrückt. Johann Wolfgang von Göthe brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Johann Wolfgang von Göthe damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
+    "series": "person_johann_wolfgang_von_goethe",
+    "explanation_short": "Johann Wolfgang von Goethe konzeptualisiert hier einen Aspekt von bildung. Das Zitat verdeutlicht die Bedeutung von bildung in der Analyse.",
+    "explanation_long": "In \"Wilhelm Meister\" (1795) artikuliert Johann Wolfgang von Goethe einen Gedanken, der zentral für die Analyse von bildung ist. Das Zitat — \"Die beste Bildung findet ein gescheiter Mensch auf Reisen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich bildung konkret ausdrückt. Johann Wolfgang von Goethe brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Johann Wolfgang von Goethe damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": [],
     "needs_review": true
   },
@@ -9451,7 +9451,7 @@
       "Werte"
     ],
     "difficulty": "advanced",
-    "series": "person_schiller",
+    "series": "person_friedrich_schiller",
     "explanation_short": "Ästhetische und politische Bedeutung von Freiheit.",
     "explanation_long": "Schiller sieht Freiheit als zentral für moralische Entwicklung und Kultur.",
     "related_ids": [],
@@ -9462,7 +9462,7 @@
     "author": "Friedrich Schiller",
     "author_type": "writer",
     "text_de": "Wahre Größe zeigt sich in selbstlosem Handeln.",
-    "text_original": "Trü greatness shows itself in selfless action.",
+    "text_original": "True greatness shows itself in selfless action.",
     "source": "Pöms",
     "year": 1799,
     "chapter": "Pötry",
@@ -9471,7 +9471,7 @@
       "Ethik"
     ],
     "difficulty": "intermediate",
-    "series": "person_schiller",
+    "series": "person_friedrich_schiller",
     "explanation_short": "Ethische Perspektive auf Größe.",
     "explanation_long": "Schiller preist selbstlose Tat als Ausdruck moralischer Größe.",
     "related_ids": [],
@@ -9491,7 +9491,7 @@
       "Philosophie"
     ],
     "difficulty": "intermediate",
-    "series": "person_emerson",
+    "series": "person_ralph_waldo_emerson",
     "explanation_short": "Plädoyer für Selbstvertrauen und Eigenständigkeit.",
     "explanation_long": "Emerson ruft zur inneren Unabhängigkeit und Authentizität auf.",
     "related_ids": [],
@@ -9511,7 +9511,7 @@
       "Inspiration"
     ],
     "difficulty": "intermediate",
-    "series": "person_emerson",
+    "series": "person_ralph_waldo_emerson",
     "explanation_short": "Innere Ressourcen sind entscheidend.",
     "explanation_long": "Emerson betont persönliche Stärke und Potenzial als Kern der Lebensführung.",
     "related_ids": [],
@@ -9531,7 +9531,7 @@
       "Natur"
     ],
     "difficulty": "intermediate",
-    "series": "person_thoreau",
+    "series": "person_henry_david_thoreau",
     "explanation_short": "Aufruf zu praktischer Selbstverwirklichung.",
     "explanation_long": "Thoreau ermutigt zu einem selbstbestimmten Leben in Übereinstimmung mit eigenen Idealen.",
     "related_ids": [],
@@ -9551,8 +9551,8 @@
       "Selbst"
     ],
     "difficulty": "intermediate",
-    "series": "person_thoreau",
-    "explanation_short": "Innere Werte als Lebensqülle.",
+    "series": "person_henry_david_thoreau",
+    "explanation_short": "Innere Werte als Lebensquelle.",
     "explanation_long": "Thoreau betont die innere Identität und Kontinuität des Selbst.",
     "related_ids": [],
     "needs_review": true
@@ -9571,7 +9571,7 @@
       "Familie"
     ],
     "difficulty": "advanced",
-    "series": "person_tolstoy",
+    "series": "person_leo_tolstoy",
     "explanation_short": "Berühmter Eröffnungsatz über Familie und Schicksal.",
     "explanation_long": "Tolstoys Roman beginnt mit einer berühmten Beobachtung über Glück und Unglück in familiären Beziehungen.",
     "related_ids": [],
@@ -9591,7 +9591,7 @@
       "Psychologie"
     ],
     "difficulty": "advanced",
-    "series": "person_dostövsky",
+    "series": "person_fyodor_dostövsky",
     "explanation_short": "Dostojewskijs Blick auf Mitgefühl und Erkenntnis.",
     "explanation_long": "Dostövskys Werk untersucht Tiefen menschlicher Motivation und moralische Komplexität.",
     "related_ids": [],
@@ -9651,7 +9651,7 @@
       "Gesellschaft"
     ],
     "difficulty": "intermediate",
-    "series": "person_moliere",
+    "series": "person_molière",
     "explanation_short": "Molière konzeptualisiert hier einen Aspekt von kunst. Das Zitat verdeutlicht die Bedeutung von kunst in der Analyse.",
     "explanation_long": "In \"Plays\" (1666) artikuliert Molière einen Gedanken, der zentral für die Analyse von kunst ist. Das Zitat — \"Die Menschen sind stets bemüht, das zu zeigen, was sie nicht sind.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich kunst konkret ausdrückt. Molière brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da Molière damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": [],
@@ -9660,7 +9660,7 @@
   {
     "id": "homer_001",
     "author": "Homer",
-    "author_type": "pöt",
+    "author_type": "poet",
     "text_de": "Mut ist nicht die Abwesenheit von Furcht, sondern Handeln trotz Furcht.",
     "text_original": "Courage is not the absence of fear, but acting in spite of it.",
     "source": "Iliad",
@@ -9680,7 +9680,7 @@
   {
     "id": "virgil_001",
     "author": "Virgil",
-    "author_type": "pöt",
+    "author_type": "poet",
     "text_de": "Sieh die Zeichen der Zeit und handle entsprechend.",
     "text_original": "Observe the signs of the times and act accordingly.",
     "source": "Äneid",
@@ -9711,7 +9711,7 @@
       "Mathematik"
     ],
     "difficulty": "advanced",
-    "series": "person_euclid",
+    "series": "person_euklid",
     "explanation_short": "Grundsatz mathematischer Methode.",
     "explanation_long": "Euklids Elemente prägen die strukturierte Darstellung mathematischer Wahrheiten.",
     "related_ids": [],
@@ -9811,7 +9811,7 @@
       "Recht"
     ],
     "difficulty": "advanced",
-    "series": "person_cicero",
+    "series": "person_marcus_tullius_cicero",
     "explanation_short": "Gemeinwohl als Rechtsgrundlage.",
     "explanation_long": "Cicero verbindet staatliche Ordnung mit dem Wohl der Bürger.",
     "related_ids": [],
@@ -9831,7 +9831,7 @@
       "Ethik"
     ],
     "difficulty": "advanced",
-    "series": "person_cicero",
+    "series": "person_marcus_tullius_cicero",
     "explanation_short": "Klassische Reflexion über Freundschaft.",
     "explanation_long": "Cicero beschreibt die soziale und emotionale Funktion echter Freundschaft.",
     "related_ids": [],
@@ -9839,7 +9839,7 @@
   },
   {
     "id": "göthe_004",
-    "author": "Johann Wolfgang von Göthe",
+    "author": "Johann Wolfgang von Goethe",
     "author_type": "writer",
     "text_de": "Der Mensch kennt sich nur im Menschen.",
     "text_original": "A person hears only what they understand.",
@@ -9851,15 +9851,15 @@
       "Gesellschaft"
     ],
     "difficulty": "advanced",
-    "series": "person_göthe",
+    "series": "person_johann_wolfgang_von_goethe",
     "explanation_short": "Selbsterkenntnis durch Beziehungen.",
-    "explanation_long": "Göthe betont, dass Menschen sich im Spiegel anderer verstehen.",
+    "explanation_long": "Goethe betont, dass Menschen sich im Spiegel anderer verstehen.",
     "related_ids": [],
     "needs_review": true
   },
   {
     "id": "göthe_005",
-    "author": "Johann Wolfgang von Göthe",
+    "author": "Johann Wolfgang von Goethe",
     "author_type": "writer",
     "text_de": "Wer immer tut, was er schon kann, bleibt immer das, was er schon ist.",
     "text_original": "Whatever you can do, or dream you can, begin it.",
@@ -9871,9 +9871,9 @@
       "Handeln"
     ],
     "difficulty": "advanced",
-    "series": "person_göthe",
+    "series": "person_johann_wolfgang_von_goethe",
     "explanation_short": "Aufruf zum Beginn und Wachstum.",
-    "explanation_long": "Göthe verbindet Selbstüberschreitung mit dem Mut, Neues zu beginnen.",
+    "explanation_long": "Goethe verbindet Selbstüberschreitung mit dem Mut, Neues zu beginnen.",
     "related_ids": [],
     "needs_review": true
   },
@@ -9891,7 +9891,7 @@
       "Gesellschaft"
     ],
     "difficulty": "advanced",
-    "series": "person_schiller",
+    "series": "person_friedrich_schiller",
     "explanation_short": "Scharfe Kritik an Dummheit und Starrheit.",
     "explanation_long": "Schiller formuliert eine bittere Beobachtung über Unbelehrbarkeit.",
     "related_ids": [],
@@ -9911,7 +9911,7 @@
       "Philosophie"
     ],
     "difficulty": "advanced",
-    "series": "person_schiller",
+    "series": "person_friedrich_schiller",
     "explanation_short": "Historische Gerechtigkeit als Leitidee.",
     "explanation_long": "Schiller deutet Geschichte als moralischen Prüfstein gesellschaftlicher Entwicklungen.",
     "related_ids": [],
@@ -9931,7 +9931,7 @@
       "Arbeit"
     ],
     "difficulty": "intermediate",
-    "series": "person_emerson",
+    "series": "person_ralph_waldo_emerson",
     "explanation_short": "Begeisterung als Motor von Leistung.",
     "explanation_long": "Emerson sieht Engagement und Begeisterung als Grundlage bedeutender Leistungen.",
     "related_ids": [],
@@ -9951,7 +9951,7 @@
       "Gesellschaft"
     ],
     "difficulty": "advanced",
-    "series": "person_thoreau",
+    "series": "person_henry_david_thoreau",
     "explanation_short": "Kritik an unbewusstem Leben.",
     "explanation_long": "Thoreau kritisiert die Konformität und Unzufriedenheit moderner Lebensformen.",
     "related_ids": [],
@@ -9971,7 +9971,7 @@
       "Ausdauer"
     ],
     "difficulty": "intermediate",
-    "series": "person_confucius",
+    "series": "person_konfuzius",
     "explanation_short": "Beständigkeit zählt mehr als Tempo.",
     "explanation_long": "Konfuzius legt Wert auf Ausdauer und kontinuierliche Entwicklung.",
     "related_ids": [],
@@ -10002,7 +10002,7 @@
     "author": "Laozi",
     "author_type": "philosopher",
     "text_de": "Wer andere kennt, ist klug; wer sich selbst kennt, ist erleuchtet.",
-    "text_original": "Knowing others is intelligence; knowing yourself is trü wisdom.",
+    "text_original": "Knowing others is intelligence; knowing yourself is true wisdom.",
     "source": "Tao Te Ching",
     "year": -600,
     "chapter": "Chapter 33",
@@ -10071,7 +10071,7 @@
       "Philosophie"
     ],
     "difficulty": "advanced",
-    "series": "person_montaigne",
+    "series": "person_michel_de_montaigne",
     "explanation_short": "Innere Unabhängigkeit.",
     "explanation_long": "Montaigne hebt persönliche Autonomie und Reflexion als Kern des Menschseins hervor.",
     "related_ids": [],
@@ -10091,7 +10091,7 @@
       "Moral"
     ],
     "difficulty": "intermediate",
-    "series": "person_moliere",
+    "series": "person_molière",
     "explanation_short": "Satire auf falsche Frömmigkeit.",
     "explanation_long": "Molière greift in Tartuffe Heuchelei und soziale Täuschung an.",
     "related_ids": [],
@@ -10100,7 +10100,7 @@
   {
     "id": "homer_002",
     "author": "Homer",
-    "author_type": "pöt",
+    "author_type": "poet",
     "text_de": "Niemand ist frei von Schmerz, aber nicht jeder ist frei von Würde.",
     "text_original": "No man is free from sorrow, but not every man is free from dignity.",
     "source": "Odyssey",
@@ -10120,9 +10120,9 @@
   {
     "id": "virgil_002",
     "author": "Virgil",
-    "author_type": "pöt",
+    "author_type": "poet",
     "text_de": "Die Liebe bezwingt alles; auch wir müssen der Liebe weichen.",
-    "text_original": "Love conqürs all; let us too yield to love.",
+    "text_original": "Love conquers all; let us too yield to love.",
     "source": "Eclogüs",
     "year": -37,
     "chapter": "Pöm",
@@ -10152,7 +10152,7 @@
       "Bildung"
     ],
     "difficulty": "advanced",
-    "series": "person_euclid",
+    "series": "person_euklid",
     "explanation_short": "Lernen erfordert Arbeit.",
     "explanation_long": "Euklid macht deutlich, dass auch exaktes Wissen Anstrengung verlangt.",
     "related_ids": [],
@@ -10212,7 +10212,7 @@
       "Politik"
     ],
     "difficulty": "intermediate",
-    "series": "person_thatcher",
+    "series": "person_margaret_thatcher",
     "explanation_short": "Betonung von Eigenverantwortung.",
     "explanation_long": "Thatcher stellt individülle Verantwortung über abstrakte Gesellschaftskonzepte.",
     "related_ids": [],
@@ -10233,7 +10233,7 @@
       "Arbeit"
     ],
     "difficulty": "intermediate",
-    "series": "person_thatcher",
+    "series": "person_margaret_thatcher",
     "explanation_short": "Ironische Anerkennung weiblicher Durchsetzungskraft.",
     "explanation_long": "Das Zitat wird oft als Thatcher-Signatur für pragmatische Handlungskraft zitiert.",
     "related_ids": [],
@@ -10254,7 +10254,7 @@
       "Kultur"
     ],
     "difficulty": "intermediate",
-    "series": "person_scruton",
+    "series": "person_roger_scruton",
     "explanation_short": "Konservativer Schutz kultureller Güter.",
     "explanation_long": "Scruton erklärt Konservatismus als Sorge um gewachsene Bindungen und Institutionen.",
     "related_ids": [],
@@ -10287,7 +10287,7 @@
     "author_type": "writer",
     "text_de": "Das Problem hat keinen Namen, aber viele Frauen kennen es.",
     "text_original": "The problem that has no name.",
-    "source": "The Feminine Mystiqü",
+    "source": "The Feminine Mystique",
     "year": 1963,
     "chapter": "Introduction",
     "category": [
@@ -10336,7 +10336,7 @@
       "Methode"
     ],
     "difficulty": "intermediate",
-    "series": "person_galileo",
+    "series": "person_galileo_galilei",
     "explanation_short": "Widerspruch gegen dogmatische Autorität.",
     "explanation_long": "Das berühmte Galileo zugeschriebene Diktum steht für empirische Erkenntnis gegen Zensur.",
     "related_ids": [],
@@ -10356,7 +10356,7 @@
       "Mensch"
     ],
     "difficulty": "intermediate",
-    "series": "person_newton",
+    "series": "person_isaac_newton",
     "explanation_short": "Wissenschaft und menschliche Unberechenbarkeit.",
     "explanation_long": "Newton wird häufig mit klarer Rationalität verbunden; das Zitat betont zugleich die Grenzen des Messbaren.",
     "related_ids": [],
@@ -10416,7 +10416,7 @@
       "Ethik"
     ],
     "difficulty": "intermediate",
-    "series": "person_schweitzer",
+    "series": "person_albert_schweitzer",
     "explanation_short": "Vorbildwirkung als Ethik.",
     "explanation_long": "Schweitzer sieht moralische Glaubwürdigkeit in konkretem Handeln.",
     "related_ids": [],
@@ -10437,7 +10437,7 @@
       "Ethik"
     ],
     "difficulty": "advanced",
-    "series": "person_bonhöffer",
+    "series": "person_dietrich_bonhöffer",
     "explanation_short": "Glaube ohne Solidarität ist leer.",
     "explanation_long": "Bonhöffer verbindet religiöse Praxis mit aktiver Solidarität gegen Verfolgung.",
     "related_ids": [],
@@ -10458,7 +10458,7 @@
       "Gleichheit"
     ],
     "difficulty": "intermediate",
-    "series": "person_mlk",
+    "series": "person_martin_luther_king_jr.",
     "explanation_short": "Verbindung von lokaler und allgemeiner Gerechtigkeit.",
     "explanation_long": "King formuliert ein zentrales Prinzip sozialer Verantwortung und Bürgerrechte.",
     "related_ids": [],
@@ -10478,7 +10478,7 @@
       "Freiheit"
     ],
     "difficulty": "intermediate",
-    "series": "person_jose_marti",
+    "series": "person_josé_martí",
     "explanation_short": "José Martí konzeptualisiert hier einen Aspekt von kolonialismus. Das Zitat verdeutlicht die Bedeutung von kolonialismus in der Analyse.",
     "explanation_long": "In \"Writings\" (1891) artikuliert José Martí einen Gedanken, der zentral für die Analyse von kolonialismus ist. Das Zitat — \"Freiheit ist der höchste Ausdruck des Menschen.\" — verdichtet einen komplexen Sachverhalt: Es behandelt die Frage, wie sich kolonialismus konkret ausdrückt. José Martí brachte bedeutende Gedanken ein und bringt dies in diesem Satz auf den Punkt. Die Aussage betrifft nicht nur theoretische Reflexion, sondern auch praktische Orientierung im Handeln. Historisch ist dieses Zitat bedeutsam, da José Martí damit eine Position vertritt, die Kontinuität und Bruch zugleich markiert. Die Geltung des Satzes liegt darin, dass er Verständnis schärft für das Zusammenspiel von Struktur und Prozess.",
     "related_ids": [],
@@ -10499,7 +10499,7 @@
       "Freiheit"
     ],
     "difficulty": "intermediate",
-    "series": "person_lumumba",
+    "series": "person_patrice_lumumba",
     "explanation_short": "Selbstbestimmung gegen Kolonialherrschaft.",
     "explanation_long": "Lumumba betont afrikanische Eigenständigkeit und politische Souveränität.",
     "related_ids": [],
@@ -10520,7 +10520,7 @@
       "Gleichheit"
     ],
     "difficulty": "advanced",
-    "series": "person_w_e_b_du_bois",
+    "series": "person_w._e._b._du_bois",
     "explanation_short": "Zentrale Diagnose von Rassismus und Ungleichheit.",
     "explanation_long": "Du Bois prägte die Analyse struktureller rassistischer Barrieren in der Moderne.",
     "related_ids": [],
@@ -10541,7 +10541,7 @@
       "Gleichheit"
     ],
     "difficulty": "intermediate",
-    "series": "person_booker_t_washington",
+    "series": "person_booker_t._washington",
     "explanation_short": "Fortschritt durch überwundene Hindernisse.",
     "explanation_long": "Washington betont praktische Bildung und den Wert von Anstrengung und Ausdauer.",
     "related_ids": [],
@@ -10594,7 +10594,7 @@
     "author": "Ayn Rand",
     "author_type": "writer",
     "text_de": "Der Mensch lebt für sich selbst, nicht als Mittel für andere.",
-    "text_original": "The qüstion isn't who is going to let me; it's who is going to stop me.",
+    "text_original": "The question isn't who is going to let me; it's who is going to stop me.",
     "source": "The Fountainhead",
     "year": 1943,
     "chapter": "Novel",
@@ -10614,8 +10614,8 @@
     "id": "rand_002",
     "author": "Ayn Rand",
     "author_type": "writer",
-    "text_de": "Man kann der Realität entkommen, aber nicht den Konseqünzen, die daraus folgen.",
-    "text_original": "You can avoid reality, but you cannot avoid the conseqünces of avoiding reality.",
+    "text_de": "Man kann der Realität entkommen, aber nicht den Konsequenzen, die daraus folgen.",
+    "text_original": "You can avoid reality, but you cannot avoid the consequences of avoiding reality.",
     "source": "Atlas Shrugged",
     "year": 1957,
     "chapter": "Novel",
@@ -10626,8 +10626,8 @@
     ],
     "difficulty": "intermediate",
     "series": "person_ayn_rand",
-    "explanation_short": "Konseqünzen von Realitätsverweigerung.",
-    "explanation_long": "Rand verbindet Konseqünz, Verantwortung und persönliche Handlungsfreiheit.",
+    "explanation_short": "Konsequenzen von Realitätsverweigerung.",
+    "explanation_long": "Rand verbindet Konsequenz, Verantwortung und persönliche Handlungsfreiheit.",
     "related_ids": [],
     "needs_review": true
   },
@@ -10686,7 +10686,7 @@
       "Charakter"
     ],
     "difficulty": "intermediate",
-    "series": "person_booker_t_washington",
+    "series": "person_booker_t._washington",
     "explanation_short": "Charakter als zentrales Bildungsideal.",
     "explanation_long": "Washington hebt Selbstdisziplin und moralische Bildung hervor.",
     "related_ids": [],
@@ -10836,5 +10836,338 @@
       "luxemburg_002",
       "luxemburg_003"
     ]
+  },
+  {
+    "id": "clausewitz_002",
+    "author": "Carl von Clausewitz",
+    "author_type": "theorist",
+    "category": [
+      "Krieg",
+      "Politik",
+      "Staat",
+      "Theorie"
+    ],
+    "chapter": "Buch 1, Kapitel 1",
+    "difficulty": "intermediate",
+    "explanation_short": "Krieg ist für Clausewitz kein Selbstzweck, sondern Fortsetzung politischen Handelns.",
+    "explanation_long": "In seinem Hauptwerk \"Vom Kriege\" (postum 1832) bestimmt Carl von Clausewitz den Krieg als Instrument der Politik: Militärische Gewalt bleibt an politische Zwecke gebunden und muss von ihnen her verstanden werden. Der Satz wurde zur meistzitierten Formel der Kriegstheorie und prägt bis heute Debatten über das Verhältnis von Politik und Militär.",
+    "related_ids": [],
+    "series": "person_carl_von_clausewitz",
+    "source": "Vom Kriege",
+    "text_de": "Der Krieg ist eine bloße Fortsetzung der Politik mit anderen Mitteln.",
+    "text_original": "Der Krieg ist eine bloße Fortsetzung der Politik mit anderen Mitteln.",
+    "year": 1832
+  },
+  {
+    "id": "kant_004",
+    "author": "Immanuel Kant",
+    "author_type": "philosopher",
+    "category": [
+      "Frieden",
+      "Krieg",
+      "Philosophie",
+      "Rechte"
+    ],
+    "chapter": "Zweiter Abschnitt",
+    "difficulty": "intermediate",
+    "explanation_short": "Frieden ist kein Naturzustand, sondern muss aktiv gestiftet werden.",
+    "explanation_long": "In \"Zum ewigen Frieden\" (1795) argumentiert Immanuel Kant, dass zwischen Menschen und Staaten der Kriegszustand der natürliche ist und Frieden deshalb rechtlich eingerichtet werden muss. Die Schrift entwirft Grundzüge eines Völkerrechts und gilt als geistige Vorlage internationaler Friedensordnungen bis hin zu den Vereinten Nationen.",
+    "related_ids": [],
+    "series": "person_immanuel_kant",
+    "source": "Zum ewigen Frieden",
+    "text_de": "Der Friedenszustand unter Menschen, die nebeneinander leben, ist kein Naturzustand; er muss also gestiftet werden.",
+    "text_original": "Der Friedenszustand unter Menschen, die neben einander leben, ist kein Naturstand (status naturalis) ... er muß also gestiftet werden.",
+    "year": 1795
+  },
+  {
+    "id": "erasmus_001",
+    "author": "Erasmus von Rotterdam",
+    "author_type": "philosopher",
+    "category": [
+      "Krieg",
+      "Frieden",
+      "Religion",
+      "Ethik"
+    ],
+    "chapter": "Adagia",
+    "difficulty": "beginner",
+    "explanation_short": "Nur wer den Krieg nicht erlebt hat, kann ihn verklären.",
+    "explanation_long": "Das antike Sprichwort \"Dulce bellum inexpertis\" machte Erasmus von Rotterdam in seinen \"Adagia\" (1515) zum Ausgangspunkt einer der frühesten humanistischen Friedensschriften. Als christlicher Humanist verurteilt er den Krieg als Widerspruch zur christlichen Lehre und zur Vernunft — eine Position, die den europäischen Pazifismus nachhaltig beeinflusste.",
+    "related_ids": [],
+    "series": "person_erasmus_von_rotterdam",
+    "source": "Adagia",
+    "text_de": "Süß erscheint der Krieg nur denen, die ihn nicht erfahren haben.",
+    "text_original": "Dulce bellum inexpertis.",
+    "year": 1515
+  },
+  {
+    "id": "suttner_001",
+    "author": "Bertha von Suttner",
+    "author_type": "activist",
+    "category": [
+      "Frieden",
+      "Krieg",
+      "Frauen",
+      "Bewegung"
+    ],
+    "chapter": "Romantitel und Losung",
+    "difficulty": "beginner",
+    "explanation_short": "Die Losung der modernen Friedensbewegung.",
+    "explanation_long": "Mit ihrem Roman \"Die Waffen nieder!\" (1889) machte Bertha von Suttner das Leid der Kriege des 19. Jahrhunderts erfahrbar und gab der internationalen Friedensbewegung ihre Losung. Als erste Frau erhielt sie 1905 den Friedensnobelpreis; ihr Titel wurde zum Schlachtruf des organisierten Pazifismus.",
+    "related_ids": [],
+    "series": "person_bertha_von_suttner",
+    "source": "Die Waffen nieder!",
+    "text_de": "Die Waffen nieder!",
+    "text_original": "Die Waffen nieder!",
+    "year": 1889
+  },
+  {
+    "id": "sunzi_002",
+    "author": "Sunzi",
+    "author_type": "theorist",
+    "category": [
+      "Krieg",
+      "Strategie",
+      "Taktik"
+    ],
+    "chapter": "Kapitel 3",
+    "difficulty": "beginner",
+    "explanation_short": "Der höchste Sieg kommt ohne Schlacht aus.",
+    "explanation_long": "In der \"Kunst des Krieges\" (ca. 5. Jh. v. Chr.) lehrt Sunzi, dass die überlegene Strategie den Gegner ohne offene Schlacht zur Aufgabe bringt. Der Gedanke verschiebt den Fokus vom Gefecht auf Planung, Täuschung und Diplomatie und wird bis heute in Militär, Politik und Management rezipiert.",
+    "related_ids": [],
+    "series": "person_sunzi",
+    "source": "Die Kunst des Krieges",
+    "text_de": "Die größte Leistung besteht darin, den Widerstand des Feindes ohne einen Kampf zu brechen.",
+    "text_original": "The supreme art of war is to subdue the enemy without fighting.",
+    "year": -500
+  },
+  {
+    "id": "cesaire_002",
+    "author": "Aime Cesaire",
+    "author_type": "writer",
+    "category": [
+      "Kolonialismus",
+      "Kritik",
+      "Geschichte"
+    ],
+    "chapter": "Eröffnung",
+    "difficulty": "intermediate",
+    "explanation_short": "Césaires Anklage: Der Kolonialismus entzieht Europa jede moralische Rechtfertigung.",
+    "explanation_long": "Mit diesem Satz eröffnet Aimé Césaire seinen \"Discours sur le colonialisme\" (1950), eine der schärfsten Abrechnungen mit dem europäischen Kolonialismus. Césaire argumentiert, dass die Kolonisierung nicht nur die Kolonisierten entmenschlicht, sondern auch die Kolonisatoren selbst verroht — Europa könne sich vor der Geschichte nicht verteidigen.",
+    "related_ids": [],
+    "series": "person_aime_cesaire",
+    "source": "Über den Kolonialismus",
+    "text_de": "Europa ist nicht zu verteidigen.",
+    "text_original": "L'Europe est indéfendable.",
+    "year": 1950
+  },
+  {
+    "id": "fanon_002",
+    "author": "Frantz Fanon",
+    "author_type": "philosopher",
+    "category": [
+      "Kolonialismus",
+      "Revolution",
+      "Befreiung"
+    ],
+    "chapter": "Über die nationale Kultur",
+    "difficulty": "intermediate",
+    "explanation_short": "Jede Generation steht vor der Wahl, ihre geschichtliche Aufgabe zu erfüllen oder zu verraten.",
+    "explanation_long": "In \"Die Verdammten dieser Erde\" (1961) beschreibt Frantz Fanon die Dekolonisierung als Aufgabe, die jede Generation neu entdecken muss. Der Satz wurde zum Leitspruch antikolonialer Bewegungen weltweit und verbindet historische Verantwortung mit der Offenheit des politischen Handelns.",
+    "related_ids": [],
+    "series": "person_frantz_fanon",
+    "source": "Die Verdammten dieser Erde",
+    "text_de": "Jede Generation muss in relativer Undurchsichtigkeit ihre Mission entdecken und sie erfüllen oder verraten.",
+    "text_original": "Chaque génération doit dans une relative opacité découvrir sa mission, la remplir ou la trahir.",
+    "year": 1961
+  },
+  {
+    "id": "said_002",
+    "author": "Edward Said",
+    "author_type": "philosopher",
+    "category": [
+      "Kolonialismus",
+      "Kultur",
+      "Kritik",
+      "Wissenschaft"
+    ],
+    "chapter": "Einleitung",
+    "difficulty": "intermediate",
+    "explanation_short": "Der \"Orient\" ist ein europäisches Konstrukt, kein neutraler Befund.",
+    "explanation_long": "In \"Orientalismus\" (1978) zeigt Edward Said, wie europäische Wissenschaft, Literatur und Verwaltung ein Bild des \"Orients\" erzeugten, das koloniale Herrschaft rechtfertigte. Das Werk begründete die postkoloniale Theorie und veränderte, wie Geistes- und Sozialwissenschaften über Repräsentation und Macht sprechen.",
+    "related_ids": [],
+    "series": "person_edward_said",
+    "source": "Orientalismus",
+    "text_de": "Der Orient war beinahe eine europäische Erfindung.",
+    "text_original": "The Orient was almost a European invention.",
+    "year": 1978
+  },
+  {
+    "id": "lascasas_002",
+    "author": "Bartolome de las Casas",
+    "author_type": "theologian",
+    "category": [
+      "Kolonialismus",
+      "Menschenrechte",
+      "Religion",
+      "Gleichheit"
+    ],
+    "chapter": "Historia de las Indias",
+    "difficulty": "beginner",
+    "explanation_short": "Eine frühe Absage an die koloniale Entmenschlichung.",
+    "explanation_long": "Der Dominikaner Bartolomé de las Casas dokumentierte die Gewalt der spanischen Eroberung Amerikas und verteidigte die indigene Bevölkerung als vollwertige Menschen. Sein Satz aus der \"Historia de las Indias\" (um 1552) formuliert einen frühneuzeitlichen Universalismus, der als Vorläufer der Menschenrechtsidee gilt.",
+    "related_ids": [],
+    "series": "person_bartolome_de_las_casas",
+    "source": "Historia de las Indias",
+    "text_de": "Alle Völker der Welt sind Menschen.",
+    "text_original": "Todas las naciones del mundo son hombres.",
+    "year": 1552
+  },
+  {
+    "id": "augustinus_002",
+    "author": "Augustinus",
+    "author_type": "theologian",
+    "category": [
+      "Religion",
+      "Ethik",
+      "Liebe",
+      "Philosophie"
+    ],
+    "chapter": "7. Predigt",
+    "difficulty": "beginner",
+    "explanation_short": "Die Liebe als Maßstab allen Handelns.",
+    "explanation_long": "In seiner Auslegung des ersten Johannesbriefes (um 407) verdichtet Augustinus die christliche Ethik auf eine Formel: Wer wirklich liebt, dessen Handeln kann nicht böse sein. Der Satz wurde zu einem der wirkmächtigsten Sätze der christlichen Theologie und wird bis heute in Ethik und Seelsorge zitiert.",
+    "related_ids": [],
+    "series": "person_augustinus",
+    "source": "In epistulam Ioannis ad Parthos",
+    "text_de": "Liebe, und dann tu, was du willst.",
+    "text_original": "Dilige, et quod vis fac.",
+    "year": 407
+  },
+  {
+    "id": "luther_002",
+    "author": "Martin Luther",
+    "author_type": "theologian",
+    "category": [
+      "Religion",
+      "Freiheit",
+      "Reformation",
+      "Kirche"
+    ],
+    "chapter": "These 1 und 2",
+    "difficulty": "intermediate",
+    "explanation_short": "Luthers Doppelthese von Freiheit und Dienst des Christenmenschen.",
+    "explanation_long": "Die Reformationsschrift \"Von der Freiheit eines Christenmenschen\" (1520) beginnt mit diesem scheinbaren Widerspruch: Im Glauben ist der Mensch frei von allen Ansprüchen, in der Liebe zugleich Diener aller. Die Doppelthese wurde zur Kurzformel reformatorischer Theologie und prägte das protestantische Freiheitsverständnis.",
+    "related_ids": [],
+    "series": "person_martin_luther",
+    "source": "Von der Freiheit eines Christenmenschen",
+    "text_de": "Ein Christenmensch ist ein freier Herr über alle Dinge und niemand untertan. Ein Christenmensch ist ein dienstbarer Knecht aller Dinge und jedermann untertan.",
+    "text_original": "Eyn Christen mensch ist eyn freyer herr über alle ding und niemandt unterthan. Eyn Christen mensch ist eyn dienstpar knecht aller ding und yderman unterthan.",
+    "year": 1520
+  },
+  {
+    "id": "pascal_002",
+    "author": "Blaise Pascal",
+    "author_type": "philosopher",
+    "category": [
+      "Religion",
+      "Philosophie",
+      "Erkenntnis",
+      "Glaube"
+    ],
+    "chapter": "Pensées, Fragment 277",
+    "difficulty": "beginner",
+    "explanation_short": "Glaube und Gefühl folgen einer eigenen Logik jenseits der Vernunft.",
+    "explanation_long": "In den postum erschienenen \"Pensées\" (1670) unterscheidet Blaise Pascal die Ordnung des Herzens von der Ordnung der Vernunft: Religiöse Gewissheit und Liebe gründen in einer Erkenntnisweise, die dem diskursiven Verstand nicht zugänglich ist. Der Satz gehört zu den bekanntesten der französischen Philosophie.",
+    "related_ids": [],
+    "series": "person_blaise_pascal",
+    "source": "Pensées",
+    "text_de": "Das Herz hat seine Gründe, die die Vernunft nicht kennt.",
+    "text_original": "Le cœur a ses raisons, que la raison ne connaît point.",
+    "year": 1670
+  },
+  {
+    "id": "bonhoeffer_001",
+    "author": "Dietrich Bonhoeffer",
+    "author_type": "theologian",
+    "category": [
+      "Religion",
+      "Kirche",
+      "Ethik",
+      "Widerstand"
+    ],
+    "chapter": "Die teure Gnade",
+    "difficulty": "intermediate",
+    "explanation_short": "Bonhoeffers Kritik an einem folgenlosen Christentum.",
+    "explanation_long": "In \"Nachfolge\" (1937) wendet sich Dietrich Bonhoeffer gegen eine \"billige Gnade\", die Vergebung ohne Umkehr und Glauben ohne Konsequenz verspricht. Geschrieben im Kirchenkampf gegen den Nationalsozialismus, verbindet die Schrift theologische Radikalität mit politischem Ernst; Bonhoeffer wurde 1945 als Widerstandskämpfer hingerichtet.",
+    "related_ids": [],
+    "series": "person_dietrich_bonhoeffer",
+    "source": "Nachfolge",
+    "text_de": "Billige Gnade ist die Todfeindin unserer Kirche. Unser Kampf heute geht um die teure Gnade.",
+    "text_original": "Billige Gnade ist die Todfeindin unserer Kirche. Unser Kampf heute geht um die teure Gnade.",
+    "year": 1937
+  },
+  {
+    "id": "chesterton_002",
+    "author": "G.K. Chesterton",
+    "author_type": "writer",
+    "category": [
+      "Tradition",
+      "Conservative",
+      "Demokratie",
+      "Religion"
+    ],
+    "chapter": "The Ethics of Elfland",
+    "difficulty": "intermediate",
+    "explanation_short": "Tradition als Mitspracherecht der Vorfahren.",
+    "explanation_long": "In \"Orthodoxie\" (1908) deutet G.K. Chesterton Tradition demokratisch: Wer nur die Lebenden entscheiden lässt, entrechtet die Mehrheit der Menschen, die vor uns lebten. Die pointierte Verteidigung der Überlieferung wurde zu einem Schlüsselzitat konservativen Denkens.",
+    "related_ids": [],
+    "series": "person_g._k._chesterton",
+    "source": "Orthodoxie",
+    "text_de": "Tradition bedeutet, der unbekanntesten aller Klassen eine Stimme zu geben: unseren Vorfahren. Sie ist die Demokratie der Toten.",
+    "text_original": "Tradition means giving votes to the most obscure of all classes, our ancestors. It is the democracy of the dead.",
+    "year": 1908
+  },
+  {
+    "id": "oakeshott_002",
+    "author": "Michael Oakeshott",
+    "author_type": "philosopher",
+    "category": [
+      "Conservative",
+      "Tradition",
+      "Ordnung",
+      "Werte"
+    ],
+    "chapter": "On Being Conservative",
+    "difficulty": "intermediate",
+    "explanation_short": "Konservative Haltung als Vorzug des Erprobten vor dem Ungewissen.",
+    "explanation_long": "In seinem Essay \"On Being Conservative\" (1956) beschreibt Michael Oakeshott den Konservatismus nicht als Ideologie, sondern als Disposition: die Neigung, Bewährtes und Vertrautes gegen ungewisse Verheißungen zu verteidigen. Der Text gilt als eine der elegantesten Selbstbeschreibungen konservativen Denkens im 20. Jahrhundert.",
+    "related_ids": [],
+    "series": "person_michael_oakeshott",
+    "source": "Rationalism in Politics",
+    "text_de": "Konservativ zu sein bedeutet, das Vertraute dem Unbekannten vorzuziehen, das Erprobte dem Unerprobten.",
+    "text_original": "To be conservative, then, is to prefer the familiar to the unknown, to prefer the tried to the untried.",
+    "year": 1956
+  },
+  {
+    "id": "scruton_003",
+    "author": "Roger Scruton",
+    "author_type": "philosopher",
+    "category": [
+      "Conservative",
+      "Werte",
+      "Kontinuität",
+      "Verantwortung"
+    ],
+    "chapter": "Einleitung",
+    "difficulty": "beginner",
+    "explanation_short": "Konservatismus als Wissen um die Zerbrechlichkeit des Guten.",
+    "explanation_long": "Roger Scruton begründet in \"How to Be a Conservative\" (2014) die konservative Haltung anthropologisch: Gute Institutionen, Vertrauen und Frieden entstehen langsam, können aber schnell zerstört werden. Konservatismus ist für ihn deshalb zuerst Pflege des Bestehenden, nicht Ablehnung des Neuen.",
+    "related_ids": [],
+    "series": "person_roger_scruton",
+    "source": "How to Be a Conservative",
+    "text_de": "Gute Dinge sind leicht zerstört, aber nicht leicht geschaffen.",
+    "text_original": "Good things are easily destroyed, but not easily created.",
+    "year": 2014
   }
 ]
