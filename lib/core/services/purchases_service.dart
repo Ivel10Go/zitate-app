@@ -77,12 +77,12 @@ class PurchasesService {
   }
 
   /// Convenience initializer that reads the API key from Dart environment
-  /// (`--dart-define=REVENUECAT_API_KEY=...`). Falls back to a sensible
-  /// test key when none is provided.
+  /// (`--dart-define=REVENUECAT_API_KEY=...`). Falls back to the app's
+  /// public Android SDK key (publishable, safe to embed in the binary).
   Future<void> initFromEnvironment({bool debugLogs = false}) async {
     final apiKey = const String.fromEnvironment(
       'REVENUECAT_API_KEY',
-      defaultValue: 'test_PjGielVRVSTMPwgxgCkbstAiMjR',
+      defaultValue: 'goog_DIuFsiykgmyWanTtkwNpkdEaRTV',
     );
     return init(apiKey, debugLogs: debugLogs);
   }

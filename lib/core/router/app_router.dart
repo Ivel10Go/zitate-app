@@ -14,6 +14,10 @@ import '../../presentation/account/account_screen.dart';
 import '../../presentation/legal/legal_screen.dart';
 import '../../presentation/settings/settings_screen.dart';
 import '../../presentation/quotes/quote_submission_screen.dart';
+import '../../presentation/paywall/purchase_page.dart';
+import '../../presentation/quiz/quiz_screen.dart';
+import '../../presentation/thinkers/thinkers_screen.dart';
+import '../../widgets/premium_gate.dart';
 import '../../domain/providers/admin_access_provider.dart';
 
 final initialRouteProvider = Provider<String>((Ref ref) => '/auth-gate');
@@ -138,7 +142,27 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
         name: 'submit-quote',
         builder: (context, state) => const QuoteSubmissionScreen(),
       ),
-      // Purchase and premium features routes removed for beta launch
+      GoRoute(
+        path: '/paywall',
+        name: 'paywall',
+        builder: (context, state) => const PurchasePage(),
+      ),
+      GoRoute(
+        path: '/thinkers',
+        name: 'thinkers',
+        builder: (context, state) => const PremiumGate(
+          featureName: 'Denkeratlas',
+          featureDescription:
+              'Durchstöbere die komplette Bibliothek: alle Philosophen und Politiker, '
+              'sämtliche Zitate und die Volltextsuche über den gesamten Bestand.',
+          child: ThinkersScreen(),
+        ),
+      ),
+      GoRoute(
+        path: '/quiz',
+        name: 'quiz',
+        builder: (context, state) => const QuizScreen(),
+      ),
     ],
   );
 });

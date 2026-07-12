@@ -20,7 +20,13 @@ if ($LASTEXITCODE -ne 0) {
   Write-Host "Analyse meldet Warnungen/Hinweise. Build wird trotzdem fortgesetzt." -ForegroundColor Yellow
 }
 
-RunStep "3/4 Signiertes Android App Bundle bauen" "flutter build appbundle"
+$buildCommand = "flutter build appbundle"
+if ($env:REVENUECAT_API_KEY) {
+  $buildCommand += " --dart-define=REVENUECAT_API_KEY=$env:REVENUECAT_API_KEY"
+} else {
+  Write-Host "Hinweis: REVENUECAT_API_KEY ist nicht gesetzt - Build nutzt den im Code hinterlegten Standard-Key." -ForegroundColor DarkGray
+}
+RunStep "3/4 Signiertes Android App Bundle bauen" $buildCommand
 
 Step "4/4 Upload-Artefakt pruefen"
 $aabPath = "build/app/outputs/bundle/release/app-release.aab"

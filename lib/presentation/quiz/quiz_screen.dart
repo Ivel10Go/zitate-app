@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/providers/purchases_provider.dart';
 import '../../core/theme/app_colors.dart';
 import '../../domain/providers/quiz_provider.dart';
 import '../../domain/providers/quiz_timer_provider.dart';
@@ -40,6 +42,15 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           subtitle: 'Fragen und Antwortoptionen werden geladen ...',
         ),
       );
+    }
+
+    final isPro = ref.watch(isProProvider);
+    final playedToday = ref
+        .watch(quizPlayedTodayProvider)
+        .maybeWhen(data: (value) => value, orElse: () => false);
+
+    if (!_quizStarted && !isPro && playedToday) {
+      return const _QuizDailyLimitScreen();
     }
 
     if (!_quizStarted) {
@@ -361,5 +372,101 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             _timerStartedForQuestionIndex = null;
           },
         );
+  }
+}
+
+/// Shown to free users who already completed today's quiz.
+class _QuizDailyLimitScreen extends StatelessWidget {
+  const _QuizDailyLimitScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return AppDecoratedScaffold(
+      bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+        children: <Widget>[
+          Container(
+            color: AppColors.red,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            child: Text(
+              'QUIZ',
+              style: GoogleFonts.ibmPlexSans(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: AppColors.redOnRed,
+                letterSpacing: 1.3,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: AppColors.paper,
+              border: Border.all(color: AppColors.rule, width: 1),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'TAGESLIMIT ERREICHT',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.red,
+                    letterSpacing: 1.1,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Du hast dein Quiz für heute gespielt.',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.ink,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Morgen wartet ein neues Quiz auf dich. Mit Zitate App Pro spielst du ohne Tageslimit — so oft du willst.',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 11,
+                    color: AppColors.inkLight,
+                    height: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: Material(
+                    color: AppColors.red,
+                    child: InkWell(
+                      onTap: () => context.push('/paywall'),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                        child: Text(
+                          'PRO FREISCHALTEN',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.ibmPlexSans(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.redOnRed,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

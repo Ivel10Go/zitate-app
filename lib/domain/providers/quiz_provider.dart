@@ -181,6 +181,7 @@ class QuizNotifier extends StateNotifier<QuizSession> {
       await prefs.setInt('quiz_highscore', state.score);
     }
     await prefs.setString('quiz_last_played', DateTime.now().toIso8601String());
+    _ref.invalidate(quizPlayedTodayProvider);
   }
 }
 
@@ -191,4 +192,22 @@ final quizProvider = StateNotifierProvider<QuizNotifier, QuizSession>(
 final quizHighscoreProvider = FutureProvider<int>((Ref ref) async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.getInt('quiz_highscore') ?? 0;
+});
+
+/// Whether a quiz was already completed today. Free users are limited to one
+/// quiz per day; Pro users play without limit (checked at the UI gate).
+final quizPlayedTodayProvider = FutureProvider<bool>((Ref ref) async {
+  final prefs = await SharedPreferences.getInstance();
+  final raw = prefs.getString('quiz_last_played');
+  if (raw == null) {
+    return false;
+  }
+  final lastPlayed = DateTime.tryParse(raw);
+  if (lastPlayed == null) {
+    return false;
+  }
+  final now = DateTime.now();
+  return lastPlayed.year == now.year &&
+      lastPlayed.month == now.month &&
+      lastPlayed.day == now.day;
 });

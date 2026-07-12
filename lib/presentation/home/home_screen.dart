@@ -319,8 +319,139 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
                 ),
               ),
+
+              // ── Entdecken (Denkeratlas, Quiz) ────────────────────────────
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  AppTheme.spacingBase,
+                  0,
+                  AppTheme.spacingBase,
+                  AppTheme.spacingXl,
+                ),
+                child: const _ExploreSection(),
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ExploreSection extends StatelessWidget {
+  const _ExploreSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return AppCard(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'ENTDECKEN',
+            style: GoogleFonts.ibmPlexSans(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: scheme.onSurfaceVariant,
+              letterSpacing: 1.8,
+            ),
+          ),
+          const SizedBox(height: 4),
+          _ExploreLinkRow(
+            label: 'DENKERATLAS',
+            description: 'Alle Denker und Zitate durchstöbern',
+            isProFeature: true,
+            onTap: () => context.push('/thinkers'),
+          ),
+          Container(height: 1, color: scheme.outline),
+          _ExploreLinkRow(
+            label: 'ZITAT-QUIZ',
+            description: 'Erkennst du die Quelle? 10 Fragen täglich',
+            isProFeature: false,
+            onTap: () => context.push('/quiz'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ExploreLinkRow extends StatelessWidget {
+  const _ExploreLinkRow({
+    required this.label,
+    required this.description,
+    required this.isProFeature,
+    required this.onTap,
+  });
+
+  final String label;
+  final String description;
+  final bool isProFeature;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        label,
+                        style: GoogleFonts.ibmPlexSans(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: scheme.onSurface,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                      if (isProFeature) ...<Widget>[
+                        const SizedBox(width: 8),
+                        Container(
+                          color: AppColors.red,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 2,
+                          ),
+                          child: Text(
+                            'PRO',
+                            style: GoogleFonts.ibmPlexSans(
+                              fontSize: 8,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.redOnRed,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    description,
+                    style: GoogleFonts.ibmPlexSans(
+                      fontSize: 11,
+                      color: scheme.onSurfaceVariant,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right, size: 20, color: scheme.onSurfaceVariant),
+          ],
         ),
       ),
     );
