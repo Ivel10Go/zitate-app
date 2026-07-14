@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/utils/quote_attribution.dart';
-import '../../data/models/history_fact.dart';
 import '../../data/models/quote.dart';
 import '../../data/models/user_profile.dart';
 import '../services/personalization_service.dart';
@@ -11,14 +10,9 @@ import 'user_profile_provider.dart';
 enum ArchiveTab { all }
 
 class ArchiveItem {
-  const ArchiveItem.quote(this.quote) : fact = null;
-  const ArchiveItem.fact(this.fact) : quote = null;
+  const ArchiveItem.quote(this.quote);
 
-  final Quote? quote;
-  final HistoryFact? fact;
-
-  bool get isQuote => quote != null;
-  bool get isFact => fact != null;
+  final Quote quote;
 }
 
 final personalizationServiceProvider = Provider<PersonalizationService>((
@@ -44,36 +38,19 @@ final archivePoolProvider = StreamProvider<List<ArchiveItem>>((Ref ref) async* {
   final selectedOrientation = ref.watch(archiveOrientationFilterProvider);
   final profile = ref.watch(userProfileProvider);
   final personalization = ref.watch(personalizationServiceProvider);
-  // History facts are intentionally not loaded here because they are
-  // temporarily excluded from the archive listing.
 
   yield* ref.watch(quoteRepositoryProvider).watchAllQuotes().map((
     List<Quote> quotes,
   ) {
-    // Filter quotes based on user profile
     final profileQuotes = _filterQuotesByProfile(quotes, profile);
-    // Weight quotes based on personalization
     final weightedQuotes = personalization.getWeightedQuotes(
       profileQuotes,
       profile,
     );
-    // Weight facts based on personalization (currently unused because
-    // history facts are temporarily excluded from the archive listing).
 
-    // Temporarily exclude history facts from the archive listing per UX request.
-    // Keep quotes only for now; facts (from assets/history_facts.json) are
-    // intentionally hidden while we review them.
-    final items = <ArchiveItem>[
-      ...weightedQuotes.map(ArchiveItem.quote),
-      // ...weightedFacts.map(ArchiveItem.fact),
-    ];
+    final items = weightedQuotes.map(ArchiveItem.quote).toList();
 
-    final tabFiltered = items.where((ArchiveItem item) {
-      // Show all items (only ArchiveTab.all is supported now)
-      return true;
-    }).toList();
-
-    final dropdownFiltered = tabFiltered.where((ArchiveItem item) {
+    final dropdownFiltered = items.where((ArchiveItem item) {
       if (selectedTheme != null &&
           !_matchesTheme(item: item, theme: selectedTheme)) {
         return false;
@@ -92,25 +69,13 @@ final archivePoolProvider = StreamProvider<List<ArchiveItem>>((Ref ref) async* {
     }
 
     return dropdownFiltered.where((ArchiveItem item) {
-      if (item.isQuote) {
-        final quote = item.quote!;
-        return quote.textDe.toLowerCase().contains(query) ||
-            quote.source.toLowerCase().contains(query) ||
-            quote.series.toLowerCase().contains(query) ||
-            quote.category.any(
-              (String category) => category.toLowerCase().contains(query),
-            );
-      }
-
-      final fact = item.fact!;
-      return fact.headline.toLowerCase().contains(query) ||
-          fact.body.toLowerCase().contains(query) ||
-          fact.region.toLowerCase().contains(query) ||
-          fact.era.toLowerCase().contains(query) ||
-          fact.category.any(
+      final quote = item.quote;
+      return quote.textDe.toLowerCase().contains(query) ||
+          quote.source.toLowerCase().contains(query) ||
+          quote.series.toLowerCase().contains(query) ||
+          quote.category.any(
             (String category) => category.toLowerCase().contains(query),
-          ) ||
-          (fact.person?.toLowerCase().contains(query) ?? false);
+          );
     }).toList();
   });
 });
@@ -148,33 +113,16 @@ final archiveProvider = Provider<AsyncValue<List<ArchiveItem>>>((Ref ref) {
 });
 
 Set<String> _themeTokensForItem({required ArchiveItem item}) {
-  if (item.isQuote) {
-    final quote = item.quote!;
-    return <String>{...quote.category};
-  }
-
-  final fact = item.fact!;
-  return <String>{...fact.category};
+  return <String>{...item.quote.category};
 }
 
 Set<String> _orientationTokensForItem({required ArchiveItem item}) {
-  final text = item.isQuote
-      ? <String>[
-          item.quote!.textDe,
-          item.quote!.source,
-          item.quote!.chapter,
-          ...item.quote!.category,
-        ].join(' ').toLowerCase()
-      : <String>[
-          item.fact!.headline,
-          item.fact!.body,
-          item.fact!.era,
-          item.fact!.region,
-          item.fact!.connectionToMarx,
-          if (item.fact!.person != null) item.fact!.person!,
-          if (item.fact!.personRole != null) item.fact!.personRole!,
-          ...item.fact!.category,
-        ].join(' ').toLowerCase();
+  final text = <String>[
+    item.quote.textDe,
+    item.quote.source,
+    item.quote.chapter,
+    ...item.quote.category,
+  ].join(' ').toLowerCase();
 
   final tokens = <String>{};
 
@@ -236,13 +184,7 @@ bool _containsAny(String text, List<String> keywords) {
 
 bool _matchesTheme({required ArchiveItem item, required String theme}) {
   final normalized = theme.toLowerCase();
-  if (item.isQuote) {
-    return item.quote!.category.any(
-      (String category) => category.toLowerCase().contains(normalized),
-    );
-  }
-
-  return item.fact!.category.any(
+  return item.quote.category.any(
     (String category) => category.toLowerCase().contains(normalized),
   );
 }
@@ -273,9 +215,7 @@ final archiveHierarchyAllThemesProvider = Provider<List<String>>((Ref ref) {
 
   final themes = <String>{};
   for (final item in poolAsync) {
-    if (item.isQuote) {
-      themes.addAll(item.quote!.category);
-    }
+    themes.addAll(item.quote.category);
   }
 
   return themes.toList()..sort();
@@ -291,9 +231,8 @@ final archiveHierarchyPhilosophersProvider = Provider<List<String>>((Ref ref) {
 
   final philosophers = <String>{};
   for (final item in poolAsync) {
-    if (item.isQuote && item.quote!.category.contains(selectedTheme)) {
-      final author = quoteAuthorLabel(item.quote!);
-      philosophers.add(author);
+    if (item.quote.category.contains(selectedTheme)) {
+      philosophers.add(quoteAuthorLabel(item.quote));
     }
   }
 
@@ -311,39 +250,27 @@ final archiveHierarchyQuotesProvider = Provider<List<ArchiveItem>>((Ref ref) {
 
   var filtered = poolAsync;
 
-  // Filter by theme if selected
   if (selectedTheme != null) {
-    filtered = filtered.where((item) {
-      if (item.isQuote) {
-        return item.quote!.category.contains(selectedTheme);
-      }
-      return false;
-    }).toList();
+    filtered = filtered
+        .where((item) => item.quote.category.contains(selectedTheme))
+        .toList();
   }
 
-  // Filter by philosopher if selected
   if (selectedPhilosopher != null) {
-    filtered = filtered.where((item) {
-      if (item.isQuote) {
-        return quoteAuthorLabel(item.quote!) == selectedPhilosopher;
-      }
-      return false;
-    }).toList();
+    filtered = filtered
+        .where((item) => quoteAuthorLabel(item.quote) == selectedPhilosopher)
+        .toList();
   }
 
-  // Apply text search if present
   if (query.isNotEmpty) {
     filtered = filtered.where((item) {
-      if (item.isQuote) {
-        final quote = item.quote!;
-        return quote.textDe.toLowerCase().contains(query) ||
-            quote.source.toLowerCase().contains(query) ||
-            quote.series.toLowerCase().contains(query) ||
-            quote.category.any(
-              (category) => category.toLowerCase().contains(query),
-            );
-      }
-      return false;
+      final quote = item.quote;
+      return quote.textDe.toLowerCase().contains(query) ||
+          quote.source.toLowerCase().contains(query) ||
+          quote.series.toLowerCase().contains(query) ||
+          quote.category.any(
+            (category) => category.toLowerCase().contains(query),
+          );
     }).toList();
   }
 

@@ -9,7 +9,6 @@ import 'package:share_plus/share_plus.dart';
 
 import '../theme/app_colors.dart';
 import 'quote_attribution.dart';
-import '../../data/models/history_fact.dart';
 import '../../data/models/quote.dart';
 import '../../widgets/adaptive_quote_text.dart';
 
@@ -30,25 +29,6 @@ class ShareCardRenderer {
       );
     } catch (error, stackTrace) {
       debugPrint('[ShareCardRenderer] quote share failed: $error');
-      debugPrintStack(stackTrace: stackTrace);
-      await Share.share(fallbackText);
-    }
-  }
-
-  Future<void> shareFact(HistoryFact fact, BuildContext context) async {
-    final fallbackText = _factShareText(fact);
-    try {
-      final image = await _controller.captureFromWidget(
-        _ShareCanvas.fact(fact: fact),
-      );
-
-      await _shareBytes(
-        image,
-        fallbackText: fallbackText,
-        filePrefix: 'fact_share',
-      );
-    } catch (error, stackTrace) {
-      debugPrint('[ShareCardRenderer] fact share failed: $error');
       debugPrintStack(stackTrace: stackTrace);
       await Share.share(fallbackText);
     }
@@ -90,26 +70,19 @@ class ShareCardRenderer {
         : quote.textOriginal.trim();
     return '"$text"\n— ${quote.source}, ${quote.year}\n${quote.explanationShort}';
   }
-
-  String _factShareText(HistoryFact fact) {
-    return '${fact.funFact ?? fact.headline}\n${fact.headline}\n${fact.dateDisplay}';
-  }
 }
 
 class _ShareCanvas extends StatelessWidget {
   const _ShareCanvas._({
-    required this.kind,
     required this.kicker,
     required this.title,
     required this.source,
     required this.headerRight,
     this.tagline,
-    this.body,
   });
 
   factory _ShareCanvas.quote({required Quote quote}) {
     return _ShareCanvas._(
-      kind: _ShareCanvasKind.quote,
       kicker: '${quoteAuthorLabel(quote).toUpperCase()} · ${quote.year}',
       title: quote.textDe,
       source: '— ${quoteAuthorLabel(quote)}',
@@ -118,27 +91,11 @@ class _ShareCanvas extends StatelessWidget {
     );
   }
 
-  factory _ShareCanvas.fact({required HistoryFact fact}) {
-    return _ShareCanvas._(
-      kind: _ShareCanvasKind.fact,
-      kicker: 'WELTGESCHICHTE · ${fact.dateDisplay.toUpperCase()}',
-      title: fact.funFact ?? fact.headline,
-      body: fact.body,
-      source: fact.connectionToMarx,
-      headerRight: fact.category.isNotEmpty
-          ? fact.category.first.toUpperCase()
-          : 'FAKT',
-      tagline: fact.category.take(3).join(' · '),
-    );
-  }
-
-  final _ShareCanvasKind kind;
   final String kicker;
   final String title;
   final String source;
   final String headerRight;
   final String? tagline;
-  final String? body;
 
   @override
   Widget build(BuildContext context) {
@@ -205,9 +162,9 @@ class _ShareCanvas extends StatelessWidget {
                     children: <Widget>[
                       AdaptiveQuoteText(
                         text: title,
-                        minFontSize: kind == _ShareCanvasKind.quote ? 22 : 20,
-                        maxFontSize: kind == _ShareCanvasKind.quote ? 34 : 30,
-                        maxLines: kind == _ShareCanvasKind.quote ? 7 : 5,
+                        minFontSize: 22,
+                        maxFontSize: 34,
+                        maxLines: 7,
                         style: GoogleFonts.playfairDisplay(
                           fontStyle: FontStyle.italic,
                           color: AppColors.ink,
@@ -226,19 +183,6 @@ class _ShareCanvas extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      if (body != null && body!.trim().isNotEmpty) ...<Widget>[
-                        const SizedBox(height: 14),
-                        Text(
-                          body!,
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 11,
-                            height: 1.55,
-                            color: AppColors.ink,
-                          ),
-                          maxLines: 7,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
                       if (tagline != null &&
                           tagline!.trim().isNotEmpty) ...<Widget>[
                         const SizedBox(height: 14),
@@ -278,5 +222,3 @@ class _ShareCanvas extends StatelessWidget {
     );
   }
 }
-
-enum _ShareCanvasKind { quote, fact }

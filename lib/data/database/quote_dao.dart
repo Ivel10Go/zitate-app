@@ -42,6 +42,31 @@ class QuoteDao extends DatabaseAccessor<AppDatabase> with _$QuoteDaoMixin {
     });
   }
 
+  /// Deletes every quote that is no longer part of the seed asset, along with
+  /// the favorites/seen rows pointing at it. Seeding is upsert-only, so without
+  /// this a quote removed from `thinkers_quotes.json` would survive forever on
+  /// installs that had already seeded it.
+  Future<void> pruneQuotesNotIn(Set<String> keptIds) async {
+    await transaction(() async {
+      final staleIds = (await getAllQuoteIds())
+          .where((String id) => !keptIds.contains(id))
+          .toList();
+      if (staleIds.isEmpty) {
+        return;
+      }
+
+      await (delete(
+        favorites,
+      )..where((Favorites t) => t.quoteId.isIn(staleIds))).go();
+      await (delete(
+        seenQuotes,
+      )..where((SeenQuotes t) => t.quoteId.isIn(staleIds))).go();
+      await (delete(
+        quoteEntries,
+      )..where((QuoteEntries t) => t.id.isIn(staleIds))).go();
+    });
+  }
+
   Stream<List<QuoteEntry>> watchFavoriteQuoteEntries() {
     final query = select(favorites).join(<Join>[
       innerJoin(quoteEntries, quoteEntries.id.equalsExp(favorites.quoteId)),

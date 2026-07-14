@@ -5,18 +5,17 @@ import 'tables.dart';
 
 part 'app_database.g.dart';
 part 'quote_dao.dart';
-part 'history_fact_dao.dart';
 part 'app_open_log_dao.dart';
 
 @DriftDatabase(
-  tables: [QuoteEntries, Favorites, SeenQuotes, HistoryFactEntries, AppOpenLog],
-  daos: [QuoteDao, HistoryFactDao, AppOpenLogDao],
+  tables: [QuoteEntries, Favorites, SeenQuotes, AppOpenLog],
+  daos: [QuoteDao, AppOpenLogDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -26,9 +25,9 @@ class AppDatabase extends _$AppDatabase {
       await _createAppOpenLogIndex(m);
     },
     onUpgrade: (Migrator m, int from, int to) async {
-      if (from < 2) {
-        await m.createTable(historyFactEntries);
-      }
+      // Schema v2 created `history_fact_entries`; v7 drops the history-fact
+      // feature entirely. Installs upgrading from <7 still carry the table, so
+      // drop it explicitly — `createAll()` never revisits existing databases.
       if (from < 3) {
         await m.createTable(appOpenLog);
       }
@@ -37,6 +36,14 @@ class AppDatabase extends _$AppDatabase {
       }
       if (from < 5) {
         await _createAppOpenLogIndex(m);
+      }
+      if (from < 6) {
+        await m.addColumn(quoteEntries, quoteEntries.author);
+      }
+      if (from < 7) {
+        await m.database.customStatement(
+          'DROP TABLE IF EXISTS history_fact_entries',
+        );
       }
     },
   );

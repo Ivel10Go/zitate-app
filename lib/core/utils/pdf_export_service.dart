@@ -3,7 +3,6 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-import '../../data/models/history_fact.dart';
 import '../../data/models/quote.dart';
 import 'quote_attribution.dart';
 
@@ -12,10 +11,7 @@ class PdfExportService {
   static final _ink = PdfColor.fromInt(0xFF1A1A1A);
   static final _muted = PdfColor.fromInt(0xFF555555);
 
-  Future<void> exportFavorites({
-    required List<Quote> quotes,
-    required List<HistoryFact> facts,
-  }) async {
+  Future<void> exportFavorites({required List<Quote> quotes}) async {
     final doc = pw.Document();
     final fonts = await _loadFonts();
 
@@ -23,11 +19,7 @@ class PdfExportService {
       pw.Page(
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(40),
-        build: (_) => _buildTitlePage(
-          quotes: quotes.length,
-          facts: facts.length,
-          fonts: fonts,
-        ),
+        build: (_) => _buildTitlePage(quotes: quotes.length, fonts: fonts),
       ),
     );
 
@@ -37,16 +29,6 @@ class PdfExportService {
           pageFormat: PdfPageFormat.a4,
           margin: const pw.EdgeInsets.all(40),
           build: (_) => _buildQuotePage(quote, fonts),
-        ),
-      );
-    }
-
-    for (final fact in facts) {
-      doc.addPage(
-        pw.Page(
-          pageFormat: PdfPageFormat.a4,
-          margin: const pw.EdgeInsets.all(40),
-          build: (_) => _buildFactPage(fact, fonts),
         ),
       );
     }
@@ -81,11 +63,7 @@ class PdfExportService {
     );
   }
 
-  pw.Widget _buildTitlePage({
-    required int quotes,
-    required int facts,
-    required _PdfFonts fonts,
-  }) {
+  pw.Widget _buildTitlePage({required int quotes, required _PdfFonts fonts}) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: <pw.Widget>[
@@ -108,11 +86,6 @@ class PdfExportService {
         pw.SizedBox(height: 20),
         pw.Text(
           '$quotes gespeicherte Zitate',
-          style: pw.TextStyle(font: fonts.sans, fontSize: 12, color: _ink),
-        ),
-        pw.SizedBox(height: 6),
-        pw.Text(
-          '$facts gespeicherte Fakten',
           style: pw.TextStyle(font: fonts.sans, fontSize: 12, color: _ink),
         ),
       ],
@@ -217,92 +190,8 @@ class PdfExportService {
     );
   }
 
-  pw.Widget _buildFactPage(HistoryFact fact, _PdfFonts fonts) {
-    return pw.Container(
-      decoration: pw.BoxDecoration(
-        border: pw.Border.all(color: _ink, width: 1.5),
-      ),
-      child: pw.Column(
-        crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-        children: <pw.Widget>[
-          pw.Container(
-            color: _red,
-            padding: const pw.EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 10,
-            ),
-            child: pw.Row(
-              children: <pw.Widget>[
-                pw.Expanded(
-                  child: pw.Text(
-                    'WELTGESCHICHTE · ${fact.dateDisplay.toUpperCase()}',
-                    style: pw.TextStyle(
-                      font: fonts.sansBold,
-                      fontSize: 9,
-                      color: PdfColors.white,
-                      letterSpacing: 1.1,
-                    ),
-                  ),
-                ),
-                pw.SizedBox(width: 8),
-                pw.Text(
-                  fact.category.isNotEmpty
-                      ? fact.category.first.toUpperCase()
-                      : 'FAKT',
-                  style: pw.TextStyle(
-                    font: fonts.sansBold,
-                    fontSize: 8,
-                    color: PdfColors.white,
-                    letterSpacing: 1.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          pw.Padding(
-            padding: const pw.EdgeInsets.fromLTRB(18, 18, 18, 14),
-            child: pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.start,
-              children: <pw.Widget>[
-                pw.Text(
-                  fact.funFact ?? fact.headline,
-                  style: pw.TextStyle(
-                    font: fonts.serif,
-                    fontSize: 22,
-                    color: _ink,
-                    lineSpacing: 4,
-                  ),
-                ),
-                pw.SizedBox(height: 12),
-                pw.Text(
-                  fact.body,
-                  style: pw.TextStyle(
-                    font: fonts.sans,
-                    fontSize: 11,
-                    color: _ink,
-                    lineSpacing: 3,
-                  ),
-                ),
-                pw.SizedBox(height: 14),
-                pw.Container(width: 56, height: 2, color: _red),
-                pw.SizedBox(height: 10),
-                pw.Text(
-                  fact.connectionToMarx,
-                  style: pw.TextStyle(
-                    font: fonts.sans,
-                    fontSize: 10,
-                    color: _muted,
-                    lineSpacing: 2.6,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
+
 
 class _PdfFonts {
   const _PdfFonts({this.serif, this.serifItalic, this.sans, this.sansBold});

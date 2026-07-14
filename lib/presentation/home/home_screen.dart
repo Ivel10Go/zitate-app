@@ -24,7 +24,6 @@ import '../../widgets/android_back_guard.dart';
 import '../../widgets/app_navigation_bar.dart';
 import '../../widgets/adaptive_quote_text.dart';
 import '../../widgets/quote_card.dart';
-import '../home/widgets/fact_block.dart';
 import '../loading/app_loading_screen.dart';
 import '../shared/icon_circle.dart';
 import '../shared/app_card.dart';
@@ -104,7 +103,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   String _dailyContentSignature(DailyContent content) {
     return content.when(
       quote: (quote) => 'quote:${quote.id}',
-      fact: (fact) => 'fact:${fact.id}',
       thinkerQuote: (quote) => 'thinker:${quote.id}',
     );
   }
@@ -292,16 +290,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                               error: (_, __) => fallbackCard,
                             );
                           },
-                          fact: (fact) => FactBlock(
-                            fact: fact,
-                            onShareTap: () =>
-                                ShareCardRenderer().shareFact(fact, context),
-                            onRelatedQuoteTap: fact.relatedQuoteIds.isNotEmpty
-                                ? () => context.push(
-                                    '/detail/${fact.relatedQuoteIds.first}',
-                                  )
-                                : null,
-                          ),
                           thinkerQuote: (ThinkerQuote quote) =>
                               _ThinkerQuoteCard(quote: quote),
                         ),

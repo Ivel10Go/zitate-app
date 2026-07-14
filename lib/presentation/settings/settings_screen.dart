@@ -8,7 +8,6 @@ import '../../core/services/notification_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/models/daily_content.dart';
-import '../../data/models/home_content_mode.dart';
 import '../../data/models/user_profile.dart';
 import '../../domain/providers/admin_access_provider.dart';
 import '../../domain/providers/app_mode_provider.dart';
@@ -367,17 +366,6 @@ Widget _fieldLabel(String text) {
   );
 }
 
-String _contentModeLabel(HomeContentMode mode) {
-  switch (mode) {
-    case HomeContentMode.quotes:
-      return 'Zitate';
-    case HomeContentMode.facts:
-      return 'Fakten';
-    case HomeContentMode.mixed:
-      return 'Gemischt';
-  }
-}
-
 String _leaningLabel(PoliticalLeaning leaning) {
   switch (leaning) {
     case PoliticalLeaning.left:
@@ -393,18 +381,16 @@ String _leaningLabel(PoliticalLeaning leaning) {
   }
 }
 
-/// Content preferences: home format, topics of interest and political lens.
-/// These mirror the onboarding inputs so they can be revisited any time; any
-/// change re-resolves today's content immediately.
+/// Content preferences: topics of interest and political lens. These mirror the
+/// onboarding inputs so they can be revisited any time; any change re-resolves
+/// today's content immediately.
 class _ContentPreferencesGroup extends ConsumerWidget {
   const _ContentPreferencesGroup();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scheme = Theme.of(context).colorScheme;
-    final settings = ref.watch(settingsControllerProvider).valueOrNull;
     final profile = ref.watch(userProfileProvider);
-    final mode = settings?.homeContentMode ?? HomeContentMode.quotes;
 
     Future<void> refreshContent() async {
       // Clear the cached daily pick so the new preferences take effect today
@@ -416,26 +402,6 @@ class _ContentPreferencesGroup extends ConsumerWidget {
     return _SettingsGroup(
       title: 'INHALT',
       children: <Widget>[
-        _fieldLabel('FORMAT'),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: <Widget>[
-            for (final HomeContentMode value in HomeContentMode.values)
-              _ChoicePill(
-                label: _contentModeLabel(value),
-                selected: mode == value,
-                onTap: () async {
-                  await ref
-                      .read(settingsControllerProvider.notifier)
-                      .setHomeContentMode(value);
-                  await refreshContent();
-                },
-              ),
-          ],
-        ),
-        const SizedBox(height: 20),
         _fieldLabel('THEMEN'),
         const SizedBox(height: 4),
         Text(

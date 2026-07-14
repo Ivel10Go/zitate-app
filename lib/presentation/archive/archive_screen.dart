@@ -11,7 +11,6 @@ import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
 import '../../widgets/app_navigation_bar.dart';
 import '../../widgets/compact_quote_card.dart';
-import '../home/widgets/fact_block.dart';
 import '../loading/app_loading_screen.dart';
 import 'widgets/archive_filter_chips.dart';
 
@@ -215,22 +214,12 @@ class _ArchiveScreenState extends ConsumerState<ArchiveScreen> {
                         padding: const EdgeInsets.only(
                           bottom: AppTheme.spacingMedium,
                         ),
-                        child: item.isQuote
-                            ? CompactQuoteCard(
-                                quote: item.quote!,
-                                onTap: () => context.push(
-                                  '/detail/${Uri.encodeComponent(item.quote!.id)}',
-                                ),
-                              )
-                            : FactBlock(
-                                fact: item.fact!,
-                                onRelatedQuoteTap:
-                                    item.fact!.relatedQuoteIds.isNotEmpty
-                                    ? () => context.push(
-                                        '/detail/${Uri.encodeComponent(item.fact!.relatedQuoteIds.first)}',
-                                      )
-                                    : null,
-                              ),
+                        child: CompactQuoteCard(
+                          quote: item.quote,
+                          onTap: () => context.push(
+                            '/detail/${Uri.encodeComponent(item.quote.id)}',
+                          ),
+                        ),
                       );
                     },
                   );

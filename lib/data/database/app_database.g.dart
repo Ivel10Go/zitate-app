@@ -38,6 +38,16 @@ class $QuoteEntriesTable extends QuoteEntries
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _authorMeta = const VerificationMeta('author');
+  @override
+  late final GeneratedColumn<String> author = GeneratedColumn<String>(
+    'author',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
   static const VerificationMeta _sourceMeta = const VerificationMeta('source');
   @override
   late final GeneratedColumn<String> source = GeneratedColumn<String>(
@@ -147,6 +157,7 @@ class $QuoteEntriesTable extends QuoteEntries
     id,
     textDe,
     textOriginal,
+    author,
     source,
     year,
     chapter,
@@ -193,6 +204,12 @@ class $QuoteEntriesTable extends QuoteEntries
       );
     } else if (isInserting) {
       context.missing(_textOriginalMeta);
+    }
+    if (data.containsKey('author')) {
+      context.handle(
+        _authorMeta,
+        author.isAcceptableOrUnknown(data['author']!, _authorMeta),
+      );
     }
     if (data.containsKey('source')) {
       context.handle(
@@ -305,6 +322,10 @@ class $QuoteEntriesTable extends QuoteEntries
         DriftSqlType.string,
         data['${effectivePrefix}text_original'],
       )!,
+      author: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}author'],
+      )!,
       source: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}source'],
@@ -358,6 +379,12 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
   final String id;
   final String textDe;
   final String textOriginal;
+
+  /// The person a quote is attributed to. Distinct from [source], which is the
+  /// work it appears in ("Das Kapital Band 1", "Menon"). Defaults to empty so
+  /// rows written before schema v6 stay readable until the seed backfills them;
+  /// use `quoteAuthorLabel()` rather than reading this directly.
+  final String author;
   final String source;
   final int year;
   final String chapter;
@@ -372,6 +399,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
     required this.id,
     required this.textDe,
     required this.textOriginal,
+    required this.author,
     required this.source,
     required this.year,
     required this.chapter,
@@ -389,6 +417,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
     map['id'] = Variable<String>(id);
     map['text_de'] = Variable<String>(textDe);
     map['text_original'] = Variable<String>(textOriginal);
+    map['author'] = Variable<String>(author);
     map['source'] = Variable<String>(source);
     map['year'] = Variable<int>(year);
     map['chapter'] = Variable<String>(chapter);
@@ -409,6 +438,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
       id: Value(id),
       textDe: Value(textDe),
       textOriginal: Value(textOriginal),
+      author: Value(author),
       source: Value(source),
       year: Value(year),
       chapter: Value(chapter),
@@ -433,6 +463,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
       id: serializer.fromJson<String>(json['id']),
       textDe: serializer.fromJson<String>(json['textDe']),
       textOriginal: serializer.fromJson<String>(json['textOriginal']),
+      author: serializer.fromJson<String>(json['author']),
       source: serializer.fromJson<String>(json['source']),
       year: serializer.fromJson<int>(json['year']),
       chapter: serializer.fromJson<String>(json['chapter']),
@@ -452,6 +483,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
       'id': serializer.toJson<String>(id),
       'textDe': serializer.toJson<String>(textDe),
       'textOriginal': serializer.toJson<String>(textOriginal),
+      'author': serializer.toJson<String>(author),
       'source': serializer.toJson<String>(source),
       'year': serializer.toJson<int>(year),
       'chapter': serializer.toJson<String>(chapter),
@@ -469,6 +501,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
     String? id,
     String? textDe,
     String? textOriginal,
+    String? author,
     String? source,
     int? year,
     String? chapter,
@@ -483,6 +516,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
     id: id ?? this.id,
     textDe: textDe ?? this.textDe,
     textOriginal: textOriginal ?? this.textOriginal,
+    author: author ?? this.author,
     source: source ?? this.source,
     year: year ?? this.year,
     chapter: chapter ?? this.chapter,
@@ -501,6 +535,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
       textOriginal: data.textOriginal.present
           ? data.textOriginal.value
           : this.textOriginal,
+      author: data.author.present ? data.author.value : this.author,
       source: data.source.present ? data.source.value : this.source,
       year: data.year.present ? data.year.value : this.year,
       chapter: data.chapter.present ? data.chapter.value : this.chapter,
@@ -530,6 +565,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
           ..write('id: $id, ')
           ..write('textDe: $textDe, ')
           ..write('textOriginal: $textOriginal, ')
+          ..write('author: $author, ')
           ..write('source: $source, ')
           ..write('year: $year, ')
           ..write('chapter: $chapter, ')
@@ -549,6 +585,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
     id,
     textDe,
     textOriginal,
+    author,
     source,
     year,
     chapter,
@@ -567,6 +604,7 @@ class QuoteEntry extends DataClass implements Insertable<QuoteEntry> {
           other.id == this.id &&
           other.textDe == this.textDe &&
           other.textOriginal == this.textOriginal &&
+          other.author == this.author &&
           other.source == this.source &&
           other.year == this.year &&
           other.chapter == this.chapter &&
@@ -583,6 +621,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
   final Value<String> id;
   final Value<String> textDe;
   final Value<String> textOriginal;
+  final Value<String> author;
   final Value<String> source;
   final Value<int> year;
   final Value<String> chapter;
@@ -598,6 +637,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
     this.id = const Value.absent(),
     this.textDe = const Value.absent(),
     this.textOriginal = const Value.absent(),
+    this.author = const Value.absent(),
     this.source = const Value.absent(),
     this.year = const Value.absent(),
     this.chapter = const Value.absent(),
@@ -614,6 +654,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
     required String id,
     required String textDe,
     required String textOriginal,
+    this.author = const Value.absent(),
     required String source,
     required int year,
     required String chapter,
@@ -641,6 +682,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
     Expression<String>? id,
     Expression<String>? textDe,
     Expression<String>? textOriginal,
+    Expression<String>? author,
     Expression<String>? source,
     Expression<int>? year,
     Expression<String>? chapter,
@@ -657,6 +699,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
       if (id != null) 'id': id,
       if (textDe != null) 'text_de': textDe,
       if (textOriginal != null) 'text_original': textOriginal,
+      if (author != null) 'author': author,
       if (source != null) 'source': source,
       if (year != null) 'year': year,
       if (chapter != null) 'chapter': chapter,
@@ -675,6 +718,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
     Value<String>? id,
     Value<String>? textDe,
     Value<String>? textOriginal,
+    Value<String>? author,
     Value<String>? source,
     Value<int>? year,
     Value<String>? chapter,
@@ -691,6 +735,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
       id: id ?? this.id,
       textDe: textDe ?? this.textDe,
       textOriginal: textOriginal ?? this.textOriginal,
+      author: author ?? this.author,
       source: source ?? this.source,
       year: year ?? this.year,
       chapter: chapter ?? this.chapter,
@@ -716,6 +761,9 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
     }
     if (textOriginal.present) {
       map['text_original'] = Variable<String>(textOriginal.value);
+    }
+    if (author.present) {
+      map['author'] = Variable<String>(author.value);
     }
     if (source.present) {
       map['source'] = Variable<String>(source.value);
@@ -759,6 +807,7 @@ class QuoteEntriesCompanion extends UpdateCompanion<QuoteEntry> {
           ..write('id: $id, ')
           ..write('textDe: $textDe, ')
           ..write('textOriginal: $textOriginal, ')
+          ..write('author: $author, ')
           ..write('source: $source, ')
           ..write('year: $year, ')
           ..write('chapter: $chapter, ')
@@ -1270,978 +1319,6 @@ class SeenQuotesCompanion extends UpdateCompanion<SeenQuote> {
   }
 }
 
-class $HistoryFactEntriesTable extends HistoryFactEntries
-    with TableInfo<$HistoryFactEntriesTable, HistoryFactEntry> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $HistoryFactEntriesTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _headlineMeta = const VerificationMeta(
-    'headline',
-  );
-  @override
-  late final GeneratedColumn<String> headline = GeneratedColumn<String>(
-    'headline',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
-  @override
-  late final GeneratedColumn<String> body = GeneratedColumn<String>(
-    'body',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _dateDisplayMeta = const VerificationMeta(
-    'dateDisplay',
-  );
-  @override
-  late final GeneratedColumn<String> dateDisplay = GeneratedColumn<String>(
-    'date_display',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _dateIsoMeta = const VerificationMeta(
-    'dateIso',
-  );
-  @override
-  late final GeneratedColumn<String> dateIso = GeneratedColumn<String>(
-    'date_iso',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _dayOfYearMeta = const VerificationMeta(
-    'dayOfYear',
-  );
-  @override
-  late final GeneratedColumn<int> dayOfYear = GeneratedColumn<int>(
-    'day_of_year',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _eraMeta = const VerificationMeta('era');
-  @override
-  late final GeneratedColumn<String> era = GeneratedColumn<String>(
-    'era',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _regionMeta = const VerificationMeta('region');
-  @override
-  late final GeneratedColumn<String> region = GeneratedColumn<String>(
-    'region',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _categoryCsvMeta = const VerificationMeta(
-    'categoryCsv',
-  );
-  @override
-  late final GeneratedColumn<String> categoryCsv = GeneratedColumn<String>(
-    'category_csv',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _difficultyMeta = const VerificationMeta(
-    'difficulty',
-  );
-  @override
-  late final GeneratedColumn<String> difficulty = GeneratedColumn<String>(
-    'difficulty',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _personMeta = const VerificationMeta('person');
-  @override
-  late final GeneratedColumn<String> person = GeneratedColumn<String>(
-    'person',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _personRoleMeta = const VerificationMeta(
-    'personRole',
-  );
-  @override
-  late final GeneratedColumn<String> personRole = GeneratedColumn<String>(
-    'person_role',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _connectionToMarxMeta = const VerificationMeta(
-    'connectionToMarx',
-  );
-  @override
-  late final GeneratedColumn<String> connectionToMarx = GeneratedColumn<String>(
-    'connection_to_marx',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _relatedQuoteIdsCsvMeta =
-      const VerificationMeta('relatedQuoteIdsCsv');
-  @override
-  late final GeneratedColumn<String> relatedQuoteIdsCsv =
-      GeneratedColumn<String>(
-        'related_quote_ids_csv',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      );
-  static const VerificationMeta _funFactMeta = const VerificationMeta(
-    'funFact',
-  );
-  @override
-  late final GeneratedColumn<String> funFact = GeneratedColumn<String>(
-    'fun_fact',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
-  @override
-  late final GeneratedColumn<String> source = GeneratedColumn<String>(
-    'source',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _todayInHistoryMeta = const VerificationMeta(
-    'todayInHistory',
-  );
-  @override
-  late final GeneratedColumn<bool> todayInHistory = GeneratedColumn<bool>(
-    'today_in_history',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("today_in_history" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    headline,
-    body,
-    dateDisplay,
-    dateIso,
-    dayOfYear,
-    era,
-    region,
-    categoryCsv,
-    difficulty,
-    person,
-    personRole,
-    connectionToMarx,
-    relatedQuoteIdsCsv,
-    funFact,
-    source,
-    todayInHistory,
-  ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'history_fact_entries';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<HistoryFactEntry> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
-    }
-    if (data.containsKey('headline')) {
-      context.handle(
-        _headlineMeta,
-        headline.isAcceptableOrUnknown(data['headline']!, _headlineMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_headlineMeta);
-    }
-    if (data.containsKey('body')) {
-      context.handle(
-        _bodyMeta,
-        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_bodyMeta);
-    }
-    if (data.containsKey('date_display')) {
-      context.handle(
-        _dateDisplayMeta,
-        dateDisplay.isAcceptableOrUnknown(
-          data['date_display']!,
-          _dateDisplayMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_dateDisplayMeta);
-    }
-    if (data.containsKey('date_iso')) {
-      context.handle(
-        _dateIsoMeta,
-        dateIso.isAcceptableOrUnknown(data['date_iso']!, _dateIsoMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dateIsoMeta);
-    }
-    if (data.containsKey('day_of_year')) {
-      context.handle(
-        _dayOfYearMeta,
-        dayOfYear.isAcceptableOrUnknown(data['day_of_year']!, _dayOfYearMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dayOfYearMeta);
-    }
-    if (data.containsKey('era')) {
-      context.handle(
-        _eraMeta,
-        era.isAcceptableOrUnknown(data['era']!, _eraMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_eraMeta);
-    }
-    if (data.containsKey('region')) {
-      context.handle(
-        _regionMeta,
-        region.isAcceptableOrUnknown(data['region']!, _regionMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_regionMeta);
-    }
-    if (data.containsKey('category_csv')) {
-      context.handle(
-        _categoryCsvMeta,
-        categoryCsv.isAcceptableOrUnknown(
-          data['category_csv']!,
-          _categoryCsvMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_categoryCsvMeta);
-    }
-    if (data.containsKey('difficulty')) {
-      context.handle(
-        _difficultyMeta,
-        difficulty.isAcceptableOrUnknown(data['difficulty']!, _difficultyMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_difficultyMeta);
-    }
-    if (data.containsKey('person')) {
-      context.handle(
-        _personMeta,
-        person.isAcceptableOrUnknown(data['person']!, _personMeta),
-      );
-    }
-    if (data.containsKey('person_role')) {
-      context.handle(
-        _personRoleMeta,
-        personRole.isAcceptableOrUnknown(data['person_role']!, _personRoleMeta),
-      );
-    }
-    if (data.containsKey('connection_to_marx')) {
-      context.handle(
-        _connectionToMarxMeta,
-        connectionToMarx.isAcceptableOrUnknown(
-          data['connection_to_marx']!,
-          _connectionToMarxMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_connectionToMarxMeta);
-    }
-    if (data.containsKey('related_quote_ids_csv')) {
-      context.handle(
-        _relatedQuoteIdsCsvMeta,
-        relatedQuoteIdsCsv.isAcceptableOrUnknown(
-          data['related_quote_ids_csv']!,
-          _relatedQuoteIdsCsvMeta,
-        ),
-      );
-    } else if (isInserting) {
-      context.missing(_relatedQuoteIdsCsvMeta);
-    }
-    if (data.containsKey('fun_fact')) {
-      context.handle(
-        _funFactMeta,
-        funFact.isAcceptableOrUnknown(data['fun_fact']!, _funFactMeta),
-      );
-    }
-    if (data.containsKey('source')) {
-      context.handle(
-        _sourceMeta,
-        source.isAcceptableOrUnknown(data['source']!, _sourceMeta),
-      );
-    }
-    if (data.containsKey('today_in_history')) {
-      context.handle(
-        _todayInHistoryMeta,
-        todayInHistory.isAcceptableOrUnknown(
-          data['today_in_history']!,
-          _todayInHistoryMeta,
-        ),
-      );
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  HistoryFactEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return HistoryFactEntry(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      headline: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}headline'],
-      )!,
-      body: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}body'],
-      )!,
-      dateDisplay: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}date_display'],
-      )!,
-      dateIso: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}date_iso'],
-      )!,
-      dayOfYear: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}day_of_year'],
-      )!,
-      era: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}era'],
-      )!,
-      region: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}region'],
-      )!,
-      categoryCsv: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}category_csv'],
-      )!,
-      difficulty: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}difficulty'],
-      )!,
-      person: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}person'],
-      ),
-      personRole: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}person_role'],
-      ),
-      connectionToMarx: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}connection_to_marx'],
-      )!,
-      relatedQuoteIdsCsv: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}related_quote_ids_csv'],
-      )!,
-      funFact: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}fun_fact'],
-      ),
-      source: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}source'],
-      ),
-      todayInHistory: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}today_in_history'],
-      )!,
-    );
-  }
-
-  @override
-  $HistoryFactEntriesTable createAlias(String alias) {
-    return $HistoryFactEntriesTable(attachedDatabase, alias);
-  }
-}
-
-class HistoryFactEntry extends DataClass
-    implements Insertable<HistoryFactEntry> {
-  final String id;
-  final String headline;
-  final String body;
-  final String dateDisplay;
-  final String dateIso;
-  final int dayOfYear;
-  final String era;
-  final String region;
-  final String categoryCsv;
-  final String difficulty;
-  final String? person;
-  final String? personRole;
-  final String connectionToMarx;
-  final String relatedQuoteIdsCsv;
-  final String? funFact;
-  final String? source;
-  final bool todayInHistory;
-  const HistoryFactEntry({
-    required this.id,
-    required this.headline,
-    required this.body,
-    required this.dateDisplay,
-    required this.dateIso,
-    required this.dayOfYear,
-    required this.era,
-    required this.region,
-    required this.categoryCsv,
-    required this.difficulty,
-    this.person,
-    this.personRole,
-    required this.connectionToMarx,
-    required this.relatedQuoteIdsCsv,
-    this.funFact,
-    this.source,
-    required this.todayInHistory,
-  });
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<String>(id);
-    map['headline'] = Variable<String>(headline);
-    map['body'] = Variable<String>(body);
-    map['date_display'] = Variable<String>(dateDisplay);
-    map['date_iso'] = Variable<String>(dateIso);
-    map['day_of_year'] = Variable<int>(dayOfYear);
-    map['era'] = Variable<String>(era);
-    map['region'] = Variable<String>(region);
-    map['category_csv'] = Variable<String>(categoryCsv);
-    map['difficulty'] = Variable<String>(difficulty);
-    if (!nullToAbsent || person != null) {
-      map['person'] = Variable<String>(person);
-    }
-    if (!nullToAbsent || personRole != null) {
-      map['person_role'] = Variable<String>(personRole);
-    }
-    map['connection_to_marx'] = Variable<String>(connectionToMarx);
-    map['related_quote_ids_csv'] = Variable<String>(relatedQuoteIdsCsv);
-    if (!nullToAbsent || funFact != null) {
-      map['fun_fact'] = Variable<String>(funFact);
-    }
-    if (!nullToAbsent || source != null) {
-      map['source'] = Variable<String>(source);
-    }
-    map['today_in_history'] = Variable<bool>(todayInHistory);
-    return map;
-  }
-
-  HistoryFactEntriesCompanion toCompanion(bool nullToAbsent) {
-    return HistoryFactEntriesCompanion(
-      id: Value(id),
-      headline: Value(headline),
-      body: Value(body),
-      dateDisplay: Value(dateDisplay),
-      dateIso: Value(dateIso),
-      dayOfYear: Value(dayOfYear),
-      era: Value(era),
-      region: Value(region),
-      categoryCsv: Value(categoryCsv),
-      difficulty: Value(difficulty),
-      person: person == null && nullToAbsent
-          ? const Value.absent()
-          : Value(person),
-      personRole: personRole == null && nullToAbsent
-          ? const Value.absent()
-          : Value(personRole),
-      connectionToMarx: Value(connectionToMarx),
-      relatedQuoteIdsCsv: Value(relatedQuoteIdsCsv),
-      funFact: funFact == null && nullToAbsent
-          ? const Value.absent()
-          : Value(funFact),
-      source: source == null && nullToAbsent
-          ? const Value.absent()
-          : Value(source),
-      todayInHistory: Value(todayInHistory),
-    );
-  }
-
-  factory HistoryFactEntry.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return HistoryFactEntry(
-      id: serializer.fromJson<String>(json['id']),
-      headline: serializer.fromJson<String>(json['headline']),
-      body: serializer.fromJson<String>(json['body']),
-      dateDisplay: serializer.fromJson<String>(json['dateDisplay']),
-      dateIso: serializer.fromJson<String>(json['dateIso']),
-      dayOfYear: serializer.fromJson<int>(json['dayOfYear']),
-      era: serializer.fromJson<String>(json['era']),
-      region: serializer.fromJson<String>(json['region']),
-      categoryCsv: serializer.fromJson<String>(json['categoryCsv']),
-      difficulty: serializer.fromJson<String>(json['difficulty']),
-      person: serializer.fromJson<String?>(json['person']),
-      personRole: serializer.fromJson<String?>(json['personRole']),
-      connectionToMarx: serializer.fromJson<String>(json['connectionToMarx']),
-      relatedQuoteIdsCsv: serializer.fromJson<String>(
-        json['relatedQuoteIdsCsv'],
-      ),
-      funFact: serializer.fromJson<String?>(json['funFact']),
-      source: serializer.fromJson<String?>(json['source']),
-      todayInHistory: serializer.fromJson<bool>(json['todayInHistory']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<String>(id),
-      'headline': serializer.toJson<String>(headline),
-      'body': serializer.toJson<String>(body),
-      'dateDisplay': serializer.toJson<String>(dateDisplay),
-      'dateIso': serializer.toJson<String>(dateIso),
-      'dayOfYear': serializer.toJson<int>(dayOfYear),
-      'era': serializer.toJson<String>(era),
-      'region': serializer.toJson<String>(region),
-      'categoryCsv': serializer.toJson<String>(categoryCsv),
-      'difficulty': serializer.toJson<String>(difficulty),
-      'person': serializer.toJson<String?>(person),
-      'personRole': serializer.toJson<String?>(personRole),
-      'connectionToMarx': serializer.toJson<String>(connectionToMarx),
-      'relatedQuoteIdsCsv': serializer.toJson<String>(relatedQuoteIdsCsv),
-      'funFact': serializer.toJson<String?>(funFact),
-      'source': serializer.toJson<String?>(source),
-      'todayInHistory': serializer.toJson<bool>(todayInHistory),
-    };
-  }
-
-  HistoryFactEntry copyWith({
-    String? id,
-    String? headline,
-    String? body,
-    String? dateDisplay,
-    String? dateIso,
-    int? dayOfYear,
-    String? era,
-    String? region,
-    String? categoryCsv,
-    String? difficulty,
-    Value<String?> person = const Value.absent(),
-    Value<String?> personRole = const Value.absent(),
-    String? connectionToMarx,
-    String? relatedQuoteIdsCsv,
-    Value<String?> funFact = const Value.absent(),
-    Value<String?> source = const Value.absent(),
-    bool? todayInHistory,
-  }) => HistoryFactEntry(
-    id: id ?? this.id,
-    headline: headline ?? this.headline,
-    body: body ?? this.body,
-    dateDisplay: dateDisplay ?? this.dateDisplay,
-    dateIso: dateIso ?? this.dateIso,
-    dayOfYear: dayOfYear ?? this.dayOfYear,
-    era: era ?? this.era,
-    region: region ?? this.region,
-    categoryCsv: categoryCsv ?? this.categoryCsv,
-    difficulty: difficulty ?? this.difficulty,
-    person: person.present ? person.value : this.person,
-    personRole: personRole.present ? personRole.value : this.personRole,
-    connectionToMarx: connectionToMarx ?? this.connectionToMarx,
-    relatedQuoteIdsCsv: relatedQuoteIdsCsv ?? this.relatedQuoteIdsCsv,
-    funFact: funFact.present ? funFact.value : this.funFact,
-    source: source.present ? source.value : this.source,
-    todayInHistory: todayInHistory ?? this.todayInHistory,
-  );
-  HistoryFactEntry copyWithCompanion(HistoryFactEntriesCompanion data) {
-    return HistoryFactEntry(
-      id: data.id.present ? data.id.value : this.id,
-      headline: data.headline.present ? data.headline.value : this.headline,
-      body: data.body.present ? data.body.value : this.body,
-      dateDisplay: data.dateDisplay.present
-          ? data.dateDisplay.value
-          : this.dateDisplay,
-      dateIso: data.dateIso.present ? data.dateIso.value : this.dateIso,
-      dayOfYear: data.dayOfYear.present ? data.dayOfYear.value : this.dayOfYear,
-      era: data.era.present ? data.era.value : this.era,
-      region: data.region.present ? data.region.value : this.region,
-      categoryCsv: data.categoryCsv.present
-          ? data.categoryCsv.value
-          : this.categoryCsv,
-      difficulty: data.difficulty.present
-          ? data.difficulty.value
-          : this.difficulty,
-      person: data.person.present ? data.person.value : this.person,
-      personRole: data.personRole.present
-          ? data.personRole.value
-          : this.personRole,
-      connectionToMarx: data.connectionToMarx.present
-          ? data.connectionToMarx.value
-          : this.connectionToMarx,
-      relatedQuoteIdsCsv: data.relatedQuoteIdsCsv.present
-          ? data.relatedQuoteIdsCsv.value
-          : this.relatedQuoteIdsCsv,
-      funFact: data.funFact.present ? data.funFact.value : this.funFact,
-      source: data.source.present ? data.source.value : this.source,
-      todayInHistory: data.todayInHistory.present
-          ? data.todayInHistory.value
-          : this.todayInHistory,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('HistoryFactEntry(')
-          ..write('id: $id, ')
-          ..write('headline: $headline, ')
-          ..write('body: $body, ')
-          ..write('dateDisplay: $dateDisplay, ')
-          ..write('dateIso: $dateIso, ')
-          ..write('dayOfYear: $dayOfYear, ')
-          ..write('era: $era, ')
-          ..write('region: $region, ')
-          ..write('categoryCsv: $categoryCsv, ')
-          ..write('difficulty: $difficulty, ')
-          ..write('person: $person, ')
-          ..write('personRole: $personRole, ')
-          ..write('connectionToMarx: $connectionToMarx, ')
-          ..write('relatedQuoteIdsCsv: $relatedQuoteIdsCsv, ')
-          ..write('funFact: $funFact, ')
-          ..write('source: $source, ')
-          ..write('todayInHistory: $todayInHistory')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    id,
-    headline,
-    body,
-    dateDisplay,
-    dateIso,
-    dayOfYear,
-    era,
-    region,
-    categoryCsv,
-    difficulty,
-    person,
-    personRole,
-    connectionToMarx,
-    relatedQuoteIdsCsv,
-    funFact,
-    source,
-    todayInHistory,
-  );
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is HistoryFactEntry &&
-          other.id == this.id &&
-          other.headline == this.headline &&
-          other.body == this.body &&
-          other.dateDisplay == this.dateDisplay &&
-          other.dateIso == this.dateIso &&
-          other.dayOfYear == this.dayOfYear &&
-          other.era == this.era &&
-          other.region == this.region &&
-          other.categoryCsv == this.categoryCsv &&
-          other.difficulty == this.difficulty &&
-          other.person == this.person &&
-          other.personRole == this.personRole &&
-          other.connectionToMarx == this.connectionToMarx &&
-          other.relatedQuoteIdsCsv == this.relatedQuoteIdsCsv &&
-          other.funFact == this.funFact &&
-          other.source == this.source &&
-          other.todayInHistory == this.todayInHistory);
-}
-
-class HistoryFactEntriesCompanion extends UpdateCompanion<HistoryFactEntry> {
-  final Value<String> id;
-  final Value<String> headline;
-  final Value<String> body;
-  final Value<String> dateDisplay;
-  final Value<String> dateIso;
-  final Value<int> dayOfYear;
-  final Value<String> era;
-  final Value<String> region;
-  final Value<String> categoryCsv;
-  final Value<String> difficulty;
-  final Value<String?> person;
-  final Value<String?> personRole;
-  final Value<String> connectionToMarx;
-  final Value<String> relatedQuoteIdsCsv;
-  final Value<String?> funFact;
-  final Value<String?> source;
-  final Value<bool> todayInHistory;
-  final Value<int> rowid;
-  const HistoryFactEntriesCompanion({
-    this.id = const Value.absent(),
-    this.headline = const Value.absent(),
-    this.body = const Value.absent(),
-    this.dateDisplay = const Value.absent(),
-    this.dateIso = const Value.absent(),
-    this.dayOfYear = const Value.absent(),
-    this.era = const Value.absent(),
-    this.region = const Value.absent(),
-    this.categoryCsv = const Value.absent(),
-    this.difficulty = const Value.absent(),
-    this.person = const Value.absent(),
-    this.personRole = const Value.absent(),
-    this.connectionToMarx = const Value.absent(),
-    this.relatedQuoteIdsCsv = const Value.absent(),
-    this.funFact = const Value.absent(),
-    this.source = const Value.absent(),
-    this.todayInHistory = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  HistoryFactEntriesCompanion.insert({
-    required String id,
-    required String headline,
-    required String body,
-    required String dateDisplay,
-    required String dateIso,
-    required int dayOfYear,
-    required String era,
-    required String region,
-    required String categoryCsv,
-    required String difficulty,
-    this.person = const Value.absent(),
-    this.personRole = const Value.absent(),
-    required String connectionToMarx,
-    required String relatedQuoteIdsCsv,
-    this.funFact = const Value.absent(),
-    this.source = const Value.absent(),
-    this.todayInHistory = const Value.absent(),
-    this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       headline = Value(headline),
-       body = Value(body),
-       dateDisplay = Value(dateDisplay),
-       dateIso = Value(dateIso),
-       dayOfYear = Value(dayOfYear),
-       era = Value(era),
-       region = Value(region),
-       categoryCsv = Value(categoryCsv),
-       difficulty = Value(difficulty),
-       connectionToMarx = Value(connectionToMarx),
-       relatedQuoteIdsCsv = Value(relatedQuoteIdsCsv);
-  static Insertable<HistoryFactEntry> custom({
-    Expression<String>? id,
-    Expression<String>? headline,
-    Expression<String>? body,
-    Expression<String>? dateDisplay,
-    Expression<String>? dateIso,
-    Expression<int>? dayOfYear,
-    Expression<String>? era,
-    Expression<String>? region,
-    Expression<String>? categoryCsv,
-    Expression<String>? difficulty,
-    Expression<String>? person,
-    Expression<String>? personRole,
-    Expression<String>? connectionToMarx,
-    Expression<String>? relatedQuoteIdsCsv,
-    Expression<String>? funFact,
-    Expression<String>? source,
-    Expression<bool>? todayInHistory,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (headline != null) 'headline': headline,
-      if (body != null) 'body': body,
-      if (dateDisplay != null) 'date_display': dateDisplay,
-      if (dateIso != null) 'date_iso': dateIso,
-      if (dayOfYear != null) 'day_of_year': dayOfYear,
-      if (era != null) 'era': era,
-      if (region != null) 'region': region,
-      if (categoryCsv != null) 'category_csv': categoryCsv,
-      if (difficulty != null) 'difficulty': difficulty,
-      if (person != null) 'person': person,
-      if (personRole != null) 'person_role': personRole,
-      if (connectionToMarx != null) 'connection_to_marx': connectionToMarx,
-      if (relatedQuoteIdsCsv != null)
-        'related_quote_ids_csv': relatedQuoteIdsCsv,
-      if (funFact != null) 'fun_fact': funFact,
-      if (source != null) 'source': source,
-      if (todayInHistory != null) 'today_in_history': todayInHistory,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  HistoryFactEntriesCompanion copyWith({
-    Value<String>? id,
-    Value<String>? headline,
-    Value<String>? body,
-    Value<String>? dateDisplay,
-    Value<String>? dateIso,
-    Value<int>? dayOfYear,
-    Value<String>? era,
-    Value<String>? region,
-    Value<String>? categoryCsv,
-    Value<String>? difficulty,
-    Value<String?>? person,
-    Value<String?>? personRole,
-    Value<String>? connectionToMarx,
-    Value<String>? relatedQuoteIdsCsv,
-    Value<String?>? funFact,
-    Value<String?>? source,
-    Value<bool>? todayInHistory,
-    Value<int>? rowid,
-  }) {
-    return HistoryFactEntriesCompanion(
-      id: id ?? this.id,
-      headline: headline ?? this.headline,
-      body: body ?? this.body,
-      dateDisplay: dateDisplay ?? this.dateDisplay,
-      dateIso: dateIso ?? this.dateIso,
-      dayOfYear: dayOfYear ?? this.dayOfYear,
-      era: era ?? this.era,
-      region: region ?? this.region,
-      categoryCsv: categoryCsv ?? this.categoryCsv,
-      difficulty: difficulty ?? this.difficulty,
-      person: person ?? this.person,
-      personRole: personRole ?? this.personRole,
-      connectionToMarx: connectionToMarx ?? this.connectionToMarx,
-      relatedQuoteIdsCsv: relatedQuoteIdsCsv ?? this.relatedQuoteIdsCsv,
-      funFact: funFact ?? this.funFact,
-      source: source ?? this.source,
-      todayInHistory: todayInHistory ?? this.todayInHistory,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<String>(id.value);
-    }
-    if (headline.present) {
-      map['headline'] = Variable<String>(headline.value);
-    }
-    if (body.present) {
-      map['body'] = Variable<String>(body.value);
-    }
-    if (dateDisplay.present) {
-      map['date_display'] = Variable<String>(dateDisplay.value);
-    }
-    if (dateIso.present) {
-      map['date_iso'] = Variable<String>(dateIso.value);
-    }
-    if (dayOfYear.present) {
-      map['day_of_year'] = Variable<int>(dayOfYear.value);
-    }
-    if (era.present) {
-      map['era'] = Variable<String>(era.value);
-    }
-    if (region.present) {
-      map['region'] = Variable<String>(region.value);
-    }
-    if (categoryCsv.present) {
-      map['category_csv'] = Variable<String>(categoryCsv.value);
-    }
-    if (difficulty.present) {
-      map['difficulty'] = Variable<String>(difficulty.value);
-    }
-    if (person.present) {
-      map['person'] = Variable<String>(person.value);
-    }
-    if (personRole.present) {
-      map['person_role'] = Variable<String>(personRole.value);
-    }
-    if (connectionToMarx.present) {
-      map['connection_to_marx'] = Variable<String>(connectionToMarx.value);
-    }
-    if (relatedQuoteIdsCsv.present) {
-      map['related_quote_ids_csv'] = Variable<String>(relatedQuoteIdsCsv.value);
-    }
-    if (funFact.present) {
-      map['fun_fact'] = Variable<String>(funFact.value);
-    }
-    if (source.present) {
-      map['source'] = Variable<String>(source.value);
-    }
-    if (todayInHistory.present) {
-      map['today_in_history'] = Variable<bool>(todayInHistory.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('HistoryFactEntriesCompanion(')
-          ..write('id: $id, ')
-          ..write('headline: $headline, ')
-          ..write('body: $body, ')
-          ..write('dateDisplay: $dateDisplay, ')
-          ..write('dateIso: $dateIso, ')
-          ..write('dayOfYear: $dayOfYear, ')
-          ..write('era: $era, ')
-          ..write('region: $region, ')
-          ..write('categoryCsv: $categoryCsv, ')
-          ..write('difficulty: $difficulty, ')
-          ..write('person: $person, ')
-          ..write('personRole: $personRole, ')
-          ..write('connectionToMarx: $connectionToMarx, ')
-          ..write('relatedQuoteIdsCsv: $relatedQuoteIdsCsv, ')
-          ..write('funFact: $funFact, ')
-          ..write('source: $source, ')
-          ..write('todayInHistory: $todayInHistory, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $AppOpenLogTable extends AppOpenLog
     with TableInfo<$AppOpenLogTable, AppOpenLogData> {
   @override
@@ -2442,13 +1519,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $QuoteEntriesTable quoteEntries = $QuoteEntriesTable(this);
   late final $FavoritesTable favorites = $FavoritesTable(this);
   late final $SeenQuotesTable seenQuotes = $SeenQuotesTable(this);
-  late final $HistoryFactEntriesTable historyFactEntries =
-      $HistoryFactEntriesTable(this);
   late final $AppOpenLogTable appOpenLog = $AppOpenLogTable(this);
   late final QuoteDao quoteDao = QuoteDao(this as AppDatabase);
-  late final HistoryFactDao historyFactDao = HistoryFactDao(
-    this as AppDatabase,
-  );
   late final AppOpenLogDao appOpenLogDao = AppOpenLogDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
@@ -2458,7 +1530,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     quoteEntries,
     favorites,
     seenQuotes,
-    historyFactEntries,
     appOpenLog,
   ];
 }
@@ -2468,6 +1539,7 @@ typedef $$QuoteEntriesTableCreateCompanionBuilder =
       required String id,
       required String textDe,
       required String textOriginal,
+      Value<String> author,
       required String source,
       required int year,
       required String chapter,
@@ -2485,6 +1557,7 @@ typedef $$QuoteEntriesTableUpdateCompanionBuilder =
       Value<String> id,
       Value<String> textDe,
       Value<String> textOriginal,
+      Value<String> author,
       Value<String> source,
       Value<int> year,
       Value<String> chapter,
@@ -2519,6 +1592,11 @@ class $$QuoteEntriesTableFilterComposer
 
   ColumnFilters<String> get textOriginal => $composableBuilder(
     column: $table.textOriginal,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get author => $composableBuilder(
+    column: $table.author,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2597,6 +1675,11 @@ class $$QuoteEntriesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get author => $composableBuilder(
+    column: $table.author,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get source => $composableBuilder(
     column: $table.source,
     builder: (column) => ColumnOrderings(column),
@@ -2667,6 +1750,9 @@ class $$QuoteEntriesTableAnnotationComposer
     column: $table.textOriginal,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get author =>
+      $composableBuilder(column: $table.author, builder: (column) => column);
 
   GeneratedColumn<String> get source =>
       $composableBuilder(column: $table.source, builder: (column) => column);
@@ -2743,6 +1829,7 @@ class $$QuoteEntriesTableTableManager
                 Value<String> id = const Value.absent(),
                 Value<String> textDe = const Value.absent(),
                 Value<String> textOriginal = const Value.absent(),
+                Value<String> author = const Value.absent(),
                 Value<String> source = const Value.absent(),
                 Value<int> year = const Value.absent(),
                 Value<String> chapter = const Value.absent(),
@@ -2758,6 +1845,7 @@ class $$QuoteEntriesTableTableManager
                 id: id,
                 textDe: textDe,
                 textOriginal: textOriginal,
+                author: author,
                 source: source,
                 year: year,
                 chapter: chapter,
@@ -2775,6 +1863,7 @@ class $$QuoteEntriesTableTableManager
                 required String id,
                 required String textDe,
                 required String textOriginal,
+                Value<String> author = const Value.absent(),
                 required String source,
                 required int year,
                 required String chapter,
@@ -2790,6 +1879,7 @@ class $$QuoteEntriesTableTableManager
                 id: id,
                 textDe: textDe,
                 textOriginal: textOriginal,
+                author: author,
                 source: source,
                 year: year,
                 chapter: chapter,
@@ -3127,461 +2217,6 @@ typedef $$SeenQuotesTableProcessedTableManager =
       SeenQuote,
       PrefetchHooks Function()
     >;
-typedef $$HistoryFactEntriesTableCreateCompanionBuilder =
-    HistoryFactEntriesCompanion Function({
-      required String id,
-      required String headline,
-      required String body,
-      required String dateDisplay,
-      required String dateIso,
-      required int dayOfYear,
-      required String era,
-      required String region,
-      required String categoryCsv,
-      required String difficulty,
-      Value<String?> person,
-      Value<String?> personRole,
-      required String connectionToMarx,
-      required String relatedQuoteIdsCsv,
-      Value<String?> funFact,
-      Value<String?> source,
-      Value<bool> todayInHistory,
-      Value<int> rowid,
-    });
-typedef $$HistoryFactEntriesTableUpdateCompanionBuilder =
-    HistoryFactEntriesCompanion Function({
-      Value<String> id,
-      Value<String> headline,
-      Value<String> body,
-      Value<String> dateDisplay,
-      Value<String> dateIso,
-      Value<int> dayOfYear,
-      Value<String> era,
-      Value<String> region,
-      Value<String> categoryCsv,
-      Value<String> difficulty,
-      Value<String?> person,
-      Value<String?> personRole,
-      Value<String> connectionToMarx,
-      Value<String> relatedQuoteIdsCsv,
-      Value<String?> funFact,
-      Value<String?> source,
-      Value<bool> todayInHistory,
-      Value<int> rowid,
-    });
-
-class $$HistoryFactEntriesTableFilterComposer
-    extends Composer<_$AppDatabase, $HistoryFactEntriesTable> {
-  $$HistoryFactEntriesTableFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get headline => $composableBuilder(
-    column: $table.headline,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get dateDisplay => $composableBuilder(
-    column: $table.dateDisplay,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get dateIso => $composableBuilder(
-    column: $table.dateIso,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get dayOfYear => $composableBuilder(
-    column: $table.dayOfYear,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get era => $composableBuilder(
-    column: $table.era,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get region => $composableBuilder(
-    column: $table.region,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get categoryCsv => $composableBuilder(
-    column: $table.categoryCsv,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get difficulty => $composableBuilder(
-    column: $table.difficulty,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get person => $composableBuilder(
-    column: $table.person,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get personRole => $composableBuilder(
-    column: $table.personRole,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get connectionToMarx => $composableBuilder(
-    column: $table.connectionToMarx,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get relatedQuoteIdsCsv => $composableBuilder(
-    column: $table.relatedQuoteIdsCsv,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get funFact => $composableBuilder(
-    column: $table.funFact,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get source => $composableBuilder(
-    column: $table.source,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<bool> get todayInHistory => $composableBuilder(
-    column: $table.todayInHistory,
-    builder: (column) => ColumnFilters(column),
-  );
-}
-
-class $$HistoryFactEntriesTableOrderingComposer
-    extends Composer<_$AppDatabase, $HistoryFactEntriesTable> {
-  $$HistoryFactEntriesTableOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get headline => $composableBuilder(
-    column: $table.headline,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get dateDisplay => $composableBuilder(
-    column: $table.dateDisplay,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get dateIso => $composableBuilder(
-    column: $table.dateIso,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get dayOfYear => $composableBuilder(
-    column: $table.dayOfYear,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get era => $composableBuilder(
-    column: $table.era,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get region => $composableBuilder(
-    column: $table.region,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get categoryCsv => $composableBuilder(
-    column: $table.categoryCsv,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get difficulty => $composableBuilder(
-    column: $table.difficulty,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get person => $composableBuilder(
-    column: $table.person,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get personRole => $composableBuilder(
-    column: $table.personRole,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get connectionToMarx => $composableBuilder(
-    column: $table.connectionToMarx,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get relatedQuoteIdsCsv => $composableBuilder(
-    column: $table.relatedQuoteIdsCsv,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get funFact => $composableBuilder(
-    column: $table.funFact,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get source => $composableBuilder(
-    column: $table.source,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<bool> get todayInHistory => $composableBuilder(
-    column: $table.todayInHistory,
-    builder: (column) => ColumnOrderings(column),
-  );
-}
-
-class $$HistoryFactEntriesTableAnnotationComposer
-    extends Composer<_$AppDatabase, $HistoryFactEntriesTable> {
-  $$HistoryFactEntriesTableAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<String> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<String> get headline =>
-      $composableBuilder(column: $table.headline, builder: (column) => column);
-
-  GeneratedColumn<String> get body =>
-      $composableBuilder(column: $table.body, builder: (column) => column);
-
-  GeneratedColumn<String> get dateDisplay => $composableBuilder(
-    column: $table.dateDisplay,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get dateIso =>
-      $composableBuilder(column: $table.dateIso, builder: (column) => column);
-
-  GeneratedColumn<int> get dayOfYear =>
-      $composableBuilder(column: $table.dayOfYear, builder: (column) => column);
-
-  GeneratedColumn<String> get era =>
-      $composableBuilder(column: $table.era, builder: (column) => column);
-
-  GeneratedColumn<String> get region =>
-      $composableBuilder(column: $table.region, builder: (column) => column);
-
-  GeneratedColumn<String> get categoryCsv => $composableBuilder(
-    column: $table.categoryCsv,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get difficulty => $composableBuilder(
-    column: $table.difficulty,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get person =>
-      $composableBuilder(column: $table.person, builder: (column) => column);
-
-  GeneratedColumn<String> get personRole => $composableBuilder(
-    column: $table.personRole,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get connectionToMarx => $composableBuilder(
-    column: $table.connectionToMarx,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get relatedQuoteIdsCsv => $composableBuilder(
-    column: $table.relatedQuoteIdsCsv,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get funFact =>
-      $composableBuilder(column: $table.funFact, builder: (column) => column);
-
-  GeneratedColumn<String> get source =>
-      $composableBuilder(column: $table.source, builder: (column) => column);
-
-  GeneratedColumn<bool> get todayInHistory => $composableBuilder(
-    column: $table.todayInHistory,
-    builder: (column) => column,
-  );
-}
-
-class $$HistoryFactEntriesTableTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          $HistoryFactEntriesTable,
-          HistoryFactEntry,
-          $$HistoryFactEntriesTableFilterComposer,
-          $$HistoryFactEntriesTableOrderingComposer,
-          $$HistoryFactEntriesTableAnnotationComposer,
-          $$HistoryFactEntriesTableCreateCompanionBuilder,
-          $$HistoryFactEntriesTableUpdateCompanionBuilder,
-          (
-            HistoryFactEntry,
-            BaseReferences<
-              _$AppDatabase,
-              $HistoryFactEntriesTable,
-              HistoryFactEntry
-            >,
-          ),
-          HistoryFactEntry,
-          PrefetchHooks Function()
-        > {
-  $$HistoryFactEntriesTableTableManager(
-    _$AppDatabase db,
-    $HistoryFactEntriesTable table,
-  ) : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $$HistoryFactEntriesTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$HistoryFactEntriesTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$HistoryFactEntriesTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> headline = const Value.absent(),
-                Value<String> body = const Value.absent(),
-                Value<String> dateDisplay = const Value.absent(),
-                Value<String> dateIso = const Value.absent(),
-                Value<int> dayOfYear = const Value.absent(),
-                Value<String> era = const Value.absent(),
-                Value<String> region = const Value.absent(),
-                Value<String> categoryCsv = const Value.absent(),
-                Value<String> difficulty = const Value.absent(),
-                Value<String?> person = const Value.absent(),
-                Value<String?> personRole = const Value.absent(),
-                Value<String> connectionToMarx = const Value.absent(),
-                Value<String> relatedQuoteIdsCsv = const Value.absent(),
-                Value<String?> funFact = const Value.absent(),
-                Value<String?> source = const Value.absent(),
-                Value<bool> todayInHistory = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => HistoryFactEntriesCompanion(
-                id: id,
-                headline: headline,
-                body: body,
-                dateDisplay: dateDisplay,
-                dateIso: dateIso,
-                dayOfYear: dayOfYear,
-                era: era,
-                region: region,
-                categoryCsv: categoryCsv,
-                difficulty: difficulty,
-                person: person,
-                personRole: personRole,
-                connectionToMarx: connectionToMarx,
-                relatedQuoteIdsCsv: relatedQuoteIdsCsv,
-                funFact: funFact,
-                source: source,
-                todayInHistory: todayInHistory,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String headline,
-                required String body,
-                required String dateDisplay,
-                required String dateIso,
-                required int dayOfYear,
-                required String era,
-                required String region,
-                required String categoryCsv,
-                required String difficulty,
-                Value<String?> person = const Value.absent(),
-                Value<String?> personRole = const Value.absent(),
-                required String connectionToMarx,
-                required String relatedQuoteIdsCsv,
-                Value<String?> funFact = const Value.absent(),
-                Value<String?> source = const Value.absent(),
-                Value<bool> todayInHistory = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => HistoryFactEntriesCompanion.insert(
-                id: id,
-                headline: headline,
-                body: body,
-                dateDisplay: dateDisplay,
-                dateIso: dateIso,
-                dayOfYear: dayOfYear,
-                era: era,
-                region: region,
-                categoryCsv: categoryCsv,
-                difficulty: difficulty,
-                person: person,
-                personRole: personRole,
-                connectionToMarx: connectionToMarx,
-                relatedQuoteIdsCsv: relatedQuoteIdsCsv,
-                funFact: funFact,
-                source: source,
-                todayInHistory: todayInHistory,
-                rowid: rowid,
-              ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ),
-      );
-}
-
-typedef $$HistoryFactEntriesTableProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      $HistoryFactEntriesTable,
-      HistoryFactEntry,
-      $$HistoryFactEntriesTableFilterComposer,
-      $$HistoryFactEntriesTableOrderingComposer,
-      $$HistoryFactEntriesTableAnnotationComposer,
-      $$HistoryFactEntriesTableCreateCompanionBuilder,
-      $$HistoryFactEntriesTableUpdateCompanionBuilder,
-      (
-        HistoryFactEntry,
-        BaseReferences<
-          _$AppDatabase,
-          $HistoryFactEntriesTable,
-          HistoryFactEntry
-        >,
-      ),
-      HistoryFactEntry,
-      PrefetchHooks Function()
-    >;
 typedef $$AppOpenLogTableCreateCompanionBuilder =
     AppOpenLogCompanion Function({Value<int> id, required DateTime openedAt});
 typedef $$AppOpenLogTableUpdateCompanionBuilder =
@@ -3717,8 +2352,6 @@ class $AppDatabaseManager {
       $$FavoritesTableTableManager(_db, _db.favorites);
   $$SeenQuotesTableTableManager get seenQuotes =>
       $$SeenQuotesTableTableManager(_db, _db.seenQuotes);
-  $$HistoryFactEntriesTableTableManager get historyFactEntries =>
-      $$HistoryFactEntriesTableTableManager(_db, _db.historyFactEntries);
   $$AppOpenLogTableTableManager get appOpenLog =>
       $$AppOpenLogTableTableManager(_db, _db.appOpenLog);
 }
@@ -3727,10 +2360,6 @@ mixin _$QuoteDaoMixin on DatabaseAccessor<AppDatabase> {
   $QuoteEntriesTable get quoteEntries => attachedDatabase.quoteEntries;
   $FavoritesTable get favorites => attachedDatabase.favorites;
   $SeenQuotesTable get seenQuotes => attachedDatabase.seenQuotes;
-}
-mixin _$HistoryFactDaoMixin on DatabaseAccessor<AppDatabase> {
-  $HistoryFactEntriesTable get historyFactEntries =>
-      attachedDatabase.historyFactEntries;
 }
 mixin _$AppOpenLogDaoMixin on DatabaseAccessor<AppDatabase> {
   $AppOpenLogTable get appOpenLog => attachedDatabase.appOpenLog;

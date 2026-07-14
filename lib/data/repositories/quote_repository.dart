@@ -48,6 +48,9 @@ class QuoteRepository {
         .toList();
 
     await _db.quoteDao.upsertQuotes(quotes.map(_toCompanion).toList());
+    await _db.quoteDao.pruneQuotesNotIn(
+      quotes.map((Quote quote) => quote.id).toSet(),
+    );
   }
 
   Stream<List<Quote>> watchAllQuotes() {
@@ -126,6 +129,7 @@ class QuoteRepository {
       id: quote.id,
       textDe: quote.textDe,
       textOriginal: quote.textOriginal,
+      author: Value<String>(quote.author),
       source: quote.source,
       year: quote.year,
       chapter: quote.chapter,
@@ -156,6 +160,7 @@ class QuoteRepository {
       id: row.id,
       textDe: (normalizeGermanDisplayText(row.textDe) ?? '').trim(),
       textOriginal: (normalizeGermanDisplayText(row.textOriginal) ?? '').trim(),
+      author: (normalizeGermanDisplayText(row.author) ?? '').trim(),
       source: (normalizeGermanDisplayText(row.source) ?? '').trim(),
       year: row.year,
       chapter: (normalizeGermanDisplayText(row.chapter) ?? '').trim(),
@@ -187,6 +192,7 @@ class QuoteRepository {
 
     _requiredString(item, 'text_de', index);
     _requiredString(item, 'text_original', index);
+    _requiredString(item, 'author', index);
     _requiredString(item, 'source', index);
     _requiredString(item, 'chapter', index);
     _requiredString(item, 'difficulty', index);

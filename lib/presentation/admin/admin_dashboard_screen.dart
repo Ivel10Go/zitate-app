@@ -107,9 +107,8 @@ class AdminDashboardScreen extends ConsumerWidget {
                 return Text(
                   content.when(
                     quote: (quote) =>
-                        'Zitatqülle: ${quote.source} (${quote.year})',
-                    fact: (fact) => 'Faktqülle: ${fact.headline}',
-                    thinkerQuote: (quote) => 'Denkerqülle: ${quote.author}',
+                        'Zitatquelle: ${quote.source} (${quote.year})',
+                    thinkerQuote: (quote) => 'Denkerquelle: ${quote.author}',
                   ),
                   style: GoogleFonts.ibmPlexSans(
                     fontSize: 12,

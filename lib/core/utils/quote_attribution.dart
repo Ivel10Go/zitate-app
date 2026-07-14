@@ -1,6 +1,19 @@
 import '../../data/models/quote.dart';
 
+/// The person a quote is attributed to, for display and for quiz answers.
+///
+/// Prefers the authoritative `author` field. Rows seeded before schema v6 have
+/// it empty, so we keep deriving the name from `series` ("person_karl_marx") as
+/// a fallback — that derivation loses punctuation ("Jean Jacques Rousseau"),
+/// which is why the real field wins whenever it is present.
+///
+/// Never falls back to [Quote.source]: that is the work title, not a person.
 String quoteAuthorLabel(Quote quote) {
+  final author = quote.author.trim();
+  if (author.isNotEmpty) {
+    return author;
+  }
+
   final series = quote.series.trim().toLowerCase();
 
   if (series.startsWith('person_')) {

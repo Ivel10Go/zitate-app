@@ -37,8 +37,6 @@ class AccountPrivacyService {
             prefs.getBool(SettingsKeys.notificationEnabled) ?? true,
         'crash_reporting_enabled':
             prefs.getBool(SettingsKeys.crashReportingEnabled) ?? false,
-        'home_content_mode':
-            prefs.getString(SettingsKeys.homeContentMode) ?? 'mixed',
         'streak': prefs.getInt(SettingsKeys.streak) ?? 0,
         'onboarding_seen': prefs.getBool('settings_onboarding_seen') ?? false,
         'app_mode': prefs.getString('app_mode'),
@@ -63,7 +61,8 @@ class AccountPrivacyService {
     await prefs.remove(SettingsKeys.notificationMinute);
     await prefs.remove(SettingsKeys.notificationEnabled);
     await prefs.remove(SettingsKeys.crashReportingEnabled);
-    await prefs.remove(SettingsKeys.homeContentMode);
+    // Legacy key from the removed quotes/facts/mixed home-format setting.
+    await prefs.remove('settings_home_content_mode');
     await prefs.remove(SettingsKeys.streak);
     await prefs.remove('settings_onboarding_seen');
     await prefs.remove('app_mode');

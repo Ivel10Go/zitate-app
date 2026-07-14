@@ -49,40 +49,6 @@ abstract final class WidgetSyncService {
             quoteId: quote.id,
           );
         },
-        fact: (fact) async {
-          debugPrint(
-            '[WidgetSync.syncDailyContent] Processing fact: ${fact.id}',
-          );
-          final route = fact.relatedQuoteIds.isNotEmpty
-              ? '/detail/${fact.relatedQuoteIds.first}'
-              : '/';
-          final factLead = fact.funFact?.trim().isNotEmpty == true
-              ? fact.funFact!.trim()
-              : fact.headline;
-          await _saveCommon(
-            contentType: 'fact',
-            header: 'WELTGESCHICHTE',
-            modeLabel: modeLabel ?? 'PUBLIC',
-            author: 'Geschichte',
-            launchRoute: route,
-            quoteText: factLead,
-            source: fact.dateDisplay,
-            explanation: fact.headline,
-            categories: [
-              fact.era,
-              fact.region,
-              ...fact.category,
-            ].where((String item) => item.trim().isNotEmpty).join(', '),
-          );
-          await HomeWidget.saveWidgetData<String>(
-            'fact_headline',
-            fact.headline,
-          );
-          await HomeWidget.saveWidgetData<String>(
-            'fact_fun_fact',
-            fact.funFact ?? '',
-          );
-        },
         thinkerQuote: (ThinkerQuote quote) async {
           debugPrint(
             '[WidgetSync.syncDailyContent] Processing thinker quote: ${quote.id}',

@@ -5,6 +5,7 @@ class Quote {
     required this.id,
     required this.textDe,
     required this.textOriginal,
+    required this.author,
     required this.source,
     required this.year,
     required this.chapter,
@@ -21,6 +22,12 @@ class Quote {
   final String id;
   final String textDe;
   final String textOriginal;
+
+  /// Person the quote is attributed to. Empty for rows seeded before schema v6;
+  /// read it through `quoteAuthorLabel()`, which falls back to [series].
+  final String author;
+
+  /// The work the quote appears in — a title, not a person.
   final String source;
   final int year;
   final String chapter;
@@ -42,6 +49,7 @@ class Quote {
       textOriginal:
           normalizeGermanDisplayText(json['text_original'] as String?) ??
           '(Original text not available)',
+      author: normalizeGermanDisplayText(json['author'] as String?) ?? '',
       source:
           normalizeGermanDisplayText(json['source'] as String?) ??
           '(Source unknown)',
@@ -98,6 +106,7 @@ class Quote {
       'id': id,
       'text_de': textDe,
       'text_original': textOriginal,
+      'author': author,
       'source': source,
       'year': year,
       'chapter': chapter,

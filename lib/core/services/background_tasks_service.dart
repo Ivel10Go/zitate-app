@@ -3,9 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/database/app_database.dart';
 import '../../data/models/daily_content.dart';
-import '../../data/models/home_content_mode.dart';
 import '../../data/models/user_profile.dart';
-import '../../data/repositories/history_repository.dart';
 import '../../data/repositories/quote_repository.dart';
 import '../../domain/services/daily_content_resolver.dart';
 import '../constants/settings_keys.dart';
@@ -26,9 +24,7 @@ void workmanagerCallbackDispatcher() {
     final db = AppDatabase();
     try {
       final quoteRepository = QuoteRepository(db);
-      final historyRepository = HistoryRepository(db);
       await quoteRepository.ensureSeeded();
-      await historyRepository.ensureSeeded();
 
       // Read small primitive values passed from the main isolate via
       // `inputData`. Avoid calling platform-channel plugins from the
@@ -41,16 +37,11 @@ void workmanagerCallbackDispatcher() {
       final appMode = _resolveAppMode(
         inputData != null ? inputData['app_mode'] as String? : null,
       );
-      final homeContentMode = HomeContentMode.fromStorage(
-        inputData != null ? inputData['home_content_mode'] as String? : null,
-      );
       final profile = _resolveProfile(
         inputData != null ? inputData['user_profile'] as String? : null,
       );
       final content = await _resolveDailyContent(
         quoteRepository: quoteRepository,
-        historyRepository: historyRepository,
-        homeContentMode: homeContentMode,
         appMode: appMode,
         profile: profile,
       );
@@ -74,8 +65,6 @@ void workmanagerCallbackDispatcher() {
 
 Future<DailyContent?> _resolveDailyContent({
   required QuoteRepository quoteRepository,
-  required HistoryRepository historyRepository,
-  required HomeContentMode homeContentMode,
   required AppMode appMode,
   required UserProfile profile,
 }) async {
@@ -83,8 +72,6 @@ Future<DailyContent?> _resolveDailyContent({
   try {
     final content = await resolver.resolveDailyContentFromRepository(
       quoteRepository: quoteRepository,
-      historyRepository: historyRepository,
-      homeContentMode: homeContentMode,
       appMode: appMode,
       profile: profile,
     );
@@ -99,11 +86,6 @@ Future<DailyContent?> _resolveDailyContent({
   final quotes = await quoteRepository.watchAllQuotes().first;
   if (quotes.isNotEmpty) {
     return DailyContent.quote(quote: quotes.first);
-  }
-
-  final facts = await historyRepository.watchAllHistoryFacts().first;
-  if (facts.isNotEmpty) {
-    return DailyContent.fact(fact: facts.first);
   }
 
   return null;
@@ -150,7 +132,6 @@ abstract final class BackgroundTasksService {
     final inputData = <String, dynamic>{
       'streak': prefs.getInt(SettingsKeys.streak) ?? 0,
       'app_mode': prefs.getString('app_mode') ?? '',
-      'home_content_mode': prefs.getString(SettingsKeys.homeContentMode) ?? '',
       'user_profile': prefs.getString(UserProfile.storageKey) ?? '',
     };
 

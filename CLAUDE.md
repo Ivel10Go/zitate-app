@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project identity
 
-Flutter app for daily quotes/history facts ("Zitate-App" / marketing name "Quotidian"). Note the naming split across the repo — be aware of it when searching, don't assume one name:
+Flutter app for daily quotes ("Zitate-App" / marketing name "Quotidian"). A "history facts" feature existed until schema v7 and was removed entirely (asset, `HistoryFactEntries` table, DAO, repository, providers, `FactBlock` UI, `HomeContentMode` setting) — do not reintroduce it. Note the naming split across the repo — be aware of it when searching, don't assume one name:
 - pubspec package name: `zitate_app`
 - Android/iOS bundle id: `com.quotidian.app`
 - Root `MaterialApp` widget: `DasKapitalApp` (`lib/app.dart`), title `"Quotidian"`
@@ -33,7 +33,7 @@ Useful one-off scripts (PowerShell, in `scripts/`):
 
 There is no CI pipeline (no `.github/workflows`).
 
-`tools/` and `process_quotes.py` are one-off/offline Python scripts for curating and validating the quote/thinker content datasets (dedup, authenticity checks, umlaut/encoding fixes, Supabase import prep) — they operate on JSON/CSV data files, not on the Flutter app, and are not part of the app build.
+`tools/` and `process_quotes.py` are one-off/offline Python scripts that were used on the quote datasets. **Do not run them against `assets/thinkers_quotes.json`.** They caused the two defects the current database was rebuilt to remove: `enrich_explanations_ai.py` (in its `--api local` mode) generated template explanations with the author's name swapped in, which say nothing; and `normalize_umlauts.py` rewrote `ue`/`oe`/`ae` inside non-German words, corrupting titles and names ("Virtue" → "Virtü", "Poems" → "Pöms", "Goethe" → "Göthe"). `data_backup/` holds the superseded datasets — it is outside `assets/` on purpose so it does not ship in the bundle.
 
 `.env` (gitignored, see `.env.example`) supplies `SUPABASE_URL` / `SUPABASE_ANON_KEY` for local runs; release builds prefer `--dart-define` build-time values over `.env` (see `lib/main.dart`).
 
@@ -55,17 +55,26 @@ State management is Riverpod (`flutter_riverpod`) throughout — no other state 
 Startup is intentionally split into three stages to keep perceived launch time low — understand this before touching bootstrap/provider init order:
 1. `main()` (`lib/main.dart`) does binding init, crash reporting, orientation lock, dotenv/Supabase init (all time-boxed with timeouts, failures are non-fatal), then runs `_BootstrapGateApp` — a plain (non-Riverpod) widget that drives `AppBootstrap.initialize()` outside of any `ProviderScope`.
 2. `AppBootstrap` (`core/bootstrap/app_bootstrap.dart`) does the minimum needed to pick the correct `initialRoute` (auth/onboarding/guest/home) from `SharedPreferences` and emits progress via a broadcast stream consumed by `AppLoadingScreen`. It deliberately does **not** touch the database or return real daily content (`dailyContent: null` in `AppBootstrapResult`) — DB seeding must happen inside the `ProviderScope` so it shares the single `AppDatabase` instance from `appDatabaseProvider`. It schedules a `_scheduleDeferredOperations()` (widget refresh, notification scheduling) 500ms after returning.
-3. Once bootstrap resolves, `main.dart` mounts `ProviderScope` + `DasKapitalApp`, overriding `initialRouteProvider` with the resolved route. From here Riverpod providers take over: `initialSeedProvider` (idempotent, guarded by a `app_seeded_v1` SharedPreferences flag) seeds the Drift DB from `assets/thinkers_quotes.json` before `dailyContentProvider` or other repository-backed providers resolve.
+3. Once bootstrap resolves, `main.dart` mounts `ProviderScope` + `DasKapitalApp`, overriding `initialRouteProvider` with the resolved route. From here Riverpod providers take over: `initialSeedProvider` (idempotent, guarded by an `app_seeded_vN` SharedPreferences flag — bump the suffix whenever the seed asset changes) seeds the Drift DB from `assets/thinkers_quotes.json` before `dailyContentProvider` or other repository-backed providers resolve. Seeding upserts and then calls `QuoteDao.pruneQuotesNotIn`, so quotes deleted from the asset also disappear from already-seeded installs.
 
 ### Daily content resolution & caching
 
-`dailyContentProvider` (`domain/providers/daily_content_provider.dart`) is the single source of truth for "today's" quote/fact/thinker-quote shown on Home. It:
+`dailyContentProvider` (`domain/providers/daily_content_provider.dart`) is the single source of truth for "today's" quote shown on Home. It:
 - Reads a per-user, per-day cache from `SharedPreferences` first (`_readCachedDailyContent`, keyed by user id + date) and returns immediately if present — avoids recomputation on every provider rebuild within the same day.
-- Otherwise waits on `initialSeedProvider.future`, then calls `DailyContentResolver.resolveDailyContentFromRepository` (`domain/services/daily_content_resolver.dart`), which factors in `AppMode` (public vs. admin), user profile personalization, and `HomeContentMode` settings.
-- Falls back to the first quote/fact from the repository if resolution fails or returns nothing, so Home always has something to render.
+- Otherwise waits on `initialSeedProvider.future`, then calls `DailyContentResolver.resolveDailyContentFromRepository` (`domain/services/daily_content_resolver.dart`), which factors in `AppMode` (public vs. admin) and user profile personalization.
+- Falls back to the first quote from the repository if resolution fails or returns nothing, so Home always has something to render.
 - Caches the resolved content afterward. Any change to caching keys/serialization must stay in sync with `_serializeDailyContent`/`_deserializeDailyContent`.
 
 `premiumDailyQuotesProvider` layers a personalized multi-quote feed on top for Pro users; Home falls back to the single daily quote if this errors or is loading.
+
+### Quote database — content rules
+
+`assets/thinkers_quotes.json` is the only content asset the app ships. It was rebuilt from scratch in July 2026 because roughly half the previous 539 entries were fabricated: LLM-written summary sentences attributed to real people as if they were quotations (Adam Smith, Angela Davis, Mandela, Foucault, and whole padded work-series such as `manifest_009`–`012`), plus ~140 entries whose "explanation" was one template with the name swapped in. Two rules follow, and they are not negotiable:
+
+1. **Every `text_de` must be a real, verbatim utterance of a real person.** Not a paraphrase, not a summary of their position, not a plausible-sounding sentence in their style. If a quote cannot be tied to a work, speech, letter or documented occasion, it does not go in. Where a famous line is popularly misattributed or has no clean source (Gandhi's "an eye for an eye", Wilde's "be yourself", the Rumi and Hawking lines), the entry says so openly in `source` and `explanation_long` rather than pretending.
+2. **Every `explanation_short` / `explanation_long` must explain that specific quote** — its context, what it actually claims, why it matters, and where it is commonly misread. Never generate them from a template, and never let them describe the recommendation algorithm instead of the quote (the old data had explanations reading "strengthens neutral and centrist recommendations").
+
+Adding quotes means writing them by hand. There is no script for this, and a script is exactly how the database got ruined.
 
 ### Design system
 

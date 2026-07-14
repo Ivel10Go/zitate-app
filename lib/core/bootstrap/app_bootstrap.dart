@@ -7,9 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../data/database/app_database.dart';
 import '../../data/models/daily_content.dart';
-import '../../data/models/home_content_mode.dart';
 import '../../data/models/user_profile.dart';
-import '../../data/repositories/history_repository.dart';
 import '../../data/repositories/quote_repository.dart';
 import '../../domain/services/daily_content_resolver.dart';
 import '../constants/settings_keys.dart';
@@ -40,17 +38,12 @@ Future<_IsolateDailyContent> _initializeDatabaseInIsolate(
   try {
     debugPrint('[DeferredData] Starting content resolution in isolate...');
     final quoteRepository = QuoteRepository(db);
-    final historyRepository = HistoryRepository(db);
     await quoteRepository.ensureSeeded();
-    await historyRepository.ensureSeeded();
 
     // Parse persisted settings passed from main isolate.
     final prefsStart = Stopwatch()..start();
     final streak = (args[SettingsKeys.streak] as int?) ?? 0;
     final appMode = AppBootstrap._resolveAppMode(args['app_mode'] as String?);
-    final homeContentMode = HomeContentMode.fromStorage(
-      args[SettingsKeys.homeContentMode] as String?,
-    );
     final profile = AppBootstrap._resolveProfile(
       args[UserProfile.storageKey] as String?,
     );
@@ -64,8 +57,6 @@ Future<_IsolateDailyContent> _initializeDatabaseInIsolate(
     final resolver = DailyContentResolver();
     final content = await AppBootstrap._resolveDailyContent(
       quoteRepository: quoteRepository,
-      historyRepository: historyRepository,
-      homeContentMode: homeContentMode,
       appMode: appMode,
       profile: profile,
       resolver: resolver,
@@ -274,9 +265,6 @@ abstract final class AppBootstrap {
         final isolateArgs = <String, Object?>{
           SettingsKeys.streak: prefs.getInt(SettingsKeys.streak),
           'app_mode': prefs.getString('app_mode'),
-          SettingsKeys.homeContentMode: prefs.getString(
-            SettingsKeys.homeContentMode,
-          ),
           UserProfile.storageKey: prefs.getString(UserProfile.storageKey),
         };
 
@@ -342,8 +330,6 @@ abstract final class AppBootstrap {
 
   static Future<DailyContent?> _resolveDailyContent({
     required QuoteRepository quoteRepository,
-    required HistoryRepository historyRepository,
-    required HomeContentMode homeContentMode,
     required AppMode appMode,
     required UserProfile profile,
     required DailyContentResolver resolver,
@@ -351,8 +337,6 @@ abstract final class AppBootstrap {
     try {
       final content = await resolver.resolveDailyContentFromRepository(
         quoteRepository: quoteRepository,
-        historyRepository: historyRepository,
-        homeContentMode: homeContentMode,
         appMode: appMode,
         profile: profile,
       );
@@ -368,11 +352,6 @@ abstract final class AppBootstrap {
     final quotes = await quoteRepository.watchAllQuotes().first;
     if (quotes.isNotEmpty) {
       return DailyContent.quote(quote: quotes.first);
-    }
-
-    final facts = await historyRepository.watchAllHistoryFacts().first;
-    if (facts.isNotEmpty) {
-      return DailyContent.fact(fact: facts.first);
     }
 
     return null;
