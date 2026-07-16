@@ -205,8 +205,8 @@ class _OnboardingCompletionPageState
                       horizontal: 32,
                       vertical: 12,
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
                     ),
                   ),
                   child: Text(

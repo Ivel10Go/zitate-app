@@ -381,9 +381,11 @@ String _leaningLabel(PoliticalLeaning leaning) {
   }
 }
 
-/// Content preferences: topics of interest and political lens. These mirror the
-/// onboarding inputs so they can be revisited any time; any change re-resolves
-/// today's content immediately.
+/// Content preferences: topics of interest and political lens. These mirror
+/// the onboarding inputs so they can be revisited any time. Changes must NOT
+/// re-resolve today's already picked quote — the free tier gets exactly one
+/// quote per day; only from tomorrow on do new preferences shape the pick.
+/// (The Pro feed via premiumDailyQuotesProvider reacts immediately.)
 class _ContentPreferencesGroup extends ConsumerWidget {
   const _ContentPreferencesGroup();
 
@@ -391,13 +393,6 @@ class _ContentPreferencesGroup extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scheme = Theme.of(context).colorScheme;
     final profile = ref.watch(userProfileProvider);
-
-    Future<void> refreshContent() async {
-      // Clear the cached daily pick so the new preferences take effect today
-      // rather than only on the next day.
-      await clearDailyContentCache();
-      ref.invalidate(dailyContentProvider);
-    }
 
     return _SettingsGroup(
       title: 'INHALT',
@@ -431,7 +426,6 @@ class _ContentPreferencesGroup extends ConsumerWidget {
                   await ref
                       .read(userProfileProvider.notifier)
                       .updateInterests(next);
-                  await refreshContent();
                 },
               ),
           ],
@@ -451,10 +445,19 @@ class _ContentPreferencesGroup extends ConsumerWidget {
                   await ref
                       .read(userProfileProvider.notifier)
                       .updatePoliticalLeaning(value);
-                  await refreshContent();
                 },
               ),
           ],
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Änderungen wirken sich ab morgen auf dein Tageszitat aus. '
+          'Mit Pro erhältst du sofort einen Feed aus mehreren Zitaten zu deinen Interessen.',
+          style: GoogleFonts.ibmPlexSans(
+            fontSize: 10,
+            color: scheme.onSurfaceVariant,
+            height: 1.5,
+          ),
         ),
       ],
     );

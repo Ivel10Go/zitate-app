@@ -367,7 +367,6 @@ class AppFullscreenRecoveryScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.paper,
                   border: Border.all(color: AppColors.ink, width: 1),
-                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

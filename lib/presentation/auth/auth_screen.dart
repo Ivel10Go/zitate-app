@@ -21,8 +21,7 @@ class AuthScreen extends ConsumerStatefulWidget {
   ConsumerState<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _AuthScreenState extends ConsumerState<AuthScreen>
-    with TickerProviderStateMixin {
+class _AuthScreenState extends ConsumerState<AuthScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -30,30 +29,21 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
   bool _loading = false;
   bool _passwordVisible = false;
   String? _errorMessage;
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
-    _controller.forward();
-  }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     _passwordConfirmController.dispose();
-    _controller.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-    setState(() => _loading = true);
+    setState(() {
+      _loading = true;
+      _errorMessage = null;
+    });
     final authController = ref.read(authControllerProvider.notifier);
     final success = widget.isSignUp
         ? await authController.signUp(
@@ -79,6 +69,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
             context: context,
             barrierDismissible: false,
             builder: (dialogContext) => AlertDialog(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
               title: const Text('Registrierung erfolgreich'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -95,7 +88,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                 ],
               ),
               actions: [
-                ElevatedButton(
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppColors.red,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    elevation: 0,
+                  ),
                   onPressed: () {
                     Navigator.pop(dialogContext);
                     if (mounted) {
@@ -128,12 +128,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
         _loading = false;
       });
     }
-
-    // Error handling
   }
 
   Future<void> _signInWithGoogle() async {
-    setState(() => _loading = true);
+    setState(() {
+      _loading = true;
+      _errorMessage = null;
+    });
     try {
       final authController = ref.read(authControllerProvider.notifier);
 
@@ -187,6 +188,79 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     context.go('/');
   }
 
+  Future<void> _showResetPasswordDialog() async {
+    final resetEmailCtrl = TextEditingController();
+
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+          title: const Text('Passwort zurücksetzen'),
+          content: TextField(
+            controller: resetEmailCtrl,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+              labelText: 'E-Mail Adresse',
+              hintText: 'deine@email.com',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: const Text('Abbrechen'),
+            ),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: AppColors.red,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
+                elevation: 0,
+              ),
+              onPressed: () async {
+                final email = resetEmailCtrl.text.trim();
+                if (email.isEmpty || !email.contains('@')) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Bitte gib eine gültige E-Mail ein'),
+                    ),
+                  );
+                  return;
+                }
+
+                try {
+                  await ref
+                      .read(authControllerProvider.notifier)
+                      .resetPassword(email);
+
+                  if (!mounted) return;
+                  Navigator.pop(dialogContext);
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Passwort-Reset-Link wurde gesendet. Bitte überprüfe dein Postfach.',
+                      ),
+                    ),
+                  );
+                } catch (e) {
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text('Fehler: $e')));
+                }
+              },
+              child: const Text('Senden'),
+            ),
+          ],
+        );
+      },
+    );
+
+    resetEmailCtrl.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
@@ -194,12 +268,22 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     return AppDecoratedScaffold(
       child: Column(
         children: <Widget>[
-          Container(
-            color: scheme.surface,
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+          // Masthead im Editorial-Stil, analog zu Home/Onboarding.
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Text(
+                  'QUOTIDIAN · KONTO',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 9,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.red,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+                const SizedBox(height: 6),
                 Text(
                   widget.isSignUp ? 'REGISTRIEREN' : 'ANMELDEN',
                   style: GoogleFonts.playfairDisplay(
@@ -209,9 +293,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                     letterSpacing: -0.5,
                   ),
                 ),
-                const SizedBox(height: 12),
-                Container(width: 40, height: 2, color: AppColors.red),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
                 Text(
                   widget.isSignUp
                       ? 'Erstelle ein Konto, um Inhalte zu speichern und zu synchronisieren.'
@@ -223,31 +305,10 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                     height: 1.5,
                   ),
                 ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: _GoogleSignInButton(
-                    label: widget.isSignUp
-                        ? 'Mit Google registrieren'
-                        : 'Mit Google anmelden',
-                    isLoading: _loading,
-                    onTap: _signInWithGoogle,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Center(
-                  child: TextButton(
-                    onPressed: _continueAsGuest,
-                    child: Text(
-                      'OHNE LOGIN FORTFAHREN',
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.red,
-                        letterSpacing: 0.9,
-                      ),
-                    ),
-                  ),
+                const SizedBox(height: 12),
+                Divider(
+                  color: scheme.primary.withValues(alpha: 0.25),
+                  height: 1,
                 ),
               ],
             ),
@@ -264,27 +325,29 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: scheme.errorContainer,
-                          borderRadius: BorderRadius.circular(4),
+                          color: AppColors.red.withValues(alpha: 0.06),
+                          border: Border.all(
+                            color: AppColors.red.withValues(alpha: 0.4),
+                          ),
                         ),
                         child: Text(
                           _errorMessage!,
-                          style: TextStyle(
-                            color: scheme.onErrorContainer,
+                          style: GoogleFonts.ibmPlexSans(
+                            color: AppColors.red,
                             fontSize: 11,
+                            height: 1.4,
                           ),
                         ),
                       ),
                       const SizedBox(height: 16),
                     ],
+                    _fieldLabel('E-MAIL'),
+                    const SizedBox(height: 6),
                     _buildTextField(
                       controller: _emailController,
-                      label: 'E-Mail',
                       hint: 'deine@email.com',
-                      icon: Icons.mail_outline_rounded,
                       keyboardType: TextInputType.emailAddress,
                       enabled: !_loading,
-                      showSuffixIcon: false,
                       validator: (v) {
                         if (v == null || v.isEmpty) {
                           return 'E-Mail ist erforderlich';
@@ -295,19 +358,17 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                         return null;
                       },
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 16),
+                    _fieldLabel('PASSWORT'),
+                    const SizedBox(height: 6),
                     _buildTextField(
                       controller: _passwordController,
-                      label: 'Passwort',
                       hint: widget.isSignUp
                           ? 'Mindestens 6 Zeichen'
                           : 'Dein Passwort',
-                      icon: Icons.lock_outline_rounded,
                       obscureText: !_passwordVisible,
                       enabled: !_loading,
-                      onObscureToggle: () {
-                        setState(() => _passwordVisible = !_passwordVisible);
-                      },
+                      showVisibilityToggle: true,
                       validator: (v) {
                         if (v == null || v.isEmpty) {
                           return 'Passwort ist erforderlich';
@@ -315,25 +376,19 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                         if (v.length < 6) {
                           return 'Passwort muss mindestens 6 Zeichen lang sein';
                         }
-                        if (widget.isSignUp &&
-                            v != _passwordConfirmController.text) {
-                          return 'Passwörter stimmen nicht überein';
-                        }
                         return null;
                       },
                     ),
                     if (widget.isSignUp) ...<Widget>[
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 16),
+                      _fieldLabel('PASSWORT BESTÄTIGEN'),
+                      const SizedBox(height: 6),
                       _buildTextField(
                         controller: _passwordConfirmController,
-                        label: 'Passwort bestätigen',
                         hint: 'Passwort wiederholen',
-                        icon: Icons.lock_outline_rounded,
                         obscureText: !_passwordVisible,
                         enabled: !_loading,
-                        onObscureToggle: () {
-                          setState(() => _passwordVisible = !_passwordVisible);
-                        },
+                        showVisibilityToggle: true,
                         validator: (v) {
                           if (v == null || v.isEmpty) {
                             return 'Bestätigung erforderlich';
@@ -345,12 +400,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                         },
                       ),
                     ],
-                    if (!widget.isSignUp) ...<Widget>[
-                      const SizedBox(height: 8),
+                    if (!widget.isSignUp)
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: _loading ? null : () {},
+                          onPressed: _loading
+                              ? null
+                              : _showResetPasswordDialog,
                           child: Text(
                             'Passwort vergessen?',
                             style: GoogleFonts.ibmPlexSans(
@@ -361,33 +417,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                           ),
                         ),
                       ),
-                    ],
-                    const SizedBox(height: 18),
-                    if (widget.isSignUp)
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: scheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(4),
-                          border: Border.all(color: scheme.outlineVariant),
-                        ),
-                        child: Text(
-                          'Nach der Registrierung richtest du dein Profil und deine Interessen ein.',
-                          style: GoogleFonts.ibmPlexSans(
-                            fontSize: 11,
-                            color: scheme.onSurfaceVariant,
-                            height: 1.45,
-                          ),
-                        ),
-                      ),
                     const SizedBox(height: 20),
                     FilledButton(
                       onPressed: _loading ? null : _submit,
                       style: FilledButton.styleFrom(
                         backgroundColor: AppColors.red,
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
                         ),
                         elevation: 0,
                       ),
@@ -410,7 +447,56 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                               ),
                             ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Divider(color: scheme.outline, height: 1),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            'ODER',
+                            style: GoogleFonts.ibmPlexSans(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w700,
+                              color: scheme.onSurfaceVariant,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(color: scheme.outline, height: 1),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    _GoogleSignInButton(
+                      label: widget.isSignUp
+                          ? 'MIT GOOGLE REGISTRIEREN'
+                          : 'MIT GOOGLE ANMELDEN',
+                      isLoading: _loading,
+                      onTap: _signInWithGoogle,
+                    ),
+                    if (widget.isSignUp) ...<Widget>[
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: scheme.surfaceContainerHighest,
+                          border: Border.all(color: scheme.outlineVariant),
+                        ),
+                        child: Text(
+                          'Nach der Registrierung richtest du dein Profil und deine Interessen ein.',
+                          style: GoogleFonts.ibmPlexSans(
+                            fontSize: 11,
+                            color: scheme.onSurfaceVariant,
+                            height: 1.45,
+                          ),
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 16),
                     Center(
                       child: TextButton(
                         onPressed: _loading
@@ -437,6 +523,20 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
                         ),
                       ),
                     ),
+                    Center(
+                      child: TextButton(
+                        onPressed: _loading ? null : _continueAsGuest,
+                        child: Text(
+                          'OHNE LOGIN FORTFAHREN',
+                          style: GoogleFonts.ibmPlexSans(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.red,
+                            letterSpacing: 0.9,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -447,16 +547,26 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     );
   }
 
+  Widget _fieldLabel(String text) {
+    final scheme = Theme.of(context).colorScheme;
+    return Text(
+      text,
+      style: GoogleFonts.ibmPlexSans(
+        fontSize: 9,
+        fontWeight: FontWeight.w700,
+        color: scheme.onSurfaceVariant,
+        letterSpacing: 1.2,
+      ),
+    );
+  }
+
   Widget _buildTextField({
     required TextEditingController controller,
-    required String label,
     required String hint,
-    required IconData icon,
     bool obscureText = false,
     bool enabled = true,
-    bool showSuffixIcon = true,
+    bool showVisibilityToggle = false,
     TextInputType keyboardType = TextInputType.text,
-    VoidCallback? onObscureToggle,
     String? Function(String?)? validator,
   }) {
     final scheme = Theme.of(context).colorScheme;
@@ -467,27 +577,48 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
       enabled: enabled,
       keyboardType: keyboardType,
       validator: validator,
+      style: GoogleFonts.ibmPlexSans(fontSize: 13, color: scheme.onSurface),
       decoration: InputDecoration(
-        labelText: label,
         hintText: hint,
-        prefixIcon: Icon(icon, size: 18),
-        suffixIcon: showSuffixIcon && obscureText != obscureText
+        hintStyle: GoogleFonts.ibmPlexSans(
+          fontSize: 13,
+          color: scheme.onSurfaceVariant.withValues(alpha: 0.7),
+        ),
+        suffixIcon: showVisibilityToggle
             ? IconButton(
                 icon: Icon(
-                  obscureText ? Icons.visibility_off : Icons.visibility,
+                  obscureText
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  size: 18,
+                  color: scheme.onSurfaceVariant,
                 ),
-                onPressed: onObscureToggle,
+                onPressed: () {
+                  setState(() => _passwordVisible = !_passwordVisible);
+                },
               )
             : null,
         filled: true,
         fillColor: enabled ? scheme.surface : scheme.surfaceContainerHighest,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.zero,
           borderSide: BorderSide(color: scheme.outline),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.zero,
           borderSide: BorderSide(color: scheme.outline, width: 1),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: AppColors.red, width: 1.2),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: AppColors.red, width: 1),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+          borderSide: BorderSide(color: AppColors.red, width: 1.2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12,
@@ -512,52 +643,56 @@ class _GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Material(
-      color: scheme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-        side: const BorderSide(color: Color(0xFFDB4437), width: 1.5),
+    return OutlinedButton(
+      onPressed: isLoading ? null : onTap,
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        side: BorderSide(color: scheme.outline, width: 1),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(4),
-        onTap: isLoading ? null : onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: isLoading
-              ? SizedBox(
-                  height: 20,
+      child: isLoading
+          ? SizedBox(
+              height: 18,
+              width: 18,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation<Color>(scheme.onSurface),
+              ),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
                   width: 20,
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(scheme.onSurface),
-                    strokeWidth: 2,
+                  height: 20,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFDB4437),
+                    shape: BoxShape.circle,
                   ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'G',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFFDB4437),
-                      ),
+                  child: const Text(
+                    'G',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      height: 1,
                     ),
-                    const SizedBox(width: 12),
-                    Text(
-                      label,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.ibmPlexSans(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: scheme.onSurface,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-        ),
-      ),
+                const SizedBox(width: 10),
+                Text(
+                  label,
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: scheme.onSurface,
+                    letterSpacing: 1.0,
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

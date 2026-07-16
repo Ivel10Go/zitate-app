@@ -94,7 +94,6 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                         border: Border.all(
                           color: AppColors.red.withValues(alpha: 0.24),
                         ),
-                        borderRadius: BorderRadius.circular(4),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(10),
@@ -156,12 +155,9 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                               },
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
-                          side: const BorderSide(
-                            color: Color(0xFFDB4437),
-                            width: 1.2,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
+                          side: BorderSide(color: scheme.outline, width: 1),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
                           ),
                         ),
                         child: _googleLoading
@@ -203,7 +199,7 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                                     style: GoogleFonts.ibmPlexSans(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
-                                      color: AppColors.red,
+                                      color: scheme.onSurface,
                                       letterSpacing: 1.0,
                                     ),
                                   ),
@@ -236,8 +232,8 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                     style: FilledButton.styleFrom(
                       backgroundColor: AppColors.red,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
                       ),
                       elevation: 0,
                     ),
@@ -257,8 +253,8 @@ class _AuthChoiceScreenState extends ConsumerState<AuthChoiceScreen>
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       side: BorderSide(color: scheme.outline, width: 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
                       ),
                     ),
                     child: Text(
