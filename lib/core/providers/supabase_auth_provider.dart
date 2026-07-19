@@ -6,14 +6,19 @@ import '../services/supabase_auth_service.dart';
 import '../services/supabase_sync_service.dart';
 import '../services/purchases_service.dart';
 import '../constants/settings_keys.dart';
+import 'purchases_provider.dart';
 import '../../domain/providers/repository_providers.dart';
 import '../../domain/providers/user_profile_provider.dart';
 import '../../domain/providers/daily_content_provider.dart';
 
-/// Stream des aktüllen Auth-Status
-final supabaseAuthStateProvider = StreamProvider<AuthUser?>((ref) {
-  final service = SupabaseAuthService();
-  return service.authStateChanges();
+/// Auth-Status der App.
+///
+/// Leitet bewusst von [authControllerProvider] ab statt ein zweites Abo auf
+/// `authStateChanges()` zu öffnen. Vorher liefen beide Abos parallel, und
+/// verschiedene Screens lasen verschiedene Quellen — bei Login/Logout konnten
+/// sie kurzzeitig widersprüchliche Zustände anzeigen.
+final supabaseAuthStateProvider = Provider<AsyncValue<AuthUser?>>((ref) {
+  return ref.watch(authControllerProvider);
 });
 
 /// Ist der Benutzer angemeldet?
@@ -33,6 +38,18 @@ final currentUserEmailProvider = Provider<String?>((ref) {
   final authState = ref.watch(supabaseAuthStateProvider);
   return authState.whenData((user) => user?.email).value;
 });
+
+/// Ergebnis einer Registrierung aus Sicht der UI.
+enum SignUpOutcome {
+  /// Konto angelegt und Session aktiv.
+  signedIn,
+
+  /// Konto angelegt, aber die E-Mail muss noch bestätigt werden.
+  confirmationRequired,
+
+  /// Registrierung fehlgeschlagen; Fehler liegt im Controller-State.
+  failed,
+}
 
 final googleOnboardingPendingProvider = FutureProvider<bool>((ref) async {
   final prefs = await SharedPreferences.getInstance();
@@ -65,17 +82,20 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
 
         state = AsyncValue.data(user);
 
+        if (!identityChanged) {
+          return;
+        }
+
         // Only reload daily content when the signed-in user actually changes
         // (login or logout), not on every token refresh / session replay.
-        if (identityChanged) {
-          _ref.invalidate(dailyContentProvider);
-        }
+        _ref.invalidate(dailyContentProvider);
+
         try {
           // Login side effects (favorites merge, cloud profile restore,
           // RevenueCat linking) must only run once per real login. Running
           // them on every token refresh kept rewriting the user profile,
           // which forced the daily content provider to reload repeatedly.
-          if (user != null && identityChanged) {
+          if (user != null) {
             await _setGuestModeEnabled(false);
             // On login: merge local favorites to cloud and pull cloud favorites back locally
             try {
@@ -91,6 +111,9 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
               // non-fatal: log and continue
               debugPrint('RevenueCat login error: $e');
             }
+          } else if (previousUserId != null) {
+            // Echte Abmeldung (nicht der initiale "kein Nutzer"-Event).
+            await _onLogout();
           }
         } catch (e) {
           // ignore sync errors here but log if needed
@@ -139,15 +162,46 @@ class AuthController extends StateNotifier<AsyncValue<AuthUser?>> {
     }
   }
 
-  Future<bool> signUp({required String email, required String password}) async {
+  /// Räumt den kontogebundenen Zustand nach einer Abmeldung auf.
+  ///
+  /// Ohne das behielt das Gerät die RevenueCat-Identität des abgemeldeten
+  /// Nutzers — dessen Pro-Entitlement blieb also aktiv — und die Provider für
+  /// Profil und Favoriten zeigten weiter dessen Daten.
+  Future<void> _onLogout() async {
+    try {
+      await PurchasesService.instance.logOut();
+    } catch (e) {
+      debugPrint('RevenueCat logout error: $e');
+    }
+
+    try {
+      await _ref.read(entitlementProvider.notifier).refresh();
+    } catch (e) {
+      debugPrint('Entitlement refresh error: $e');
+    }
+
+    _ref.invalidate(userProfileProvider);
+  }
+
+  Future<SignUpOutcome> signUp({
+    required String email,
+    required String password,
+  }) async {
     state = const AsyncValue.loading();
     try {
-      await _service.signUpWithEmail(email, password);
+      final result = await _service.signUpWithEmail(email, password);
+      if (result.needsEmailConfirmation) {
+        // Keine Session — der Auth-Stream feuert nicht. Der Zustand muss hier
+        // explizit auf "abgemeldet" gesetzt werden, sonst bleibt die UI im
+        // Ladezustand hängen.
+        state = const AsyncValue.data(null);
+        return SignUpOutcome.confirmationRequired;
+      }
       // Auth state wird durch authStateChanges automatisch aktualisiert
-      return true;
+      return SignUpOutcome.signedIn;
     } catch (e, st) {
       state = AsyncValue.error(e, st);
-      return false;
+      return SignUpOutcome.failed;
     }
   }
 

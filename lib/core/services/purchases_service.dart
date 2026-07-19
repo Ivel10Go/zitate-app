@@ -4,6 +4,8 @@ import 'dart:developer' as developer;
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 
+import '../constants/purchase_keys.dart';
+
 class OfferingsFetchResult {
   const OfferingsFetchResult({
     required this.offerings,
@@ -27,11 +29,24 @@ class PurchasesService {
 
   final _customerInfoController = StreamController<CustomerInfo>.broadcast();
   CustomerInfo? _latestCustomerInfo;
-  bool _initialized = false;
+
+  /// `Purchases.configure` wurde erfolgreich aufgerufen. Getrennt von
+  /// [_ready], weil `configure` genau einmal pro Prozess laufen darf — ein
+  /// zweiter Aufruf beim Wiederholversuch würde die SDK in einen
+  /// inkonsistenten Zustand bringen.
+  bool _configured = false;
+
+  /// SDK ist konfiguriert *und* der erste CustomerInfo-Abruf hat geklappt.
+  bool _ready = false;
   bool _customerInfoListenerAdded = false;
+  Future<void>? _inFlightInit;
 
   CustomerInfo? get latestCustomerInfo => _latestCustomerInfo;
   Stream<CustomerInfo> get customerInfoStream => _customerInfoController.stream;
+
+  /// Ob die SDK einsatzbereit ist. Solange `false`, darf ein fehlender
+  /// Pro-Status nicht als "kein Abo" interpretiert werden — er ist unbekannt.
+  bool get isReady => _ready;
 
   void _publishCustomerInfo(CustomerInfo customerInfo) {
     _latestCustomerInfo = customerInfo;
@@ -43,27 +58,42 @@ class PurchasesService {
   }
 
   /// Initialize RevenueCat Purchases SDK with given API key.
-  Future<void> init(String apiKey, {bool debugLogs = false}) async {
-    if (_initialized) {
-      return;
+  ///
+  /// Sicher mehrfach aufrufbar: `Purchases.configure` läuft genau einmal, der
+  /// CustomerInfo-Abruf wird bei jedem Versuch wiederholt, bis er einmal
+  /// geklappt hat. Parallele Aufrufe teilen sich denselben Future.
+  Future<void> init(String apiKey, {bool debugLogs = false}) {
+    if (_ready) {
+      return Future<void>.value();
     }
 
-    try {
-      await Purchases.setLogLevel(debugLogs ? LogLevel.debug : LogLevel.info);
-      await Purchases.configure(PurchasesConfiguration(apiKey));
+    return _inFlightInit ??= _runInit(apiKey, debugLogs: debugLogs)
+        .whenComplete(() {
+          _inFlightInit = null;
+        });
+  }
 
-      // seed initial customer info and listen for updates
-      final info = await Purchases.getCustomerInfo();
-      _publishCustomerInfo(info);
+  Future<void> _runInit(String apiKey, {required bool debugLogs}) async {
+    try {
+      if (!_configured) {
+        await Purchases.setLogLevel(debugLogs ? LogLevel.debug : LogLevel.info);
+        await Purchases.configure(PurchasesConfiguration(apiKey));
+        // Ab hier gilt die SDK als konfiguriert, auch wenn der folgende
+        // CustomerInfo-Abruf scheitert. Sonst würde ein Wiederholversuch
+        // `configure` ein zweites Mal aufrufen.
+        _configured = true;
+      }
 
       if (!_customerInfoListenerAdded) {
-        Purchases.addCustomerInfoUpdateListener((customerInfo) {
-          _publishCustomerInfo(customerInfo);
-        });
+        Purchases.addCustomerInfoUpdateListener(_publishCustomerInfo);
         _customerInfoListenerAdded = true;
       }
 
-      _initialized = true;
+      // seed initial customer info
+      final info = await Purchases.getCustomerInfo();
+      _publishCustomerInfo(info);
+
+      _ready = true;
     } on PurchasesError catch (e) {
       developer.log('Purchases SDK error during init: ${e.message}');
       rethrow;
@@ -79,12 +109,31 @@ class PurchasesService {
   /// Convenience initializer that reads the API key from Dart environment
   /// (`--dart-define=REVENUECAT_API_KEY=...`). Falls back to the app's
   /// public Android SDK key (publishable, safe to embed in the binary).
-  Future<void> initFromEnvironment({bool debugLogs = false}) async {
-    final apiKey = const String.fromEnvironment(
+  Future<void> initFromEnvironment({bool debugLogs = false}) {
+    const apiKey = String.fromEnvironment(
       'REVENUECAT_API_KEY',
       defaultValue: 'goog_DIuFsiykgmyWanTtkwNpkdEaRTV',
     );
     return init(apiKey, debugLogs: debugLogs);
+  }
+
+  /// Stellt sicher, dass die SDK bereit ist, ohne bei Fehlern zu werfen.
+  ///
+  /// Der Bootstrap begrenzt die Initialisierung auf 5 Sekunden und behandelt
+  /// Fehler als unkritisch. Ohne diesen Wiedereinstieg blieb die SDK danach
+  /// für die gesamte Sitzung uninitialisiert — und jeder zahlende Nutzer galt
+  /// als Gratisnutzer, bis er die App neu startete.
+  Future<bool> ensureInitialized({bool debugLogs = false}) async {
+    if (_ready) {
+      return true;
+    }
+    try {
+      await initFromEnvironment(debugLogs: debugLogs);
+      return _ready;
+    } catch (e) {
+      developer.log('Purchases ensureInitialized failed: $e');
+      return false;
+    }
   }
 
   Future<OfferingsFetchResult> fetchOfferingsWithStatus({
@@ -93,6 +142,17 @@ class PurchasesService {
   }) async {
     Object? lastError;
     bool timedOut = false;
+
+    if (!await ensureInitialized()) {
+      return const OfferingsFetchResult(
+        offerings: null,
+        attempts: 0,
+        isTimeout: false,
+        errorMessage:
+            'Zahlungsdienst konnte nicht initialisiert werden. '
+            'Bitte Verbindung prüfen und erneut versuchen.',
+      );
+    }
 
     for (int attempt = 1; attempt <= maxAttempts; attempt++) {
       try {
@@ -136,6 +196,9 @@ class PurchasesService {
   }
 
   Future<PurchaseResult> purchasePackage(Package pkg) async {
+    if (!await ensureInitialized()) {
+      throw StateError('Zahlungsdienst ist nicht verfügbar');
+    }
     try {
       final result = await Purchases.purchase(PurchaseParams.package(pkg));
       return result;
@@ -149,8 +212,12 @@ class PurchasesService {
   }
 
   Future<void> restorePurchases() async {
+    if (!await ensureInitialized()) {
+      throw StateError('Zahlungsdienst ist nicht verfügbar');
+    }
     try {
-      await Purchases.restorePurchases();
+      final info = await Purchases.restorePurchases();
+      _publishCustomerInfo(info);
     } on PurchasesError catch (e) {
       developer.log('Restore failed: ${e.message}');
       rethrow;
@@ -167,6 +234,9 @@ class PurchasesService {
   }
 
   Future<CustomerInfo?> refreshCustomerInfoSafe() async {
+    if (!await ensureInitialized()) {
+      return null;
+    }
     try {
       return await refreshCustomerInfo();
     } on PurchasesError catch (e) {
@@ -180,9 +250,12 @@ class PurchasesService {
 
   /// Associate an app user id with RevenueCat (login). Safe to call repeatedly.
   Future<void> logIn(String appUserId) async {
+    if (!await ensureInitialized()) {
+      throw StateError('Purchases SDK ist nicht initialisiert');
+    }
     try {
-      await Purchases.logIn(appUserId);
-      await refreshCustomerInfoSafe();
+      final result = await Purchases.logIn(appUserId);
+      _publishCustomerInfo(result.customerInfo);
     } catch (e, st) {
       developer.log('Purchases logIn failed: $e', stackTrace: st);
       rethrow;
@@ -190,19 +263,27 @@ class PurchasesService {
   }
 
   /// Clears RevenueCat identity for the current device.
+  ///
+  /// Muss beim Abmelden laufen: sonst behält das Gerät die Entitlements des
+  /// vorherigen Kontos, und der nächste (nicht angemeldete) Nutzer sieht
+  /// fremde Pro-Inhalte.
   Future<void> logOut() async {
+    if (!await ensureInitialized()) {
+      return;
+    }
     try {
-      await Purchases.logOut();
-      await refreshCustomerInfoSafe();
+      final info = await Purchases.logOut();
+      _publishCustomerInfo(info);
     } catch (e, st) {
+      // Ein anonymer Nutzer kann nicht ausgeloggt werden — das ist kein
+      // Fehlerfall, den der Abmeldevorgang abbrechen dürfte.
       developer.log('Purchases logOut failed: $e', stackTrace: st);
-      rethrow;
     }
   }
 
   bool hasProEntitlement(
     CustomerInfo info, {
-    String entitlementId = 'zitate_app_pro',
+    String entitlementId = PurchaseKeys.proEntitlement,
   }) {
     final ent = info.entitlements.all[entitlementId];
     return ent?.isActive ?? false;
@@ -240,11 +321,5 @@ class PurchasesService {
       );
       rethrow;
     }
-  }
-
-  void dispose() {
-    try {
-      _customerInfoController.close();
-    } catch (_) {}
   }
 }

@@ -9,6 +9,7 @@ import '../../core/services/widget_sync_service.dart';
 import '../../core/services/supabase_sync_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/constants/pro_launch_config.dart';
 import '../../core/providers/purchases_provider.dart';
 import '../../core/utils/share_card_renderer.dart';
 import '../../data/models/daily_content.dart';
@@ -351,7 +352,7 @@ class _ExploreSection extends StatelessWidget {
           _ExploreLinkRow(
             label: 'DENKERATLAS',
             description: 'Alle Denker und Zitate durchstöbern',
-            isProFeature: true,
+            isProFeature: kProLaunchEnabled,
             onTap: () => context.push('/thinkers'),
           ),
           Container(height: 1, color: scheme.outline),

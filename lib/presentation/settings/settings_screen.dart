@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/constants/pro_launch_config.dart';
+import '../../core/providers/purchases_provider.dart';
 import '../../core/services/feedback_submission_service.dart';
 import '../../core/services/notification_service.dart';
 import '../../core/theme/app_colors.dart';
@@ -30,6 +32,7 @@ class SettingsScreen extends ConsumerWidget {
     final settingsAsync = ref.watch(settingsControllerProvider);
     final appMode = ref.watch(appModeNotifierProvider);
     final isAdmin = ref.watch(adminAccessProvider);
+    final isPro = ref.watch(isProProvider);
 
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
@@ -62,6 +65,19 @@ class SettingsScreen extends ConsumerWidget {
                         icon: Icons.person_rounded,
                         onTap: () => context.push('/account'),
                       ),
+                      if (kProLaunchEnabled) ...<Widget>[
+                        SizedBox(height: AppTheme.spacingLarge),
+                        _SettingsLinkCard(
+                          title: 'ZITATE APP PRO',
+                          subtitle: isPro
+                              ? 'Pro aktiv — Abo verwalten'
+                              : 'Personalisierter Feed, Denkeratlas & mehr',
+                          icon: isPro
+                              ? Icons.workspace_premium_rounded
+                              : Icons.workspace_premium_outlined,
+                          onTap: () => context.push('/paywall'),
+                        ),
+                      ],
                       SizedBox(height: AppTheme.spacingLarge),
                       const _ContentPreferencesGroup(),
                       SizedBox(height: AppTheme.spacingLarge),

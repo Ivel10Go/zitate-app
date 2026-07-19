@@ -1,7 +1,7 @@
 name: zitate_app
 description: "A new Flutter project."
 publish_to: 'none'
-version: 1.0.0+8
+version: 1.0.0+9
 
 environment:
   sdk: ^3.9.2
@@ -61,7 +61,12 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    # `assets/` bündelt nur Dateien direkt in diesem Ordner, nicht in
+    # Unterordnern. Jeder Unterordner braucht einen eigenen Eintrag — ohne
+    # `assets/branding/` fehlte das App-Logo im Bundle und Image.asset
+    # scheiterte zur Laufzeit.
     - assets/
+    - assets/branding/
   fonts:
     - family: Playfair Display
       fonts:

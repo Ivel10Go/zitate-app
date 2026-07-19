@@ -90,13 +90,38 @@ class NotificationService {
 
     _initialized = true;
 
-    // Request the runtime permission after init and remember the result so the
-    // UI can reflect whether notifications will actually be delivered.
-    await requestPermission();
+    // Bewusst KEINE Berechtigungsabfrage hier. `initialize()` läuft beim
+    // Bootstrap jedes Kaltstarts — eine Abfrage an dieser Stelle erscheint
+    // ohne jeden Kontext und noch bevor das Onboarding erklärt hat, wofür sie
+    // gebraucht wird. Gefragt wird nur dort, wo der Nutzer es ausgelöst hat
+    // (Onboarding-Seite, Einstellungen).
+    await refreshPermissionStatus();
   }
 
-  /// Requests notification (and, on Android 12+, exact-alarm) permissions.
-  /// Returns whether the notification permission is granted afterwards.
+  /// Liest den tatsächlichen Systemzustand der Benachrichtigungs-Berechtigung.
+  ///
+  /// Vorher spiegelte [_permissionGranted] nur das Ergebnis einer Abfrage
+  /// innerhalb derselben Sitzung — nach einem Neustart stand es wieder auf
+  /// `false`, obwohl die Berechtigung erteilt war.
+  Future<bool> refreshPermissionStatus() async {
+    final android = _android;
+    if (android != null) {
+      try {
+        _permissionGranted = await android.areNotificationsEnabled() ?? false;
+      } catch (error) {
+        debugPrint('[Notification] Permission status check failed: $error');
+      }
+      return _permissionGranted;
+    }
+
+    // iOS kennt keine synchrone Statusabfrage über dieses Plugin; dort bleibt
+    // der zuletzt bekannte Wert stehen.
+    return _permissionGranted;
+  }
+
+  /// Fordert die Benachrichtigungs-Berechtigung an.
+  ///
+  /// Nur aus einem Nutzer-ausgelösten Kontext aufrufen.
   Future<bool> requestPermission() async {
     await initialize();
 
@@ -104,13 +129,6 @@ class NotificationService {
     if (android != null) {
       final granted = await android.requestNotificationsPermission();
       _permissionGranted = granted ?? _permissionGranted;
-      // Exact alarms make the daily reminder fire on time on Android 12+.
-      // Best-effort: ignore failures, we fall back to inexact scheduling.
-      try {
-        await android.requestExactAlarmsPermission();
-      } catch (_) {
-        // ignore
-      }
     } else {
       final ios = _plugin
           .resolvePlatformSpecificImplementation<
@@ -191,33 +209,45 @@ class NotificationService {
       return;
     }
 
+    // Trotzdem planen, wenn die Berechtigung fehlt: erteilt der Nutzer sie
+    // später, wird der bereits eingeplante Alarm zugestellt. Der Hinweis im
+    // Log macht aber sichtbar, warum nichts ankommt.
+    if (!await refreshPermissionStatus()) {
+      debugPrint(
+        '[Notification] Reminder wird geplant, aber die '
+        'Benachrichtigungs-Berechtigung fehlt — es wird nichts angezeigt.',
+      );
+    }
+
     final nextTrigger = _nextInstanceOfTime(hour: hour, minute: minute);
 
-    // Prefer exact alarms so the reminder fires at the chosen time; if exact
-    // alarms aren't permitted (Android 12+ without the permission) fall back
-    // to an inexact alarm rather than failing to schedule at all.
-    Future<void> schedule(AndroidScheduleMode mode) {
-      return _plugin.zonedSchedule(
+    // Bewusst inexakte Alarme.
+    //
+    // Exakte Alarme (`exactAllowWhileIdle`) verlangen auf Android 12+ die
+    // Berechtigung SCHEDULE_EXACT_ALARM bzw. USE_EXACT_ALARM. Google beschränkt
+    // die auf Wecker- und Kalender-Apps; ein Zitat-Reminder erfüllt das
+    // Kriterium nicht und würde bei der Play-Prüfung beanstandet. Ein täglicher
+    // Reminder braucht auch keine Sekundengenauigkeit — Android darf ihn im
+    // Doze-Modus um einige Minuten verschieben.
+    try {
+      await _plugin.zonedSchedule(
         _dailyReminderId,
         'Zitatatlas - Tageszitat',
         'Dein nächstes Tageszitat wartet auf dich.',
         nextTrigger,
         _details,
         payload: 'route:/',
-        androidScheduleMode: mode,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
         matchDateTimeComponents: DateTimeComponents.time,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
       );
-    }
-
-    try {
-      await schedule(AndroidScheduleMode.exactAllowWhileIdle);
-    } catch (error) {
-      debugPrint(
-        '[Notification] Exact alarm scheduling failed, using inexact: $error',
-      );
-      await schedule(AndroidScheduleMode.inexactAllowWhileIdle);
+      debugPrint('[Notification] Daily reminder scheduled for $nextTrigger');
+    } catch (error, stackTrace) {
+      // Nicht schlucken: schlägt das Planen fehl, kommt nie eine
+      // Benachrichtigung, und ohne Log ist die Ursache nicht auffindbar.
+      debugPrint('[Notification] Daily reminder scheduling failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
     }
   }
 

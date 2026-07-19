@@ -45,24 +45,27 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       _errorMessage = null;
     });
     final authController = ref.read(authControllerProvider.notifier);
-    final success = widget.isSignUp
-        ? await authController.signUp(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          )
-        : await authController.signIn(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          );
+
+    final SignUpOutcome outcome;
+    if (widget.isSignUp) {
+      outcome = await authController.signUp(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+    } else {
+      final signedIn = await authController.signIn(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+      outcome = signedIn ? SignUpOutcome.signedIn : SignUpOutcome.failed;
+    }
 
     if (!mounted) {
       return;
     }
 
-    if (success) {
-      final currentUser = ref.read(authControllerProvider).valueOrNull;
-
-      if (widget.isSignUp && currentUser == null) {
+    if (outcome != SignUpOutcome.failed) {
+      if (outcome == SignUpOutcome.confirmationRequired) {
         setState(() => _loading = false);
         if (mounted) {
           await showDialog<void>(
@@ -111,8 +114,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         return;
       }
 
-      ref.invalidate(authControllerProvider);
-      await Future.delayed(const Duration(milliseconds: 200));
+      // Kein invalidate/delay mehr: der Auth-Stream hat den Controller-State
+      // bereits gesetzt. Ein Neuaufbau würde ihn nur zurück auf `loading`
+      // werfen und den Auth-Gate kurz ins Leere laufen lassen.
       if (mounted) {
         // Registrierung → immer Onboarding.
         // Login → über den Auth-Gate, der anhand des Profils entscheidet, ob

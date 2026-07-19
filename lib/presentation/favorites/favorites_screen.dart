@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/providers/purchases_provider.dart';
+import '../../core/utils/pdf_export_service.dart';
 import '../../core/utils/share_card_renderer.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
@@ -21,6 +24,7 @@ class FavoritesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoritesAsync = ref.watch(favoritesProvider);
+    final quotes = favoritesAsync.valueOrNull ?? const <Quote>[];
     final scheme = Theme.of(context).colorScheme;
 
     return AndroidBackGuard(
@@ -36,6 +40,9 @@ class FavoritesScreen extends ConsumerWidget {
               title: 'FAVORITEN',
               subtitle:
                   'Deine gespeicherten Lieblingszitate zum Revisieren und Teilen.',
+              trailing: quotes.isEmpty
+                  ? null
+                  : _ExportPdfButton(quotes: quotes),
             ),
             Container(height: 1, color: scheme.outline),
             Expanded(
@@ -218,6 +225,98 @@ Future<void> _showQuoteInsightSheet(BuildContext context, Quote quote) async {
       );
     },
   );
+}
+
+/// PDF-Export der Favoriten — Pro-Feature. Free-Nutzer werden zur Paywall
+/// geleitet statt den Export auszuführen; der Button selbst bleibt sichtbar,
+/// damit das Feature entdeckt werden kann.
+class _ExportPdfButton extends ConsumerStatefulWidget {
+  const _ExportPdfButton({required this.quotes});
+
+  final List<Quote> quotes;
+
+  @override
+  ConsumerState<_ExportPdfButton> createState() => _ExportPdfButtonState();
+}
+
+class _ExportPdfButtonState extends ConsumerState<_ExportPdfButton> {
+  bool _busy = false;
+
+  Future<void> _export() async {
+    setState(() => _busy = true);
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      await PdfExportService().exportFavorites(quotes: widget.quotes);
+    } catch (e) {
+      messenger.showSnackBar(
+        SnackBar(content: Text('PDF-Export fehlgeschlagen: $e')),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _busy = false);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isPro = ref.watch(isProProvider);
+
+    return InkWell(
+      onTap: _busy
+          ? null
+          : () => isPro ? _export() : context.push('/paywall'),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (_busy)
+              const SizedBox(
+                width: 14,
+                height: 14,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            else
+              const Icon(
+                Icons.picture_as_pdf_outlined,
+                size: 18,
+                color: AppColors.red,
+              ),
+            const SizedBox(width: 6),
+            Text(
+              'PDF',
+              style: GoogleFonts.ibmPlexSans(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: AppColors.red,
+                letterSpacing: 1.0,
+              ),
+            ),
+            if (!isPro) ...<Widget>[
+              const SizedBox(width: 6),
+              Container(
+                color: AppColors.red,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 2,
+                ),
+                child: Text(
+                  'PRO',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 8,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.redOnRed,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _FavoritesEmptyStateCard extends StatelessWidget {

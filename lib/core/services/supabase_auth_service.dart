@@ -11,6 +11,18 @@ class AuthUser {
   final String? displayName;
 }
 
+/// Ergebnis einer Registrierung.
+class SignUpResult {
+  const SignUpResult({required this.user, required this.needsEmailConfirmation});
+
+  final AuthUser user;
+
+  /// `true`, wenn Supabase eine Bestätigungs-E-Mail verschickt hat und noch
+  /// keine Session besteht. Die UI muss den Nutzer dann zum Postfach schicken
+  /// statt ihn als angemeldet zu behandeln.
+  final bool needsEmailConfirmation;
+}
+
 /// Service für Supabase Authentication (Singleton)
 class SupabaseAuthService {
   SupabaseAuthService._();
@@ -42,9 +54,11 @@ class SupabaseAuthService {
   bool get isAuthenticated => _client.auth.currentUser != null;
 
   /// Email/Passwort Registrierung
-  /// Hinweis: Wenn Email-Verifikation aktiviert ist, ist die Session null,
-  /// aber der Benutzer wird registriert und kann sich später anmelden.
-  Future<AuthUser> signUpWithEmail(String email, String password) async {
+  ///
+  /// Wenn in Supabase die E-Mail-Verifikation aktiv ist, wird der Benutzer
+  /// angelegt, aber es entsteht **keine** Session. Das Ergebnis unterscheidet
+  /// beide Fälle, damit die UI nicht fälschlich "angemeldet" signalisiert.
+  Future<SignUpResult> signUpWithEmail(String email, String password) async {
     try {
       final res = await _client.auth.signUp(
         email: email,
@@ -55,7 +69,10 @@ class SupabaseAuthService {
       if (user == null) {
         throw Exception('Benutzer konnte nicht registriert werden');
       }
-      return _mapToAuthUser(user)!;
+      return SignUpResult(
+        user: _mapToAuthUser(user)!,
+        needsEmailConfirmation: res.session == null,
+      );
     } on AuthException catch (e) {
       // Besseres Error-Handling für Auth-spezifische Fehler
       if (e.message.contains('already registered') ||

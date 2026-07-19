@@ -73,6 +73,34 @@
             android:enabled="false"
             android:exported="false"
             android:directBootAware="false" />
+
+        <!--
+            Receiver von flutter_local_notifications.
+
+            Das Plugin bringt in seinem eigenen Manifest nur Berechtigungen mit,
+            keine Receiver — die muss die App selbst deklarieren. Ohne sie setzt
+            `zonedSchedule` zwar einen Alarm im AlarmManager, aber es gibt kein
+            Ziel, an das er zugestellt werden könnte: der geplante Reminder
+            wurde deshalb nie ausgeliefert.
+        -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+            android:exported="false" />
+
+        <!--
+            Stellt geplante Reminder nach einem Neustart oder App-Update wieder
+            her. AlarmManager-Alarme überleben einen Reboot nicht.
+        -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

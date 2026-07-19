@@ -9,6 +9,8 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/constants/pro_launch_config.dart';
+import '../../core/providers/purchases_provider.dart';
 import '../../core/services/account_privacy_service.dart';
 import '../../core/providers/supabase_auth_provider.dart';
 import '../../core/services/supabase_sync_service.dart';
@@ -73,6 +75,10 @@ class AccountScreen extends ConsumerWidget {
                     context: context,
                     ref: ref,
                   ),
+                  if (kProLaunchEnabled) ...<Widget>[
+                    SizedBox(height: AppTheme.spacingXl),
+                    const _ProCard(),
+                  ],
                   SizedBox(height: AppTheme.spacingXl),
                   _PrivacyCard(context: context, ref: ref),
                   if (kDebugMode) ...<Widget>[
@@ -257,6 +263,100 @@ class _AuthCard extends StatelessWidget {
   }
 }
 
+class _ProCard extends ConsumerWidget {
+  const _ProCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scheme = Theme.of(context).colorScheme;
+    final isPro = ref.watch(isProProvider);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: scheme.surface,
+        border: Border.all(color: scheme.outline, width: 1),
+        borderRadius: BorderRadius.zero,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    color: AppColors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    isPro
+                        ? Icons.workspace_premium_rounded
+                        : Icons.workspace_premium_outlined,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'ZITATE APP PRO',
+                        style: GoogleFonts.ibmPlexSans(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.red,
+                          letterSpacing: 1.4,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        isPro ? 'Aktiv' : 'Nicht aktiv',
+                        style: GoogleFonts.ibmPlexSans(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: scheme.onSurface,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Container(height: 1, color: scheme.outline),
+            const SizedBox(height: 16),
+            Text(
+              isPro
+                  ? 'Dein Upgrade ist freigeschaltet: personalisierter Feed, kompletter Denkeratlas, Quiz ohne Tageslimit und PDF-Export der Favoriten.'
+                  : 'Personalisierter Zitate-Feed, kompletter Denkeratlas, Quiz ohne Tageslimit und PDF-Export der Favoriten.',
+              style: GoogleFonts.ibmPlexSans(
+                fontSize: 11,
+                color: scheme.onSurfaceVariant,
+                height: 1.6,
+              ),
+            ),
+            const SizedBox(height: 14),
+            SizedBox(
+              width: double.infinity,
+              child: _AccountActionButton(
+                label: isPro ? 'ABO VERWALTEN' : 'PRO FREISCHALTEN',
+                filled: !isPro,
+                icon: isPro ? Icons.settings_outlined : Icons.arrow_forward,
+                onTap: () => context.push('/paywall'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _PrivacyCard extends StatelessWidget {
   const _PrivacyCard({required this.context, required this.ref});
 
@@ -340,7 +440,41 @@ class _PrivacyCard extends StatelessWidget {
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
-                label: const Text('KONTO & LOKALE DATEN LÖSCHEN'),
+                label: const Text('LOKALE DATEN LÖSCHEN'),
+              ),
+            ),
+            const SizedBox(height: 12),
+            // Die Schaltfläche hieß zuvor "KONTO & LOKALE DATEN LÖSCHEN",
+            // löschte aber nie das Supabase-Konto. Die Beschriftung nennt
+            // jetzt, was wirklich passiert; für die Kontolöschung selbst gilt
+            // der dokumentierte Weg über den Anbieterkontakt.
+            Text(
+              'Damit werden Favoriten, Einstellungen und lokal gespeicherte '
+              'Inhalte auf diesem Gerät entfernt und du wirst abgemeldet. '
+              'Dein Konto selbst bleibt bestehen — die vollständige Löschung '
+              'des Kontos kannst du über die Kontaktangaben unter '
+              '„Rechtliches" anfordern.',
+              style: GoogleFonts.ibmPlexSans(
+                fontSize: 10.5,
+                color: scheme.onSurfaceVariant,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 8),
+            InkWell(
+              onTap: () => context.push('/legal'),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Text(
+                  'Rechtliches & Kontakt',
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.red,
+                    decoration: TextDecoration.underline,
+                    decorationColor: AppColors.red,
+                  ),
+                ),
               ),
             ),
           ],
@@ -539,9 +673,12 @@ Future<void> _confirmDeletePersonalData(
     context: context,
     builder: (dialogContext) {
       return AlertDialog(
-        title: const Text('Daten wirklich löschen?'),
+        title: const Text('Lokale Daten wirklich löschen?'),
         content: const Text(
-          'Damit werden lokale Einstellungen, Favoriten, gelesene Inhalte und Cloud-Favoriten entfernt. Danach wirst du abgemeldet.',
+          'Damit werden lokale Einstellungen, Favoriten, gelesene Inhalte und '
+          'Cloud-Favoriten entfernt. Danach wirst du abgemeldet.\n\n'
+          'Dein Konto bleibt bestehen und kann weiterhin zur Anmeldung '
+          'genutzt werden.',
         ),
         actions: <Widget>[
           TextButton(
@@ -578,7 +715,7 @@ Future<void> _confirmDeletePersonalData(
     }
 
     messenger.showSnackBar(
-      const SnackBar(content: Text('Nutzerdaten wurden gelöscht.')),
+      const SnackBar(content: Text('Lokale Nutzerdaten wurden gelöscht.')),
     );
   } catch (e) {
     messenger.showSnackBar(

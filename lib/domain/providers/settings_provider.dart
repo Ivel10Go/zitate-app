@@ -122,6 +122,11 @@ class SettingsController extends AsyncNotifier<SettingsState> {
       return;
     }
 
+    // Das Umlegen des Schalters ist der passende Moment, die Berechtigung
+    // anzufragen: der Nutzer hat sie gerade angefordert. Wurde sie zuvor
+    // abgelehnt, blieb der Schalter sonst an, ohne dass je etwas ankam.
+    await NotificationService.instance.requestPermission();
+
     await NotificationService.instance.scheduleDailyReminder(
       hour: state.requireValue.notificationHour,
       minute: state.requireValue.notificationMinute,

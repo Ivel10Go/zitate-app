@@ -107,15 +107,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
 
     final authController = ref.read(authControllerProvider.notifier);
-    final success = _isSignUp
-        ? await authController.signUp(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          )
-        : await authController.signIn(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          );
+    final bool success;
+    if (_isSignUp) {
+      final outcome = await authController.signUp(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+      success = outcome != SignUpOutcome.failed;
+    } else {
+      success = await authController.signIn(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+    }
 
     if (!mounted) {
       return;

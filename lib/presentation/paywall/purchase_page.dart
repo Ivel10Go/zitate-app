@@ -33,6 +33,7 @@ class _PurchasePageState extends ConsumerState<PurchasePage> {
     'Personalisierter Zitate-Feed',
     'Kompletter Denkeratlas mit Suche',
     'Zitat-Quiz ohne Tageslimit',
+    'PDF-Export deiner Favoriten',
   ];
 
   @override

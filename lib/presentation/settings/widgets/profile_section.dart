@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_colors.dart';
@@ -11,7 +12,6 @@ import '../../../domain/providers/repository_providers.dart';
 import '../../../data/models/user_profile.dart';
 import '../../../domain/providers/daily_content_provider.dart';
 import '../../../core/providers/supabase_auth_provider.dart';
-import '../../../core/services/supabase_auth_service.dart';
 import '../../../domain/providers/user_profile_provider.dart';
 
 class ProfileSection extends ConsumerWidget {
@@ -34,44 +34,22 @@ class ProfileSection extends ConsumerWidget {
       titleColor: AppColors.red,
       topAccentColor: AppColors.red,
       children: <Widget>[
+        // Konto-Verwaltung läuft ausschließlich über /account. Vorher gab es
+        // hier ein eigenes Auth-Bottom-Sheet ohne Google-Login, ohne
+        // Passwort-Reset und ohne Validierung — zwei Anmeldewege mit
+        // unterschiedlichem Funktionsumfang.
         Consumer(
           builder: (context, ref, _) {
             final authState = ref.watch(authControllerProvider);
             final isAuth = authState.whenData((u) => u != null).value ?? false;
             final email = authState.whenData((u) => u?.email).value;
-            if (isAuth) {
-              return _ProfileRow(
-                label: 'KONTO',
-                value: email ?? 'Angemeldet',
-                onTap: () async {
-                  // Quick sign out confirmation
-                  final doSignOut = await showDialog<bool>(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: const Text('Abmelden?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(ctx).pop(false),
-                          child: const Text('Abbrechen'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.of(ctx).pop(true),
-                          child: const Text('Abmelden'),
-                        ),
-                      ],
-                    ),
-                  );
-                  if (doSignOut == true) {
-                    await ref.read(authControllerProvider.notifier).signOut();
-                  }
-                },
-              );
-            }
 
             return _ProfileRow(
               label: 'KONTO',
-              value: 'Nicht angemeldet',
-              onTap: () => _showAuthSheet(context, ref),
+              value: isAuth
+                  ? (email ?? 'Angemeldet')
+                  : 'Nicht angemeldet — tippen zum Anmelden',
+              onTap: () => context.push('/account'),
             );
           },
         ),
@@ -156,118 +134,6 @@ class ProfileSection extends ConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Future<void> _showAuthSheet(BuildContext context, WidgetRef ref) async {
-    final scheme = Theme.of(context).colorScheme;
-    final emailCtrl = TextEditingController();
-    final passCtrl = TextEditingController();
-    var isLogin = true;
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: scheme.surface,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      builder: (BuildContext ctx) {
-        return StatefulBuilder(
-          builder: (ctx, setState) {
-            final authState = ref.watch(authControllerProvider);
-            final loading = authState.isLoading;
-            final messenger = ScaffoldMessenger.of(ctx);
-            return Padding(
-              padding: EdgeInsets.fromLTRB(
-                20,
-                20,
-                20,
-                MediaQuery.of(ctx).viewInsets.bottom + 24,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    isLogin ? 'ANMELDEN' : 'REGISTRIEREN',
-                    style: GoogleFonts.ibmPlexSans(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: scheme.primary,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  TextField(
-                    controller: emailCtrl,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(hintText: 'E-Mail'),
-                  ),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: passCtrl,
-                    obscureText: true,
-                    decoration: const InputDecoration(hintText: 'Passwort'),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: loading
-                          ? null
-                          : () async {
-                              final success = isLogin
-                                  ? await ref
-                                        .read(authControllerProvider.notifier)
-                                        .signIn(
-                                          email: emailCtrl.text.trim(),
-                                          password: passCtrl.text.trim(),
-                                        )
-                                  : await ref
-                                        .read(authControllerProvider.notifier)
-                                        .signUp(
-                                          email: emailCtrl.text.trim(),
-                                          password: passCtrl.text.trim(),
-                                        );
-
-                              if (!ctx.mounted) return;
-
-                              if (success) {
-                                Navigator.of(ctx).pop();
-                                return;
-                              }
-
-                              final authError = ref
-                                  .read(authControllerProvider)
-                                  .maybeWhen(
-                                    error: (e, _) => e,
-                                    orElse: () => null,
-                                  );
-                              messenger.showSnackBar(
-                                SnackBar(
-                                  content: Text(authErrorMessage(authError)),
-                                ),
-                              );
-                            },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: scheme.onSurface,
-                        foregroundColor: scheme.surface,
-                      ),
-                      child: Text(isLogin ? 'ANMELDEN' : 'REGISTRIEREN'),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  TextButton(
-                    onPressed: () => setState(() => isLogin = !isLogin),
-                    child: Text(
-                      isLogin
-                          ? 'Neu hier? Registrieren'
-                          : 'Bereits registriert? Anmelden',
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
     );
   }
 
