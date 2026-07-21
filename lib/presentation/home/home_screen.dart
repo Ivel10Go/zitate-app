@@ -12,6 +12,7 @@ import '../../core/theme/app_theme.dart';
 import '../../core/constants/pro_launch_config.dart';
 import '../../core/providers/purchases_provider.dart';
 import '../../core/utils/share_card_renderer.dart';
+import '../../data/models/quiz_session.dart';
 import '../../data/models/daily_content.dart';
 import '../../data/models/quote.dart';
 import '../../data/models/thinker_quote.dart';
@@ -49,6 +50,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   String? _lastWidgetSyncSignature;
   bool _widgetSyncInFlight = false;
   bool _widgetSyncNeedsRetry = false;
+
+  /// What the last Supabase profile sync wrote, so repeat emissions of the same
+  /// day for the same user do not re-issue an identical cloud write.
+  String? _lastSyncedQuoteDate;
+  String? _lastSyncedUserId;
 
   @override
   void initState() {
@@ -183,6 +189,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     final todayStr =
         '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
 
+    // This runs on every emission of dailyContentProvider — including each
+    // pull-to-refresh and every retry — and the payload is identical each time.
+    // One write per user per day is all the cloud profile needs.
+    if (_lastSyncedQuoteDate == todayStr && _lastSyncedUserId == userId) {
+      return;
+    }
+    _lastSyncedQuoteDate = todayStr;
+    _lastSyncedUserId = userId;
+
     unawaited(
       Future(() async {
         try {
@@ -206,6 +221,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     );
   }
 
+  /// Awaits the re-resolution rather than returning immediately, so the refresh
+  /// indicator stays up until there is actually something new to show.
+  ///
+  /// Both providers are invalidated: the carousel is fed by
+  /// `premiumDailyQuotesProvider`, so refreshing only `dailyContentProvider`
+  /// left the visible content untouched. Today's pick itself is cached per day
+  /// by design and will usually come back identical — the value here is
+  /// recovering from a transient error, not shuffling the quote.
+  Future<void> _refresh() async {
+    ref.invalidate(dailyContentProvider);
+    ref.invalidate(premiumDailyQuotesProvider);
+    await Future.wait<void>(<Future<void>>[
+      ref.read(dailyContentProvider.future).then((_) {}).catchError((_) {}),
+      ref.read(premiumDailyQuotesProvider.future).then((_) {}).catchError((_) {}),
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     final dailyContent = ref.watch(dailyContentProvider);
@@ -221,7 +253,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             ? const AppNavigationBar(selectedIndex: 0)
             : null,
         child: RefreshIndicator(
-          onRefresh: () async => ref.invalidate(dailyContentProvider),
+          onRefresh: _refresh,
           child: ListView(
             padding: EdgeInsets.zero,
             physics: const AlwaysScrollableScrollPhysics(
@@ -259,10 +291,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           quote: (quote) {
                             final fallbackCard = QuoteCard(
                               quote: quote,
-                              onShare: () => ShareCardRenderer().shareQuote(
-                                quote,
-                                context,
-                              ),
+                              onShare: () => ShareCardRenderer().shareQuote(quote),
                               onTap: () =>
                                   _showQuoteInsightSheet(context, quote),
                               onLongPress: () =>
@@ -358,7 +387,12 @@ class _ExploreSection extends StatelessWidget {
           Container(height: 1, color: scheme.outline),
           _ExploreLinkRow(
             label: 'ZITAT-QUIZ',
-            description: 'Erkennst du die Quelle? 10 Fragen täglich',
+            // Interpolated, not spelled out: a run can legitimately come up
+            // short on a heavily filtered pool, and the quiz screen already
+            // reports the real count.
+            description:
+                'Erkennst du die Quelle? Bis zu $kQuizQuestionCount Fragen '
+                'täglich',
             isProFeature: false,
             onTap: () => context.push('/quiz'),
           ),
@@ -538,7 +572,7 @@ class _MainQuoteScrollerState extends State<_MainQuoteScroller> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.96);
+    _pageController = PageController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         Future<void>.delayed(const Duration(seconds: 3), () {
@@ -553,6 +587,23 @@ class _MainQuoteScrollerState extends State<_MainQuoteScroller> {
   }
 
   @override
+  void didUpdateWidget(_MainQuoteScroller oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // The feed can shrink under a page the user is already on — narrowing the
+    // political lens or the interests re-resolves it to fewer quotes. The State
+    // (and its controller) survives that rebuild, so without this the PageView
+    // kept an out-of-range page: an empty viewport and no highlighted dot until
+    // the user scrolled back by hand.
+    if (widget.quotes.length != oldWidget.quotes.length &&
+        _currentPage >= widget.quotes.length) {
+      _currentPage = 0;
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(0);
+      }
+    }
+  }
+
+  @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
@@ -560,8 +611,20 @@ class _MainQuoteScrollerState extends State<_MainQuoteScroller> {
 
   @override
   Widget build(BuildContext context) {
+    // A single quote never needs the carousel chrome (hint, fixed height,
+    // dots) — render it exactly like the free daily card.
+    if (widget.quotes.length <= 1) {
+      final quote = widget.quotes.first;
+      return QuoteCard(
+        quote: quote,
+        onShare: () => ShareCardRenderer().shareQuote(quote),
+        onTap: () => widget.onQuoteTap(quote),
+        onLongPress: () => widget.onQuoteTap(quote),
+      );
+    }
+
     final media = MediaQuery.sizeOf(context);
-    final pageHeight = (media.height * 0.74).clamp(440.0, 620.0);
+    final pageHeight = (media.height * 0.72).clamp(420.0, 600.0);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -616,40 +679,15 @@ class _MainQuoteScrollerState extends State<_MainQuoteScroller> {
             },
             itemBuilder: (BuildContext context, int index) {
               final quote = widget.quotes[index];
-              return AnimatedBuilder(
-                animation: _pageController,
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.only(bottom: 20),
                 child: QuoteCard(
                   quote: quote,
-                  onShare: () => ShareCardRenderer().shareQuote(quote, context),
+                  onShare: () => ShareCardRenderer().shareQuote(quote),
                   onTap: () => widget.onQuoteTap(quote),
                   onLongPress: () => widget.onQuoteTap(quote),
                 ),
-                builder: (BuildContext context, Widget? child) {
-                  final page =
-                      _pageController.hasClients && _pageController.page != null
-                      ? _pageController.page!
-                      : _currentPage.toDouble();
-                  final distance = (page - index).abs();
-                  final scale = (1.0 - (distance * 0.08)).clamp(0.90, 1.0);
-                  final opacity = (1.0 - (distance * 0.24)).clamp(0.68, 1.0);
-
-                  return Center(
-                    child: Opacity(
-                      opacity: opacity,
-                      child: Transform.scale(
-                        scale: scale,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 2),
-                          child: SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: child,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
               );
             },
           ),
@@ -873,7 +911,7 @@ extension on _HomeScreenState {
                         child: _BroadsheetOutlineButton(
                           onPressed: () {
                             Navigator.of(sheetContext).pop();
-                            ShareCardRenderer().shareQuote(quote, context);
+                            ShareCardRenderer().shareQuote(quote);
                           },
                           label: 'TEILEN',
                         ),

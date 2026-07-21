@@ -5,12 +5,18 @@ import '../../../core/theme/app_colors.dart';
 import '../../../data/models/quote.dart';
 
 class QuestionCard extends StatelessWidget {
-  const QuestionCard({required this.quote, super.key});
+  const QuestionCard({required this.quote, this.hint, super.key});
 
   final Quote quote;
 
+  /// Era nudge on the easier questions. Null on advanced ones, where the card
+  /// shows the quote and nothing else.
+  final String? hint;
+
   @override
   Widget build(BuildContext context) {
+    final hintLabel = hint;
+
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: const BoxDecoration(
@@ -21,14 +27,37 @@ class QuestionCard extends StatelessWidget {
           bottom: BorderSide(color: AppColors.ink, width: 1),
         ),
       ),
-      child: Text(
-        '„${quote.textDe}“',
-        style: GoogleFonts.playfairDisplay(
-          fontSize: 24,
-          fontStyle: FontStyle.italic,
-          color: AppColors.ink,
-          height: 1.45,
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            '„${quote.textDe}“',
+            style: GoogleFonts.playfairDisplay(
+              fontSize: 24,
+              fontStyle: FontStyle.italic,
+              color: AppColors.ink,
+              height: 1.45,
+            ),
+          ),
+          if (hintLabel != null) ...<Widget>[
+            const SizedBox(height: 14),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.rule, width: 1),
+              ),
+              child: Text(
+                'HINWEIS · $hintLabel',
+                style: GoogleFonts.ibmPlexSans(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.inkLight,
+                  letterSpacing: 1.1,
+                ),
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }

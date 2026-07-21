@@ -204,7 +204,7 @@ Future<void> _showQuoteInsightSheet(BuildContext context, Quote quote) async {
                       child: _BroadsheetOutlineButton(
                         onPressed: () {
                           Navigator.of(sheetContext).pop();
-                          ShareCardRenderer().shareQuote(quote, context);
+                          ShareCardRenderer().shareQuote(quote);
                         },
                         label: 'TEILEN',
                       ),

@@ -54,6 +54,7 @@ class DailyContentResolver {
     required AppMode appMode,
     required UserProfile profile,
     required int count,
+    Set<String> excludeIds = const <String>{},
     DateTime? now,
   }) async {
     final allQuotes = await quoteRepository.watchAllQuotes().first;
@@ -77,27 +78,62 @@ class DailyContentResolver {
       return <Quote>[];
     }
 
-    // If no interests set, return random diverse quotes
-    if (profile.historicalInterests.isEmpty) {
-      final weighted = _personalization.getWeightedQuotes(candidates, profile);
-      if (weighted.isEmpty) {
-        return <Quote>[];
-      }
-      return weighted.take(count).toList(growable: false);
-    }
+    // Prefer quotes that were not shown recently. The full candidate pool stays
+    // available as a top-up so the feed is always filled to [count] even when
+    // the fresh pool is exhausted (e.g. narrow interests or a small scope).
+    final fresh = excludeIds.isEmpty
+        ? candidates
+        : candidates
+              .where((Quote quote) => !excludeIds.contains(quote.id))
+              .toList(growable: false);
+    final primaryPool = fresh.isEmpty ? candidates : fresh;
 
     final selected = <Quote>[];
     final seenIds = <String>{};
     final seenContentKeys = <String>{};
 
+    // Fills [selected] up to [count] from [pool], skipping already-picked
+    // quotes and duplicate content. Deterministic per day via [seedOffset].
+    void addFrom(List<Quote> pool, int seedOffset) {
+      if (selected.length >= count) {
+        return;
+      }
+      final weighted = _personalization.getWeightedQuotes(pool, profile);
+      if (weighted.isEmpty) {
+        return;
+      }
+      final shuffled = List<Quote>.from(weighted)
+        ..shuffle(Random(issueNumber + seedOffset));
+      for (final quote in shuffled) {
+        if (selected.length >= count) {
+          break;
+        }
+        final contentKey = _quoteContentKey(quote);
+        if (seenIds.add(quote.id) && seenContentKeys.add(contentKey)) {
+          selected.add(quote);
+        }
+      }
+    }
+
+    // Without interests, just pull diverse quotes (fresh pool first).
+    if (profile.historicalInterests.isEmpty) {
+      addFrom(primaryPool, 177);
+      addFrom(candidates, 178);
+      return selected.take(count).toList(growable: false);
+    }
+
+    // Interest-driven: one pick per interest from the fresh pool first.
     for (var i = 0; i < profile.historicalInterests.length; i++) {
+      if (selected.length >= count) {
+        break;
+      }
       final interest = profile.historicalInterests[i].trim().toLowerCase();
       if (interest.isEmpty) {
         continue;
       }
 
-      final interestCandidates = candidates
-          .where((quote) => _matchesInterest(quote, interest))
+      final interestCandidates = primaryPool
+          .where((Quote quote) => _matchesInterest(quote, interest))
           .toList();
       if (interestCandidates.isEmpty) {
         continue;
@@ -123,30 +159,11 @@ class DailyContentResolver {
       }
     }
 
-    if (selected.length >= count) {
-      return selected.take(count).toList();
-    }
+    // Top up to [count]: fresh pool first, then the full pool if still short.
+    addFrom(primaryPool, 177);
+    addFrom(candidates, 178);
 
-    final weighted = _personalization.getWeightedQuotes(candidates, profile);
-    if (weighted.isEmpty) {
-      return selected;
-    }
-
-    final shuffled = List<Quote>.from(weighted)
-      ..shuffle(Random(issueNumber + 177));
-
-    for (final quote in shuffled) {
-      final contentKey = _quoteContentKey(quote);
-      if (seenIds.add(quote.id) && seenContentKeys.add(contentKey)) {
-        selected.add(quote);
-      }
-
-      if (selected.length == count) {
-        break;
-      }
-    }
-
-    return selected;
+    return selected.take(count).toList(growable: false);
   }
 
   bool _matchesInterest(Quote quote, String interest) {

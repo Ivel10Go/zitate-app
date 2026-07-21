@@ -17,9 +17,16 @@ flutter pub get                 # install dependencies
 flutter analyze                 # static analysis (flutter_lints via analysis_options.yaml)
 flutter run                     # run on connected device/emulator
 flutter build appbundle         # release Android App Bundle
+flutter test                    # run the whole suite
+flutter test test/quiz_builder_test.dart              # one file
+flutter test --plain-name "a run never repeats a quote"  # one test by name
 ```
 
-There is no `test/` directory and no automated test suite in this repo currently — do not assume `flutter test` has coverage to run.
+`test/` holds two suites, both of which load the real `assets/thinkers_quotes.json` rather than fixtures — so they double as guards on the content asset:
+- `quote_database_integrity_test.dart` — asserts the asset against the defects that forced the July 2026 rebuild (template explanations, `ue`/`oe`/`ae` corruption, duplicate texts/ids). Run it after **any** edit to the quote asset.
+- `quiz_builder_test.dart` — exercises `QuizBuilder` against the shipped pool, so a change to the asset's difficulty labels or author spread can fail it legitimately.
+
+There is no widget or integration test coverage; most of `lib/` is untested.
 
 After changing any Drift table (`lib/data/database/tables.dart`) or DAO, regenerate the generated database code:
 ```bash
@@ -48,6 +55,8 @@ There is no CI pipeline (no `.github/workflows`).
 - `widgets/` (top-level) and `presentation/shared/` — cross-screen reusable widgets (`AppDecoratedScaffold`, `EditorialSectionTitle`, `AppCard`, `IconCircle`, `QuoteCard`, navigation bar, etc.). Prefer these over ad-hoc screen-local styling when a screen needs to match the rest of the app.
 - `core/` — cross-cutting concerns: `core/theme` (design system), `core/router` (go_router config), `core/bootstrap` (startup sequencing), `core/services` (notifications, purchases, Supabase sync/auth, crash reporting, widget sync, TTS, etc.), `core/providers`, `core/utils`, `core/constants`.
 
+Two provider directories exist and are *not* interchangeable — check both before assuming a provider is missing or duplicated. `core/providers/` holds the infrastructure-facing ones (`purchases_provider.dart` with `isProProvider`, `supabase_auth_provider.dart`, `test_auth_provider.dart`); `domain/providers/` holds the feature ones, including same-named files (`purchases_provider.dart` there only wires RevenueCat login/logout to auth state; `supabase_auth_provider.dart` there exposes `currentSupabaseUserProvider`).
+
 State management is Riverpod (`flutter_riverpod`) throughout — no other state management library is used. Routing is `go_router`, configured in `core/router/app_router.dart` with a `StatefulShellRoute.indexedStack` for the three bottom-nav tabs (home `/`, `/favorites`, `/settings`) wrapped in `HomeFavoritesShell`; other screens (`/detail/:id`, `/onboarding`, `/auth`, `/admin`, etc.) are plain top-level `GoRoute`s outside the shell.
 
 ### Startup sequence
@@ -65,7 +74,19 @@ Startup is intentionally split into three stages to keep perceived launch time l
 - Falls back to the first quote from the repository if resolution fails or returns nothing, so Home always has something to render.
 - Caches the resolved content afterward. Any change to caching keys/serialization must stay in sync with `_serializeDailyContent`/`_deserializeDailyContent`.
 
-`premiumDailyQuotesProvider` layers a personalized multi-quote feed on top for Pro users; Home falls back to the single daily quote if this errors or is loading.
+`premiumDailyQuotesProvider` layers a personalized multi-quote feed on top for Pro users (capped at `kDailyFeedQuoteCount`, a fixed number rather than one-per-interest — many interests produced an overloaded feed that also burned through the collection too fast); Home falls back to the single daily quote if this errors or is loading. `QuoteRotationStore` (`domain/services/quote_rotation_store.dart`) persists recently-surfaced feed IDs in `SharedPreferences` so the resolver can avoid repeats for several weeks; it is best-effort and degrades to "no history" on any failure.
+
+### Pro soft-launch kill switch
+
+`kProLaunchEnabled` in `core/constants/pro_launch_config.dart` is currently `false`, which means **the app ships fully free**: `isProProvider` (`core/providers/purchases_provider.dart`) returns `true` for every user, and every Pro badge and paywall entry point in Settings/Account/Home is compiled out via `if (kProLaunchEnabled)`. The whole RevenueCat integration, paywall screen, and gating logic stay intact behind it — flipping the flag to `true` re-enables paid Pro without rebuilding anything. So: when a Pro-gated feature (Denkeratlas, quiz without daily limit, personalized feed, PDF export) appears ungated at runtime, that is this flag, not a bug; and any new Pro-gated UI must respect the same flag or it will leak paywall hints into the free launch.
+
+### Quiz
+
+`QuizBuilder` (`domain/services/quiz_builder.dart`) is deliberately free of Riverpod and the database so its selection rules can be tested directly against the seed asset — keep it that way, and put any I/O in `quiz_provider.dart` instead. Non-obvious rules encoded there, all of them driven by properties of the actual quote pool (~200 authors over ~300 quotes, so most authors appear exactly once):
+- The asset uses two difficulty vocabularies (`easy`/`medium`/`hard` and `beginner`/`intermediate`/`advanced`); `_difficultyAliases` maps them onto three buckets. Without it ~80 quotes fall out of every bucket.
+- Questions are drawn 4/4/2 across the buckets and sorted easiest-first — a run ramps up, it is never shuffled.
+- Distractor authors are picked *further* away for easy questions and *closer* (contemporaries, shared themes) only for advanced ones. If the pool holds too few other authors, a question shows fewer options rather than padding or looping.
+- `quiz_provider.dart` feeds it two lists: `candidates` (distinct quotes) and `drawPool` (the same quotes weight-expanded by `PersonalizationService.getWeightedQuotes`, one entry per unit of weight). Anything reading `drawPool` must de-duplicate.
 
 ### Quote database — content rules
 
@@ -75,6 +96,8 @@ Startup is intentionally split into three stages to keep perceived launch time l
 2. **Every `explanation_short` / `explanation_long` must explain that specific quote** — its context, what it actually claims, why it matters, and where it is commonly misread. Never generate them from a template, and never let them describe the recommendation algorithm instead of the quote (the old data had explanations reading "strengthens neutral and centrist recommendations").
 
 Adding quotes means writing them by hand. There is no script for this, and a script is exactly how the database got ruined.
+
+`test/quote_database_integrity_test.dart` enforces what is mechanically checkable (template-explanation fingerprints, umlaut corruption, duplicate texts and ids). Rule 1 — authenticity — is *not* machine-checkable and the test says so explicitly: a fabricated quote is indistinguishable from a real one by any rule, so it remains a review obligation. A green test run is not evidence that a new quote is real.
 
 ### Design system
 
