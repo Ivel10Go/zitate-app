@@ -3,47 +3,85 @@
     android:id="@+id/quote_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDE8DF"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:background="@drawable/widget_frame"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="28dp"
-        android:layout_height="4dp"
-        android:background="#C41E1E" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="#C41E1E" />
-
-    <TextView
-        android:id="@+id/quote_text_italic"
+    <!-- Header band: brand + date -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="serif"
-        android:textColor="#1A1A1A"
-        android:textSize="14sp"
-        android:textStyle="italic" />
+        android:background="#C41E1E"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
 
-    <TextView
-        android:id="@+id/fact_text_normal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="serif"
-        android:textColor="#1A1A1A"
-        android:textSize="14sp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/widget_brand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:letterSpacing="0.12"
+            android:maxLines="1"
+            android:text="ZITATATLAS"
+            android:textColor="#FFFFFF"
+            android:textSize="8sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/quote_author"
+        <TextView
+            android:id="@+id/widget_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="#FBEDED"
+            android:textSize="8sp" />
+    </LinearLayout>
+
+    <!-- Body: quote + author -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="#C41E1E"
-        android:textSize="10sp"
-        android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/quote_text_italic"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="serif"
+            android:lineSpacingMultiplier="1.08"
+            android:textColor="#1A1A1A"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/fact_text_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:textColor="#1A1A1A"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/quote_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:fontFamily="serif"
+            android:maxLines="1"
+            android:textColor="#C41E1E"
+            android:textSize="10sp"
+            android:textStyle="italic" />
+    </LinearLayout>
 </LinearLayout>
