@@ -269,7 +269,7 @@ class SettingsScreen extends ConsumerWidget {
                         title: 'RECHTLICHES',
                         children: <Widget>[
                           Text(
-                            'Datenschutz, Haftung und Urheberhinweise einsehen und die Absturzdiagnose bewusst aktivieren.',
+                            'Impressum, Datenschutz, Haftung und Urheberhinweise einsehen und die Absturzdiagnose bewusst aktivieren.',
                             style: GoogleFonts.ibmPlexSans(
                               fontSize: 11,
                               color: AppColors.inkLight,
@@ -283,6 +283,15 @@ class SettingsScreen extends ConsumerWidget {
                               label: 'DATENSCHUTZ & RECHTLICHES',
                               filled: false,
                               onTap: () => context.push('/legal'),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            width: double.infinity,
+                            child: _SettingsActionButton(
+                              label: 'IMPRESSUM',
+                              filled: false,
+                              onTap: () => context.push('/impressum'),
                             ),
                           ),
                           const SizedBox(height: 14),
