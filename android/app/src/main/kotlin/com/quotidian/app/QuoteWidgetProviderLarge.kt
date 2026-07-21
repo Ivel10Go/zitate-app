@@ -10,6 +10,9 @@ import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import com.quotidian.app.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class QuoteWidgetProviderLarge : AppWidgetProvider() {
   override fun onReceive(context: Context, intent: Intent) {
@@ -73,17 +76,29 @@ class QuoteWidgetProviderLarge : AppWidgetProvider() {
           "fact" -> "Geschichte"
           else -> storedAuthor
         }
+        val brand = prefs.getString("widget_header", "ZITATATLAS")?.takeIf { it.isNotBlank() }
+          ?: "ZITATATLAS"
+        val dateLabel = SimpleDateFormat("d. MMMM yyyy", Locale.GERMAN).format(Date())
         val layout = selectLayout(appWidgetManager, appWidgetId)
         Log.d(LOG_TAG, "Selected layout: ${layoutName(layout)} for large widget $appWidgetId")
 
         val views = RemoteViews(context.packageName, layout)
 
-        // Only show quote and author.
+        // Show quote, author, brand and date.
         try {
-          views.setTextViewText(R.id.quote_author, quoteAuthor)
+          val authorDisplay = if (quoteAuthor.isNotBlank()) "— $quoteAuthor" else ""
+          views.setTextViewText(R.id.quote_author, authorDisplay)
           Log.d(LOG_TAG, "✓ Set author")
         } catch (e: Exception) {
           Log.w(LOG_TAG, "Failed to set author: ${e.message}")
+        }
+
+        try {
+          views.setTextViewText(R.id.widget_brand, brand)
+          views.setTextViewText(R.id.widget_date, dateLabel)
+          Log.d(LOG_TAG, "✓ Set brand and date")
+        } catch (e: Exception) {
+          Log.w(LOG_TAG, "Failed to set brand/date: ${e.message}")
         }
 
         try {
