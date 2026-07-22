@@ -18,13 +18,10 @@ import '../../domain/providers/settings_provider.dart';
 import '../../domain/providers/user_profile_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
-import '../../widgets/app_navigation_bar.dart';
 import '../loading/app_loading_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
-  const SettingsScreen({this.showBottomNavigationBar = true, super.key});
-
-  final bool showBottomNavigationBar;
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,9 +34,6 @@ class SettingsScreen extends ConsumerWidget {
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: showBottomNavigationBar
-            ? const AppNavigationBar(selectedIndex: 2)
-            : null,
         child: Column(
           children: <Widget>[
             EditorialSectionTitle(

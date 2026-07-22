@@ -54,7 +54,7 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
                 name: 'home',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                   key: state.pageKey,
-                  child: const HomeScreen(showBottomNavigationBar: false),
+                  child: const HomeScreen(),
                 ),
               ),
               GoRoute(
@@ -95,7 +95,7 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
                 name: 'favorites',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                   key: state.pageKey,
-                  child: const FavoritesScreen(showBottomNavigationBar: false),
+                  child: const FavoritesScreen(),
                 ),
               ),
             ],
@@ -107,7 +107,7 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
                 name: 'settings',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                   key: state.pageKey,
-                  child: const SettingsScreen(showBottomNavigationBar: false),
+                  child: const SettingsScreen(),
                 ),
               ),
               GoRoute(
