@@ -7153,5 +7153,621 @@
       "seneca_004",
       "pascal_002"
     ]
+  },
+  {
+    "id": "las_casas_001",
+    "author": "Bartolomé de las Casas",
+    "author_type": "theologian",
+    "text_de": "Alle Völker der Welt sind Menschen.",
+    "text_original": "Todas las naciones del mundo son hombres.",
+    "source": "Historia de las Indias",
+    "year": 1561,
+    "chapter": "Buch II",
+    "category": [
+      "Menschenbild",
+      "Rechte",
+      "Kolonialismus"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_bartolome_de_las_casas",
+    "explanation_short": "Ein Dominikaner, der die Eroberung Amerikas selbst miterlebt hat, setzt einen einzigen Satz gegen die gesamte koloniale Rechtfertigungsliteratur.",
+    "explanation_long": "Las Casas kam 1502 als Kolonist in die Karibik, besaß selbst Zwangsarbeiter und wurde erst nach Jahren zum schärfsten Kritiker der Eroberung – als Priester, später als Bischof von Chiapas. Der Satz stammt aus seiner großen, zu Lebzeiten unveröffentlichten „Historia de las Indias“ und richtet sich gegen die damals ernsthaft vertretene These, die Bewohner Amerikas seien von Natur aus zur Knechtschaft bestimmt. In der berühmten Disputation von Valladolid (1550/51) verteidigte Las Casas gegen den Gelehrten Sepúlveda genau diese Position: Es gibt keine geborenen Sklaven, alle Völker besitzen Vernunft und Kultur. Zur ehrlichen Bilanz gehört, dass Las Casas zeitweise vorschlug, die indigene Bevölkerung durch versklavte Afrikaner zu entlasten – ein Vorschlag, den er später ausdrücklich und bitter bereute und in der „Historia“ selbst als Unrecht benannte.",
+    "related_ids": [
+      "cesaire_001",
+      "equiano_001"
+    ]
+  },
+  {
+    "id": "equiano_001",
+    "author": "Olaudah Equiano",
+    "author_type": "writer",
+    "text_de": "O ihr Christen nur dem Namen nach! Könnte ein Afrikaner euch nicht fragen: Habt ihr das von eurem Gott gelernt, der euch sagt: Tut allen Menschen so, wie sie euch tun sollen?",
+    "text_original": "O, ye nominal Christians! might not an African ask you, learned you this from your God, who says unto you, Do unto all men as you would men should do unto you?",
+    "source": "The Interesting Narrative of the Life of Olaudah Equiano",
+    "year": 1789,
+    "chapter": "Kapitel 2",
+    "category": [
+      "Religion",
+      "Ethik",
+      "Kolonialismus",
+      "Rechte"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_olaudah_equiano",
+    "explanation_short": "Ein ehemals Versklavter hält den Sklavenhändlern ihre eigene Goldene Regel vor – der Satz steht mitten in seiner Schilderung eines Sklavenmarkts.",
+    "explanation_long": "Equiano wurde als Kind aus dem Gebiet des heutigen Nigeria verschleppt, überlebte die Überfahrt über den Atlantik und kaufte sich 1766 selbst frei. Seine 1789 in London erschienene Autobiografie wurde ein Bestseller und eines der wirksamsten Texte der britischen Abolitionsbewegung. Der Ausruf steht am Ende des zweiten Kapitels, unmittelbar nachdem Equiano beschrieben hat, wie auf dem Sklavenmarkt von Barbados Familien getrennt und Verwandte in verschiedene Lose verkauft werden. Die rhetorische Wucht liegt darin, dass er nicht um Mitleid bittet, sondern die christliche Selbstbeschreibung der Täter beim Wort nimmt: Wer die Goldene Regel predigt und Menschen verkauft, widerlegt sich selbst. Das Buch erlebte zu Equianos Lebzeiten neun Auflagen und trug mit dazu bei, dass Großbritannien 1807 den Sklavenhandel verbot.",
+    "related_ids": [
+      "las_casas_001",
+      "truth_001"
+    ]
+  },
+  {
+    "id": "nkrumah_002",
+    "author": "Kwame Nkrumah",
+    "author_type": "politician",
+    "text_de": "Für die, die ihn ausüben, bedeutet Neokolonialismus Macht ohne Verantwortung – und für die, die unter ihm leiden, Ausbeutung ohne Wiedergutmachung.",
+    "text_original": "For those who practise it, it means power without responsibility and for those who suffer from it, it means exploitation without redress.",
+    "source": "Neo-Colonialism: The Last Stage of Imperialism",
+    "year": 1965,
+    "chapter": "Einleitung",
+    "category": [
+      "Politik",
+      "Kolonialismus",
+      "Ökonomie",
+      "Kritik"
+    ],
+    "difficulty": "advanced",
+    "series": "person_kwame_nkrumah",
+    "explanation_short": "Ghanas erster Präsident beschreibt, wie Kolonialherrschaft nach der Unabhängigkeit weiterlebt: als wirtschaftliche Kontrolle ohne sichtbaren Herrscher.",
+    "explanation_long": "Nkrumah hatte Ghana 1957 als erstes Land Subsahara-Afrikas in die Unabhängigkeit geführt. Acht Jahre später zog er in diesem Buch eine ernüchterte Bilanz: Die Flaggen haben gewechselt, aber Kapital, Rohstoffpreise und Kreditbedingungen werden weiter von außen bestimmt. Ein Staat könne formal souverän sein, während seine Wirtschaftspolitik faktisch anderswo entschieden wird – das nennt er Neokolonialismus, und der zitierte Satz benennt dessen doppelte Asymmetrie: Macht ohne Rechenschaft auf der einen, Schaden ohne Klageweg auf der anderen Seite. Der Buchtitel spielt polemisch auf Lenins „Der Imperialismus als höchstes Stadium des Kapitalismus“ an. Die US-Regierung protestierte offiziell gegen das Buch; wenige Monate nach Erscheinen wurde Nkrumah 1966 durch einen Militärputsch gestürzt.",
+    "related_ids": [
+      "nkrumah_001",
+      "galeano_001"
+    ]
+  },
+  {
+    "id": "galeano_001",
+    "author": "Eduardo Galeano",
+    "author_type": "writer",
+    "text_de": "Die internationale Arbeitsteilung besteht darin, dass sich die einen Länder aufs Gewinnen spezialisieren und die anderen aufs Verlieren.",
+    "text_original": "La división internacional del trabajo consiste en que unos países se especializan en ganar y otros en perder.",
+    "source": "Die offenen Adern Lateinamerikas",
+    "year": 1971,
+    "chapter": "Einleitung",
+    "category": [
+      "Ökonomie",
+      "Kolonialismus",
+      "Geschichte",
+      "Kritik"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_eduardo_galeano",
+    "explanation_short": "Der erste Satz eines Buches, das die Wirtschaftsgeschichte Lateinamerikas als fünfhundertjährige Ausplünderung erzählt.",
+    "explanation_long": "Mit diesem Satz beginnt Galeanos berühmtestes Buch. Es erzählt die Geschichte Lateinamerikas entlang seiner Exportgüter – dem Silber von Potosí, Zucker, Kaffee, Kautschuk, Erdöl – und liest sie als eine Kontinuität: Die Region liefert Rohstoffe, der Gewinn entsteht anderswo. „Arbeitsteilung“, eigentlich ein neutraler Begriff der Ökonomie, wird hier ironisch gewendet: Die Rollen in diesem Spiel sind historisch verteilt worden, nicht frei gewählt. Unter den Militärdiktaturen Uruguays, Argentiniens und Chiles war das Buch verboten; 2009 wurde es weltberühmt, als Hugo Chávez dem US-Präsidenten Obama ein Exemplar schenkte. Zur Wahrheit gehört auch Galeanos eigene Distanzierung: 2014 sagte er auf einer Buchmesse, er könne das Buch heute nicht mehr lesen – er habe damals zu wenig von Ökonomie verstanden und in einer Sprache geschrieben, die ihm inzwischen fremd sei. Die Debatte um das Buch ist damit selbst ein Stück Ideengeschichte.",
+    "related_ids": [
+      "nkrumah_002",
+      "cesaire_001"
+    ]
+  },
+  {
+    "id": "ho_chi_minh_001",
+    "author": "Hồ Chí Minh",
+    "author_type": "politician",
+    "text_de": "Nichts ist kostbarer als Unabhängigkeit und Freiheit.",
+    "text_original": "Không có gì quý hơn độc lập, tự do.",
+    "source": "Radioansprache an das vietnamesische Volk",
+    "year": 1966,
+    "chapter": "17. Juli 1966",
+    "category": [
+      "Politik",
+      "Freiheit",
+      "Kolonialismus",
+      "Krieg"
+    ],
+    "difficulty": "beginner",
+    "series": "person_ho_chi_minh",
+    "explanation_short": "Der Satz, der zum Staatsmotto Vietnams wurde – gesprochen auf dem Höhepunkt der amerikanischen Bombardierung des Nordens.",
+    "explanation_long": "Hồ Chí Minh sprach diesen Satz in einer Radioansprache im Juli 1966, kurz nachdem die USA ihre Luftangriffe erstmals auf die Räume Hanoi und Haiphong ausgeweitet hatten. Er steht in einer langen antikolonialen Biografie: 1919 hatte Hồ bei der Versailler Friedenskonferenz vergeblich eine Petition für die Rechte der Vietnamesen eingereicht, 1945 zitierte er in Vietnams Unabhängigkeitserklärung wörtlich die amerikanische. Der Satz wurde zur offiziellen Losung des Landes und steht bis heute auf Dokumenten und Denkmälern. Beim Lesen lohnt Genauigkeit: „Freiheit“ meint hier zuerst die kollektive Selbstbestimmung der Nation gegenüber Fremdherrschaft – nicht die individuellen Bürgerfreiheiten, die im real existierenden Einparteienstaat, den Hồ aufbaute, gerade nicht garantiert waren. Dass ein Satz beides zugleich sein kann, antikoloniale Parole und Herrschaftslegitimation, macht ihn zu einem lehrreichen Fall politischer Sprache.",
+    "related_ids": [
+      "fanon_001",
+      "nkrumah_001"
+    ]
+  },
+  {
+    "id": "saint_just_001",
+    "author": "Louis Antoine de Saint-Just",
+    "author_type": "politician",
+    "text_de": "Wer eine Revolution nur zur Hälfte macht, hat sich lediglich sein eigenes Grab geschaufelt.",
+    "text_original": "Ceux qui font des révolutions à moitié n'ont fait que se creuser un tombeau.",
+    "source": "Bericht an den Nationalkonvent über die Inhaftierten",
+    "year": 1794,
+    "chapter": "8. Ventôse des Jahres II (26. Februar 1794)",
+    "category": [
+      "Revolution",
+      "Politik",
+      "Geschichte"
+    ],
+    "difficulty": "advanced",
+    "series": "person_louis_antoine_de_saint_just",
+    "explanation_short": "Die Logik der Radikalisierung in einem Satz – ausgesprochen von einem Mann, der fünf Monate später selbst auf dem Schafott stand.",
+    "explanation_long": "Saint-Just war mit Mitte zwanzig das jüngste Mitglied des Wohlfahrtsausschusses und neben Robespierre das Gesicht der Terreur. Der Satz stammt aus dem Bericht, mit dem er im Februar 1794 die sogenannten Ventôse-Dekrete begründete: Das Eigentum von Verdächtigen und Emigranten sollte beschlagnahmt und an bedürftige Patrioten verteilt werden. Die Logik dahinter: Wer die Feinde der Revolution schont, lässt ihnen die Mittel zur Rache – Halbheit sei deshalb tödlicher als Kühnheit. Die Geschichte hat den Satz doppelt kommentiert: Im Juli 1794 wurde Saint-Just gemeinsam mit Robespierre gestürzt und guillotiniert – nicht weil die Revolution zu halb, sondern weil ihr Terror unerträglich geworden war. Seither wird der Satz in beide Richtungen zitiert: von Revolutionären als Mahnung zur Konsequenz, von ihren Kritikern als Musterbeispiel jener Eskalationslogik, die Revolutionen ihre eigenen Kinder fressen lässt.",
+    "related_ids": [
+      "buechner_001",
+      "ibarruri_001"
+    ]
+  },
+  {
+    "id": "ibarruri_001",
+    "author": "Dolores Ibárruri",
+    "author_type": "politician",
+    "text_de": "Es ist besser, stehend zu sterben, als kniend zu leben.",
+    "text_original": "Il vaut mieux mourir debout que de vivre à genoux !",
+    "source": "Rede in Paris für die Spanische Republik",
+    "year": 1936,
+    "chapter": "3. September 1936",
+    "category": [
+      "Politik",
+      "Krieg",
+      "Revolution",
+      "Freiheit"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_dolores_ibarruri",
+    "explanation_short": "Der Schlachtruf der spanischen Republik gegen Franco – gesprochen von „La Pasionaria“ vor zehntausenden Menschen in Paris.",
+    "explanation_long": "Wenige Wochen nach Francos Putsch gegen die Spanische Republik reiste die kommunistische Abgeordnete Dolores Ibárruri, genannt „La Pasionaria“, nach Paris, um für internationale Unterstützung zu werben. Vor einer riesigen Kundgebung sprach sie den Satz auf Französisch – er wurde neben ihrem „¡No pasarán!“ vom Juli 1936 zur bekanntesten Losung des republikanischen Spanien. Zur genauen Geschichte gehört, dass die Formel älter ist: Sie wird schon dem mexikanischen Revolutionär Emiliano Zapata zugeschrieben, ohne dass sich dort ein sauberer Beleg findet. Gesichert ist Ibárruris öffentlicher Gebrauch 1936, durch den der Satz nach Europa kam. Ihre eigene Biografie blieb widersprüchlich: Nach der Niederlage der Republik ging sie ins Moskauer Exil und verteidigte dort jahrzehntelang treu die stalinistische Linie – der Satz überlebte seine Sprecherin als Parole aller möglichen Widerstandsbewegungen.",
+    "related_ids": [
+      "sankara_001",
+      "saint_just_001"
+    ]
+  },
+  {
+    "id": "kennedy_001",
+    "author": "John F. Kennedy",
+    "author_type": "politician",
+    "text_de": "Wer friedliche Revolution unmöglich macht, macht gewaltsame Revolution unvermeidlich.",
+    "text_original": "Those who make peaceful revolution impossible will make violent revolution inevitable.",
+    "source": "Rede zum ersten Jahrestag der Allianz für den Fortschritt",
+    "year": 1962,
+    "chapter": "Weißes Haus, 13. März 1962",
+    "category": [
+      "Politik",
+      "Revolution",
+      "Demokratie",
+      "Gesellschaft"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_john_f_kennedy",
+    "explanation_short": "Kennedys Warnung an die Eliten Lateinamerikas: Wer Reformen blockiert, bereitet den Umsturz vor, den er verhindern will.",
+    "explanation_long": "Kennedy sprach vor den Botschaftern der lateinamerikanischen Staaten zum Jahrestag der „Alianza para el Progreso“, seines großen Entwicklungsprogramms für die Region. Der Kontext ist der Kalte Krieg: Drei Jahre nach der kubanischen Revolution wollte Washington verhindern, dass sich Castros Beispiel wiederholt – und Kennedys Rezept dagegen waren Land-, Steuer- und Bildungsreformen. Der berühmte Satz ist also keine Sympathieerklärung für Revolutionen, sondern ihr Gegenprogramm: Eliten, die jede friedliche Veränderung ersticken, treiben ihre Bevölkerung den Radikalen zu. Wer das Zitat losgelöst liest, übersieht leicht diese Stoßrichtung – es ist ein Argument für rechtzeitige Reform, vorgetragen von einem Präsidenten, dessen Regierung zugleich verdeckte Operationen gegen Kuba führte. Gerade diese Spannung macht den Satz bis heute zitierfähig, quer durch alle politischen Lager.",
+    "related_ids": [
+      "mlk_001",
+      "brandt_001"
+    ]
+  },
+  {
+    "id": "kennedy_002",
+    "author": "John F. Kennedy",
+    "author_type": "politician",
+    "text_de": "Die Menschheit muss dem Krieg ein Ende setzen – oder der Krieg setzt der Menschheit ein Ende.",
+    "text_original": "Mankind must put an end to war — or war will put an end to mankind.",
+    "source": "Rede vor der UN-Generalversammlung",
+    "year": 1961,
+    "chapter": "New York, 25. September 1961",
+    "category": [
+      "Krieg",
+      "Politik",
+      "Verantwortung"
+    ],
+    "difficulty": "beginner",
+    "series": "person_john_f_kennedy",
+    "explanation_short": "Gesprochen wenige Wochen nach dem Mauerbau, mitten im Wettrüsten: Im Atomzeitalter ist Krieg keine Fortsetzung der Politik mehr, sondern ihr Ende.",
+    "explanation_long": "Im Herbst 1961 war die Welt der Katastrophe so nah wie selten: Im August war die Berliner Mauer gebaut worden, die Sowjetunion hatte gerade ihre Atomtests wieder aufgenommen. Vor der UN-Vollversammlung schlug Kennedy ein Abrüstungsprogramm vor und prägte in derselben Rede das Bild vom „nuklearen Damoklesschwert“, unter dem jeder Mensch lebe. Der zitierte Satz verdankt seine Wirkung der Umkehrfigur: Das Objekt wird zum Subjekt, der Krieg handelt zurück. Sachlich steckt darin ein Bruch mit der klassischen Kriegstheorie von Clausewitz – ein Atomkrieg kann kein „Mittel der Politik“ mehr sein, weil er den Zweck gleich mit vernichtet. Ein Jahr später bestätigte die Kubakrise die Warnung beinahe; aus ihr gingen 1963 der „heiße Draht“ und das erste Teststoppabkommen hervor.",
+    "related_ids": [
+      "kant_004",
+      "suttner_001"
+    ]
+  },
+  {
+    "id": "voltaire_003",
+    "author": "Voltaire",
+    "author_type": "philosopher",
+    "text_de": "Die Arbeit hält drei große Übel von uns fern: die Langeweile, das Laster und die Not.",
+    "text_original": "Le travail éloigne de nous trois grands maux : l'ennui, le vice et le besoin.",
+    "source": "Candide oder der Optimismus",
+    "year": 1759,
+    "chapter": "Kapitel 30",
+    "category": [
+      "Arbeit",
+      "Alltag",
+      "Ethik"
+    ],
+    "difficulty": "beginner",
+    "series": "person_voltaire",
+    "explanation_short": "Der Satz des alten türkischen Bauern am Ende des „Candide“, aus dem die berühmteste Schlussfolgerung des Buches folgt: den eigenen Garten bestellen.",
+    "explanation_long": "Am Ende von Voltaires Roman trifft der vielgeprüfte Candide bei Konstantinopel einen alten Bauern, der von den Palastintrigen der Hauptstadt nichts wissen will und mit seinen Kindern zwanzig Morgen Land bewirtschaftet. Der Satz über die drei Übel ist dessen ganze Lebensphilosophie – und Candide macht sie sich zu eigen: „Wir müssen unseren Garten bestellen.“ Die Pointe richtet sich gegen die Leibniz-Karikatur Pangloss, der noch im Schlusskapitel beweisen will, dass alles in der besten aller Welten zusammenhängt. Voltaires Antwort auf die Theodizee-Spekulation ist keine Gegentheorie, sondern eine Praxis: konkrete, nützliche Tätigkeit statt endlosen Räsonierens. Bemerkenswert ist, wem Voltaire den Satz in den Mund legt – nicht einem Philosophen, sondern einem muslimischen Bauern, der über Politik gar nicht erst diskutiert. Arbeit erscheint hier nicht als Fron, sondern als Schutz der Seele.",
+    "related_ids": [
+      "voltaire_001",
+      "voltaire_002"
+    ]
+  },
+  {
+    "id": "brecht_004",
+    "author": "Bertolt Brecht",
+    "author_type": "playwright",
+    "text_de": "Wer baute das siebentorige Theben? In den Büchern stehen die Namen von Königen. Haben die Könige die Felsbrocken herbeigeschleppt?",
+    "text_original": "Wer baute das siebentorige Theben? In den Büchern stehen die Namen von Königen. Haben die Könige die Felsbrocken herbeigeschleppt?",
+    "source": "Fragen eines lesenden Arbeiters",
+    "year": 1935,
+    "chapter": "Svendborger Gedichte (1939)",
+    "category": [
+      "Arbeit",
+      "Geschichte",
+      "Kritik",
+      "Kunst"
+    ],
+    "difficulty": "beginner",
+    "series": "person_bertolt_brecht",
+    "explanation_short": "Das ganze Gedicht besteht aus Fragen – und jede einzelne holt die Namenlosen in die Geschichtsschreibung zurück, die die Bücher weggelassen haben.",
+    "explanation_long": "Brecht schrieb das Gedicht 1935 im dänischen Exil; es erschien 1939 in den „Svendborger Gedichten“. Die Form ist das Programm: Ein Arbeiter liest Geschichtsbücher und stellt naive, unabweisbare Fragen – wer baute, wer kochte, wer bezahlte? „Das große Rom ist voll von Triumphbögen. Wer errichtete sie?“, „Jede Seite ein Sieg. Wer kochte den Siegesschmaus?“ Das Gedicht behauptet nichts und belehrt nicht; es zeigt nur, dass die übliche Geschichtserzählung eine Auslassung ist, sobald man nach den Händen fragt statt nach den Namen. Damit hat Brecht poetisch vorweggenommen, was die Geschichtswissenschaft Jahrzehnte später „Geschichte von unten“ nannte. Die Schlusszeilen – „So viele Berichte. So viele Fragen.“ – lassen die Rechnung bewusst offen: Beantworten muss sie der Leser.",
+    "related_ids": [
+      "brecht_001",
+      "achebe_001"
+    ]
+  },
+  {
+    "id": "locke_002",
+    "author": "John Locke",
+    "author_type": "philosopher",
+    "text_de": "Jeder Mensch hat ein Eigentum an seiner eigenen Person. Auf diese hat niemand ein Recht außer ihm selbst. Die Arbeit seines Körpers und das Werk seiner Hände sind, so können wir sagen, im eigentlichen Sinne sein.",
+    "text_original": "Every man has a property in his own person: this no body has any right to but himself. The labour of his body, and the work of his hands, we may say, are properly his.",
+    "source": "Zwei Abhandlungen über die Regierung",
+    "year": 1689,
+    "chapter": "II. Abhandlung, § 27",
+    "category": [
+      "Arbeit",
+      "Eigentum",
+      "Freiheit",
+      "Rechte"
+    ],
+    "difficulty": "advanced",
+    "series": "person_john_locke",
+    "explanation_short": "Der Gründungssatz der liberalen Eigentumstheorie: Eigentum entsteht nicht durch Verleihung von oben, sondern durch die eigene Arbeit.",
+    "explanation_long": "Mit diesem Paragraphen begründet Locke, wie aus der Welt, die Gott allen gemeinsam gegeben hat, rechtmäßiges Privateigentum werden kann: Wer der Natur etwas durch seine Arbeit abringt, „mischt“ ihr etwas Eigenes bei und macht es dadurch zu seinem. Der Ausgangspunkt ist das Eigentum an der eigenen Person – ein Gedanke mit gewaltiger Wirkungsgeschichte in alle Richtungen: Der Liberalismus baute darauf seine Eigentums- und Freiheitslehre, Nozick im 20. Jahrhundert seine libertäre Selbsteigentums-These, und auch die Arbeitswertlehre, die Marx gegen den Kapitalismus wendete, hat hier eine ihrer Wurzeln. Zur vollständigen Einordnung gehört, dass Locke selbst die Reichweite begrenzte („so viel, wie man nutzen kann, bevor es verdirbt“) – und dass sein Argument historisch auch dazu diente, die Aneignung „unbebauten“ Landes in Amerika zu rechtfertigen, an dessen Kolonisierung Locke als Beamter beteiligt war. Der Satz ist also Fundament und Streitfall zugleich.",
+    "related_ids": [
+      "locke_001",
+      "nozick_001"
+    ]
+  },
+  {
+    "id": "lassalle_001",
+    "author": "Ferdinand Lassalle",
+    "author_type": "politician",
+    "text_de": "Verfassungsfragen sind ursprünglich nicht Rechtsfragen, sondern Machtfragen.",
+    "text_original": "Verfassungsfragen sind ursprünglich nicht Rechtsfragen, sondern Machtfragen.",
+    "source": "Über Verfassungswesen",
+    "year": 1862,
+    "chapter": "Vortrag in Berlin",
+    "category": [
+      "Politik",
+      "Staat",
+      "Geschichte",
+      "Kritik"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_ferdinand_lassalle",
+    "explanation_short": "Mitten im preußischen Verfassungskonflikt erklärt der Gründervater der deutschen Arbeiterbewegung, was eine Verfassung wirklich trägt: die realen Machtverhältnisse.",
+    "explanation_long": "Lassalle hielt den Vortrag im April 1862 in Berlin, auf dem Höhepunkt des preußischen Verfassungskonflikts, in dem das Abgeordnetenhaus und die Krone um das Heeresbudget rangen. Seine These: Die „wirkliche Verfassung“ eines Landes sind die tatsächlichen Machtverhältnisse – König, Armee, Junker, Banken, und ganz am Ende auch das Volk. Das geschriebene Verfassungsblatt hält nur, wenn es diese Kräfteverhältnisse abbildet; tut es das nicht, wird es „unrettbar verloren“ sein. Ein Jahr später gründete Lassalle den Allgemeinen Deutschen Arbeiterverein, aus dem später die SPD hervorging. Der Satz ist bewusst ernüchternd gemeint, nicht zynisch: Wer die Verfassung ändern will, muss die realen Machtverhältnisse ändern – für Lassalle hieß das konkret das allgemeine Wahlrecht. Die Staatsrechtslehre hat den Gedanken später ausdrücklich aufgenommen und diskutiert ihn bis heute.",
+    "related_ids": [
+      "weber_001",
+      "marx_manifest_001"
+    ]
+  },
+  {
+    "id": "suttner_001",
+    "author": "Bertha von Suttner",
+    "author_type": "writer",
+    "text_de": "Die Waffen nieder!",
+    "text_original": "Die Waffen nieder!",
+    "source": "Die Waffen nieder! (Romantitel)",
+    "year": 1889,
+    "chapter": "Titel und Losung",
+    "category": [
+      "Krieg",
+      "Ethik",
+      "Politik",
+      "Gesellschaft"
+    ],
+    "difficulty": "beginner",
+    "series": "person_bertha_von_suttner",
+    "explanation_short": "Kein Satz aus einem Gespräch, sondern ein bewusst als Befehl formulierter Buchtitel – der zur Parole der internationalen Friedensbewegung wurde.",
+    "explanation_long": "Die drei Worte sind der Titel von Suttners Roman von 1889 – und genau als Titel gehören sie ihr: Sie wählte bewusst den Imperativ, gegen den Rat ihres Verlegers, dem er zu aggressiv war. Der Roman erzählt das Leben der Wienerin Martha Althaus durch vier Kriege ihrer Zeit und schildert Krieg konsequent aus der Sicht der Zurückbleibenden: Lazarette, Seuchen, Witwen. Das Buch wurde in mehr als ein Dutzend Sprachen übersetzt und machte die Friedensbewegung erstmals massentauglich; ab 1892 gab Suttner eine Zeitschrift gleichen Namens heraus. Ihr Briefwechsel mit Alfred Nobel trug dazu bei, dass er in seinem Testament einen Friedenspreis stiftete – 1905 erhielt sie ihn als erste Frau. Dass hier ein Titel und keine gesprochene Äußerung zitiert wird, ist also kein Mangel an Quelle, sondern der Kern der Sache: Suttner hat die Losung geschaffen und ihr Leben lang unter ihr agitiert.",
+    "related_ids": [
+      "kant_004",
+      "kennedy_002"
+    ]
+  },
+  {
+    "id": "dohm_001",
+    "author": "Hedwig Dohm",
+    "author_type": "writer",
+    "text_de": "Die Menschenrechte haben kein Geschlecht.",
+    "text_original": "Die Menschenrechte haben kein Geschlecht.",
+    "source": "Der Frauen Natur und Recht",
+    "year": 1876,
+    "chapter": "",
+    "category": [
+      "Frauenrechte",
+      "Rechte",
+      "Emanzipation",
+      "Politik"
+    ],
+    "difficulty": "beginner",
+    "series": "person_hedwig_dohm",
+    "explanation_short": "Fünf Worte gegen das ganze „Naturargument“: Rechte folgen aus dem Menschsein, nicht aus dem Geschlecht.",
+    "explanation_long": "Hedwig Dohm war die radikalste Stimme der frühen deutschen Frauenbewegung: Während die gemäßigte Mehrheit über Bildung und Erwerbsarbeit sprach, forderte sie schon in den 1870er Jahren das volle Frauenwahlrecht – Jahrzehnte bevor es 1918 kam. Der Satz aus ihrer Schrift „Der Frauen Natur und Recht“ zielt auf das Standardargument ihrer Gegner, die „Natur der Frau“ bestimme ihre Stellung: Wenn Rechte Menschenrechte sind, kann das Geschlecht kein Kriterium sein – jede Sonderbegründung für Frauenrechte erübrigt sich. Dohms Waffen waren Logik und Spott; ihre Essays zerlegen die zeitgenössische Gelehrtenliteratur über die weibliche Natur Satz für Satz. Der Ausspruch wurde zum Motto des radikalen Flügels der Bewegung. Eine biografische Fußnote: Ihre Enkelin Katia heiratete Thomas Mann – im Hause Mann war die große alte Dame der Frauenbewegung Familie.",
+    "related_ids": [
+      "de_gouges_001",
+      "wollstonecraft_001"
+    ]
+  },
+  {
+    "id": "malala_001",
+    "author": "Malala Yousafzai",
+    "author_type": "activist",
+    "text_de": "Ein Kind, ein Lehrer, ein Buch und ein Stift können die Welt verändern.",
+    "text_original": "One child, one teacher, one book and one pen can change the world.",
+    "source": "Rede vor der UN-Jugendversammlung",
+    "year": 2013,
+    "chapter": "New York, 12. Juli 2013",
+    "category": [
+      "Bildung",
+      "Frauenrechte",
+      "Politik"
+    ],
+    "difficulty": "beginner",
+    "series": "person_malala_yousafzai",
+    "explanation_short": "Gesprochen an ihrem 16. Geburtstag, neun Monate nach dem Attentat der Taliban – Bildung als die Waffe, vor der Extremisten sich tatsächlich fürchten.",
+    "explanation_long": "Im Oktober 2012 schossen Taliban der damals 15-jährigen Malala Yousafzai in Pakistan in den Kopf, weil sie öffentlich für den Schulbesuch von Mädchen eintrat. Neun Monate später, an ihrem 16. Geburtstag, hielt sie ihre erste große Rede vor der UN-Jugendversammlung – die Vereinten Nationen erklärten den Tag zum „Malala Day“. Der berühmte Satz ist die Schlusspointe eines Arguments, das der Rede ihre Wucht gibt: Die Extremisten, sagt sie, hätten Angst vor Büchern und Stiften; gerade das Attentat beweise, wie mächtig Bildung ist. Bemerkenswert ist auch, was sie ausdrücklich nicht will: keine Rache, nicht einmal am Schützen – eine Haltung, die sie in der Rede auf Gandhi, Bacha Khan und Mutter Teresa zurückführt. 2014 erhielt sie als jüngste Preisträgerin aller Zeiten den Friedensnobelpreis.",
+    "related_ids": [
+      "dohm_001",
+      "pankhurst_001"
+    ]
+  },
+  {
+    "id": "otto_peters_001",
+    "author": "Louise Otto-Peters",
+    "author_type": "writer",
+    "text_de": "Dem Reich der Freiheit werb' ich Bürgerinnen.",
+    "text_original": "Dem Reich der Freiheit werb' ich Bürgerinnen.",
+    "source": "Frauen-Zeitung",
+    "year": 1849,
+    "chapter": "Motto der Zeitung",
+    "category": [
+      "Frauenrechte",
+      "Freiheit",
+      "Emanzipation",
+      "Politik"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_louise_otto_peters",
+    "explanation_short": "Das Motto der ersten politischen Frauenzeitung Deutschlands, gegründet mitten in der Revolution von 1848/49.",
+    "explanation_long": "Im April 1849, während die Revolution von 1848 bereits in die Defensive geriet, gründete die sächsische Schriftstellerin Louise Otto die „Frauen-Zeitung“ – das erste politische Blatt in Deutschland, das von einer Frau für Frauen gemacht wurde. Der Vers stand als Motto auf dem Titel und ist Programm in einem Satz: Die Revolution verspricht ein „Reich der Freiheit“, aber ohne Bürgerinnen bleibt es halbiert; Frauen sollen nicht Begünstigte der Freiheit sein, sondern ihre Mitstreiterinnen. Der Staat antwortete mit bemerkenswerter Präzision: Sachsen erließ 1850 ein Pressegesetz, das Frauen die Redaktion von Zeitungen verbot – zugeschnitten auf Otto, weshalb es als „Lex Otto“ in die Geschichte einging. Sie verlegte die Zeitung daraufhin kurzzeitig nach Thüringen, bis das Blatt 1852 endgültig erlosch. 1865 gründete Otto-Peters mit Auguste Schmidt den Allgemeinen Deutschen Frauenverein – den organisatorischen Anfang der deutschen Frauenbewegung.",
+    "related_ids": [
+      "dohm_001",
+      "zetkin_001"
+    ]
+  },
+  {
+    "id": "teresa_avila_001",
+    "author": "Teresa von Ávila",
+    "author_type": "theologian",
+    "text_de": "Nichts soll dich verstören, nichts dich erschrecken: Alles vergeht, Gott ändert sich nicht. Die Geduld erreicht alles.",
+    "text_original": "Nada te turbe, nada te espante: todo se pasa, Dios no se muda. La paciencia todo lo alcanza.",
+    "source": "Eintrag in ihrem Brevier („Nada te turbe“)",
+    "year": 1582,
+    "chapter": "Nach ihrem Tod gefunden",
+    "category": [
+      "Religion",
+      "Ethik",
+      "Alltag"
+    ],
+    "difficulty": "beginner",
+    "series": "person_teresa_von_avila",
+    "explanation_short": "Die Verse, die man nach Teresas Tod handschriftlich in ihrem Gebetbuch fand – bis heute eines der bekanntesten Gebete der christlichen Mystik.",
+    "explanation_long": "Diese Zeilen wurden nach Teresas Tod 1582 auf einem Zettel in ihrem Brevier gefunden, von ihrer eigenen Hand geschrieben; sie schließen mit „Solo Dios basta“ – Gott allein genügt. Ihre Gelassenheit ist keine Stubenweisheit: Teresa reformierte gegen erhebliche Widerstände den Karmelitenorden, gründete siebzehn Klöster, wurde bei der Inquisition angezeigt und musste ihre autobiografischen Schriften jahrelang gegen den Verdacht der Häresie verteidigen. „Alles vergeht“ ist bei ihr also keine Weltflucht, sondern die Arbeitsgrundlage einer bemerkenswert zähen Praktikerin – ihre Briefe zeigen eine Frau, die Baupläne, Finanzen und Kirchenpolitik gleichzeitig verhandelte. 1970 erhob Papst Paul VI. sie als erste Frau zur Kirchenlehrerin. Die Verse werden bis heute gesungen und gebetet, weit über die katholische Welt hinaus.",
+    "related_ids": [
+      "luther_001",
+      "bonhoeffer_001"
+    ]
+  },
+  {
+    "id": "rosalind_franklin_001",
+    "author": "Rosalind Franklin",
+    "author_type": "scientist",
+    "text_de": "Wissenschaft und Alltagsleben können und dürfen nicht getrennt werden.",
+    "text_original": "Science and everyday life cannot and should not be separated.",
+    "source": "Brief an ihren Vater Ellis Franklin",
+    "year": 1940,
+    "chapter": "",
+    "category": [
+      "Wissenschaft",
+      "Alltag",
+      "Erkenntnis"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_rosalind_franklin",
+    "explanation_short": "Eine Studentin verteidigt in einem Brief an ihren Vater die Wissenschaft als Lebensform – Jahre bevor ihre Röntgenbilder die DNA-Struktur sichtbar machten.",
+    "explanation_long": "Franklin schrieb den Brief als Studentin in Cambridge an ihren Vater, der der Naturwissenschaft vorhielt, sie sei kalt und lasse für Glauben und Menschlichkeit keinen Raum. Ihre Antwort dreht das Verhältnis um: Wissenschaft sei keine vom Leben getrennte Sphäre, sondern eine Weise, im Alltag ehrlich zu denken – im selben Brief schreibt sie, der Glaube ihres Vaters beruhe darauf, dass er glaube, was zu glauben am angenehmsten sei. Der Brief wurde durch Anne Sayres Biografie von 1975 bekannt, die Franklins Rolle in der Wissenschaftsgeschichte zurechtrückte: Ihre Röntgenbeugungsaufnahme „Photo 51“ lieferte 1952 den entscheidenden Hinweis auf die Doppelhelix-Struktur der DNA; Watson und Crick nutzten ihre Daten, ohne sie zu fragen. Franklin starb 1958 mit 37 Jahren an Krebs – vier Jahre bevor der Nobelpreis für die Entdeckung vergeben wurde, den sie posthum nicht mehr erhalten konnte.",
+    "related_ids": [
+      "curie_001",
+      "meitner_001"
+    ]
+  },
+  {
+    "id": "burke_001",
+    "author": "Edmund Burke",
+    "author_type": "philosopher",
+    "text_de": "Ein Staat, der über keine Mittel zu seiner Veränderung verfügt, verfügt auch nicht über die Mittel zu seiner Erhaltung.",
+    "text_original": "A state without the means of some change is without the means of its conservation.",
+    "source": "Betrachtungen über die Revolution in Frankreich",
+    "year": 1790,
+    "chapter": "",
+    "category": [
+      "Politik",
+      "Staat",
+      "Tradition",
+      "Geschichte"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_edmund_burke",
+    "explanation_short": "Der Gründungssatz des modernen Konservatismus – und er handelt ausgerechnet von der Notwendigkeit der Veränderung.",
+    "explanation_long": "Burkes „Reflections“ erschienen 1790, ein Jahr nach dem Sturm auf die Bastille und noch vor der Terreur, deren Eskalation das Buch bemerkenswert genau vorhersagte. Der Satz enthält das Programm des politischen Denkers Burke in einer Paradoxie: Bewahren kann nur, wer reformieren kann – ein Staat, der jede Veränderung verweigert, zerbricht an der ersten Krise, statt sich anzupassen. Burke stellte der französischen Revolution das englische Modell von 1688 gegenüber: Wandel als Reparatur am bestehenden Haus statt Abriss und Neubau nach Plan. Wer Burke als bloßen Reaktionär liest, übersieht seine Biografie: Er hatte die amerikanischen Kolonisten verteidigt, den Sklavenhandel kritisiert und führte jahrelang das Amtsenthebungsverfahren gegen Warren Hastings wegen der Verbrechen der Ostindien-Kompanie in Indien. Sein Konservatismus ist eine Theorie des behutsamen Wandels, keine Verweigerung des Wandels.",
+    "related_ids": [
+      "burke_002",
+      "maistre_001"
+    ]
+  },
+  {
+    "id": "burke_002",
+    "author": "Edmund Burke",
+    "author_type": "philosopher",
+    "text_de": "Die Gesellschaft ist in der Tat ein Vertrag – aber eine Partnerschaft nicht nur zwischen den Lebenden, sondern zwischen den Lebenden, den Toten und denen, die noch geboren werden.",
+    "text_original": "Society is indeed a contract. … It becomes a partnership not only between those who are living, but between those who are living, those who are dead, and those who are to be born.",
+    "source": "Betrachtungen über die Revolution in Frankreich",
+    "year": 1790,
+    "chapter": "",
+    "category": [
+      "Gesellschaft",
+      "Tradition",
+      "Verantwortung",
+      "Philosophie"
+    ],
+    "difficulty": "advanced",
+    "series": "person_edmund_burke",
+    "explanation_short": "Burkes Antwort auf die Vertragstheorie der Aufklärung: Der Gesellschaftsvertrag ist keine kündbare Abmachung der Gegenwart, sondern ein Bund der Generationen.",
+    "explanation_long": "Die Stelle ist Burkes direkte Auseinandersetzung mit Rousseau und der Vertragstheorie, auf die sich die Französische Revolution berief. Burke akzeptiert die Vertragsmetapher – und sprengt sie dann von innen: Ein Staat sei kein Handelsvertrag über „Pfeffer und Kaffee“, den die gerade lebende Generation nach Belieben kündigen kann. Wer die Gesellschaft als Partnerschaft „in aller Wissenschaft, in aller Kunst, in jeder Tugend“ versteht, wie es unmittelbar davor heißt, muss die Toten (deren Errungenschaften wir erben) und die Ungeborenen (denen wir sie schulden) mitdenken. Bemerkenswert ist die heutige Rezeption: Der Gedanke der Generationenverantwortung wird längst quer durch alle Lager zitiert, von konservativen Institutionenlehren bis zu Nachhaltigkeits- und Klimadebatten – ein konservatives Argument, das seine schärfste Aktualität ausgerechnet in der Zukunftsethik gefunden hat.",
+    "related_ids": [
+      "burke_001",
+      "chesterton_001"
+    ]
+  },
+  {
+    "id": "bismarck_001",
+    "author": "Otto von Bismarck",
+    "author_type": "politician",
+    "text_de": "Die Politik ist die Lehre vom Möglichen.",
+    "text_original": "Die Politik ist die Lehre vom Möglichen.",
+    "source": "Gespräch mit Friedrich Meyer von Waldeck",
+    "year": 1867,
+    "chapter": "11. August 1867",
+    "category": [
+      "Politik",
+      "Staat",
+      "Methode"
+    ],
+    "difficulty": "beginner",
+    "series": "person_otto_von_bismarck",
+    "explanation_short": "Die Kurzformel der Realpolitik – überliefert aus einem Zeitungsgespräch im Sommer 1867, meist ungenau als „Kunst des Möglichen“ zitiert.",
+    "explanation_long": "Der Satz fiel im August 1867 in einem Gespräch mit dem Journalisten Friedrich Meyer von Waldeck von der „St. Petersburger Zeitung“, der es überlieferte – im Original „Lehre vom Möglichen“, nicht die geläufigere Abwandlung „Kunst des Möglichen“. Der Zeitpunkt erklärt den Inhalt: Nach dem Sieg über Österreich 1866 hatte Bismarck den Norddeutschen Bund geschmiedet und dabei mehrfach gegen die Erwartungen des eigenen Lagers gehandelt – etwa mit dem allgemeinen Wahlrecht für den Reichstag, das er als Werkzeug gegen die Liberalen einsetzte. Politik heißt für ihn: nicht vom Wünschbaren her denken, sondern vom Erreichbaren, und Bündnisse wie Prinzipien den Umständen anpassen. Beim Zitieren ist Vorsicht angebracht: Der Satz wird gern als Ausrede für Ambitionslosigkeit gebraucht. Bismarck selbst meinte das Gegenteil – das Mögliche ausschöpfen heißt bei ihm, es kaltblütig und vollständig auszuschöpfen.",
+    "related_ids": [
+      "weber_001",
+      "burke_001"
+    ]
+  },
+  {
+    "id": "chesterton_001",
+    "author": "G. K. Chesterton",
+    "author_type": "writer",
+    "text_de": "Tradition bedeutet, der unbekanntesten aller Klassen das Stimmrecht zu geben: unseren Vorfahren. Tradition ist die Demokratie der Toten.",
+    "text_original": "Tradition means giving votes to the most obscure of all classes, our ancestors. It is the democracy of the dead.",
+    "source": "Orthodoxie",
+    "year": 1908,
+    "chapter": "Kapitel 4: Die Ethik des Elfenlandes",
+    "category": [
+      "Tradition",
+      "Demokratie",
+      "Kultur",
+      "Religion"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_g_k_chesterton",
+    "explanation_short": "Chestertons berühmtester Gedankendreh: Wer Demokrat ist, darf Menschen nicht wegen des Zufalls ihrer Geburt übergehen – und auch nicht wegen des Zufalls ihres Todes.",
+    "explanation_long": "Die Passage steht in „Orthodoxy“, Chestertons witziger Verteidigung des christlichen Glaubens gegen den Fortschrittsoptimismus seiner Zeit. Das Argument ist ein bewusst frecher Syllogismus: Demokratie heißt, dass die Meinung eines Menschen nicht deshalb weniger zählt, weil er zufällig arm oder unbekannt ist – Tradition wendet dasselbe Prinzip auf die an, die zufällig schon gestorben sind. Im nächsten Satz spitzt Chesterton zu: Tradition weigere sich, „der kleinen und arroganten Oligarchie derer zu unterwerfen, die bloß zufällig gerade herumlaufen“. Das ist keine Ahnenverehrung: Die Toten bekommen eine Stimme, kein Veto – ihr Votum ist zu gewichten wie jedes andere. Der oft mit diesem Zitat verwechselte Gedanke vom Zaun, den man erst abreißen darf, wenn man weiß, wozu er errichtet wurde, stammt ebenfalls von Chesterton, aber aus einem späteren Buch („The Thing“, 1929).",
+    "related_ids": [
+      "burke_002",
+      "oakeshott_001"
+    ]
+  },
+  {
+    "id": "maistre_001",
+    "author": "Joseph de Maistre",
+    "author_type": "philosopher",
+    "text_de": "Jede Nation hat die Regierung, die sie verdient.",
+    "text_original": "Toute nation a le gouvernement qu'elle mérite.",
+    "source": "Brief an den Chevalier de Rossi",
+    "year": 1811,
+    "chapter": "27. August 1811",
+    "category": [
+      "Politik",
+      "Staat",
+      "Gesellschaft",
+      "Kritik"
+    ],
+    "difficulty": "intermediate",
+    "series": "person_joseph_de_maistre",
+    "explanation_short": "Heute klingt der Satz nach demokratischer Selbstverantwortung – geschrieben wurde er als Argument gegen Verfassungsreformen.",
+    "explanation_long": "Maistre, savoyischer Gesandter am Zarenhof in St. Petersburg und der schärfste Kopf der Gegenaufklärung, schrieb den Satz 1811 in einem diplomatischen Brief – in einer Zeit, in der in Russland über liberale Verfassungsreformen diskutiert wurde, die er für gefährlichen Unsinn hielt. Sein Punkt ist anti-konstitutionalistisch: Regierungsformen lassen sich nicht am Reißbrett entwerfen und Völkern überstülpen; sie wachsen aus Geschichte, Religion und Charakter einer Nation – deshalb sei jede Regierung letztlich der genaue Ausdruck dessen, was ein Volk ist und trägt. Die Wirkungsgeschichte hat den Satz komplett umgedreht: Heute wird er fast immer demokratisch zitiert – als Mahnung, dass Wähler für ihre Regierungen selbst verantwortlich sind. Dass ein Satz des großen Reaktionärs zum Sprichwort der Demokraten wurde, ist eine der feineren Ironien der Ideengeschichte.",
+    "related_ids": [
+      "burke_001",
+      "tocqueville_001"
+    ]
+  },
+  {
+    "id": "oakeshott_001",
+    "author": "Michael Oakeshott",
+    "author_type": "philosopher",
+    "text_de": "Konservativ zu sein heißt, das Vertraute dem Unbekannten vorzuziehen, das Erprobte dem Unerprobten, die Tatsache dem Rätsel, das Wirkliche dem Möglichen, das Begrenzte dem Unbegrenzten, das Nahe dem Fernen.",
+    "text_original": "To be conservative, then, is to prefer the familiar to the unknown, to prefer the tried to the untried, fact to mystery, the actual to the possible, the limited to the unbounded, the near to the distant.",
+    "source": "On Being Conservative",
+    "year": 1956,
+    "chapter": "in: Rationalism in Politics (1962)",
+    "category": [
+      "Politik",
+      "Tradition",
+      "Philosophie",
+      "Alltag"
+    ],
+    "difficulty": "advanced",
+    "series": "person_michael_oakeshott",
+    "explanation_short": "Die berühmteste moderne Definition des Konservatismus – nicht als Lehre oder Programm, sondern als Neigung, das Vorhandene zu genießen.",
+    "explanation_long": "Oakeshott, politischer Philosoph an der London School of Economics, definiert Konservatismus in diesem Essay ausdrücklich nicht als Ideologie, Glaubensbekenntnis oder Programm, sondern als „disposition“ – eine Gemütslage. Die Aufzählung geht im Original noch weiter, bis zur schönsten Wendung: das „gegenwärtige Lachen“ sei der „utopischen Glückseligkeit“ vorzuziehen. Der Gegner des Essays ist der „Rationalismus in der Politik“: der Glaube, Gesellschaften ließen sich wie Maschinen nach Plan umbauen. Dagegen setzt Oakeshott keine Ehrfurcht vor Autorität und keine religiöse Ordnung – sein Konservatismus ist skeptisch, weltlich und beinahe hedonistisch: Wer etwas hat, das funktioniert und Freude macht, braucht gute Gründe, es für ein Versprechen einzutauschen. Damit unterscheidet er sich deutlich von Maistre und auch von Burke: Es geht nicht um die Heiligkeit des Alten, sondern um die Kostbarkeit des Gegenwärtigen.",
+    "related_ids": [
+      "burke_001",
+      "chesterton_001"
+    ]
+  },
+  {
+    "id": "bernstein_001",
+    "author": "Eduard Bernstein",
+    "author_type": "politician",
+    "text_de": "Das, was man gemeinhin Endziel des Sozialismus nennt, ist mir nichts, die Bewegung alles.",
+    "text_original": "Das, was man gemeinhin Endziel des Sozialismus nennt, ist mir nichts, die Bewegung alles.",
+    "source": "Der Kampf der Sozialdemokratie und die Revolution der Gesellschaft",
+    "year": 1898,
+    "chapter": "Die Neue Zeit, Jg. 16",
+    "category": [
+      "Politik",
+      "Ökonomie",
+      "Demokratie",
+      "Kritik"
+    ],
+    "difficulty": "advanced",
+    "series": "person_eduard_bernstein",
+    "explanation_short": "Der Satz, der die Sozialdemokratie spaltete: Reform statt Revolution – und Rosa Luxemburgs berühmteste Streitschrift war die direkte Antwort darauf.",
+    "explanation_long": "Bernstein, enger Vertrauter von Engels und Verwalter seines Nachlasses, löste mit seinen Artikeln in der „Neuen Zeit“ den Revisionismusstreit aus, die folgenreichste Debatte in der Geschichte der Sozialdemokratie. Seine Beobachtung: Der von Marx erwartete Zusammenbruch des Kapitalismus blieb aus, die Lage der Arbeiter verbesserte sich, Genossenschaften, Gewerkschaften und Wahlrecht wirkten. Seine Folgerung: Der Sozialismus kommt nicht durch den großen Kladderadatsch, sondern durch tägliche demokratische Reformarbeit – eben „die Bewegung“. Rosa Luxemburg antwortete 1899 mit „Sozialreform oder Revolution?“, die SPD verurteilte den Revisionismus offiziell – und wurde in der Praxis doch immer bernsteinischer, bis zum Godesberger Programm von 1959. Bernstein selbst beklagte später, der Satz werde missverstanden: Er habe kein Desinteresse an Zielen gemeint, sondern die Absage an ein dogmatisch fixiertes Endziel, dem die Gegenwart geopfert wird.",
+    "related_ids": [
+      "luxemburg_001",
+      "marx_gotha_001"
+    ]
   }
 ]

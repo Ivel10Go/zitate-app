@@ -21,7 +21,7 @@ final initialSeedProvider = FutureProvider<void>((Ref ref) async {
   // Version suffix must be bumped whenever assets/thinkers_quotes.json changes,
   // so existing installs re-upsert the fixes.
   final prefs = await SharedPreferences.getInstance();
-  const seedKey = 'app_seeded_v4';
+  const seedKey = 'app_seeded_v5';
 
   if (prefs.getBool(seedKey) == true) {
     // The flag says we've seeded before, but the database itself is the
