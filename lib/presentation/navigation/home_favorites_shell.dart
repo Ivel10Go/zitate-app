@@ -10,11 +10,22 @@ class HomeFavoritesShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(child: navigationShell),
-        AppNavigationBar(selectedIndex: navigationShell.currentIndex),
-      ],
+    // Scaffold statt Column: so verbraucht die Navigationsleiste den unteren
+    // System-Inset genau einmal — identisch zu den Screens außerhalb der Shell,
+    // die sie über `Scaffold.bottomNavigationBar` einhängen. Sonst springt die
+    // Leiste beim Wechsel zwischen Shell- und Nicht-Shell-Screens.
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: navigationShell,
+      bottomNavigationBar: AppNavigationBar(
+        selectedIndex: navigationShell.currentIndex,
+        // `initialLocation: true` beim aktiven Tab: ein erneuter Tap springt
+        // auf die Startroute des Branches zurück (z. B. /quiz -> /).
+        onDestinationSelected: (index) => navigationShell.goBranch(
+          index,
+          initialLocation: index == navigationShell.currentIndex,
+        ),
+      ),
     );
   }
 }

@@ -6,11 +6,11 @@ import '../../core/services/feedback_submission_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/models/quote.dart';
+import '../../domain/providers/supabase_auth_provider.dart';
 import '../../domain/services/quote_deduplication_service.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
-import '../../data/database/app_database.dart';
-import '../../data/repositories/quote_repository.dart';
+import '../../domain/providers/repository_providers.dart';
 
 class QuoteSubmissionScreen extends StatelessWidget {
   const QuoteSubmissionScreen({super.key});
@@ -58,8 +58,9 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
     }
 
     try {
-      final db = AppDatabase();
-      final repository = QuoteRepository(db);
+      // Bewusst über den Provider: eine zweite AppDatabase()-Instanz würde
+      // eine eigene Verbindung auf dieselbe Datei öffnen.
+      final repository = ref.read(quoteRepositoryProvider);
       final allQuotesStream = repository.watchAllQuotes();
       final allQuotes = await allQuotesStream.first;
       final similar = QuoteDeduplicationService.findSimilarQuotes(
@@ -195,8 +196,16 @@ class _QuoteSubmissionViewState extends ConsumerState<_QuoteSubmissionView> {
     setState(() => _isSubmitting = true);
 
     try {
+      // Angemeldete Einreichungen werden dem Konto zugeordnet, damit die
+      // Prüfung nachfragen kann; Gäste reichen anonym ein.
+      final currentUser = ref
+          .read(currentSupabaseUserProvider)
+          .maybeWhen(data: (user) => user, orElse: () => null);
+
       final service = FeedbackSubmissionService();
       await service.submitQuoteSubmission(
+        submittedBy: currentUser?.id,
+        submitterEmail: currentUser?.email,
         quote: _textController.text,
         author: _authorController.text,
         source: _sourceController.text.isEmpty ? null : _sourceController.text,

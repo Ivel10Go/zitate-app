@@ -9,7 +9,6 @@ import '../../data/models/quiz_session.dart';
 import '../../domain/providers/quiz_provider.dart';
 import '../../domain/providers/quiz_timer_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
-import '../../widgets/app_navigation_bar.dart';
 import '../loading/app_loading_screen.dart';
 import 'quiz_result_screen.dart';
 import 'widgets/answer_button.dart';
@@ -69,7 +68,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     if (session.isEmpty) {
       return const AppDecoratedScaffold(
-        bottomNavigationBar: AppNavigationBar(selectedIndex: -1),
         child: AppInlineLoadingState(
           title: 'Quiz wird vorbereitet',
           subtitle: 'Fragen und Antwortoptionen werden geladen ...',
@@ -106,7 +104,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     }
 
     return AppDecoratedScaffold(
-      bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
         children: <Widget>[
@@ -323,7 +320,6 @@ class _QuizStartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppDecoratedScaffold(
-      bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
         children: <Widget>[
@@ -411,7 +407,6 @@ class _QuizDailyLimitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppDecoratedScaffold(
-      bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
         children: <Widget>[

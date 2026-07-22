@@ -79,6 +79,15 @@ class SettingsScreen extends ConsumerWidget {
                         ),
                       ],
                       SizedBox(height: AppTheme.spacingLarge),
+                      _SettingsLinkCard(
+                        title: 'ZITAT EINREICHEN',
+                        subtitle:
+                            'Schlage ein Zitat vor — es wird geprüft und '
+                            'ggf. aufgenommen',
+                        icon: Icons.edit_note_rounded,
+                        onTap: () => context.push('/submit-quote'),
+                      ),
+                      SizedBox(height: AppTheme.spacingLarge),
                       const _ContentPreferencesGroup(),
                       SizedBox(height: AppTheme.spacingLarge),
                       const _NotificationsGroup(),
@@ -109,6 +118,16 @@ class SettingsScreen extends ConsumerWidget {
                               ],
                             ),
                             const SizedBox(height: 14),
+                            SizedBox(
+                              width: double.infinity,
+                              child: _SettingsActionButton(
+                                label: 'EINREICHUNGEN PRÜFEN',
+                                filled: false,
+                                onTap: () =>
+                                    context.push('/admin/submissions'),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
                             Row(
                               children: <Widget>[
                                 Expanded(

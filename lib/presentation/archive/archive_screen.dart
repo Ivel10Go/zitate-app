@@ -9,7 +9,6 @@ import '../../core/theme/app_theme.dart';
 import '../../domain/providers/archive_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
-import '../../widgets/app_navigation_bar.dart';
 import '../../widgets/compact_quote_card.dart';
 import '../loading/app_loading_screen.dart';
 import 'widgets/archive_filter_chips.dart';
@@ -50,7 +49,6 @@ class _ArchiveScreenState extends ConsumerState<ArchiveScreen> {
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: const AppNavigationBar(selectedIndex: 1),
         child: Column(
           children: <Widget>[
             EditorialSectionTitle(

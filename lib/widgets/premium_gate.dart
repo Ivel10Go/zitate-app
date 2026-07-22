@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../core/providers/purchases_provider.dart';
 import '../core/theme/app_colors.dart';
 import 'app_decorated_scaffold.dart';
-import 'app_navigation_bar.dart';
 
 /// Premium feature gate that shows content for Pro users or a teaser for free users.
 ///
@@ -67,7 +66,6 @@ class _PremiumTeaserScreen extends StatelessWidget {
 
     return AppDecoratedScaffold(
       appBar: null,
-      bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 24, 20, 28),
         children: <Widget>[
