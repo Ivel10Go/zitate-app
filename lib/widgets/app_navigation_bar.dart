@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../core/theme/app_theme.dart';
 
 class AppNavigationBar extends StatelessWidget {
-  const AppNavigationBar({required this.selectedIndex, super.key});
+  const AppNavigationBar({
+    required this.selectedIndex,
+    required this.onDestinationSelected,
+    super.key,
+  });
 
   final int selectedIndex;
 
+  /// Wird mit dem Branch-Index gerufen — auch beim Tippen auf den bereits
+  /// aktiven Tab, damit die Shell dann auf dessen Startroute zurückspringen
+  /// kann (z. B. von `/quiz` zurück auf `/`).
+  final ValueChanged<int> onDestinationSelected;
+
   static const _destinations = <_NavDestination>[
-    _NavDestination(path: '/', label: 'HEUTE', icon: Icons.today_outlined),
-    _NavDestination(
-      path: '/favorites',
-      label: 'FAVORITEN',
-      icon: Icons.favorite_outlined,
-    ),
-    _NavDestination(
-      path: '/settings',
-      label: 'EINSTELLUNGEN',
-      icon: Icons.settings_outlined,
-      isMore: true,
-    ),
+    _NavDestination(label: 'HEUTE', icon: Icons.today_outlined),
+    _NavDestination(label: 'FAVORITEN', icon: Icons.favorite_outlined),
+    _NavDestination(label: 'EINSTELLUNGEN', icon: Icons.settings_outlined),
   ];
 
   @override
@@ -50,16 +49,7 @@ class AppNavigationBar extends StatelessWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
-                      if (destination.isMore) {
-                        context.go('/settings');
-                        return;
-                      }
-                      if (isActive || destination.path == null) {
-                        return;
-                      }
-                      context.go(destination.path!);
-                    },
+                    onTap: () => onDestinationSelected(index),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 2),
                       child: Column(
@@ -113,14 +103,7 @@ class AppNavigationBar extends StatelessWidget {
 }
 
 class _NavDestination {
-  const _NavDestination({
-    this.path,
-    required this.label,
-    required this.icon,
-    this.isMore = false,
-  });
-  final String? path;
+  const _NavDestination({required this.label, required this.icon});
   final String label;
   final IconData icon;
-  final bool isMore;
 }

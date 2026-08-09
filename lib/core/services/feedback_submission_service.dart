@@ -1,5 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../data/models/quote_submission.dart';
+
 class FeedbackSubmissionService {
   FeedbackSubmissionService._();
 
@@ -65,6 +67,61 @@ class FeedbackSubmissionService {
       'app_version': appVersion,
       'app_locale': appLocale,
     });
+  }
+
+  /// Liest Einreichungen zur Prüfung.
+  ///
+  /// Was zurückkommt, entscheidet die RLS in Supabase: Admins
+  /// (`profiles.is_admin = true`) sehen alles, alle anderen nur ihre eigenen
+  /// Einreichungen. Der lokale `UserProfile.isAdmin`-Schalter steuert nur die
+  /// Sichtbarkeit der UI, nicht den Datenzugriff.
+  Future<List<QuoteSubmission>> fetchSubmissions({
+    SubmissionType? type,
+    SubmissionStatus? status,
+    int limit = 200,
+  }) async {
+    try {
+      var query = _client.from('community_submissions').select();
+      if (type != null) {
+        query = query.eq('submission_type', type.dbValue);
+      }
+      if (status != null) {
+        query = query.eq('status', status.name);
+      }
+      final rows = await query.order('created_at', ascending: false).limit(
+        limit,
+      );
+
+      return (rows as List<dynamic>)
+          .cast<Map<String, dynamic>>()
+          .map(QuoteSubmission.fromJson)
+          .toList();
+    } catch (e) {
+      throw Exception('Einreichungen konnten nicht geladen werden: $e');
+    }
+  }
+
+  /// Setzt Status und Prüfnotiz einer Einreichung. Nur Admins dürfen das —
+  /// bei allen anderen lehnt die RLS das Update ab.
+  Future<void> reviewSubmission({
+    required String id,
+    required SubmissionStatus status,
+    String? reviewNotes,
+  }) async {
+    final reviewerId = _client.auth.currentUser?.id;
+    try {
+      await _client
+          .from('community_submissions')
+          .update(<String, dynamic>{
+            'status': status.name,
+            'reviewed_at': DateTime.now().toUtc().toIso8601String(),
+            'reviewed_by': reviewerId,
+            if (reviewNotes != null) 'review_notes': reviewNotes,
+          })
+          .eq('id', id);
+    } catch (e) {
+      throw Exception('Status konnte nicht gespeichert werden: $e');
+    }
   }
 
   Future<void> _insertSubmission(Map<String, dynamic> payload) async {

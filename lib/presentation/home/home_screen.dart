@@ -22,7 +22,6 @@ import '../../domain/providers/supabase_auth_provider.dart';
 import '../../domain/providers/user_profile_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
-import '../../widgets/app_navigation_bar.dart';
 import '../../widgets/adaptive_quote_text.dart';
 import '../../widgets/quote_card.dart';
 import '../loading/app_loading_screen.dart';
@@ -30,9 +29,7 @@ import '../shared/icon_circle.dart';
 import '../shared/app_card.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({this.showBottomNavigationBar = true, super.key});
-
-  final bool showBottomNavigationBar;
+  const HomeScreen({super.key});
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
@@ -217,9 +214,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: widget.showBottomNavigationBar
-            ? const AppNavigationBar(selectedIndex: 0)
-            : null,
         child: RefreshIndicator(
           onRefresh: () async => ref.invalidate(dailyContentProvider),
           child: ListView(

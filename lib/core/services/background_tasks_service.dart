@@ -5,6 +5,7 @@ import '../../data/database/app_database.dart';
 import '../../data/models/daily_content.dart';
 import '../../data/models/user_profile.dart';
 import '../../data/repositories/quote_repository.dart';
+import '../../domain/services/daily_content_cache.dart';
 import '../../domain/services/daily_content_resolver.dart';
 import '../constants/settings_keys.dart';
 import 'widget_sync_service.dart';
@@ -21,46 +22,110 @@ void workmanagerCallbackDispatcher() {
       return true;
     }
 
-    final db = AppDatabase();
-    try {
-      final quoteRepository = QuoteRepository(db);
-      await quoteRepository.ensureSeeded();
+    final settings = await _WidgetTaskSettings.resolve(inputData);
 
-      // Read small primitive values passed from the main isolate via
-      // `inputData`. Avoid calling platform-channel plugins from the
-      // background (DartWorker) isolate.
-      final streak = (inputData != null && inputData['streak'] != null)
-          ? (inputData['streak'] is int
-                ? inputData['streak'] as int
-                : int.tryParse('${inputData['streak']}') ?? 0)
-          : 0;
-      final appMode = _resolveAppMode(
-        inputData != null ? inputData['app_mode'] as String? : null,
-      );
-      final profile = _resolveProfile(
-        inputData != null ? inputData['user_profile'] as String? : null,
-      );
-      final content = await _resolveDailyContent(
-        quoteRepository: quoteRepository,
-        appMode: appMode,
-        profile: profile,
-      );
+    // Show whatever the app has already picked for today instead of resolving
+    // a second time — resolving independently is how the widget ended up on a
+    // different quote than the home screen. Only when nothing is cached yet
+    // (typically the first refresh after midnight) does this task resolve, and
+    // it then publishes its pick so the app adopts the very same quote.
+    final content =
+        await DailyContentCache.read() ??
+        await _resolveAndCacheDailyContent(settings);
 
-      if (content == null) {
-        return true;
-      }
-
-      await WidgetSyncService.syncDailyContent(
-        content: content,
-        streakCount: streak,
-        modeLabel: appMode.name.toUpperCase(),
-      );
-    } finally {
-      await db.close();
+    if (content == null) {
+      return true;
     }
+
+    await WidgetSyncService.syncDailyContent(
+      content: content,
+      streakCount: settings.streak,
+      modeLabel: settings.appMode.name.toUpperCase(),
+    );
 
     return true;
   });
+}
+
+Future<DailyContent?> _resolveAndCacheDailyContent(
+  _WidgetTaskSettings settings,
+) async {
+  final db = AppDatabase();
+  try {
+    final quoteRepository = QuoteRepository(db);
+    await quoteRepository.ensureSeeded();
+
+    final content = await _resolveDailyContent(
+      quoteRepository: quoteRepository,
+      appMode: settings.appMode,
+      profile: settings.profile,
+    );
+
+    if (content != null) {
+      await DailyContentCache.write(
+        content: content,
+        ownerUserId: await DailyContentCache.readOwner(),
+      );
+    }
+
+    return content;
+  } finally {
+    await db.close();
+  }
+}
+
+/// Settings the widget refresh runs with.
+class _WidgetTaskSettings {
+  const _WidgetTaskSettings({
+    required this.streak,
+    required this.appMode,
+    required this.profile,
+  });
+
+  final int streak;
+  final AppMode appMode;
+  final UserProfile profile;
+
+  /// Reads the current settings, preferring the live stored values over the
+  /// `inputData` copies. Those copies were captured when the periodic task was
+  /// registered and go stale as soon as the user changes mode or profile —
+  /// which made the widget resolve against a different profile than the app.
+  /// The stored values stay optional so this keeps working even where the
+  /// background (DartWorker) isolate cannot reach the preferences plugin.
+  static Future<_WidgetTaskSettings> resolve(
+    Map<String, dynamic>? inputData,
+  ) async {
+    SharedPreferences? prefs;
+    try {
+      prefs = await SharedPreferences.getInstance();
+    } catch (_) {
+      prefs = null;
+    }
+
+    return _WidgetTaskSettings(
+      streak:
+          prefs?.getInt(SettingsKeys.streak) ??
+          _asInt(inputData?['streak']) ??
+          0,
+      appMode: _resolveAppMode(
+        prefs?.getString('app_mode') ?? inputData?['app_mode'] as String?,
+      ),
+      profile: _resolveProfile(
+        prefs?.getString(UserProfile.storageKey) ??
+            inputData?['user_profile'] as String?,
+      ),
+    );
+  }
+
+  static int? _asInt(Object? value) {
+    if (value is int) {
+      return value;
+    }
+    if (value == null) {
+      return null;
+    }
+    return int.tryParse('$value');
+  }
 }
 
 Future<DailyContent?> _resolveDailyContent({

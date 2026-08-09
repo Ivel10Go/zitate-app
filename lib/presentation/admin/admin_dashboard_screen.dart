@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -7,6 +8,7 @@ import '../../data/models/daily_content.dart';
 import '../../domain/providers/admin_access_provider.dart';
 import '../../domain/providers/app_mode_provider.dart';
 import '../../domain/providers/daily_content_provider.dart';
+import '../../domain/providers/submissions_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../loading/app_loading_screen.dart';
 
@@ -126,6 +128,56 @@ class AdminDashboardScreen extends ConsumerWidget {
                 message: 'Fehler: $error',
                 onRetry: () => ref.invalidate(dailyContentProvider),
               ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          _Panel(
+            title: 'EINGEREICHTE ZITATE',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ref
+                    .watch(pendingSubmissionCountProvider)
+                    .when(
+                      data: (count) => Text(
+                        count == 0
+                            ? 'Aktuell wartet keine Einreichung auf Prüfung.'
+                            : count == 1
+                            ? '1 Einreichung wartet auf Prüfung.'
+                            : '$count Einreichungen warten auf Prüfung.',
+                        style: GoogleFonts.ibmPlexSans(
+                          fontSize: 12,
+                          color: AppColors.ink,
+                          height: 1.4,
+                        ),
+                      ),
+                      loading: () => Text(
+                        'Einreichungen werden gezählt …',
+                        style: GoogleFonts.ibmPlexSans(
+                          fontSize: 12,
+                          color: AppColors.inkLight,
+                        ),
+                      ),
+                      error: (error, _) => Text(
+                        'Anzahl konnte nicht geladen werden. Prüfe die '
+                        'Internetverbindung und ob dein Konto in Supabase als '
+                        'Admin markiert ist.',
+                        style: GoogleFonts.ibmPlexSans(
+                          fontSize: 11,
+                          color: AppColors.inkLight,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: _ActionButton(
+                    label: 'EINREICHUNGEN PRÜFEN',
+                    onTap: () => context.push('/admin/submissions'),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 16),

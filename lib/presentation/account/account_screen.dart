@@ -18,7 +18,6 @@ import '../../domain/providers/repository_providers.dart';
 import '../../domain/providers/user_profile_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
-import '../../widgets/app_navigation_bar.dart';
 
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
@@ -33,7 +32,6 @@ class AccountScreen extends ConsumerWidget {
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
         child: Column(
           children: <Widget>[
             // Back affordance above the shared editorial masthead so the

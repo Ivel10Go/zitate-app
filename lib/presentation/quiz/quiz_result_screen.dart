@@ -7,7 +7,6 @@ import '../../core/theme/app_colors.dart';
 import '../../data/models/quiz_session.dart';
 import '../../domain/providers/quiz_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
-import '../../widgets/app_navigation_bar.dart';
 
 class QuizResultScreen extends ConsumerWidget {
   const QuizResultScreen({
@@ -28,7 +27,6 @@ class QuizResultScreen extends ConsumerWidget {
         .maybeWhen(data: (int value) => value, orElse: () => score);
 
     return AppDecoratedScaffold(
-      bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
         children: <Widget>[

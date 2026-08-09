@@ -9,7 +9,6 @@ import '../../data/models/thinker_quote.dart';
 import '../../domain/providers/thinkers_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
-import '../../widgets/app_navigation_bar.dart';
 import '../shared/app_card.dart';
 import '../loading/app_loading_screen.dart';
 
@@ -40,7 +39,6 @@ class ThinkersScreen extends ConsumerWidget {
       },
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
         child: Column(
           children: <Widget>[
             // Masthead

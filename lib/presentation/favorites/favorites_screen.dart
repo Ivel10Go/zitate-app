@@ -12,14 +12,11 @@ import '../../data/models/quote.dart';
 import '../../domain/providers/favorites_provider.dart';
 import '../../widgets/app_decorated_scaffold.dart';
 import '../../widgets/android_back_guard.dart';
-import '../../widgets/app_navigation_bar.dart';
 import '../../widgets/quote_card.dart';
 import '../loading/app_loading_screen.dart';
 
 class FavoritesScreen extends ConsumerWidget {
-  const FavoritesScreen({this.showBottomNavigationBar = true, super.key});
-
-  final bool showBottomNavigationBar;
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,9 +27,6 @@ class FavoritesScreen extends ConsumerWidget {
     return AndroidBackGuard(
       child: AppDecoratedScaffold(
         appBar: null,
-        bottomNavigationBar: showBottomNavigationBar
-            ? const AppNavigationBar(selectedIndex: 1)
-            : null,
         child: Column(
           children: <Widget>[
             EditorialSectionTitle(

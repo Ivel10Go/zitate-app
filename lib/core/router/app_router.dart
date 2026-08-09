@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../presentation/admin/admin_dashboard_screen.dart';
+import '../../presentation/admin/submission_review_screen.dart';
+import '../../presentation/archive/archive_screen.dart';
 import '../../presentation/detail/quote_detail_screen_new.dart';
 import '../../presentation/favorites/favorites_screen.dart';
 import '../../presentation/home/home_screen.dart';
@@ -29,7 +31,7 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
   return GoRouter(
     initialLocation: initialRoute,
     redirect: (context, state) {
-      if (state.matchedLocation == '/admin' && !isAdmin) {
+      if (state.matchedLocation.startsWith('/admin') && !isAdmin) {
         return '/';
       }
       return null;
@@ -52,7 +54,7 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
                 name: 'home',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                   key: state.pageKey,
-                  child: const HomeScreen(showBottomNavigationBar: false),
+                  child: const HomeScreen(),
                 ),
               ),
               GoRoute(
@@ -63,6 +65,27 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
                   return QuoteDetailScreen(quoteId: id);
                 },
               ),
+              GoRoute(
+                path: '/archive',
+                name: 'archive',
+                builder: (context, state) => const ArchiveScreen(),
+              ),
+              GoRoute(
+                path: '/thinkers',
+                name: 'thinkers',
+                builder: (context, state) => const PremiumGate(
+                  featureName: 'Denkeratlas',
+                  featureDescription:
+                      'Durchstöbere die komplette Bibliothek: alle Philosophen und Politiker, '
+                      'sämtliche Zitate und die Volltextsuche über den gesamten Bestand.',
+                  child: ThinkersScreen(),
+                ),
+              ),
+              GoRoute(
+                path: '/quiz',
+                name: 'quiz',
+                builder: (context, state) => const QuizScreen(),
+              ),
             ],
           ),
           StatefulShellBranch(
@@ -72,7 +95,7 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
                 name: 'favorites',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                   key: state.pageKey,
-                  child: const FavoritesScreen(showBottomNavigationBar: false),
+                  child: const FavoritesScreen(),
                 ),
               ),
             ],
@@ -84,8 +107,18 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
                 name: 'settings',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                   key: state.pageKey,
-                  child: const SettingsScreen(showBottomNavigationBar: false),
+                  child: const SettingsScreen(),
                 ),
+              ),
+              GoRoute(
+                path: '/account',
+                name: 'account',
+                builder: (context, state) => const AccountScreen(),
+              ),
+              GoRoute(
+                path: '/profile',
+                name: 'profile',
+                builder: (context, state) => const AccountScreen(),
               ),
             ],
           ),
@@ -100,6 +133,11 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
         path: '/admin',
         name: 'admin',
         builder: (context, state) => const AdminDashboardScreen(),
+      ),
+      GoRoute(
+        path: '/admin/submissions',
+        name: 'admin-submissions',
+        builder: (context, state) => const SubmissionReviewScreen(),
       ),
       GoRoute(
         path: '/onboarding',
@@ -122,22 +160,6 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
         builder: (context, state) => const AuthScreen(isSignUp: true),
       ),
       GoRoute(
-        path: '/account',
-        name: 'account',
-        pageBuilder: (context, state) => NoTransitionPage<void>(
-          key: state.pageKey,
-          child: const AccountScreen(),
-        ),
-      ),
-      GoRoute(
-        path: '/profile',
-        name: 'profile',
-        pageBuilder: (context, state) => NoTransitionPage<void>(
-          key: state.pageKey,
-          child: const AccountScreen(),
-        ),
-      ),
-      GoRoute(
         path: '/submit-quote',
         name: 'submit-quote',
         builder: (context, state) => const QuoteSubmissionScreen(),
@@ -146,22 +168,6 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
         path: '/paywall',
         name: 'paywall',
         builder: (context, state) => const PurchasePage(),
-      ),
-      GoRoute(
-        path: '/thinkers',
-        name: 'thinkers',
-        builder: (context, state) => const PremiumGate(
-          featureName: 'Denkeratlas',
-          featureDescription:
-              'Durchstöbere die komplette Bibliothek: alle Philosophen und Politiker, '
-              'sämtliche Zitate und die Volltextsuche über den gesamten Bestand.',
-          child: ThinkersScreen(),
-        ),
-      ),
-      GoRoute(
-        path: '/quiz',
-        name: 'quiz',
-        builder: (context, state) => const QuizScreen(),
       ),
     ],
   );
