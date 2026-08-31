@@ -118,16 +118,81 @@ void main() {
     }
   });
 
-  test('a full run has ten questions with four options each', () {
+  test('a full run has ten questions, with the opening ones cut down', () {
     final session = QuizBuilder(
       random: Random(3),
     ).build(candidates: seedQuotes, drawPool: _weightExpanded(seedQuotes));
 
     expect(session.totalQuestions, kQuizQuestionCount);
     for (final QuizQuestion question in session.questions) {
-      expect(question.options, hasLength(kQuizOptionCount));
-      expect(question.correctIndex, inInclusiveRange(0, 3));
+      final expected = question.difficulty == 'beginner'
+          ? kQuizEasyOptionCount
+          : kQuizOptionCount;
+      expect(question.options, hasLength(expected));
+      expect(question.correctIndex, inInclusiveRange(0, expected - 1));
+      expect(question.correctOption, quoteAuthorLabel(question.quote));
     }
+  });
+
+  test('a run ramps up instead of opening on an advanced question', () {
+    // The old builder shuffled the whole run, so seed 0 could — and did — open
+    // with three advanced questions in a row.
+    for (int seed = 0; seed < 50; seed++) {
+      final session = QuizBuilder(
+        random: Random(seed),
+      ).build(candidates: seedQuotes, drawPool: _weightExpanded(seedQuotes));
+
+      const rank = <String, int>{
+        'beginner': 0,
+        'intermediate': 1,
+        'advanced': 2,
+      };
+      final ranks = session.questions
+          .map((QuizQuestion q) => rank[q.difficulty]!)
+          .toList();
+
+      expect(
+        ranks,
+        orderedEquals(List<int>.from(ranks)..sort()),
+        reason: 'run with seed $seed is not ordered easiest-first',
+      );
+      expect(
+        session.questions.first.difficulty,
+        'beginner',
+        reason: 'run with seed $seed opens on a hard question',
+      );
+    }
+  });
+
+  test('easier questions get a hint and more time than advanced ones', () {
+    final session = QuizBuilder(
+      random: Random(11),
+    ).build(candidates: seedQuotes, drawPool: _weightExpanded(seedQuotes));
+
+    final beginner = session.questions.firstWhere(
+      (QuizQuestion q) => q.difficulty == 'beginner',
+    );
+    final advanced = session.questions.firstWhere(
+      (QuizQuestion q) => q.difficulty == 'advanced',
+    );
+
+    expect(beginner.hint, isNotNull);
+    expect(advanced.hint, isNull, reason: 'advanced questions stay unaided');
+
+    // Every question now beats the flat 15s the whole quiz used to run on.
+    for (final QuizQuestion question in session.questions) {
+      expect(question.duration.inSeconds, greaterThanOrEqualTo(25));
+    }
+  });
+
+  test('era labels stay coarse, and handle antiquity', () {
+    expect(QuizBuilder.eraLabel(-500), 'Antike');
+    expect(QuizBuilder.eraLabel(180), 'Antike');
+    expect(QuizBuilder.eraLabel(1250), 'Mittelalter');
+    expect(QuizBuilder.eraLabel(1651), 'Frühe Neuzeit');
+    expect(QuizBuilder.eraLabel(1867), '19. Jahrhundert');
+    expect(QuizBuilder.eraLabel(1949), '20. Jahrhundert');
+    expect(QuizBuilder.eraLabel(2015), '21. Jahrhundert');
   });
 
   test('every seed quote lands in one of the three buckets', () {
@@ -188,5 +253,60 @@ void main() {
     ).build(candidates: marxOnly, drawPool: marxOnly);
 
     expect(session.isEmpty, isTrue);
+    // Distinct from "still building": the screen shows an explanation here, not
+    // a spinner that never resolves.
+    expect(session.status, QuizStatus.unavailable);
+  });
+
+  test('a quote with no resolvable author is never drawn as a question', () {
+    // The guard and the distractor pool always excluded these; the draw pool did
+    // not, so one could become a question whose correct answer was "".
+    final blank = Quote(
+      id: 'blank_author',
+      textDe: 'Ein Satz ohne zurechenbare Urheberschaft.',
+      textOriginal: 'Ein Satz ohne zurechenbare Urheberschaft.',
+      author: '',
+      source: '',
+      year: 1900,
+      chapter: '',
+      category: const <String>['Philosophie'],
+      difficulty: 'beginner',
+      series: '',
+      explanationShort: 'Kurz',
+      explanationLong: 'Lang',
+      relatedIds: const <String>[],
+    );
+
+    final pool = <Quote>[...seedQuotes.take(30), blank];
+    // Heavily weighted, so a builder that draws from the unfiltered pool would
+    // pick it almost every run rather than occasionally.
+    final drawPool = <Quote>[
+      ...pool,
+      for (int i = 0; i < 200; i++) blank,
+    ];
+
+    final session = QuizBuilder(
+      random: Random(7),
+    ).build(candidates: pool, drawPool: drawPool);
+
+    expect(session.questions, isNotEmpty);
+    expect(
+      session.questions.where((QuizQuestion q) => q.quote.id == blank.id),
+      isEmpty,
+      reason: 'a quote with no author cannot be the answer to "who said this?"',
+    );
+    for (final QuizQuestion question in session.questions) {
+      expect(question.options.where((String o) => o.trim().isEmpty), isEmpty);
+    }
+  });
+
+  test('a run never exceeds the advertised question count', () {
+    // The bucket spread and kQuizQuestionCount are two separate constants; if
+    // they drift apart the UI reasons about a different number than it renders.
+    final session = QuizBuilder(
+      random: Random(3),
+    ).build(candidates: seedQuotes, drawPool: _weightExpanded(seedQuotes));
+
+    expect(session.questions.length, lessThanOrEqualTo(kQuizQuestionCount));
   });
 }

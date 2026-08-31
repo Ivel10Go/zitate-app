@@ -129,7 +129,7 @@ class _QuoteDetailScreenState extends ConsumerState<QuoteDetailScreen> {
   }
 
   Future<void> _shareQuote(Quote quote) async {
-    await ShareCardRenderer().shareQuote(quote, context);
+    await ShareCardRenderer().shareQuote(quote);
   }
 
   @override

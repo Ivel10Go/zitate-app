@@ -12,3 +12,13 @@
 /// RevenueCat-Anbindung, Paywall-Seite und Gating-Logik bleiben unverändert
 /// bestehen und müssen nicht neu gebaut werden.
 const bool kProLaunchEnabled = false;
+
+/// Wie viele Zitate der personalisierte Tages-Feed (`premiumDailyQuotesProvider`)
+/// höchstens anzeigt.
+///
+/// Bewusst eine feste Zahl statt „ein Zitat pro Interesse": Bei vielen
+/// Interessen entstand sonst ein überladener Feed, der die Sammlung außerdem
+/// pro Tag zu schnell verbraucht hat. Solange [kProLaunchEnabled] `false` ist,
+/// bekommt jeder Nutzer diesen vollen Umfang; nach dem Pro-Launch ist dies der
+/// Umfang für zahlende Nutzer.
+const int kDailyFeedQuoteCount = 5;

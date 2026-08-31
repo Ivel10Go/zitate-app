@@ -18,9 +18,11 @@ class QuizTimerNotifier extends StateNotifier<int> {
 
   bool get isRunning => _ticker != null;
 
-  void start({required VoidCallback onDone}) {
+  /// [duration] comes from the question itself — harder buckets and longer
+  /// quotes get different budgets, so the clock is never a flat 15 seconds.
+  void start({required VoidCallback onDone, required Duration duration}) {
     _onDone = onDone;
-    state = kQuizQuestionDuration.inSeconds;
+    state = duration.inSeconds;
     _tick();
   }
 
@@ -37,10 +39,13 @@ class QuizTimerNotifier extends StateNotifier<int> {
     _tick();
   }
 
-  void reset() {
+  /// [duration] is the budget of the question about to be shown. Without it the
+  /// clock fell back to [kQuizQuestionDuration] between questions, so a 45s or
+  /// 25s question flashed "00:30" for a frame before [start] corrected it.
+  void reset({Duration? duration}) {
     pause();
     _onDone = null;
-    state = kQuizQuestionDuration.inSeconds;
+    state = (duration ?? kQuizQuestionDuration).inSeconds;
   }
 
   void _tick() {

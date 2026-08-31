@@ -12,11 +12,22 @@ import 'quote_attribution.dart';
 import '../../data/models/quote.dart';
 import '../../widgets/adaptive_quote_text.dart';
 
+/// Store link and promo copy appended to every shared quote so recipients can
+/// find the app. Keep the link in sync with the release bundle id
+/// (`com.quotidian.app`).
+const String _appStoreUrl =
+    'https://play.google.com/store/apps/details?id=com.quotidian.app';
+const String _appPromoLine =
+    'Jeden Tag ein Zitat zum Nachdenken – mit Quotidian:';
+
 class ShareCardRenderer {
   final ScreenshotController _controller = ScreenshotController();
 
-  Future<void> shareQuote(Quote quote, BuildContext context) async {
-    final fallbackText = _quoteShareText(quote);
+  /// Takes no [BuildContext] on purpose: `captureFromWidget` builds its own
+  /// tree off-screen, so there is nothing here that needs the caller's context —
+  /// and accepting one invited callers to hold it across this await for nothing.
+  Future<void> shareQuote(Quote quote) async {
+    final shareText = _quoteShareText(quote);
     try {
       final image = await _controller.captureFromWidget(
         _ShareCanvas.quote(quote: quote),
@@ -24,23 +35,23 @@ class ShareCardRenderer {
 
       await _shareBytes(
         image,
-        fallbackText: fallbackText,
+        shareText: shareText,
         filePrefix: 'quote_share',
       );
     } catch (error, stackTrace) {
       debugPrint('[ShareCardRenderer] quote share failed: $error');
       debugPrintStack(stackTrace: stackTrace);
-      await Share.share(fallbackText);
+      await Share.share(shareText);
     }
   }
 
   Future<void> _shareBytes(
     Uint8List bytes, {
-    required String fallbackText,
+    required String shareText,
     required String filePrefix,
   }) async {
     if (bytes.isEmpty) {
-      await Share.share(fallbackText);
+      await Share.share(shareText);
       return;
     }
 
@@ -52,15 +63,29 @@ class ShareCardRenderer {
     try {
       await file.writeAsBytes(bytes, flush: true);
       if (await file.length() == 0) {
-        await Share.share(fallbackText);
+        await Share.share(shareText);
         return;
       }
 
-      await Share.shareXFiles(<XFile>[XFile(file.path)]);
+      // Attach the caption so the full quote, attribution, promo line and store
+      // link travel with the image — even if the rendered card visually
+      // truncates a very long quote, the complete text is still shared.
+      await Share.shareXFiles(<XFile>[XFile(file.path)], text: shareText);
     } catch (error, stackTrace) {
       debugPrint('[ShareCardRenderer] file share failed: $error');
       debugPrintStack(stackTrace: stackTrace);
-      await Share.share(fallbackText);
+      await Share.share(shareText);
+    } finally {
+      // Each share wrote a uniquely named PNG; without this they accumulate in
+      // the temp directory for the life of the install. Only safe once
+      // shareXFiles has resolved — the receiving app has read the file by then.
+      try {
+        if (await file.exists()) {
+          await file.delete();
+        }
+      } catch (_) {
+        // The OS reclaims the temp directory anyway; never fail a share on this.
+      }
     }
   }
 
@@ -68,7 +93,8 @@ class ShareCardRenderer {
     final text = quote.textDe.trim().isNotEmpty
         ? quote.textDe.trim()
         : quote.textOriginal.trim();
-    return '"$text"\n— ${quote.source}, ${quote.year}\n${quote.explanationShort}';
+    final attribution = '— ${quoteAuthorLabel(quote)}, ${quote.year}';
+    return '"$text"\n$attribution\n\n$_appPromoLine\n$_appStoreUrl';
   }
 }
 
@@ -162,9 +188,11 @@ class _ShareCanvas extends StatelessWidget {
                     children: <Widget>[
                       AdaptiveQuoteText(
                         text: title,
-                        minFontSize: 22,
+                        // Allow long quotes to shrink further and use more
+                        // lines so they fit the card instead of being cut off.
+                        minFontSize: 14,
                         maxFontSize: 34,
-                        maxLines: 7,
+                        maxLines: 14,
                         style: GoogleFonts.playfairDisplay(
                           fontStyle: FontStyle.italic,
                           color: AppColors.ink,

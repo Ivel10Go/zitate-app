@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,8 +17,25 @@ class QuizNotifier extends StateNotifier<QuizSession> {
   final Ref _ref;
   final QuizBuilder _builder = QuizBuilder();
 
-  Future<void> _initialize() async {
-    state = await _generateSession();
+  Future<void> _initialize() => load();
+
+  /// Builds a run, and — importantly — always leaves [state] in a terminal
+  /// status. Seeding or reading the repository can throw (corrupt DB, failed
+  /// asset seed); before this the exception escaped an un-awaited future and
+  /// the session stayed empty, which the screen rendered as a spinner forever.
+  Future<void> load() async {
+    state = QuizSession.empty();
+    try {
+      state = await _generateSession();
+    } catch (error, stackTrace) {
+      developer.log(
+        'Quiz generation failed',
+        name: 'QuizNotifier',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      state = QuizSession.failed();
+    }
   }
 
   Future<QuizSession> _generateSession() async {
@@ -28,7 +47,7 @@ class QuizNotifier extends StateNotifier<QuizSession> {
         .first;
 
     if (candidates.isEmpty) {
-      return QuizSession.empty();
+      return QuizSession.unavailable();
     }
 
     // Expands each quote once per unit of weight — a draw pool, not a set.
@@ -84,10 +103,7 @@ class QuizNotifier extends StateNotifier<QuizSession> {
   }
 
   /// Discards the current run and builds a fresh one.
-  Future<void> restart() async {
-    state = QuizSession.empty();
-    state = await _generateSession();
-  }
+  Future<void> restart() => load();
 
   Future<void> _recordCompletedRun() async {
     final prefs = await SharedPreferences.getInstance();

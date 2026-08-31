@@ -29,15 +29,25 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   int? _timerStartedForQuestionIndex;
   bool _quizStarted = false;
 
+  /// Captured in [initState] so [dispose] does not have to touch `ref`.
+  /// `quizTimerProvider` is not autoDispose, so this instance outlives the
+  /// screen and is safe to hold.
+  late final QuizTimerNotifier _timer;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _timer = ref.read(quizTimerProvider.notifier);
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    // The ticker outlives this screen, so leaving it running would keep firing
+    // after disposal — retaining this State through the onDone closure, and,
+    // with the observer already removed, ticking on into the background too.
+    _timer.reset();
     super.dispose();
   }
 
@@ -47,9 +57,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       return;
     }
 
-    final timer = ref.read(quizTimerProvider.notifier);
     if (lifecycleState != AppLifecycleState.resumed) {
-      timer.pause();
+      _timer.pause();
       return;
     }
 
@@ -58,23 +67,52 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     final session = ref.read(quizProvider);
     final question = session.currentQuestion;
     if (!session.isComplete && question != null && !question.isAnswered) {
-      timer.resume();
+      _timer.resume();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final session = ref.watch(quizProvider);
-    final timer = ref.watch(quizTimerProvider);
+    // Deliberately not watching quizTimerProvider here: it changes once a
+    // second, and watching it at this level rebuilt the whole ListView — every
+    // AnswerButton and the QuestionCard — on every tick, for the full 25-55s of
+    // each question. Only the countdown itself subscribes, further down.
 
-    if (session.isEmpty) {
-      return const AppDecoratedScaffold(
-        bottomNavigationBar: AppNavigationBar(selectedIndex: -1),
-        child: AppInlineLoadingState(
-          title: 'Quiz wird vorbereitet',
-          subtitle: 'Fragen und Antwortoptionen werden geladen ...',
-        ),
-      );
+    switch (session.status) {
+      case QuizStatus.loading:
+        return const AppDecoratedScaffold(
+          bottomNavigationBar: AppNavigationBar(selectedIndex: -1),
+          child: AppInlineLoadingState(
+            title: 'Quiz wird vorbereitet',
+            subtitle: 'Fragen und Antwortoptionen werden geladen ...',
+          ),
+        );
+      case QuizStatus.unavailable:
+        return AppDecoratedScaffold(
+          bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
+          child: AppInlineErrorState(
+            title: 'Quiz derzeit nicht verfügbar',
+            message:
+                'Für ein Quiz braucht es Zitate von mindestens zwei '
+                'verschiedenen Personen. Sobald die Sammlung wieder genug '
+                'hergibt, geht es hier weiter.',
+            onRetry: () => ref.read(quizProvider.notifier).load(),
+          ),
+        );
+      case QuizStatus.failed:
+        return AppDecoratedScaffold(
+          bottomNavigationBar: const AppNavigationBar(selectedIndex: -1),
+          child: AppInlineErrorState(
+            title: 'Quiz konnte nicht geladen werden',
+            message:
+                'Beim Vorbereiten der Fragen ist etwas schiefgelaufen. '
+                'Versuche es noch einmal.',
+            onRetry: () => ref.read(quizProvider.notifier).load(),
+          ),
+        );
+      case QuizStatus.ready:
+        break;
     }
 
     final isPro = ref.watch(isProProvider);
@@ -132,7 +170,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                 ),
               ),
               const SizedBox(width: 10),
-              CountdownDisplay(seconds: timer),
+              // The only subscriber to the per-second tick.
+              Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? _) {
+                  return CountdownDisplay(seconds: ref.watch(quizTimerProvider));
+                },
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -148,7 +191,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Wähle innerhalb von ${kQuizQuestionDuration.inSeconds} Sekunden '
+            'Wähle innerhalb von ${question.duration.inSeconds} Sekunden '
             'die richtige Autorin oder den richtigen Autor.',
             style: GoogleFonts.ibmPlexSans(
               fontSize: 11,
@@ -156,7 +199,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             ),
           ),
           const SizedBox(height: 12),
-          QuestionCard(quote: question.quote),
+          QuestionCard(quote: question.quote, hint: question.hint),
           const SizedBox(height: 14),
           ...question.options.asMap().entries.map((MapEntry<int, String> entry) {
             final index = entry.key;
@@ -213,7 +256,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         return;
       }
 
-      ref.read(quizTimerProvider.notifier).start(
+      _timer.start(
+        duration: question.duration,
         onDone: () {
           if (mounted) {
             ref.read(quizProvider.notifier).answerTimeout();
@@ -226,11 +270,17 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   void _answer(int index) {
     ref.read(quizProvider.notifier).answer(index);
     // Freeze the countdown where it is; the reveal now waits for a tap.
-    ref.read(quizTimerProvider.notifier).pause();
+    _timer.pause();
   }
 
   Future<void> _continue() async {
-    ref.read(quizTimerProvider.notifier).reset();
+    final session = ref.read(quizProvider);
+    // Seed the clock with the *next* question's budget so the countdown does
+    // not flash the default for a frame before starting.
+    final next = session.currentIndex + 1 < session.questions.length
+        ? session.questions[session.currentIndex + 1]
+        : null;
+    _timer.reset(duration: next?.duration);
     await ref.read(quizProvider.notifier).nextQuestion();
   }
 
@@ -241,7 +291,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
         session.questions.any((QuizQuestion q) => q.isAnswered);
 
     setState(() => _quizStarted = true);
-    ref.read(quizTimerProvider.notifier).reset();
+    _timer.reset(duration: session.currentQuestion?.duration);
     _timerStartedForQuestionIndex = null;
 
     // Returning to the quiz after a finished run must not drop the user back
@@ -252,7 +302,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   }
 
   Future<void> _restart() async {
-    ref.read(quizTimerProvider.notifier).reset();
+    _timer.reset();
     _timerStartedForQuestionIndex = null;
     // Back to the intro, which re-applies the free-tier daily gate.
     setState(() => _quizStarted = false);
@@ -351,7 +401,8 @@ class _QuizStartScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   'Kurzer Check, wie sicher du Denkerinnen und Denker an ihren '
-                  'Sätzen erkennst. Der Timer startet erst nach deinem Startklick.',
+                  'Sätzen erkennst. Die ersten Fragen geben dir einen Hinweis '
+                  'auf die Epoche. Der Timer startet erst nach deinem Startklick.',
                   style: GoogleFonts.ibmPlexSans(
                     fontSize: 11,
                     color: AppColors.inkLight,
@@ -382,8 +433,8 @@ class _QuizStartScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text(
                   'Du bekommst $questionCount Zitate und rätst, von wem sie '
-                  'stammen. ${kQuizQuestionDuration.inSeconds} Sekunden pro '
-                  'Frage — erst nach dem Start läuft die Zeit.',
+                  'stammen. Es geht leicht los und wird Frage für Frage '
+                  'kniffliger — erst nach dem Start läuft die Zeit.',
                   style: GoogleFonts.ibmPlexSans(
                     fontSize: 11,
                     color: AppColors.inkLight,
