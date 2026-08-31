@@ -11,6 +11,7 @@ import '../../presentation/auth/auth_gate_screen.dart';
 import '../../presentation/auth/auth_choice_screen.dart';
 import '../../presentation/auth/auth_screen.dart';
 import '../../presentation/account/account_screen.dart';
+import '../../presentation/legal/impressum_screen.dart';
 import '../../presentation/legal/legal_screen.dart';
 import '../../presentation/settings/settings_screen.dart';
 import '../../presentation/quotes/quote_submission_screen.dart';
@@ -95,6 +96,11 @@ final appRouterProvider = Provider<GoRouter>((Ref ref) {
         path: '/legal',
         name: 'legal',
         builder: (context, state) => const LegalScreen(),
+      ),
+      GoRoute(
+        path: '/impressum',
+        name: 'impressum',
+        builder: (context, state) => const ImpressumScreen(),
       ),
       GoRoute(
         path: '/admin',

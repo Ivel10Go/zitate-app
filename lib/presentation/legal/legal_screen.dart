@@ -1,26 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
 import '../../widgets/android_back_guard.dart';
 import '../../widgets/app_decorated_scaffold.dart';
-
-/// Provider/Firma für die Anbieterkennzeichnung.
-/// Beispiel: "Musterfirma GmbH".
-const String _legalProviderName = String.fromEnvironment('LEGAL_PROVIDER_NAME');
-
-/// Ladungsfähige Anschrift für die Anbieterkennzeichnung.
-/// Beispiel: "Musterstraße 12, 12345 Berlin".
-const String _legalProviderAddress = String.fromEnvironment(
-  'LEGAL_PROVIDER_ADDRESS',
-);
-
-/// Kontaktangabe für rechtliche Anfragen.
-/// Beispiel: "kontakt@beispiel.de".
-const String _legalProviderContact = String.fromEnvironment(
-  'LEGAL_PROVIDER_CONTACT',
-);
 
 class LegalScreen extends StatelessWidget {
   const LegalScreen({super.key});
@@ -109,7 +94,14 @@ class LegalScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   _LegalCard(
                     title: 'ANBIETERKENNZEICHNUNG',
-                    body: _providerInfoText,
+                    body:
+                        'Die vollständigen Angaben zum Anbieter nach § 5 DDG — Name, '
+                        'ladungsfähige Anschrift, Kontakt, Register und redaktionelle '
+                        'Verantwortung — stehen im Impressum.',
+                    action: _LegalCardAction(
+                      label: 'IMPRESSUM ÖFFNEN',
+                      onTap: () => context.push('/impressum'),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Text(
@@ -130,11 +122,19 @@ class LegalScreen extends StatelessWidget {
   }
 }
 
+class _LegalCardAction {
+  const _LegalCardAction({required this.label, required this.onTap});
+
+  final String label;
+  final VoidCallback onTap;
+}
+
 class _LegalCard extends StatelessWidget {
-  const _LegalCard({required this.title, required this.body});
+  const _LegalCard({required this.title, required this.body, this.action});
 
   final String title;
   final String body;
+  final _LegalCardAction? action;
 
   @override
   Widget build(BuildContext context) {
@@ -167,30 +167,32 @@ class _LegalCard extends StatelessWidget {
               height: 1.6,
             ),
           ),
+          if (action != null) ...<Widget>[
+            const SizedBox(height: 14),
+            InkWell(
+              onTap: action!.onTap,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: scheme.outline, width: 1),
+                  borderRadius: BorderRadius.zero,
+                ),
+                child: Text(
+                  action!.label,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.ibmPlexSans(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    color: scheme.onSurface,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );
   }
-}
-
-String get _providerInfoText {
-  final providerName = _legalProviderName.trim();
-  final providerAddress = _legalProviderAddress.trim();
-  final providerContact = _legalProviderContact.trim();
-  final hasProviderInfo =
-      providerName.isNotEmpty &&
-      providerAddress.isNotEmpty &&
-      providerContact.isNotEmpty;
-
-  if (hasProviderInfo) {
-    return 'Name/Firma: $providerName\n'
-        'Anschrift: $providerAddress\n'
-        'Kontakt: $providerContact';
-  }
-
-  return 'Name/Firma: NICHT KONFIGURIERT\n'
-      'Anschrift: NICHT KONFIGURIERT\n'
-      'Kontakt: NICHT KONFIGURIERT\n\n'
-      'Setze die Werte per Dart-Define: '
-      'LEGAL_PROVIDER_NAME, LEGAL_PROVIDER_ADDRESS, LEGAL_PROVIDER_CONTACT.';
 }
